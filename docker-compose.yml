@@ -2,8 +2,6 @@ app-server:
   build: .
   ports:
     - "8000:8000"
-  volumes:
-    - ./public:/src/app/public
   links:
     - redis
   environment:
