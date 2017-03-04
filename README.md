@@ -15,7 +15,7 @@ State of [d4779c935](https://github.com/starlightgroup/node-api/commit/d4779c935
 Requirements
 =================
 
-1. Linux
+1. Linux (sorry, i have 0 skills with other OSes and cannot assist further)
 2. Nodejs of >=7.5.0
 3. Redis server running with stack settings (localhost:6379 without password)
 
@@ -38,3 +38,19 @@ Or
 
 1. docker-compose up --build
 2. Open `http://localhost:8000`
+
+How to build frontend code
+==================
+
+Source codes are in `frontend` directory.
+Run `npm run-script gulp` to process them and save output in `public` directory.
+
+TODO - livereload?
+
+
+How to run tests
+==================
+
+1. npm run-script eslint (works for backend code mainly)
+2. npm test (unit tests for backend code, supertest and mocha)
+
