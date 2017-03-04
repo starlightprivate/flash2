@@ -1,0 +1,13 @@
+node_modules/
+bower_components/
+.idea/
+.DS_Store/
+.dist/
+.vscode/
+.nyc_output/
+npm-debug.log*
+public/
+test/
+Dockerfile
+docker-compose.yml
+redis/
