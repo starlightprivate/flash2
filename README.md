@@ -2,6 +2,10 @@
 Merge of frontend and backend code into single container that is ok for developers to deploy on their local PC
 
 
+
+[![Codeship status](https://codeship.com/projects/205942/status?branch=master)](https://codeship.com/projects/205942/status?branch=master)
+
+
 Frontend
 ===================
 State of [f98451a6f](https://github.com/starlightgroup/flashlightsforever/commit/f98451a6ffbf929566b595ad129e1eb37b329182) commit - tip of dev branch
