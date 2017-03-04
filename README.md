@@ -3,7 +3,7 @@ Merge of frontend and backend code into single container that is ok for develope
 
 
 
-[![Codeship status](https://codeship.com/projects/205942/status?branch=master)](https://codeship.com/projects/205942/status?branch=master)
+[ ![Codeship Status for starlightgroup/flash2](https://app.codeship.com/projects/5ec6e150-e305-0134-1b72-664f30205a5b/status?branch=master)](https://app.codeship.com/projects/205942)
 
 
 Frontend
