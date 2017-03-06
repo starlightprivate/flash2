@@ -16,28 +16,28 @@ with SANE name like `hotfix/stopThingsExploding` and so on
 
 6. Verify that your code pass unit tests - `npm test`
 
-7. Push code to your feature branch and make pull request to `dev` branch. I repeat, `dev` branch.
+7. Push code to your feature branch and make pull request to `master` branch. I repeat, `master` branch.
 
-8. Notify Anatolij or Yang to merge PR using slackchat.
+8. Notify Anatolij to merge PR using slackchat.
 
 9. DELETE your branch when it is merged pls!
 
 Anatolij github id - @vodolaz095
 
-Yang's github id - @starneit
 
 
 Branch meaning
 ====================
 
-- `dev` - code is working, ok to deploy locally for development or on dev server.
+- `master` - code is working, ok to deploy locally for development or on dev server.
 Locally code runs with environment variable of `NODE_ENV` set to `development` or non existant.
 On dev server the `NODE_ENV` have to be `staging`.
 
-- `staging` - code is working and mainly tested - ok to deploy on staging server. The`NODE_ENV` have to be `staging`.
+- `staging` - code is working and mainly tested - ok to deploy on staging server.
+The`NODE_ENV` have to be `staging`.
 
 
-- `master` - code for production.  The`NODE_ENV` have to be `production`.
+- `production` - code for production.  The`NODE_ENV` have to be `production`.
 
 
 
