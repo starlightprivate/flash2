@@ -79,7 +79,7 @@ gulp.task('html', function () {
 
 // Copy JS libraries 
 gulp.task('libcopy', function () {
-  return gulp.src([config.src + '/scripts/libs/**/*'], { base: config.src + '/scripts/libs' })
+  return gulp.src([config.src + '/scripts/libs/**/*'], {base: config.src + '/scripts/libs'})
     .pipe(newer(config.dist + '/assets/libs'))
     .pipe(gulp.dest(config.dist + '/assets/libs'));
 });
@@ -130,7 +130,7 @@ gulp.task('csspurify', function () {
       config.src + '/html/*.html'
     ]))
     .pipe(gulp.dest(config.dist + '/assets/css'))
-    .pipe(cleanCSS({ compatibility: 'ie8' }))
+    .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(gulp.dest(config.dist + '/assets/css'))
     .pipe(size());
 });

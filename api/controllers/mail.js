@@ -4,8 +4,6 @@ import xss from 'xss';
 
 import config from '../../server-config';
 import zipcodes from 'zipcodes';
-import security from '../middlewares/security';
-import request from 'request-promise';
 
 /*
  * DO NOT REMOVE THIS COMMENT!!!
