@@ -58,3 +58,19 @@ How to run tests
 1. npm run-script eslint (works for backend code mainly)
 2. npm test (unit tests for backend code, supertest and mocha)
 
+
+How to use redis server, if you cannot install it locally
+==================
+
+In case, you cannot install redis server, you can use this one:
+
+```bash
+
+    $ REDIS_URL=redis://redistogo:759a4a957ceda6ad36d8c42f41dec81c@koi.redistogo.com:10968/
+    $ npm start
+
+```
+
+Note that it is Free Tier Redis server on [RedisToGo](https://elements.heroku.com/addons/redistogo).
+It has 5 connections limit. It has 5 MB memory limit. But it works ok, if you cannot install redis for your
+local development.
