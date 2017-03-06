@@ -1,5 +1,7 @@
 import Autopilot from 'autopilot-api';
 import config from '../../server-config';
+import xss from 'xss';
+
 const autopilot = new Autopilot(config.autopilot.key);
 
 /*
@@ -18,14 +20,14 @@ const autopilot = new Autopilot(config.autopilot.key);
 
 async function sendSMS(req, res) {
   const {contactId} = req.params;
-  const response = await autopilot.journeys.add('0001', contactId);
+  const response = await autopilot.journeys.add('0001', xss(contactId));
   console.log(response);
   res.success();
 }
 
 async function sendSMS2(req, res) {
   const {contactid} = req.query;
-  const response = await autopilot.journeys.add('0001', contactid);
+  const response = await autopilot.journeys.add('0001', xss(contactid));
   console.log(response);
   res.success();
 }

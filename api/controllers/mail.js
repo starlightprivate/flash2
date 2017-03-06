@@ -34,14 +34,14 @@ function getStateInfo(req, res) {
 
 async function triggerJourney(req, res) {
   const {contactid} = req.query;
-  const hookid = req.query.hookid || '0001';
-  const response = await autopilot.journeys.add(hookid, contactid);
+  const hookid = xss(req.query.hookid) || '0001';
+  const response = await autopilot.journeys.add(hookid, xss(contactid));
   console.log(response);
   res.success();
 }
 
 async function getIpinfo(req, res) {
-  const clientIp = security.getIp(req);
+  const clientIp = xss(security.getIp(req));
   //const ipinfo = JSON.parse(await request(`http://ipinfo.io/${clientIp}`));
   //i am hardcoding our token in here because i don't give a fuck
   let ipinfo = JSON.parse(await request(`https://ipinfo.io/${clientIp}/json/?token=1f4c1ea49e0aa2`));
