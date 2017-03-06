@@ -46,7 +46,6 @@ function route(router) {
   // router.post('/aphq', mailCtrl.triggerJourney);
   
   router.get('/state/:stateNumber', mailCtrl.getStateInfo); //###, 3 times)
-  // router.get('/ipinfo', mailCtrl.getIpinfo);
   router.get('/ping' , mailCtrl.ping); //###
   router.post('/add-contact', leadoutpostCtrl.addContact); //###
   router.post('/update-contact', leadoutpostCtrl.updateContact);//###

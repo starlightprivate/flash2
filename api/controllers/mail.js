@@ -40,13 +40,6 @@ async function triggerJourney(req, res) {
   res.success();
 }
 
-async function getIpinfo(req, res) {
-  const clientIp = xss(security.getIp(req));
-  //const ipinfo = JSON.parse(await request(`http://ipinfo.io/${clientIp}`));
-  //i am hardcoding our token in here because i don't give a fuck
-  let ipinfo = JSON.parse(await request(`https://ipinfo.io/${clientIp}/json/?token=1f4c1ea49e0aa2`));
-  res.send(ipinfo);
-}
 
 // function mapToStateDetails(data) {
 //   return {
@@ -112,7 +105,6 @@ function ping(req, res) {
 export default {
   getStateInfo: getStateInfo,
   triggerJourney: triggerJourney,
-  getIpinfo: getIpinfo,
   verifyPhoneNumber: verifyPhoneNumber,
   ping: ping
 };
