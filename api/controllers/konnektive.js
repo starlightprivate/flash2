@@ -24,6 +24,8 @@ import util from 'util';
 //It is more secure (source code do not have Konnective API login and password, that gave full
 //permissions to edit database of Konnective via API exposed.
 //But proxy add some lags and it is bad for production.
+//Source code of proxy - https://github.com/starlightgroup/starlightproxy
+//Proxy deployed on https://starlightproxy.herokuapp.com/ (temporary)
 
 //On staging and production environments Konnective API is used without proxy.
 
@@ -31,12 +33,13 @@ let connectiveApiURL;
 let proxyApiKey;
 let konnectiveLogin;
 let konnectivePassword;
+let useProxy = false;
+//let usePorxy = config.ENV === 'development'; //TODO - uncomment it, when Anatolij fix 10 second timeout for /upsale/import/ on proxy
 
-if (config.ENV === 'development') {
+if (useProxy) {
   connectiveApiURL = config.konnective.proxy;
   proxyApiKey = config.konnective.proxyApiKey;
 } else {
-  proxyApiKey = '';
   connectiveApiURL = 'https://api.konnektive.com/';
   konnectiveLogin = config.konnective.loginId;
   konnectivePassword = config.konnective.password;
@@ -208,6 +211,7 @@ async function upsell(req, res) {
     res.error('Invalid Upsell Data');
   }
   else {
+    console.log('Preparing to send data to /upsale/import', req.body);
     req.body.loginId = konnectiveLogin;
     req.body.password = konnectivePassword;
     const options = {
