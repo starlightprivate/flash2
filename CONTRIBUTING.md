@@ -57,5 +57,10 @@ Has bachelor degree at mathematics, self educated programmer.
  
 - Kenji (Github - [KenKimura88](http://github.com/KenKimura88/)) - security expert, javascript developer. Uses MacOS.
 
+Full Stack Developer( knows front end and back end programming and architecture ).
+Back End(Node, Python, bit of ROR, Laravel)
+Front End(Angular, React, Vue)
+Can be reached by ken.kimura1988@outlook.com, slackchat - [@kenji](https://starlightads.slack.com/messages/@kenji/)
+
 - Sachin (Github - [asharma-ror](http://github.com/asharma-ror/) - nodejs and ROR developer. Uses Ubuntu.
 
