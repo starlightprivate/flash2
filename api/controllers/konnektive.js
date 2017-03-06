@@ -33,8 +33,7 @@ let connectiveApiURL;
 let proxyApiKey;
 let konnectiveLogin;
 let konnectivePassword;
-let useProxy = false;
-//let usePorxy = config.ENV === 'development'; //TODO - uncomment it, when Anatolij fix 10 second timeout for /upsale/import/ on proxy
+let useProxy = config.ENV === 'development';
 
 if (useProxy) {
   connectiveApiURL = config.konnective.proxy;
