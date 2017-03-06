@@ -58,6 +58,10 @@ How to run tests
 1. npm run-script eslint (works for backend code mainly)
 2. npm test (unit tests for backend code, supertest and mocha)
 
+How to contribute to this repo
+==================
+
+See [CONTRIBUTING.md](https://github.com/starlightgroup/flash2/blob/master/CONTRIBUTING.md)
 
 How to use redis server, if you cannot install it locally
 ==================
