@@ -4,6 +4,7 @@
 
 import rangeCheck from 'range_check';
 import config from './../../server-config';
+import xss from 'xss';
 
 
 //This is first pages of site, that real users usually visits
@@ -57,6 +58,7 @@ const cloudFlareIp6Range = [
 //https://starlightgroup.atlassian.net/projects/SG/issues/SG-35
 exports.verifyThatSiteIsAccessedFromCloudflare = function (req, res, next) {
   let rIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  rIp = xss(rIp);
 //https://github.com/keverw/range_check#check-if-ip-is-within-range
   let isOk = false;
 // it helped me
@@ -84,10 +86,13 @@ exports.verifyThatSiteIsAccessedFromCloudflare = function (req, res, next) {
 function getIp(req) {
 //https://support.cloudflare.com/hc/en-us/articles/200170986-How-does-CloudFlare-handle-HTTP-Request-headers-
   if (config.ENV !== 'development' && req.headers['cf-connecting-ip']) {
-    return req.headers['cf-connecting-ip'];
+    return xss(req.headers['cf-connecting-ip']);
   }
 //http://stackoverflow.com/a/10849772/1885921
-  return req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  if (req.headers['x-forwarded-for']){
+    return xss(req.headers['x-forwarded-for']);
+  }
+  return req.connection.remoteAddress;
 }
 
 exports.getIp = getIp;
