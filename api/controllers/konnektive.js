@@ -2,6 +2,7 @@
 import request from 'request-promise';
 import config from '../../server-config';
 import xss from 'xss';
+import util from 'util';
 
 // const autopilot = new Autopilot(config.autopilot.key);
 
@@ -18,6 +19,28 @@ import xss from 'xss';
  * - Anatolij
  */
 
+
+//On development environment we use proxy to connective api.
+//It is more secure (source code do not have Konnective API login and password, that gave full
+//permissions to edit database of Konnective via API exposed.
+//But proxy add some lags and it is bad for production.
+
+//On staging and production environments Konnective API is used without proxy.
+
+let connectiveApiURL;
+let proxyApiKey;
+let konnectiveLogin;
+let konnectivePassword;
+
+if (config.ENV === 'development') {
+  connectiveApiURL = config.konnective.proxy;
+  proxyApiKey = config.konnective.proxyApiKey;
+} else {
+  proxyApiKey = '';
+  connectiveApiURL = 'https://api.konnektive.com/';
+  konnectiveLogin = config.konnective.loginId;
+  konnectivePassword = config.konnective.password;
+}
 
 
 async function addKonnektiveOrder(req, res) {
@@ -59,8 +82,6 @@ async function addKonnektiveOrder(req, res) {
   //req.body.cardSecurityCode = '100';
 
   body.campaignId = 3;
-  body.loginId = config.konnective.loginId;
-  body.password = config.konnective.password;
   body.paySource = 'CREDITCARD';
   body.product1_qty = 1;
   body.product1_id = req.body.productId;
@@ -69,10 +90,12 @@ async function addKonnektiveOrder(req, res) {
   //delete req.body.productId;
 
   const options = {
-    uri: 'https://api.konnektive.com/order/import/',
+    method: 'GET',
+    uri: util.format('%s%s', connectiveApiURL, 'order/import/'),
     qs: body,
     headers: {
-      'User-Agent': 'Request-Promise'
+      'api-key':proxyApiKey,
+      'User-Agent': 'Request-Promise',
     },
     json: true // Automatically parses the JSON string in the response
   };
@@ -90,8 +113,22 @@ async function addKonnektiveOrder(req, res) {
 
 async function getLead(req, res) {
   const orderId = xss(req.params.id);
-  const url = `https://api.konnektive.com/order/query/?loginId=${config.konnective.loginId}&password=${config.konnective.password}&orderId=${orderId}`;
-  const response = JSON.parse(await request(url));
+  const options = {
+    method: 'GET',
+    uri: util.format('%sorder/query/', connectiveApiURL),
+    qs: {
+      loginId: konnectiveLogin,
+      password: konnectivePassword,
+      orderId: orderId
+    },
+    headers: {
+      'api-key':proxyApiKey,
+      'User-Agent': 'Request-Promise',
+    },
+    json: true // Automatically parses the JSON string in the response
+  };
+
+  const response = JSON.parse(await request(options));
   console.log(response);
   if (response.result == 'ERROR') {
     res.error(response.message);
@@ -103,8 +140,21 @@ async function getLead(req, res) {
 
 async function getTrans(req, res) {
   const orderId = xss(req.params.id);
-  const url = `https://api.konnektive.com/transactions/query/?loginId=${config.konnective.loginId}&password=${config.konnective.password}&orderId=${orderId}`;
-  const response = JSON.parse(await request(url));
+  const options = {
+    method: 'GET',
+    uri: util.format('%stransactions/query/', connectiveApiURL),
+    qs: {
+      loginId: konnectiveLogin,
+      password: konnectivePassword,
+      orderId: orderId
+    },
+    headers: {
+      'api-key':proxyApiKey,
+      'User-Agent': 'Request-Promise',
+    },
+    json: true // Automatically parses the JSON string in the response
+  };
+  const response = JSON.parse(await request(options));
   if (response.result == 'ERROR') {
     res.error(response.message);
   }
@@ -120,8 +170,6 @@ async function createKonnektiveLead(req, res) {
   const campaignId = 3;
 
   const body = {};
-  body.loginId = config.konnective.loginId;
-  body.password = config.konnective.password;
   body.campaignId = campaignId;
 
   body.firstName = xss(req.body.firstName);
@@ -131,10 +179,14 @@ async function createKonnektiveLead(req, res) {
 
   console.log(body);
 
+  body.loginId = konnectiveLogin;
+  body.password = konnectivePassword;
+
   const options = {
-    uri: 'https://api.konnektive.com/leads/import/',
+    uri: util.format('%sleads/import/', connectiveApiURL),
     qs: body,
     headers: {
+      'api-key':proxyApiKey,
       'User-Agent': 'Request-Promise'
     },
     json: true // Automatically parses the JSON string in the response
@@ -156,12 +208,13 @@ async function upsell(req, res) {
     res.error('Invalid Upsell Data');
   }
   else {
-    req.body.loginId = config.konnective.loginId;
-    req.body.password = config.konnective.password;
+    req.body.loginId = konnectiveLogin;
+    req.body.password = konnectivePassword;
     const options = {
-      uri: 'https://api.konnektive.com/upsale/import/',
+      uri: util.format('%supsale/import/', connectiveApiURL),
       qs: req.body,
       headers: {
+        'api-key':proxyApiKey,
         'User-Agent': 'Request-Promise'
       },
       json: true // Automatically parses the JSON string in the response
