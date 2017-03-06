@@ -1,5 +1,7 @@
 'use strict';
 
+/*eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
+
 import RedisClient from 'ioredis';
 
 // let connectionDetails;

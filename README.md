@@ -8,7 +8,7 @@ Merge of frontend and backend code into single container that is ok for develope
 
 Frontend
 ===================
-State of [f98451a6f](https://github.com/starlightgroup/flashlightsforever/commit/f98451a6ffbf929566b595ad129e1eb37b329182) commit - tip of dev branch
+State of [7d28751e90e](https://github.com/starlightgroup/new-flashlightsforever/commit/7d28751e90e7f76f1133b90bc04d22b998ce3f76)
 
 
 Backend

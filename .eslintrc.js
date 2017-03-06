@@ -1,17 +1,19 @@
 module.exports = {
+  'extends': 'eslint:recommended',
+  //'extends': 'airbnb-base',
   'parser': 'babel-eslint',
-  'plugins': ['async-await','babel'],
+  'plugins': ['async-await','babel','import'],
   'env': {
     'browser': false,
     'commonjs': true,
     'es6': true,
     'node':true
   },
-  'extends': 'eslint:recommended',
   'parserOptions': {
     'sourceType': 'module'
   },
   'rules': {
+    'no-undef': 1,
     'babel/new-cap': 1,
     'babel/object-curly-spacing': 1,
     'babel/no-await-in-loop': 1,
@@ -20,7 +22,7 @@ module.exports = {
       2
     ],
     'no-console': [
-      0
+      1
     ],
     'indent': [
       'error',

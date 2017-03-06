@@ -1,12 +1,11 @@
-/* jshint node: true */
-
 'use strict';
 
-var _ = require('lodash'),
+/*eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
+
+let _ = require('lodash'),
   gulp = require('gulp'),
   // sass = require('gulp-sass'),
   cleanCSS = require('gulp-clean-css'),
-  jshint = require('gulp-jshint'),
   // uglify = require('gulp-uglify'),
   // rename = require('gulp-rename'),
   del = require('del'),
@@ -16,23 +15,29 @@ var _ = require('lodash'),
   // plumber = require('gulp-plumber'),
   purify = require('gulp-purifycss'),
   newer = require('gulp-newer'),
-  glob = require('glob'),
   runSequence = require('run-sequence'),
-  XSSLint = require('xsslint'),
   // CSSfilter = require('cssfilter'),
   // validator = require('validator'),
-  stripCssComments = require('gulp-strip-css-comments'),
   // safe = require('safe-regex'),
-  eslint = require('gulp-eslint');
+  debug = require('gulp-debug'),
+  stripCssComments = require('gulp-strip-css-comments');
 
-
-var config = {
+const config = {
   src: 'frontend', // source directory
   dist: 'public', // destination directory
 };
 
-gulp.task('lint', function () {
-  return gulp.src([config.src + '/scripts/**/*.js', '!node_modules/**'])
+/*
+ * Tests tasks - they are performed as part of unit tests
+ */
+gulp.task('eslint', function () {
+  const eslint = require('gulp-eslint');
+  return gulp.src([
+    config.src + '/scripts/app/pages/*.js',
+    config.src + '/scripts/app/utils.js',
+    config.src + '/scripts/app/storage-wrapper.js'
+  ])
+    .pipe(debug({title: 'Eslint this file:'}))
     .pipe(eslint({
       rules: {
         'no-evil-regex-rule': 1,
@@ -40,21 +45,32 @@ gulp.task('lint', function () {
       rulePaths: ['./eslint-rules'],
       envs: ['browser']
     }))
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
+    .pipe(eslint.format());
+//    .pipe(eslint.failAfterError()); //TODO - it have to fail on errors, not report only
 });
 
-// Stylish reporter for JSHint
-gulp.task('jshint', function () {
-  gulp.src([
-    config.src + '/scripts/app/pages/*.js',
-    config.src + '/scripts/app/config.js',
-    config.src + '/scripts/app/utils.js',
-    config.src + '/scripts/vendor/addclear.js',
-  ])
-    .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'));
+gulp.task('html-lint', function () {
+  const htmlLint = require('gulp-html-lint');
+  return gulp
+    .src([config.src + '/html/*.html'])
+    .pipe(debug({title: 'HTML linting this file:'}))
+    .pipe(htmlLint()) //TODO - implement options - https://www.npmjs.com/package/gulp-html-lint#options
+    .pipe(htmlLint.format());
+  // .pipe(htmlLint.failOnError());  //TODO - it have to fail on errors, not report only
 });
+
+gulp.task('test', ['eslint', 'html-lint'], function (cb) {
+  console.log('Test finished!');
+  process.nextTick(cb);
+});
+
+/*
+ * End of tests tasks
+ */
+
+/*
+ * Build tasks
+ */
 
 // Fonts
 gulp.task('fonts', function () {
@@ -79,7 +95,7 @@ gulp.task('html', function () {
 
 // Copy JS libraries 
 gulp.task('libcopy', function () {
-  return gulp.src([config.src + '/scripts/libs/**/*'], { base: config.src + '/scripts/libs' })
+  return gulp.src([config.src + '/scripts/libs/**/*'], {base: config.src + '/scripts/libs'})
     .pipe(newer(config.dist + '/assets/libs'))
     .pipe(gulp.dest(config.dist + '/assets/libs'));
 });
@@ -130,7 +146,7 @@ gulp.task('csspurify', function () {
       config.src + '/html/*.html'
     ]))
     .pipe(gulp.dest(config.dist + '/assets/css'))
-    .pipe(cleanCSS({ compatibility: 'ie8' }))
+    .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(gulp.dest(config.dist + '/assets/css'))
     .pipe(size());
 });
@@ -138,18 +154,6 @@ gulp.task('csspurify', function () {
 // Clean Temp Dir
 gulp.task('cleantemp', function (cb) {
   del([config.dist + '/assets/temp'], cb);
-});
-
-// XSSLint - Find potential XSS vulnerabilities
-gulp.task('xsslint', function () {
-  var files = glob.sync(config.src + '/scripts/app/**/*.js');
-  files.forEach(function (file) {
-    var warnings = XSSLint.run(file);
-    warnings.forEach(function (warning) {
-      if (warning.method != '+' && warning.method != 'html()')
-        console.error(file + ':' + warning.line + ': possibly XSS-able `' + warning.method + '` call');
-    });
-  });
 });
 
 // String Validation and Sanitization
@@ -170,8 +174,8 @@ gulp.task('xsslint', function () {
 // Build Task !
 gulp.task('build', ['clean-all'], function (done) {
   runSequence(
-    'jshint',
-    'xsslint',
+    // 'jshint', //this all is called in `test` task
+    // 'xsslint',
     'libcopy',
     'jscopy',
     'fonts',
