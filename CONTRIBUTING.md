@@ -38,3 +38,24 @@ On dev server the `NODE_ENV` have to be `staging`.
 
 
 - `master` - code for production.  The`NODE_ENV` have to be `production`.
+
+
+
+Contributors
+=====================
+
+- Anatolij (Github - [vodolaz095](http://github.com/vodolaz095/)) - backend developer. 
+Uses Fedora Linux since 2002 year. Uses Docker. Can setup CI. Knows nodejs, redis.
+Has little knowledge of frontend (jquery, angular1, gulp, bootstrap).
+Wrote ~50% of nodejs backend code and all unit tests.
+Has no skills of Windows, MacOS, and fancy recent browsers like Google Chrome, Safari and so on. 
+Lives by [Moscow](https://www.worldtimebuddy.com/?pl=1&lid=524901&h=524901) timezone.
+Is prone to sins of rage and pride. On Sunday he goes to Church and is totally offline.  
+Can be reached by [anatolii@starlightgroup.io], slackchat - [@anatolij](https://starlightads.slack.com/messages/@anatolij/)
+Has bachelor degree at mathematics, self educated programmer.
+
+ 
+- Kenji (Github - [KenKimura88](http://github.com/KenKimura88/)) - security expert, javascript developer. Uses MacOS.
+
+- Sachin (Github - [asharma-ror](http://github.com/asharma-ror/) - nodejs and ROR developer. Uses Ubuntu.
+
