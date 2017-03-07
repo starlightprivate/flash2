@@ -139,6 +139,7 @@ gulp.task('transpile-and-jscopy', function() {
     config.src + '/scripts/app/config.js' ,
     config.src + '/scripts/app/utils.js' ,
     config.src + '/scripts/app/storage-wrapper.js' ,
+    config.src + '/scripts/app/safty-overrides.js' ,
     config.src + '/scripts/libs/xss.js' ,
     config.src + '/scripts/vendor/addclear.js',
     config.src + '/scripts/vendor/xss.js',
