@@ -6,12 +6,13 @@
     if (frm.length > 0) {
       $.each(fields, (index, key) => {
         const tempKey = filterXSS(key);
-        if ($(`input[name=${tempKey}]`).length > 0 && $(`input[name=${tempKey}]`).val() !== '') {
+        const $input = $(`input[name=${tempKey}]`);
+        if ($input.length > 0 && $input.val() !== '') {
           let phoneNumber = filterXSS($('input[name=phoneNumber]').val());
           switch (tempKey) {
             case 'postalCode':
-              if ($(`input[name=${tempKey}]`).val() !== tmpZipCode) {
-                tmpZipCode = $(`input[name=${tempKey}]`).val();
+              if ($input.val() !== tmpZipCode) {
+                tmpZipCode = $input.val();
                 loadStateFromZip();
               }
               break;
