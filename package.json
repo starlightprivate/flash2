@@ -17,7 +17,6 @@
 
     "lint": "eslint *.js api/**/*.js config/redis.js config/**/*.js test/**/*.js",
 
-    /*Frontend*/
     "precommit": "npm run lint && npm run lint:frontend",
     "test:frontend": "snyk test && gulp xsslint",
     "dev": "gulp",
@@ -105,7 +104,7 @@
     "safe-regex": "^1.1.0",
     "serve-static": "^1.11.2",
     "should": "^11.2.0",
-    "snyk": "^1.25.1",
+    "snyk": "^1.25.2",
     "supertest": "^3.0.0",
     "validator": "^7.0",
     "xsslint": "^0.1.4"
