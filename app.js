@@ -48,7 +48,7 @@ if (isProtectedByCloudflare){
   //i commented it out, because it i uncomment it, there can be rare case when everybody gets 500 : NOT OK response from server
   // -Anatolij
 
-  //app.use(security.verifyThatSiteIsAccessedFromCloudflare); // ####
+  app.use(security.verifyThatSiteIsAccessedFromCloudflare); // ####
 
   // uncomment line (####) if you are brave and have dev,staging server
   // working and protected by Cloudflare.
