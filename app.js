@@ -30,6 +30,7 @@ import {routes} from './config/routes/v2';
 //https://starlightgroup.atlassian.net/browse/SG-8
 //protect /api/v2/ from session tampering
 import security from './api/middlewares/security.js';
+import rateLimiter from './api/middlewares/rateLimiter.js';
 
 const app = express();
 console.log('Currently Running On : ' , config.ENV);
@@ -217,6 +218,7 @@ if (isProtectedByCloudflare) {
 app.use('/api', security.punishForChangingUserAgent);
 app.use('/api', security.punishForEnteringSiteFromBadLocation);
 
+app.use('/api', rateLimiter);
 
 // route with appropriate version prefix
 Object.keys(routes).forEach(r => {
