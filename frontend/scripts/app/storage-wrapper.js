@@ -69,16 +69,12 @@ const UniversalStorage = {
    * @param {Object} checkoutDetails The dictionary of checkout details.
    */
   saveCheckoutDetails: (checkoutDetails) => { // eslint-disable-line no-unused-vars
-    const value = {};
     Object.keys(checkoutDetails).forEach((field) => {
       if (UniversalStorage.whiteList.indexOf(field) === -1 || typeof checkoutDetails[field] === 'undefined') {
         return;
       }
-      value[field] = checkoutDetails[field];
+      UniversalStorage.saveCheckoutField(field, checkoutDetails[field]);
     });
-
-    // Save to storage.
-    UniversalStorage.saveStorageItem(UniversalStorage.storageKey, value);
   },
   /**
    * Retrieve checkout details saved to storage.

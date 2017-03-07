@@ -1,3 +1,6 @@
+//this is eslint config file for backend
+//Anatolij promise to make it compatible with frontend
+
 module.exports = {
   'extends': 'eslint:recommended',
   //'extends': 'airbnb-base',

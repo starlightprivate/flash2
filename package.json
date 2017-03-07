@@ -42,7 +42,7 @@
     "phone": "^1.0.8",
     "range_check": "^1.4.0",
     "request-promise": "^4.1.1",
-    "minimatch":"^3.0.2",
+    "minimatch": "^3.0.2",
     "through": "^2.3.8",
     "validator": "^6.2.0",
     "winston": "^2.3.0",
@@ -69,6 +69,7 @@
     "forever": "^0.15.3",
     "glob": "^7.1.1",
     "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
     "gulp-cache": "^0.4.5",
     "gulp-clean-css": "^3.0.2",
     "gulp-concat": "^2.6.0",
@@ -91,8 +92,8 @@
     "nyc": "^10.1.2",
     "run-sequence": "^1.2.2",
     "safe-regex": "^1.1.0",
-    "snyk": "^1.25.2",
     "should": "^11.2.0",
+    "snyk": "^1.25.2",
     "supertest": "^3.0.0",
     "xsslint": "^0.1.3"
   }

@@ -5,6 +5,7 @@
 let _ = require('lodash'),
   path = require('path'),
   gulp = require('gulp'),
+  babel = require('gulp-babel'),
   // sass = require('gulp-sass'),
   cleanCSS = require('gulp-clean-css'),
   // uglify = require('gulp-uglify'),
@@ -31,6 +32,8 @@ const config = {
 /*
  * Tests tasks - they are performed as part of unit tests
  */
+
+//run eslint against frontend code
 gulp.task('eslint', function () {
   //i require gulp-eslint here for reason - so i can only `npm install --only=prod` and `gulp-eslint` is not installed
   const eslint = require('gulp-eslint');
@@ -40,8 +43,15 @@ gulp.task('eslint', function () {
     config.src + '/scripts/app/storage-wrapper.js'
   ])
     .pipe(debug({title: 'Eslint this file:'}))
-    .pipe(eslint({
-      rules: {
+    .pipe(eslint({ //this is CUSTOM eslint rules for frontend code - `.eslintrc.js` is ignored for now!
+      'root':true, //http://eslint.org/docs/user-guide/configuring#using-configuration-files
+      'extends': 'airbnb-base',
+      'plugins': [
+        'import'
+      ],
+      'rules': {
+        'no-undef': 'off',
+        'no-console': 1,
         'no-evil-regex-rule': 1,
       },
       rulePaths: ['./eslint-rules'],
@@ -51,6 +61,7 @@ gulp.task('eslint', function () {
 //    .pipe(eslint.failAfterError()); //TODO - it have to fail on errors, not report only
 });
 
+//run html lint agaist frontend code
 gulp.task('html-lint', function () {
   //i require gulp-html-lint here for reason - so i can only `npm install --only=prod` and it is not installed
   //because it is development dependency, required for tests only
@@ -63,6 +74,7 @@ gulp.task('html-lint', function () {
   // .pipe(htmlLint.failOnError());  //TODO - it have to fail on errors, not report only
 });
 
+// Test Task !
 gulp.task('test', ['eslint', 'html-lint'], function (cb) {
   console.log('Test finished!');
   process.nextTick(cb);
@@ -97,42 +109,60 @@ gulp.task('html', function () {
     .pipe(gulp.dest(config.dist));
 });
 
-// Copy JS libraries 
+
+
+/*
+ * JS related tasks
+ */
+
+// Copy JS libraries
 gulp.task('libcopy', function () {
   return gulp.src([config.src + '/scripts/libs/**/*'], {base: config.src + '/scripts/libs'})
     .pipe(newer(config.dist + '/assets/libs'))
     .pipe(gulp.dest(config.dist + '/assets/libs'));
 });
 
-// Copy Custom JS 
+//copy validator library???
 gulp.task('jscopy', function () {
-  return gulp.src([config.src + '/scripts/app/pages/*.js',
-    config.src + '/scripts/app/config.js',
-    config.src + '/scripts/app/utils.js',
-    config.src + '/scripts/libs/xss.js',
-    config.src + '/scripts/vendor/addclear.js',
-    config.src + '/scripts/vendor/xss.js',
+  return gulp.src([
     'node_modules/validator/validator.min.js'
   ])
     .pipe(newer(config.dist + '/assets/js'))
     .pipe(gulp.dest(config.dist + '/assets/js'));
 });
 
-// Copy Css 
+
+// Copy Custom JS
+gulp.task('transpile-and-jscopy', function() {
+  return gulp.src([
+    config.src + '/scripts/app/pages/*.js',
+    config.src + '/scripts/app/config.js' ,
+    config.src + '/scripts/app/utils.js' ,
+    config.src + '/scripts/app/storage-wrapper.js' ,
+    config.src + '/scripts/libs/xss.js' ,
+    config.src + '/scripts/vendor/addclear.js',
+    config.src + '/scripts/vendor/xss.js',
+  ])
+    .pipe(babel({
+      presets: ['es2015']
+    }))
+    .pipe(newer(config.dist + '/assets/js'))
+    .pipe(gulp.dest(config.dist + '/assets/js'));
+});
+
+/*
+ * End of JS related tasks
+ */
+
+/*
+ * CSS related tasks
+ */
+
+// Copy Css
 gulp.task('csscopy', function () {
   return gulp.src([config.src + '/styles/style.css'])
     .pipe(newer(config.dist + '/assets/temp'))
     .pipe(gulp.dest(config.dist + '/assets/temp'));
-});
-
-
-// Clean-all
-gulp.task('clean-all', function (cb) {
-  return del([
-    path.join(config.dist,'assets'),
-    path.join(config.dist,'*.html'),
-    path.join(config.dist,'*.ico'),
-  ], cb);
 });
 
 // Strip comments from CSS using strip-css-comments
@@ -142,7 +172,7 @@ gulp.task('stripcss', function () {
     .pipe(gulp.dest(config.dist + '/assets/temp/'));
 });
 
-// Remove unnecessary css 
+// Remove unnecessary css
 gulp.task('csspurify', function () {
   return gulp.src(config.dist + '/assets/temp/style.css')
     .pipe(purify([
@@ -155,6 +185,20 @@ gulp.task('csspurify', function () {
     .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(gulp.dest(config.dist + '/assets/css'))
     .pipe(size());
+});
+
+/*
+ * End CSS related tasks
+ */
+
+
+// Clean-all
+gulp.task('clean-all', function (cb) {
+  return del([
+    path.join(config.dist,'assets'),
+    path.join(config.dist,'*.html'),
+    path.join(config.dist,'*.ico'),
+  ], cb);
 });
 
 // Clean Temp Dir
@@ -182,14 +226,22 @@ gulp.task('build', ['clean-all'], function (done) {
   runSequence(
     // 'jshint', //this all is called in `test` task
     // 'xsslint',
+
+//process js
     'libcopy',
+    'transpile-and-jscopy',
     'jscopy',
+
+//process other assets
     'fonts',
     'images',
     'html',
+
+// css
     'csscopy',
     'stripcss',
     'csspurify',
+//???
     'cleantemp',
     function () {
       console.log('Build successful!');

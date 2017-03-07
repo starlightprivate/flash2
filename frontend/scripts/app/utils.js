@@ -1,3 +1,4 @@
+/** global: MobileDetect */
 const md = new MobileDetect(window.navigator.userAgent);
 
 function customWrapperForIsMobileDevice() { // eslint-disable-line no-unused-vars
@@ -22,7 +23,6 @@ function isValidJson(str) {
   }
   return true;
 }
-
 
 function getJson(e) { // eslint-disable-line no-unused-vars
   let json = {};
@@ -49,9 +49,6 @@ function callAPI(endpoint, data, method, callback, err) {
   // https://starlightgroup.atlassian.net/browse/SG-14
   if (['PUT', 'POST', 'PATCH', 'DELETE'].indexOf(method) !== -1) {
     params._csrf = $.cookie('XSRF-TOKEN'); // eslint-disable-line no-underscore-dangle
-    console.log(`COOKIE(token): ${params._csrf}`); // eslint-disable-line no-underscore-dangle
-  } else {
-    console.log('COOKIE(token): -');
   }
 
   jQuery.ajax({
@@ -67,8 +64,6 @@ function callAPI(endpoint, data, method, callback, err) {
     if (typeof err === 'function') {
       err(textStatus);
     }
-    console.log(`error occured on api - ${endpoint}`);
-    console.log(`error11 - ${textStatus}`);
   });
 }
 // load state from zipcode
@@ -110,11 +105,7 @@ function loadStateFromZip() { // eslint-disable-line no-unused-vars
     });
   }
 }
-// Detects safari with Applewebkit only
 
-function isMobileSafari() { // eslint-disable-line no-unused-vars
-  return navigator.userAgent.match(/(iPod|iPhone|iPad)/) && navigator.userAgent.match(/AppleWebKit/);
-}
 function bootstrapModal(content, title) {
   const modal = $('#tm-modal');
   // set content
@@ -137,78 +128,15 @@ function popPage(pageURL, title) {
 }
 // Terms and privacy popups
 
-function termsModal(e) { // eslint-disable-line no-unused-vars
+function termsModal() { // eslint-disable-line no-unused-vars
   popPage('terms.html', 'Terms & Conditions');
 }
-function partnerModal(e) { // eslint-disable-line no-unused-vars
+function partnerModal() { // eslint-disable-line no-unused-vars
   popPage('partner.html', 'Partner');
 }
-function privacyModal(e) { // eslint-disable-line no-unused-vars
+function privacyModal() { // eslint-disable-line no-unused-vars
   popPage('privacy.html', 'Privacy Policy');
 }
-function pressModal(e) { // eslint-disable-line no-unused-vars
-  popPage('press.html');
-}
-function custcareModal(e) { // eslint-disable-line no-unused-vars
+function custcareModal() { // eslint-disable-line no-unused-vars
   popPage('customercare.html', 'Customer Care');
-}
-
-function getQueryVariable(variable) {
-  // for (let i = 0; i < window.location.search.substring(1).split('&').length; i + 1) {
-  //   const pair = window.location.search.substring(1).split('&')[i].split('=');
-  //   if (pair[0] === variable) {
-  //     console.log('url check-------->', pair);
-  //     return pair[1];
-  //   }
-  // }
-  window.location.search.substring(1)
-  .split('&')
-  .forEach((value) => {
-    const pair = value.split('=');
-    if (pair[0] === variable) {
-      console.log('url check-------->', pair);
-      return pair[1];
-    }
-    return '';
-  });
-
-  return '';
-}
-
-function afGet(field, qsField) { // eslint-disable-line no-unused-vars
-  let returnThis;
-  if (qsField) {
-    const qParam = getQueryVariable(qsField);
-    if (qParam !== '') {
-      returnThis = qParam;
-    }
-  }
-  if (returnThis) {
-    return returnThis.replace(/[+]/g, ' ');
-  }
-  return returnThis;
-}
-
-function escapeHTML(str) { // eslint-disable-line no-unused-vars
-  const params = {
-    str,
-  };
-
-  params[str] = `${params[str]}`;
-  let out = '';
-  params[str].forEach((value) => {
-    if (value === '<') {
-      out += '&lt;';
-    } else if (value === '>') {
-      out += '&gt;';
-    } else if (value === "'") {
-      out += '&#39;';
-    } else if (value === '"') {
-      out += '&quot;';
-    } else {
-      out += value;
-    }
-  });
-
-  return out;
 }
