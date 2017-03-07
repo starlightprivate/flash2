@@ -14,9 +14,7 @@
     "snyk-protect": "snyk protect",
     "frontend": "gulp build",
     "test": "nyc --require babel-core/register mocha ./test/**/*.spec.js",
-
     "lint": "eslint *.js api/**/*.js config/redis.js config/**/*.js test/**/*.js",
-
     "precommit": "npm run lint && npm run lint:frontend",
     "test:frontend": "snyk test && gulp xsslint",
     "dev": "gulp",
@@ -54,7 +52,8 @@
     "validator": "^6.2.0",
     "winston": "^2.3.0",
     "xss": "^0.3.3",
-    "zipcodes": "^2.1.0"
+    "zipcodes": "^2.1.0",
+    "snyk": "^1.25.2"
   },
   "optionalDependencies": {
     "hiredis": "^0.5.0"
@@ -104,7 +103,6 @@
     "run-sequence": "^1.2.2",
     "safe-regex": "^1.1.0",
     "should": "^11.2.0",
-    "snyk": "^1.25.2",
     "supertest": "^3.0.0",
     "validator": "^7.0",
     "xsslint": "^0.1.4"
