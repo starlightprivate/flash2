@@ -14,8 +14,15 @@
     "snyk-protect": "snyk protect",
     "frontend": "gulp build",
     "test": "nyc --require babel-core/register mocha ./test/**/*.spec.js",
-    "test:frontend": "gulp test",
-    "lint": "eslint *.js api/**/*.js config/redis.js config/**/*.js test/**/*.js"
+
+    "lint": "eslint *.js api/**/*.js config/redis.js config/**/*.js test/**/*.js",
+
+    /*Frontend*/
+    "precommit": "npm run lint && npm run lint:frontend",
+    "test:frontend": "snyk test && gulp xsslint",
+    "dev": "gulp",
+    "prepublish": "npm run snyk-protect",
+    "lint:frontend": "gulp lint &&  node_modules/.bin/htmlhint --config .htmlhintrc frontend/html/*.html"
   },
   "repository": {
     "type": "git",
@@ -54,14 +61,16 @@
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
+    "babel-core": "^6.23.1",
     "babel-eslint": "^7.1.1",
     "babel-plugin-transform-runtime": "^6.15.0",
-    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-es2015": "^6.22.0",
     "babel-preset-stage-0": "^6.16.0",
     "chai": "^3.5.0",
+    "connect": "^3.6.0",
     "cssfilter": "0.0.10",
     "del": "^2.2.2",
-    "eslint": "^3.10.0",
+    "eslint": "^3.17.0",
     "eslint-config-airbnb-base": "^11.1.1",
     "eslint-plugin-async-await": "0.0.0",
     "eslint-plugin-babel": "^4.0.1",
@@ -85,6 +94,8 @@
     "gulp-size": "^2.1.0",
     "gulp-strip-css-comments": "^1.2.0",
     "gulp-uglify": "^2.0.0",
+    "htmlhint": "^0.9.13",
+    "husky": "^0.13.2",
     "jshint": "^2.9.4",
     "jshint-stylish": "^2.2.1",
     "lodash": "^4.17.4",
@@ -92,9 +103,11 @@
     "nyc": "^10.1.2",
     "run-sequence": "^1.2.2",
     "safe-regex": "^1.1.0",
+    "serve-static": "^1.11.2",
     "should": "^11.2.0",
-    "snyk": "^1.25.2",
+    "snyk": "^1.25.1",
     "supertest": "^3.0.0",
-    "xsslint": "^0.1.3"
+    "validator": "^7.0",
+    "xsslint": "^0.1.4"
   }
 }

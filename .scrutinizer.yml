@@ -1,0 +1,14 @@
+checks:
+  javascript: true
+filter:
+  excluded_paths:
+    - node_modules/*
+    - eslint-rules/*
+    - frontend/scripts/libs/*
+    - gulpfile.babel.js
+    - safe-regex-shell.js
+build:
+  tests:
+    override:
+      - eslint-run "frontend/scripts/app/**/*.js"
+      # Also need to include paths for fronted as well
