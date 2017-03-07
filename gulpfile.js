@@ -31,6 +31,7 @@ const config = {
  * Tests tasks - they are performed as part of unit tests
  */
 gulp.task('eslint', function () {
+  //i require gulp-eslint here for reason - so i can only `npm install --only=prod` and `gulp-eslint` is not installed
   const eslint = require('gulp-eslint');
   return gulp.src([
     config.src + '/scripts/app/pages/*.js',
@@ -50,6 +51,8 @@ gulp.task('eslint', function () {
 });
 
 gulp.task('html-lint', function () {
+  //i require gulp-html-lint here for reason - so i can only `npm install --only=prod` and it is not installed
+  //because it is development dependency, required for tests only
   const htmlLint = require('gulp-html-lint');
   return gulp
     .src([config.src + '/html/*.html'])

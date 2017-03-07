@@ -62,13 +62,9 @@ app.use(helmet());
 app.use(helmet.referrerPolicy());
 app.use(helmet.frameguard({action: 'deny'}));
 
-if(isProtectedByCloudflare){
-//on development, being run on local
-// server it makes download all scripts via HTTPS, usually we serve site on http://localhost:8000/
-//and it fails
-//@SEE ./api/middlewares/csp.js why do i think CSP is bomb with time delayed trigger
-  app.use(csp);
-}
+
+app.use(csp);
+
 
 app.use(helmet.hpkp({
   maxAge: 2592000, //30 days
@@ -97,14 +93,20 @@ app.use(helmet.hpkp({
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+// this strange thing is made for reason
+// it is endpoint that recieves CSP rules violation info
+// from hemlet-csp middleware - see `./api/middlewares/csp.js`
 app.post('/a434819b5a5f4bfeeaa5d47c8af8ac87', function (req,res) {
   console.log(req.body);
   res.status(200).send('ok');
 });
 
+//Protect from parameter pollution
+//https://www.npmjs.com/package/hpp
 app.use(hpp());
 
 //TODO how do we plan to serve assets using nodejs, if there is 9 kbytes limit on returned data? - Anatolij
+//Or, i'm not sure what does this middleware do....
 const MAX_CONTENT_LENGTH_ACCEPTED = 9999;
 app.use(expressContentLength.validateMax({
   max: MAX_CONTENT_LENGTH_ACCEPTED,

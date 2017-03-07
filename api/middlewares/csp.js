@@ -1,5 +1,7 @@
 'use strict';
 
+import config from './../../server-config';
+
 import csp from 'helmet-csp';
 
 // This is Content Security Policy for site
@@ -15,6 +17,8 @@ import csp from 'helmet-csp';
 
 // - Anatolij
 
+
+const isDevelopment = config.ENV === 'development';
 
 //under construction
 module.exports = exports = csp({
@@ -96,7 +100,10 @@ module.exports = exports = csp({
 
     // objectSrc: ["'none'"],
     mediaSrc: ['data:'],
-    upgradeInsecureRequests: true
+
+    //on development environment, being run on http://localhost:8000
+    //it makes download all scripts via HTTPS,while locally we serve site using HTTP and it fails
+    upgradeInsecureRequests: !isDevelopment,
   },
 
   // This module will detect common mistakes in your directives and throw errors
@@ -106,7 +113,7 @@ module.exports = exports = csp({
   // Set to true if you only want browsers to report errors, not block them.
   // You may also set this to a function(req, res) in order to decide dynamically
   // whether to use reportOnly mode, e.g., to allow for a dynamic kill switch.
-  reportOnly: true,
+  reportOnly: !isDevelopment,
 
   // Set to true if you want to blindly set all headers: Content-Security-Policy,
   // X-WebKit-CSP, and X-Content-Security-Policy.
