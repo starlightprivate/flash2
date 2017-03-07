@@ -44,7 +44,7 @@ gulp.task('eslint', function () {
   ])
     .pipe(debug({title: 'Eslint this file:'}))
     .pipe(eslint({ //this is CUSTOM eslint rules for frontend code - `.eslintrc.js` is ignored for now!
-      'root':true, //http://eslint.org/docs/user-guide/configuring#using-configuration-files
+      'root': true, //http://eslint.org/docs/user-guide/configuring#using-configuration-files
       'extends': 'airbnb-base',
       'plugins': [
         'import'

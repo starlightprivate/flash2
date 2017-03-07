@@ -13,5 +13,3 @@ exclude_paths:
   - node_modules/*
   - eslint-rules/*
   - src/scripts/libs/*
-  - gulpfile.babel.js
-  - safe-regex-shell.js
