@@ -1,4 +1,6 @@
 'use strict';
+/*eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
+
 /* global it, describe, process */
 
 import supertest from 'supertest';

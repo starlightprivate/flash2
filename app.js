@@ -1,5 +1,6 @@
 'use strict';
 /* global __dirname */
+/*eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
 
 
 import path from 'path';

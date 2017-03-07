@@ -1,6 +1,7 @@
 'use strict';
 require('babel-register');
 require('@risingstack/trace');
+/*eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
 
 const
   http = require('http'),

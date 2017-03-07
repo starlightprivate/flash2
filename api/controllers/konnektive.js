@@ -1,3 +1,4 @@
+/*eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
 // import Autopilot from 'autopilot-api';
 import request from 'request-promise';
 import config from '../../server-config';
