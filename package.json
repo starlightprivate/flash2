@@ -11,6 +11,7 @@
   "scripts": {
     "start": "node index.js",
     "snyk": "snyk --dev test",
+    "snyk-protect": "snyk protect",
     "frontend": "gulp build",
     "test": "nyc --require babel-core/register mocha ./test/**/*.spec.js",
     "lint": "eslint *.js api/**/*.js config/redis.js config/**/*.js test/**/*.js"
@@ -20,15 +21,16 @@
     "url": "git://github.com/starlightgroup/flash2.git"
   },
   "main": "index.js",
+  "snyk": true,
   "dependencies": {
     "@risingstack/trace": "^3.4.0",
     "autopilot-api": "^2.0.0",
     "babel-register": "^6.23.0",
-    "body-parser": "^1.15.2",
+    "body-parser": "^1.17.1",
     "connect-redis": "^3.2.0",
     "cookie-parser": "^1.4.3",
     "csurf": "^1.9.0",
-    "express": "^4.14.1",
+    "express": "^4.15.2",
     "express-content-length-validator": "^1.0.0",
     "express-promise-router": "^1.1.1",
     "express-session": "^1.15.0",
@@ -39,7 +41,6 @@
     "phone": "^1.0.8",
     "range_check": "^1.4.0",
     "request-promise": "^4.1.1",
-    "snyk": "^1.20.0",
     "through": "^2.3.8",
     "validator": "^6.2.0",
     "winston": "^2.3.0",
@@ -86,6 +87,7 @@
     "gulp-eslint": "^3.0.1",
     "jshint-stylish": "^2.2.1",
     "lodash": "^4.17.4",
+    "snyk": "^1.25.2",
     "safe-regex": "^1.1.0"
   }
 }
