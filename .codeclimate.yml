@@ -8,8 +8,9 @@ engines:
         - javascript
 ratings:
   paths:
-    - src/scripts/app/**
+    - frontend/scripts/app/**
+    # Add paths for backend code checks
 exclude_paths:
   - node_modules/*
   - eslint-rules/*
-  - src/scripts/libs/*
+  - frontend/scripts/libs/*
