@@ -6,16 +6,6 @@ Merge of frontend and backend code into single container that is ok for develope
 [ ![Codeship Status for starlightgroup/flash2](https://app.codeship.com/projects/5ec6e150-e305-0134-1b72-664f30205a5b/status?branch=master)](https://app.codeship.com/projects/205942)
 
 
-Frontend
-===================
-State of [7d28751e90e](https://github.com/starlightgroup/new-flashlightsforever/commit/7d28751e90e7f76f1133b90bc04d22b998ce3f76)
-
-
-Backend
-==================
-State of [d4779c935](https://github.com/starlightgroup/node-api/commit/d4779c9352b94a78648ad0ea304d666bc6830636) commit - tip of dev branch
-
-
 Requirements
 =================
 
