@@ -261,7 +261,7 @@
                   name="contactModalName"
                   id="contactModalName"
                   placeholder="Your Name"
-                  autocomplete="on"
+                  autocomplete="name"
                   autocorrect="off">
                 <span class="icon-field ss-user"></span>
               </div>
@@ -273,6 +273,7 @@
                   class="form-control  scrollFix clearable"
                   name="email"
                   id="email"
+                  autocomplete="email"
                   placeholder="email@example.com"
                   autocapitalize="off"
                   autocorrect="off">
@@ -290,7 +291,7 @@
                   name="phoneNumber"
                   id="phonenumber"
                   placeholder="888-888-8888"
-                  autocomplete="on"
+                  autocomplete="tel"
                   autocorrect="off">
                 <span class="icon-field ss-phone"></span>
               </div>
@@ -350,7 +351,8 @@
                       id="zipcode"
                       placeholder="5 Digits"
                       pattern="\d*"
-                      autocomplete="on"
+                      autocorrect="off"
+                      autocomplete="postal-code"
                       inputmode="numeric"
                       onkeyup="loadStateFromZip()">
                   </div>
@@ -449,7 +451,7 @@
                   name="address1"
                   id="address"
                   placeholder="Your Address"
-                  autocomplete="on"
+                  autocomplete="address-line1"
                   autocorrect="off"/>
               </div>
 

@@ -177,7 +177,7 @@
                           id="name"
                           data-fv-field="firstName"
                           placeholder="Your Name"
-                          autocomplete="on"
+                          autocomplete="name"
                           autocorrect="off">
                       </div>
                       <input
@@ -198,7 +198,7 @@
                           name="emailAddress"
                           id="email"
                           placeholder="email@example.com"
-                          autocomplete="on"
+                          autocomplete="email"
                           autocapitalize="off"
                           autocorrect="off">
                         <span class="email-suggestion"></span>
@@ -213,7 +213,7 @@
                           name="phoneNumber"
                           id="phonenumber"
                           placeholder="888-888-8888"
-                          autocomplete="on"
+                          autocomplete="tel"
                           autocorrect="off">
                       </div>
                     </div>
@@ -245,7 +245,8 @@
                             id="zipcode"
                             placeholder="5 Digits"
                             pattern="\d*"
-                            autocomplete="on"
+                            autocomplete="postal-code"
+                            autocorrect="off"
                             inputmode="numeric"
                             onkeyup="loadStateFromZip()">
                         </div>
@@ -341,7 +342,7 @@
                         name="address1"
                         id="address"
                         placeholder="2125 Chestnut St."
-                        autocomplete="on"
+                        autocomplete="address-line1"
                         autocorrect="off"/>
                     </div>
                   </div>
@@ -379,8 +380,11 @@
                             class="form-control clearable required numfield"
                             name="cardNumber"
                             id="creditcard"
+                            inputmode="numeric"
+                            pattern="[0-9]*"
                             placeholder="•••• •••• •••• ••••"
-                            autocomplete="cc-number">
+                            autocorrect="off"
+                            autocomplete="cc-csc">
                         </div>
                         <label for="month">Expiration *
                           <small>(MM/YY)</small>
