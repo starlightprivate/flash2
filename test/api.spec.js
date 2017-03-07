@@ -1,11 +1,12 @@
 'use strict';
 /*eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
 
-/* global it, describe, process */
+/* global it, describe, process, before */
 
 import supertest from 'supertest';
 import app from '../app.js';
 import util from 'util';
+import redis from './../config/redis.js';
 
 require('should');
 
@@ -37,6 +38,11 @@ console.log('NodeJS version being used - %s for %s', process.version, process.ar
 describe('web application', function () {
 // eslint-disable-next-line
   this.timeout(10000); //not everybody have good internet connection, including codeship
+
+
+  before(function () {
+    return redis.flushdb();
+  });
 
   let
 //being used in all requests
