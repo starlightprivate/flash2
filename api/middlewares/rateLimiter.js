@@ -32,8 +32,8 @@ module.exports = exports = function (req, res, next) {
 // allow 100 request / 60s
   const limiter = new RateLimiter({
     id: id,
-    limit: limitRequestsInterval,
-    duration: limitRequestsNumber
+    limit: limitRequestsNumber,
+    duration: limitRequestsInterval
   }, redis);
 
   limiter.get(function(err, limit, remaining, reset) {
