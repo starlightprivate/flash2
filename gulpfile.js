@@ -3,6 +3,7 @@
 /*eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
 
 let _ = require('lodash'),
+  path = require('path'),
   gulp = require('gulp'),
   // sass = require('gulp-sass'),
   cleanCSS = require('gulp-clean-css'),
@@ -128,7 +129,9 @@ gulp.task('csscopy', function () {
 // Clean-all
 gulp.task('clean-all', function (cb) {
   return del([
-    config.dist
+    path.join(config.dist,'assets'),
+    path.join(config.dist,'*.html'),
+    path.join(config.dist,'*.ico'),
   ], cb);
 });
 
