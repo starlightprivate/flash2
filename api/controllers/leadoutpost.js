@@ -45,11 +45,11 @@ async function migrate(req, res) {
           },
           json: true // Automatically parses the JSON string in the response
         };
-        await request.post(options); // eslint-disable-line babel/no-await-in-loop
+        await request.post(options); // eslint-disable-line no-await-in-loop
         console.log(contact.contact_id, contact.Email, contact.Phone, contact.FirstName, contact.LastName);
       }
     }
-    contacts = await autopilot.lists.roster(config.autopilot.clientlist, contact.contact_id); // eslint-disable-line babel/no-await-in-loop
+    contacts = await autopilot.lists.roster(config.autopilot.clientlist, contact.contact_id); // eslint-disable-line no-await-in-loop
     console.log('last----------------', contact.contact_id);
   }
   res.success({length: contacts.data.contacts.length});
