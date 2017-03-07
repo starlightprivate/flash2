@@ -11,8 +11,8 @@
   function submitOrderForm() {
     const $loadingBar = $('div#js-div-loading-bar');
     $loadingBar.show();
-    const year = $('select[name=year]').val();
-    const month = $('select[name=month]').val();
+    const year = filterXSS($('select[name=year]').val());
+    const month = filterXSS($('select[name=month]').val());
     const d = new Date();
     const currentYear = d.getFullYear().toString().substr(2, 2);
     const currentMonth = (`0${d.getMonth() + 1}`).slice(-2);
@@ -245,8 +245,8 @@
               const VALID_CARD_NUMBER = '4444111144441111';
 
               // Get the number pr by user
-              let value = $field.val();
-              const CountOfChars = parseInt($field.val().length, 10);
+              let value = filterXSS($field.val());
+              const CountOfChars = parseInt(value.val().length, 10);
               if (CountOfChars === 17) {
                 value = value.substr(0, CountOfChars - 1);
               }
@@ -261,6 +261,7 @@
             },
           },
         },
+<<<<<<< Updated upstream
       },
               // CSC
       cardSecurityCode: { validators: { notEmpty: { message: 'The Security Code is required.' } } },
@@ -273,11 +274,11 @@
               const form = $field.parents('form');
               const currentDate = new Date();
               const year = parseInt(currentDate.getYear(), 10);
-              const yearVal = parseInt(form.find('[name=year]').val(), 10);
+              const yearVal = parseInt(filterXSS(form.find('[name=year]').val()), 10);
               if (isNaN(yearVal) || yearVal === null || yearVal === undefined) {
                 return true;
               }
-              const selectedYear = 100 + (parseInt(form.find('[name=year]').val(), 10) || 0);
+              const selectedYear = 100 + (parseInt(filterXSS(form.find('[name=year]').val()), 10) || 0);
               const currentMonth = parseInt(value, 10) -
                                    1 >= parseInt(currentDate.getMonth(), 10);
               if (selectedYear === year) {
