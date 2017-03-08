@@ -2,9 +2,10 @@
 // Entry points, ip tampering, and so on
 // it makes api return 403 error and sets `req.session.isBot` to true
 
+import xss from 'xss';
+
 import rangeCheck from 'range_check';
 import config from './../../server-config';
-import xss from 'xss';
 
 
 // This is first pages of site, that real users usually visits
@@ -56,24 +57,26 @@ const cloudFlareIp6Range = [
 
 // this middleware have to be the first!!!
 // https://starlightgroup.atlassian.net/projects/SG/issues/SG-35
-exports.verifyThatSiteIsAccessedFromCloudflare = function (req, res, next) {
+function verifyThatSiteIsAccessedFromCloudflare(req, res, next) {
   let rIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   rIp = xss(rIp);
 // https://github.com/keverw/range_check#check-if-ip-is-within-range
   let isOk = false;
 // it helped me
 // http://jodies.de/ipcalc?host=103.21.244.0&mask1=22&mask2=
-  cloudFlareIp4Range.map(function (ipRange) {
-    if (isOk) return;
+  cloudFlareIp4Range.map((ipRange) => {
+    if (isOk) return null;
     isOk = rangeCheck.inRange(rIp, ipRange);
+    return null;
   });
   if (isOk) {
     return next();
   }
 // https://www.ultratools.com/tools/ipv6CIDRToRangeResult?ipAddress=2400%3Acb00%3A%3A%2F32
-  cloudFlareIp6Range.map(function (ipRange) {
-    if (isOk) return;
+  cloudFlareIp6Range.map((ipRange) => {
+    if (isOk) return null;
     isOk = rangeCheck.inRange(rIp, ipRange);
+    return null;
   });
   if (isOk) {
     return next();
@@ -81,7 +84,7 @@ exports.verifyThatSiteIsAccessedFromCloudflare = function (req, res, next) {
   return res
     .status(500)
     .end('NOT OK');
-};
+}
 
 function getIp(req) {
 // https://support.cloudflare.com/hc/en-us/articles/200170986-How-does-CloudFlare-handle-HTTP-Request-headers-
@@ -95,54 +98,61 @@ function getIp(req) {
   return req.connection.remoteAddress;
 }
 
-exports.getIp = getIp;
-
 // related issues for punishing middlewares:
 // https://starlightgroup.atlassian.net/browse/SG-5
 // https://starlightgroup.atlassian.net/browse/SG-8
 // https://starlightgroup.atlassian.net/browse/SG-9
 
-exports.punishForEnteringSiteFromBadLocation = function (req, res, next) {
+function punishForEnteringSiteFromBadLocation(req, res, next) {
   if (req.session) {
     if (validEntryPoints.indexOf(req.session.entryPoint) === -1) {
       if (config.ENV !== 'production') {
         res.set('X-PUNISHEDBY', 'BAD LOCATION');
       }
-      req.session.isBot = true;
+      req.session.isBot = true;  // eslint-disable-line no-param-reassign
       return res.status(403).send('Invalid API Key');
     }
     return next();
   }
   return res.status(403).send('Invalid API Key');
-};
+}
 
 
-exports.punishForChangingIP = function (req, res, next) {
+function punishForChangingIP(req, res, next) {
   if (req.session) {
     const rIp = getIp(req);
     if (req.session.ip !== rIp) {
       if (config.ENV !== 'production') {
         res.set('X-PUNISHEDBY', 'BAD LOCATION');
       }
-      req.session.isBot = true;
+      req.session.isBot = true; // eslint-disable-line no-param-reassign
       return res.status(403).send('Invalid API Key');
     }
     return next();
   }
   return res.status(403).send('Invalid API Key');
-};
+}
 
-exports.punishForChangingUserAgent = function (req, res, next) {
+function punishForChangingUserAgent(req, res, next) {
   if (req.session) {
     const ua = req.get('User-Agent');
     if (req.session.userAgent !== ua) {
       if (config.ENV !== 'production') {
         res.set('X-PUNISHEDBY', 'BAD UA');
       }
-      req.session.isBot = true;
+      req.session.isBot = true; // eslint-disable-line no-param-reassign
       return res.status(403).send('Invalid API Key');
     }
     return next();
   }
   return res.status(403).send('Invalid API Key');
+}
+
+
+export default {
+  verifyThatSiteIsAccessedFromCloudflare,
+  getIp,
+  punishForEnteringSiteFromBadLocation,
+  punishForChangingIP,
+  punishForChangingUserAgent,
 };

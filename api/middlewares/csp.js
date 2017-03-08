@@ -1,8 +1,5 @@
-'use strict';
-
-import config from './../../server-config';
-
 import csp from 'helmet-csp';
+import config from './../../server-config';
 
 // This is Content Security Policy for site
 // https://en.wikipedia.org/wiki/Content_Security_Policy
@@ -21,7 +18,7 @@ import csp from 'helmet-csp';
 const isDevelopment = config.ENV === 'development';
 
 // under construction
-module.exports = exports = csp({
+export default csp({
   // some examples
   //
   // Specify directives as normal.

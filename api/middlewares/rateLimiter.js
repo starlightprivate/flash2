@@ -1,10 +1,9 @@
-'use strict';
-
 // Middleware for rate limiting
+import RateLimiter from 'strict-rate-limiter';
 
 import security from './security';
 import redis from './../../config/redis';
-import RateLimiter from 'strict-rate-limiter';
+
 
 // research
 // https://github.com/nfriedly/express-rate-limit - do not use redis - not scallable horizontally
@@ -20,13 +19,11 @@ import RateLimiter from 'strict-rate-limiter';
 
 // --Anatolij
 
-
-const
-  limitRequestsInterval = 60 * 1000, // 60 seconds
-  limitRequestsNumber = 100;
+const limitRequestsInterval = 60 * 1000; // 60 seconds
+const limitRequestsNumber = 100;
 
 
-module.exports = exports = function (req, res, next) {
+export default (req, res, next) => {
   const id = security.getIp(req);
 
 // allow 100 request / 60s
@@ -36,7 +33,7 @@ module.exports = exports = function (req, res, next) {
     duration: limitRequestsInterval,
   }, redis);
 
-  limiter.get(function (err, limit, remaining, reset) {
+  return limiter.get((err, limit, remaining, reset) => {
     if (err) {
       return next(err);
     }
@@ -47,12 +44,11 @@ module.exports = exports = function (req, res, next) {
 
     if (remaining >= 0) {
       // allowed, call next middleware
-      next();
-    } else {
-      // limit exceeded
-      res.setHeader('Retry-After', Math.floor((reset - new Date()) / 1000));
-      res.statusCode = 429;
-      res.end('Rate limit exceeded.');
+      return next();
     }
+    // limit exceeded
+    res.setHeader('Retry-After', Math.floor((reset - new Date()) / 1000));
+    res.statusCode = 429; // eslint-disable-line no-param-reassign
+    return res.end('Rate limit exceeded.');
   });
 };
