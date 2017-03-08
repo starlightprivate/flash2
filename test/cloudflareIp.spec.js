@@ -27,12 +27,12 @@ function ResponseMock(done) {
   this.final = done;
 }
 
-ResponseMock.prototype.status = (code) => {
+ResponseMock.prototype.status = function (code) { // eslint-disable-line func-names
   this.code = code;
   return this;
 };
 
-ResponseMock.prototype.end = (message) => {
+ResponseMock.prototype.end = function (message) { // eslint-disable-line func-names
   this.message = message;
   this.final(null, this.code, this.message);
 };

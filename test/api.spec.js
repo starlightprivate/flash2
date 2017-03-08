@@ -33,7 +33,7 @@ function extractCookie(res, rgx) {
 
 console.log('NodeJS version being used - %s for %s', process.version, process.arch);
 
-describe('web application', () => {
+describe('web application', function () { // eslint-disable-line func-names
 // eslint-disable-next-line
   this.timeout(10000); //not everybody have good internet connection, including codeship
   before(() => redis.flushdb());
