@@ -1,11 +1,11 @@
 engines:
   eslint:
     enabled: true
-    checks:
-      async-await/space-after-async:
-        enabled: false
-      async-await/space-after-await:
-        enabled: false
+    config:
+      extensions:
+        - .es7
+        - .es6
+        - .js
   duplication:
     enabled: true
     config:
