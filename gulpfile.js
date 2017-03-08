@@ -49,6 +49,7 @@ gulp.task('html-lint', function () {
   gulp.src('frontend/html/**/*.html')
       .pipe(htmlhint('.htmlhintrc'))
       .pipe(htmlhint.reporter())
+      .pipe(htmlhint.failReporter());
 });
 
 // XSSLint - Find potential XSS vulnerabilities
