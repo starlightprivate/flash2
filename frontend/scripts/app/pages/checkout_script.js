@@ -462,7 +462,7 @@
   const saveToStorage = () => {
     const checkoutDetails = {};
     checkoutFields.forEach((field) => {
-      checkoutDetails[field] = filterXSS($(`[name=${field}]`).val());
+      checkoutDetails[field] = $(`[name=${field}]`).safeVal();
     });
     UniversalStorage.saveCheckoutDetails(checkoutDetails);
   };
