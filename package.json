@@ -14,12 +14,12 @@
     "snyk-protect": "snyk protect",
     "frontend": "gulp build",
     "test": "nyc --require babel-core/register mocha ./test/**/*.spec.js",
-    "lint": "gulp test",
     "precommit": "gulp test",
     "test:frontend": "snyk test && gulp test",
     "dev": "gulp",
     "prepublish": "npm run snyk-protect",
-    "lint:frontend": "gulp test &&  node_modules/.bin/htmlhint --config .htmlhintrc frontend/html/*.html"
+    "lint": "gulp test &&  node_modules/.bin/htmlhint --config .htmlhintrc frontend/html/*.html",
+    "build": "npm run lint && gulp build"
   },
   "repository": {
     "type": "git",
