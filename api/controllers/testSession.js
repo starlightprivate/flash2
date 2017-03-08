@@ -7,17 +7,17 @@ import config from '../../server-config';
 // related to performing unit tests for
 // https://starlightgroup.atlassian.net/browse/SG-5
 
-const testSession = function (req, res) {
+function testSession(req, res) {
   if (config.ENV === 'production') {
     res.sendStatus(404);
   } else {
     res
       .status(200)
       .json({
-        'ip': req.session.ip,
-        'entryPoint': req.session.entryPoint,
-        'userAgent': req.session.userAgent,
-        'isBot': !!req.session.isBot,
+        ip: req.session.ip,
+        entryPoint: req.session.entryPoint,
+        userAgent: req.session.userAgent,
+        isBot: !!req.session.isBot,
       });
   }
 };
