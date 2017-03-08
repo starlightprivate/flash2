@@ -15,8 +15,8 @@ let _ = require('lodash'),
   glob        = require('glob'),
   XSSLint     = require("xsslint"),
   debug = require('gulp-debug'),
-  eslintconf = require('./.eslintrc.frontend.js'),
-  stripCssComments = require('gulp-strip-css-comments');
+  stripCssComments = require('gulp-strip-css-comments'),
+  htmlhint = require("gulp-htmlhint");
 
 const config = {
   src: 'frontend', // source directory
@@ -33,7 +33,6 @@ gulp.task('eslint', function () {
   const eslint = require('gulp-eslint');
   return gulp.src([
     config.src + '/scripts/app/**/*.js',
-    config.src + '/scripts/app/*.js',
     'api/**/*.js',
     '*.js',
     'config/redis.js',
@@ -42,22 +41,16 @@ gulp.task('eslint', function () {
     '!gulpfile.js'
   ])
     .pipe(debug({title: 'Eslint this file:'}))
-    .pipe(eslint(eslintconf))
-    .pipe(eslint.format());
-//    .pipe(eslint.failAfterError()); //TODO - it have to fail on errors, not report only
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError()); //TODO - it have to fail on errors, not report only
 });
 
-//run html lint agaist frontend code
 gulp.task('html-lint', function () {
-  //i require gulp-html-lint here for reason - so i can only `npm install --only=prod` and it is not installed
-  //because it is development dependency, required for tests only
-  const htmlLint = require('gulp-html-lint');
-  return gulp
-    .src([config.src + '/html/*.html'])
-    .pipe(debug({title: 'HTML linting this file:'}))
-    .pipe(htmlLint()) //TODO - implement options - https://www.npmjs.com/package/gulp-html-lint#options
-    .pipe(htmlLint.format());
-  // .pipe(htmlLint.failOnError());  //TODO - it have to fail on errors, not report only
+  gulp.src('frontend/html/**/*.html')
+      .pipe(htmlhint('.htmlhintrc'))
+      .pipe(htmlhint.reporter())
+      .pipe(htmlhint.failReporter());
 });
 
 // XSSLint - Find potential XSS vulnerabilities
@@ -73,7 +66,7 @@ gulp.task('xsslint', function() {
 });
 
 // Test Task !
-gulp.task('test', ['eslint', 'html-lint', 'xsslint'], function (cb) {
+gulp.task('test', ['eslint', 'xsslint', 'html-lint'], function (cb) {
   console.log('Test finished!');
   process.nextTick(cb);
 });
@@ -223,8 +216,6 @@ gulp.task('cleantemp', function (cb) {
 // Build Task !
 gulp.task('build', ['clean-all'], function (done) {
   runSequence(
-    // 'jshint', //this all is called in `test` task
-    // 'xsslint',
 
 //process js
     'libcopy',
