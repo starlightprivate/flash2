@@ -1,4 +1,3 @@
-/* global $, MobileDetect, store*/
 /**
  * The storage wrapper.
  * @type {Object}

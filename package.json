@@ -14,13 +14,12 @@
     "snyk-protect": "snyk protect",
     "frontend": "gulp build",
     "test": "nyc --require babel-core/register mocha ./test/**/*.spec.js",
+    "lint": "gulp test",
     "precommit": "gulp test",
     "test:frontend": "snyk test && gulp test",
     "dev": "gulp",
     "prepublish": "npm run snyk-protect",
-    "lint": "gulp test",
-    "build": "npm run lint && gulp build",
-    "lint:backend":"./node_modules/.bin/eslint api/ config/ app.js index.js server-config.js  trace.config.js test/"
+    "lint:frontend": "gulp test &&  node_modules/.bin/htmlhint --config .htmlhintrc frontend/html/*.html"
   },
   "repository": {
     "type": "git",
@@ -36,7 +35,6 @@
     "connect-redis": "^3.2.0",
     "cookie-parser": "^1.4.3",
     "csurf": "^1.9.0",
-    "eslint-plugin-async-await": "0.0.0",
     "express": "^4.15.2",
     "express-content-length-validator": "^1.0.0",
     "express-promise-router": "^1.1.1",
@@ -49,13 +47,13 @@
     "phone": "^1.0.8",
     "range_check": "^1.4.0",
     "request-promise": "^4.1.1",
-    "snyk": "^1.25.2",
     "strict-rate-limiter": "^0.2.0",
     "through": "^2.3.8",
     "validator": "^7.0.0",
     "winston": "^2.3.0",
     "xss": "^0.3.3",
-    "zipcodes": "^2.1.0"
+    "zipcodes": "^2.1.0",
+    "snyk": "^1.25.2"
   },
   "optionalDependencies": {
     "hiredis": "^0.5.0"
@@ -73,7 +71,8 @@
     "del": "^2.2.2",
     "eslint": "^3.17.0",
     "eslint-config-airbnb-base": "^11.1.1",
-    "eslint-plugin-babel": "^4.1.1",
+    "eslint-plugin-async-await": "0.0.0",
+    "eslint-plugin-babel": "^4.0.1",
     "eslint-plugin-import": "^2.2.0",
     "forever": "^0.15.3",
     "glob": "^7.1.1",
@@ -85,7 +84,6 @@
     "gulp-debug": "^3.1.0",
     "gulp-eslint": "^3.0.1",
     "gulp-html-lint": "0.0.1",
-    "gulp-htmlhint": "^0.3.1",
     "gulp-jshint": "^2.0.1",
     "gulp-newer": "^1.2.0",
     "gulp-plumber": "^1.1.0",
@@ -106,6 +104,7 @@
     "safe-regex": "^1.1.0",
     "should": "^11.2.0",
     "supertest": "^3.0.0",
+    "validator": "^7.0",
     "xsslint": "^0.1.4"
   }
 }

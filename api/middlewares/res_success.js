@@ -1,12 +1,11 @@
-export default (req, res, next) => {
-  res.success = (obj) => { // eslint-disable-line no-param-reassign
+export default function (req, res, next) {
+  res.success = function (obj) {
     if (obj && typeof obj.toJSON === 'function') {
-      obj = obj.toJSON(); // eslint-disable-line no-param-reassign
+      obj = obj.toJSON();
     }
     return res.json(Object.assign({
-      success: true,
+      success: true
     }, obj));
   };
   next();
-};
-
+}

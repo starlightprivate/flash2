@@ -1,4 +1,3 @@
-/* global $, filterXSS, jQuery, callAPI, UniversalStorage, customWrapperForIsMobileDevice */
 (() => {
   let pageType = null;
   if (window.location.pathname.indexOf('receipt') >= 0) {

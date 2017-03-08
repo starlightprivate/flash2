@@ -2,12 +2,12 @@
 //Anatolij promise to make it compatible with frontend
 
 module.exports = {
-  // 'extends': 'eslint:recommended',
-  'extends': 'airbnb-base',
+  'extends': 'eslint:recommended',
+  //'extends': 'airbnb-base',
   'parser': 'babel-eslint',
   'plugins': ['async-await','babel','import'],
   'env': {
-    'browser': true,
+    'browser': false,
     'commonjs': true,
     'es6': true,
     'node':true
@@ -18,7 +18,9 @@ module.exports = {
   'rules': {
     'no-undef': 1,
     'babel/new-cap': 1,
+    'babel/object-curly-spacing': 1,
     'no-await-in-loop': 1,
+    'babel/no-invalid-this': 1,
     'require-await':[
       2
     ],
@@ -44,5 +46,4 @@ module.exports = {
     'async-await/space-after-async': 2,
     'async-await/space-after-await': 2
   },
-  rulePaths: ['./eslint-rules'],
 };

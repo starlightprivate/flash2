@@ -1,32 +1,32 @@
-/* eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
+'use strict';
+/*eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
 
 /* global it, describe, process,before */
 
 import supertest from 'supertest';
-import whilst from 'async/whilst';
+import app from '../app.js';
 import util from 'util';
-
-import app from '../app';
-import redis from './../config/redis';
+import whilst from 'async/whilst';
+import redis from './../config/redis.js';
 
 
 require('should');
 
-const sessionIdCookieRegex = /^PHPSESSID=([^;]+); Path=\/; HttpOnly/;
+const sessionIdCookieRegex = /^PHPSESSID\=([^\;]+)\; Path=\/\; HttpOnly/;
 
 function extractCookie(res, rgx) {
-  const cookies = res.headers['set-cookie'];
-  let val;
-  let matched = false;
-  cookies.map((c) => {
+  let
+    cookies = res.headers['set-cookie'],
+    val,
+    matched = false;
+  cookies.map(function (c) {
     if (!matched) {
-      const results = rgx.exec(c);
+      let results = rgx.exec(c);
       if (results) {
         val = results[1];
         matched = true;
       }
     }
-    return null;
   });
   if (matched) {
     return val;
@@ -34,31 +34,33 @@ function extractCookie(res, rgx) {
   return false;
 }
 
-describe('RateLimiter', () => {
+describe('RateLimiter', function () {
   let
     sessionId;
 
-  before(() => redis.flushdb());
+  before(function () {
+    return redis.flushdb();
+  });
 
-  it('has anything on / but we need to start session properly to run tests', (done) => {
+  it('has anything on / but we need to start session properly to run tests', function (done) {
     supertest(app)
       .get('/')
       .expect('X-Powered-By', 'TacticalMastery')
-      .end((error, res) => {
+      .end(function (error, res) {
         if (error) {
           return done(error);
         }
         // console.log('/api/v2/ping cookies ',res.headers['set-cookie']);
-        const sId = extractCookie(res, sessionIdCookieRegex);
+        let sId = extractCookie(res, sessionIdCookieRegex);
         if (sId === false) {
           return done(new Error('PHPSESSID not set!'));
         }
         sessionId = sId;
-        return done();
+        done();
       });
   });
 
-  it('allows to perform 100 requests', (done) => {
+  it('allows to perform 100 requests', function (done) {
     let count = 0;
 
     // var count = 0;
@@ -76,8 +78,10 @@ describe('RateLimiter', () => {
     // );
 
     whilst(
-      () => count <= 99,
-      (callback) => {
+      function () {
+        return count <= 99;
+      },
+      function (callback) {
         supertest(app)
           .get('/api/v2/ping')
           .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
@@ -85,37 +89,45 @@ describe('RateLimiter', () => {
           .expect('X-RateLimit-Limit', '100')
           .expect('X-RateLimit-Remaining', /\d+/)
           .expect('X-RateLimit-Reset', /.*/)
-          .expect(200, { msg: 'PONG' }, (err, response) => {
+          .expect(200, {msg: 'PONG'}, function (err, response) {
             if (err) {
-              return callback(err);
-            }
-            count += 1;
-            const remaining = response.headers['x-ratelimit-remaining'];
-            /*
-             console.log('N=%s  Code=%s  Body=%s - Remaining:%s',
-             count,
-             response.statusCode,
-             JSON.stringify(response.body),
-             remaining);
-             */
-            response.statusCode.should.be.equal(200);
-            response.body.msg.should.be.equal('PONG');
-            remaining.should.be.equal((100 - count).toString(10));
+              callback(err);
+            } else {
+              count++;
+              let remaining = response.headers['x-ratelimit-remaining'];
+/*
+              console.log('N=%s  Code=%s  Body=%s - Remaining:%s',
+                count,
+                response.statusCode,
+                JSON.stringify(response.body),
+                remaining);
+*/
+              response.statusCode.should.be.equal(200);
+              response.body.msg.should.be.equal('PONG');
+              remaining.should.be.equal((100-count).toString(10));
 
-            return callback();
+              callback();
+            }
           });
-      }, done);
+      },
+      function (err) {
+        if (err) {
+          return done(err);
+        }
+        done();
+      }
+    );
   });
 
-  it('fails as intended on 101 request', (done) => {
+  it('fails as intended on 101 request', function (done) {
     supertest(app)
       .get('/api/v2/ping')
       .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
       .expect('X-Powered-By', 'TacticalMastery')
       .expect('X-RateLimit-Limit', '100')
       .expect('X-RateLimit-Remaining', '-1')
-      .expect('X-RateLimit-Reset', /.*/) // anything goes
-      .expect('Retry-After', /.*/) // anything goes
-      .expect(429, 'Rate limit exceeded.', done);
+      .expect('X-RateLimit-Reset', /.*/) //anything goes
+      .expect('Retry-After', /.*/) //anything goes
+      .expect(429,'Rate limit exceeded.', done);
   });
 });

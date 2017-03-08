@@ -1,6 +1,3 @@
-/* global $, filterXSS, jQuery, callAPI, UniversalStorage */
-/* global customWrapperForIsMobileDevice, bootstrapModal, getJson */
-// eslint-disable-file babel/no-invalid-this
 (() => {
   let upsellID = null;
   if (window.location.pathname.indexOf('us_batteryoffer') >= 0) {
@@ -25,18 +22,16 @@
     if (MediaStorage.orderId) {
       usParams.orderId = filterXSS(MediaStorage.orderId);
       usParams.productQty = 1;
-
       switch (sellID) {
-      case 'headlamp':
-        productIdForUserParams = productId || '31';
-        break;
-      case 'battery':
-        productIdForUserParams = productId || '11';
-        break;
-      default:
-        break;
+        case 'headlamp':
+          productIdForUserParams = productId || '31';
+          break;
+        case 'battery':
+          productIdForUserParams = productId || '11';
+          break;
+        default:
+          break;
       }
-
       if (productIdForUserParams) {
         usParams.productId = filterXSS(productIdForUserParams);
         let nextPage = `receipt.html?orderId=${filterXSS(MediaStorage.orderId)}`;

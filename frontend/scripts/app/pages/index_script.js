@@ -1,4 +1,3 @@
-/* global $, filterXSS, jQuery, callAPI, UniversalStorage, customWrapperForIsMobileDevice */
 function initFieldFv(e, data) {
   const field = filterXSS(data.field);
   const $field = data.element;
