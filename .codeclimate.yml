@@ -1,11 +1,4 @@
 engines:
-  eslint:
-    enabled: true
-    config:
-      extensions:
-        - .es7
-        - .es6
-        - .js
   duplication:
     enabled: true
     config:
