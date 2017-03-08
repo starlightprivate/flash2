@@ -6,23 +6,17 @@ let _ = require('lodash'),
   path = require('path'),
   gulp = require('gulp'),
   babel = require('gulp-babel'),
-  // sass = require('gulp-sass'),
   cleanCSS = require('gulp-clean-css'),
-  // uglify = require('gulp-uglify'),
-  // rename = require('gulp-rename'),
   del = require('del'),
-  // concat = require('gulp-concat'),
-  // cache = require('gulp-cache'),
   size = require('gulp-size'),
-  // plumber = require('gulp-plumber'),
   purify = require('gulp-purifycss'),
   newer = require('gulp-newer'),
   runSequence = require('run-sequence'),
-  // CSSfilter = require('cssfilter'),
-  // validator = require('validator'),
-  // safe = require('safe-regex'),
+  glob        = require('glob'),
+  XSSLint     = require("xsslint"),
   debug = require('gulp-debug'),
-  stripCssComments = require('gulp-strip-css-comments');
+  stripCssComments = require('gulp-strip-css-comments'),
+  htmlhint = require("gulp-htmlhint");
 
 const config = {
   src: 'frontend', // source directory
@@ -38,44 +32,41 @@ gulp.task('eslint', function () {
   //i require gulp-eslint here for reason - so i can only `npm install --only=prod` and `gulp-eslint` is not installed
   const eslint = require('gulp-eslint');
   return gulp.src([
-    config.src + '/scripts/app/pages/*.js',
-    config.src + '/scripts/app/utils.js',
-    config.src + '/scripts/app/storage-wrapper.js'
+    config.src + '/scripts/app/**/*.js',
+    'api/**/*.js',
+    '*.js',
+    'config/redis.js',
+    'config/**/*.js',
+    'test/**/*.js',
+    '!gulpfile.js'
   ])
     .pipe(debug({title: 'Eslint this file:'}))
-    .pipe(eslint({ //this is CUSTOM eslint rules for frontend code - `.eslintrc.js` is ignored for now!
-      'root': true, //http://eslint.org/docs/user-guide/configuring#using-configuration-files
-      'extends': 'airbnb-base',
-      'plugins': [
-        'import'
-      ],
-      'rules': {
-        'no-undef': 'off',
-        'no-console': 1,
-        'no-evil-regex-rule': 1,
-      },
-      rulePaths: ['./eslint-rules'],
-      envs: ['browser']
-    }))
-    .pipe(eslint.format());
-//    .pipe(eslint.failAfterError()); //TODO - it have to fail on errors, not report only
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError()); //TODO - it have to fail on errors, not report only
 });
 
-//run html lint agaist frontend code
 gulp.task('html-lint', function () {
-  //i require gulp-html-lint here for reason - so i can only `npm install --only=prod` and it is not installed
-  //because it is development dependency, required for tests only
-  const htmlLint = require('gulp-html-lint');
-  return gulp
-    .src([config.src + '/html/*.html'])
-    .pipe(debug({title: 'HTML linting this file:'}))
-    .pipe(htmlLint()) //TODO - implement options - https://www.npmjs.com/package/gulp-html-lint#options
-    .pipe(htmlLint.format());
-  // .pipe(htmlLint.failOnError());  //TODO - it have to fail on errors, not report only
+  gulp.src('frontend/html/**/*.html')
+      .pipe(htmlhint('.htmlhintrc'))
+      .pipe(htmlhint.reporter())
+      .pipe(htmlhint.failReporter());
+});
+
+// XSSLint - Find potential XSS vulnerabilities
+gulp.task('xsslint', function() {
+  var files = glob.sync(config.src + '/scripts/app/**/*.js');
+  files.forEach(function(file) {
+    var warnings = XSSLint.run(file);
+    warnings.forEach(function(warning) {
+      if (warning.method != '+' && warning.method != 'html()')
+        console.error(file + ":" + warning.line + ": possibly XSS-able `" + warning.method + "` call");
+    });
+  });
 });
 
 // Test Task !
-gulp.task('test', ['eslint', 'html-lint'], function (cb) {
+gulp.task('test', ['eslint', 'xsslint', 'html-lint'], function (cb) {
   console.log('Test finished!');
   process.nextTick(cb);
 });
@@ -225,8 +216,6 @@ gulp.task('cleantemp', function (cb) {
 // Build Task !
 gulp.task('build', ['clean-all'], function (done) {
   runSequence(
-    // 'jshint', //this all is called in `test` task
-    // 'xsslint',
 
 //process js
     'libcopy',

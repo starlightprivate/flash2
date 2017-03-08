@@ -1,3 +1,5 @@
+/* global $, filterXSS, jQuery, callAPI, UniversalStorage */
+/* global bootstrapModal, customWrapperForIsMobileDevice */
 (() => {
   if (customWrapperForIsMobileDevice()) {
     $('#checkout-wrapper').addClass('mobile-mode');
@@ -359,46 +361,46 @@
         const $iconAmex = $('.payment-icon .cc-icon.cc-american-express');
         const $iconDiscover = $('.payment-icon .cc-icon.cc-discover');
         switch (data.result.type) {
-          case 'VISA':
-            $iconVisa.parents('a')
+        case 'VISA':
+          $iconVisa.parents('a')
               .siblings()
               .find('.cc-icon')
               .removeClass('active')
               .addClass('inactive');
-            $iconVisa.removeClass('inactive faded').addClass('active');
-            $inputCardNumber.attr('maxlength', '19');
-            break;
-          case 'MASTERCARD':
-            $iconMasterCard.parents('a')
+          $iconVisa.removeClass('inactive faded').addClass('active');
+          $inputCardNumber.attr('maxlength', '19');
+          break;
+        case 'MASTERCARD':
+          $iconMasterCard.parents('a')
               .siblings()
               .find('.cc-icon')
               .removeClass('active')
               .addClass('inactive');
-            $iconMasterCard.removeClass('inactive faded').addClass('active');
-            $inputCardNumber.attr('maxlength', '19');
-            break;
-          case 'AMERICAN_EXPRESS':
-            $iconAmex.parents('a')
+          $iconMasterCard.removeClass('inactive faded').addClass('active');
+          $inputCardNumber.attr('maxlength', '19');
+          break;
+        case 'AMERICAN_EXPRESS':
+          $iconAmex.parents('a')
               .siblings()
               .find('.cc-icon')
               .removeClass('active')
               .addClass('inactive');
-            $iconAmex.removeClass('inactive faded').addClass('active');
-            $inputCardNumber.attr('maxlength', '18');
-            break;
-          case 'DISCOVER':
-            $iconDiscover.parents('a')
+          $iconAmex.removeClass('inactive faded').addClass('active');
+          $inputCardNumber.attr('maxlength', '18');
+          break;
+        case 'DISCOVER':
+          $iconDiscover.parents('a')
               .siblings()
               .find('.cc-icon')
               .removeClass('active')
               .addClass('inactive');
-            $iconDiscover.removeClass('inactive faded').addClass('active');
-            $inputCardNumber.attr('maxlength', '19');
-            break;
-          default:
-            $('.payment-icon .cc-icon').removeClass('inactive active').addClass('faded');
-            $inputCardNumber.attr('maxlength', '19');
-            break;
+          $iconDiscover.removeClass('inactive faded').addClass('active');
+          $inputCardNumber.attr('maxlength', '19');
+          break;
+        default:
+          $('.payment-icon .cc-icon').removeClass('inactive active').addClass('faded');
+          $inputCardNumber.attr('maxlength', '19');
+          break;
         }
       } else if (data.validator !== 'stringLength') {
         $('.payment-icon .cc-icon').removeClass('inactive active').addClass('faded');
