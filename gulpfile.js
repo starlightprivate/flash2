@@ -136,9 +136,6 @@ gulp.task('transpile-and-jscopy', function() {
     config.src + '/scripts/vendor/addclear.js',
     config.src + '/scripts/vendor/xss.js',
   ])
-    .pipe(babel({
-      presets: ['es2015']
-    }))
     .pipe(newer(config.dist + '/assets/js'))
     .pipe(gulp.dest(config.dist + '/assets/js'));
 });
