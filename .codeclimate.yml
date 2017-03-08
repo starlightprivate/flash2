@@ -11,6 +11,7 @@ ratings:
     - config/**
     - test/**
 exclude_paths:
-  - node_modules/*
-  - eslint-rules/*
-  - frontend/scripts/libs/*
+  - tests/**/*
+  - "**/node_modules/**/*"
+  - "**/eslint-rules/**/*"
+  - "**/frontend/scripts/libs/**/*"
