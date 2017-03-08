@@ -1,4 +1,8 @@
 engines:
+  eslint:
+    enabled: true
+    config:
+      config: .eslintrc.codeclimate.js
   duplication:
     enabled: true
     config:
