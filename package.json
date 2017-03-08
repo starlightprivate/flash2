@@ -106,7 +106,6 @@
     "safe-regex": "^1.1.0",
     "should": "^11.2.0",
     "supertest": "^3.0.0",
-    "validator": "^7.0",
     "xsslint": "^0.1.4"
   }
 }
