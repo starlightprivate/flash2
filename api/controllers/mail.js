@@ -1,4 +1,4 @@
-/*eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
+/* eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
 
 import Autopilot from 'autopilot-api';
 import phone from 'phone';
@@ -25,7 +25,7 @@ const autopilot = new Autopilot(config.autopilot.key);
 
 function getStateInfo(req, res) {
   const stateNumber = xss(req.params.stateNumber);
-  let addr = zipcodes.lookup(stateNumber);
+  const addr = zipcodes.lookup(stateNumber);
   if (addr != undefined) {
     return res.success({data: addr});
   }
@@ -71,7 +71,7 @@ export function mapToAutopilotJson(data) {
     MailingStreet: xss(data.address1) + ' ' + xss(data.address2),
     MailingCity: xss(data.city),
     MailingState: xss(data.state),
-    MailingPostalCode: xss(data.postalCode)
+    MailingPostalCode: xss(data.postalCode),
   };
 }
 
@@ -84,7 +84,7 @@ export function mapToLeadoutpostJson(data) {
     address: xss(data.address1) + ' ' + xss(data.address2),
     city: xss(data.city),
     state: xss(data.state),
-    zip: xss(data.postalCode)
+    zip: xss(data.postalCode),
   };
 }
 
@@ -103,8 +103,8 @@ function ping(req, res) {
 }
 
 export default {
-  getStateInfo: getStateInfo,
-  triggerJourney: triggerJourney,
-  verifyPhoneNumber: verifyPhoneNumber,
-  ping: ping
+  getStateInfo,
+  triggerJourney,
+  verifyPhoneNumber,
+  ping,
 };

@@ -15,7 +15,6 @@ let _ = require('lodash'),
   glob        = require('glob'),
   XSSLint     = require("xsslint"),
   debug = require('gulp-debug'),
-  eslintconf = require('./.eslintrc.frontend.js'),
   stripCssComments = require('gulp-strip-css-comments');
 
 const config = {
@@ -33,7 +32,6 @@ gulp.task('eslint', function () {
   const eslint = require('gulp-eslint');
   return gulp.src([
     config.src + '/scripts/app/**/*.js',
-    config.src + '/scripts/app/*.js',
     'api/**/*.js',
     '*.js',
     'config/redis.js',
@@ -41,9 +39,9 @@ gulp.task('eslint', function () {
     'test/**/*.js'
   ])
     .pipe(debug({title: 'Eslint this file:'}))
-    .pipe(eslint(eslintconf))
-    .pipe(eslint.format());
-//    .pipe(eslint.failAfterError()); //TODO - it have to fail on errors, not report only
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError()); //TODO - it have to fail on errors, not report only
 });
 
 //run html lint agaist frontend code

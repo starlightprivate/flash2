@@ -4,7 +4,7 @@ export default function (req, res, next) {
       obj = obj.toJSON();
     }
     return res.json(Object.assign({
-      success: true
+      success: true,
     }, obj));
   };
   next();

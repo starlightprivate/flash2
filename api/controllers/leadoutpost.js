@@ -1,4 +1,4 @@
-/*eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
+/* eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
 
 import Autopilot from 'autopilot-api';
 import config from '../../server-config';
@@ -33,7 +33,7 @@ async function migrate(req, res) {
           firstName: contact.FirstName,
           lastName: contact.LastName,
           email: contact.Email,
-          phone: contact.Phone
+          phone: contact.Phone,
         };
         leadoutpost.apiKey = config.leadoutpost.apiKey;
         leadoutpost.campaignId = config.leadoutpost.campaignId;
@@ -41,9 +41,9 @@ async function migrate(req, res) {
           uri: 'https://www.leadoutpost.com/api/v1/lead',
           qs: leadoutpost,
           headers: {
-            'User-Agent': 'Request-Promise'
+            'User-Agent': 'Request-Promise',
           },
-          json: true // Automatically parses the JSON string in the response
+          json: true, // Automatically parses the JSON string in the response
         };
         await request.post(options); // eslint-disable-line no-await-in-loop
         console.log(contact.contact_id, contact.Email, contact.Phone, contact.FirstName, contact.LastName);
@@ -53,7 +53,6 @@ async function migrate(req, res) {
     console.log('last----------------', contact.contact_id);
   }
   res.success({length: contacts.data.contacts.length});
-
 }
 
 /*
@@ -75,7 +74,7 @@ function addContact(req, res) {
       firstName: xss(req.body.FirstName),
       lastName: xss(req.body.LastName),
       email: xss(req.body.Email),
-      phone: xss(req.body.MobilePhone) || xss(req.body.Phone)
+      phone: xss(req.body.MobilePhone) || xss(req.body.Phone),
     };
     if (!req.body.MobilePhone) {
       req.body.MobilePhone = xss(req.body.Phone);
@@ -84,7 +83,7 @@ function addContact(req, res) {
     if (!req.body.Phone) {
       req.body.Phone = xss(req.body.MobilePhone);
     }
-    //await sendAffiliateEmail(req.body);
+    // await sendAffiliateEmail(req.body);
     req.body._autopilot_list = config.autopilot.clientlist;
     autopilot.contacts.upsert(req.body);
 
@@ -94,9 +93,9 @@ function addContact(req, res) {
       uri: 'https://www.leadoutpost.com/api/v1/lead',
       qs: leadoutpost,
       headers: {
-        'User-Agent': 'Request-Promise'
+        'User-Agent': 'Request-Promise',
       },
-      json: true // Automatically parses the JSON string in the response
+      json: true, // Automatically parses the JSON string in the response
     };
     request.post(options);
     res.success();
@@ -111,7 +110,7 @@ function updateContact(req, res) {
   const leadoutpostData = mapToLeadoutpostJson(req.body);
 
   try {
-    //await sendAffiliateEmail(req.body);
+    // await sendAffiliateEmail(req.body);
     contactData._autopilot_list = config.autopilot.clientlist;
     autopilot.contacts.upsert(contactData);
     res.success();
@@ -123,9 +122,9 @@ function updateContact(req, res) {
       uri: 'https://www.leadoutpost.com/api/v1/lead',
       qs: leadoutpostData,
       headers: {
-        'User-Agent': 'Request-Promise'
+        'User-Agent': 'Request-Promise',
       },
-      json: true // Automatically parses the JSON string in the response
+      json: true, // Automatically parses the JSON string in the response
     };
 
     request.post(options);
@@ -142,9 +141,9 @@ async function addLeadoutpost(req, res) {
     uri: 'https://www.leadoutpost.com/api/v1/lead',
     qs: req.body,
     headers: {
-      'User-Agent': 'Request-Promise'
+      'User-Agent': 'Request-Promise',
     },
-    json: true // Automatically parses the JSON string in the response
+    json: true, // Automatically parses the JSON string in the response
   };
 
   const response = await request.post(options);
@@ -152,8 +151,8 @@ async function addLeadoutpost(req, res) {
 }
 
 export default {
-  migrate: migrate,
-  addContact: addContact,
-  updateContact: updateContact,
-  addLeadoutpost: addLeadoutpost
+  migrate,
+  addContact,
+  updateContact,
+  addLeadoutpost,
 };

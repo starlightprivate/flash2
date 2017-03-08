@@ -1,28 +1,28 @@
 'use strict';
 
-//Middleware for rate limiting
+// Middleware for rate limiting
 
 import security from './security';
 import redis from './../../config/redis';
 import RateLimiter from 'strict-rate-limiter';
 
-//research
-//https://github.com/nfriedly/express-rate-limit - do not use redis - not scallable horizontally
+// research
+// https://github.com/nfriedly/express-rate-limit - do not use redis - not scallable horizontally
 
-//looks ok, uses redis, but it do not allows us to extract IP from cloudflare header
-//https://www.npmjs.com/package/express-brute
+// looks ok, uses redis, but it do not allows us to extract IP from cloudflare header
+// https://www.npmjs.com/package/express-brute
 
-//looks ugly
-//https://www.npmjs.com/package/express-limiter
+// looks ugly
+// https://www.npmjs.com/package/express-limiter
 
-//i like it
-//https://www.npmjs.com/package/strict-rate-limiter
+// i like it
+// https://www.npmjs.com/package/strict-rate-limiter
 
-//--Anatolij
+// --Anatolij
 
 
 const
-  limitRequestsInterval = 60*1000, //60 seconds
+  limitRequestsInterval = 60 * 1000, // 60 seconds
   limitRequestsNumber = 100;
 
 
@@ -31,12 +31,12 @@ module.exports = exports = function (req, res, next) {
 
 // allow 100 request / 60s
   const limiter = new RateLimiter({
-    id: id,
+    id,
     limit: limitRequestsNumber,
-    duration: limitRequestsInterval
+    duration: limitRequestsInterval,
   }, redis);
 
-  limiter.get(function(err, limit, remaining, reset) {
+  limiter.get(function (err, limit, remaining, reset) {
     if (err) {
       return next(err);
     }
@@ -48,7 +48,6 @@ module.exports = exports = function (req, res, next) {
     if (remaining >= 0) {
       // allowed, call next middleware
       next();
-
     } else {
       // limit exceeded
       res.setHeader('Retry-After', Math.floor((reset - new Date()) / 1000));
@@ -56,6 +55,4 @@ module.exports = exports = function (req, res, next) {
       res.end('Rate limit exceeded.');
     }
   });
-
-
 };

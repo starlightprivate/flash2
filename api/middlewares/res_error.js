@@ -7,8 +7,8 @@ export default function (req, res, next) {
     return res.status(code).json({
       success: false,
       error: message,
-      message: message,
-      showToUser: showToUser
+      message,
+      showToUser,
     });
   };
   next();

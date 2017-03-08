@@ -1,4 +1,4 @@
-/*eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
+/* eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
 
 import Autopilot from 'autopilot-api';
 import config from '../../server-config';
@@ -35,6 +35,6 @@ async function sendSMS2(req, res) {
 }
 
 export default {
-  sendSMS: sendSMS,
-  sendSMS2: sendSMS2
+  sendSMS,
+  sendSMS2,
 };

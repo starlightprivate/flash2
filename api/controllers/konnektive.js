@@ -1,4 +1,4 @@
-/*eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
+/* eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
 // import Autopilot from 'autopilot-api';
 import request from 'request-promise';
 import config from '../../server-config';
@@ -21,20 +21,20 @@ import util from 'util';
  */
 
 
-//On development environment we use proxy to connective api.
-//It is more secure (source code do not have Konnective API login and password, that gave full
-//permissions to edit database of Konnective via API exposed.
-//But proxy add some lags and it is bad for production.
-//Source code of proxy - https://github.com/starlightgroup/starlightproxy
-//Proxy deployed on https://starlightproxy.herokuapp.com/ (temporary)
+// On development environment we use proxy to connective api.
+// It is more secure (source code do not have Konnective API login and password, that gave full
+// permissions to edit database of Konnective via API exposed.
+// But proxy add some lags and it is bad for production.
+// Source code of proxy - https://github.com/starlightgroup/starlightproxy
+// Proxy deployed on https://starlightproxy.herokuapp.com/ (temporary)
 
-//On staging and production environments Konnective API is used without proxy.
+// On staging and production environments Konnective API is used without proxy.
 
 let connectiveApiURL;
 let proxyApiKey;
 let konnectiveLogin;
 let konnectivePassword;
-let useProxy = config.ENV === 'development';
+const useProxy = config.ENV === 'development';
 
 if (useProxy) {
   connectiveApiURL = config.konnective.proxy;
@@ -82,25 +82,25 @@ async function addKonnektiveOrder(req, res) {
   if (req.body.cardSecurityCode) {
     delete req.body.cardSecurityCode;
   }
-  //req.body.cardSecurityCode = '100';
+  // req.body.cardSecurityCode = '100';
 
   body.campaignId = 3;
   body.paySource = 'CREDITCARD';
   body.product1_qty = 1;
   body.product1_id = req.body.productId;
-  //body.lastName = req.body.lastName || 'NA';
-  //req.body.cardExpiryDate = `${req.body.month}/${req.body.year}`;
-  //delete req.body.productId;
+  // body.lastName = req.body.lastName || 'NA';
+  // req.body.cardExpiryDate = `${req.body.month}/${req.body.year}`;
+  // delete req.body.productId;
 
   const options = {
     method: 'GET',
     uri: util.format('%s%s', connectiveApiURL, 'order/import/'),
     qs: body,
     headers: {
-      'api-key':proxyApiKey,
+      'api-key': proxyApiKey,
       'User-Agent': 'Request-Promise',
     },
-    json: true // Automatically parses the JSON string in the response
+    json: true, // Automatically parses the JSON string in the response
   };
 
   const response = await request(options);
@@ -122,13 +122,13 @@ async function getLead(req, res) {
     qs: {
       loginId: konnectiveLogin,
       password: konnectivePassword,
-      orderId: orderId
+      orderId,
     },
     headers: {
-      'api-key':proxyApiKey,
+      'api-key': proxyApiKey,
       'User-Agent': 'Request-Promise',
     },
-    json: true // Automatically parses the JSON string in the response
+    json: true, // Automatically parses the JSON string in the response
   };
 
   const response = JSON.parse(await request(options));
@@ -149,13 +149,13 @@ async function getTrans(req, res) {
     qs: {
       loginId: konnectiveLogin,
       password: konnectivePassword,
-      orderId: orderId
+      orderId,
     },
     headers: {
-      'api-key':proxyApiKey,
+      'api-key': proxyApiKey,
       'User-Agent': 'Request-Promise',
     },
-    json: true // Automatically parses the JSON string in the response
+    json: true, // Automatically parses the JSON string in the response
   };
   const response = JSON.parse(await request(options));
   if (response.result == 'ERROR') {
@@ -167,7 +167,6 @@ async function getTrans(req, res) {
 }
 
 async function createKonnektiveLead(req, res) {
-
   console.log('createKonnektiveLead create-lead...');
 
   const campaignId = 3;
@@ -189,10 +188,10 @@ async function createKonnektiveLead(req, res) {
     uri: util.format('%sleads/import/', connectiveApiURL),
     qs: body,
     headers: {
-      'api-key':proxyApiKey,
-      'User-Agent': 'Request-Promise'
+      'api-key': proxyApiKey,
+      'User-Agent': 'Request-Promise',
     },
-    json: true // Automatically parses the JSON string in the response
+    json: true, // Automatically parses the JSON string in the response
   };
   const response = await request(options);
   console.log('response...', response);
@@ -206,7 +205,7 @@ async function createKonnektiveLead(req, res) {
 
 
 async function upsell(req, res) {
-  const {productId, productQty/*, orderId */} = req.body;
+  const {productId, productQty} = req.body;
   if (!productId || !productQty) {
     res.error('Invalid Upsell Data');
   }
@@ -218,10 +217,10 @@ async function upsell(req, res) {
       uri: util.format('%supsale/import/', connectiveApiURL),
       qs: req.body,
       headers: {
-        'api-key':proxyApiKey,
-        'User-Agent': 'Request-Promise'
+        'api-key': proxyApiKey,
+        'User-Agent': 'Request-Promise',
       },
-      json: true // Automatically parses the JSON string in the response
+      json: true, // Automatically parses the JSON string in the response
     };
     const response = await request(options);
     console.log(response);
@@ -235,9 +234,9 @@ async function upsell(req, res) {
 }
 
 export default {
-  getLead: getLead,
-  addKonnektiveOrder: addKonnektiveOrder,
-  createKonnektiveLead: createKonnektiveLead,
-  upsell: upsell,
-  getTrans: getTrans
+  getLead,
+  addKonnektiveOrder,
+  createKonnektiveLead,
+  upsell,
+  getTrans,
 };

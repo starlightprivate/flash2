@@ -1,13 +1,13 @@
 'use strict';
 
-var through = require('through');
-var winston = require('winston');
+const through = require('through');
+const winston = require('winston');
 
-var logger = new winston.Logger({
+const logger = new winston.Logger({
   transports: [
     new (winston.transports.Console)(),
-    new (winston.transports.File)({filename: 'server-log.log'})
-  ]
+    new (winston.transports.File)({filename: 'server-log.log'}),
+  ],
 });
 
 logger.asStream = function asStream(level) {
@@ -20,4 +20,4 @@ logger.asStream = function asStream(level) {
 module.exports = logger;
 
 
-//This file is never used - Anatolij
+// This file is never used - Anatolij

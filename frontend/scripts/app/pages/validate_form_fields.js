@@ -10,21 +10,21 @@
         if ($input.length > 0 && $input.val() !== '') {
           let phoneNumber = filterXSS($('input[name=phoneNumber]').val());
           switch (tempKey) {
-            case 'postalCode':
-              if ($input.val() !== tmpZipCode) {
-                tmpZipCode = $input.val();
-                loadStateFromZip();
-              }
-              break;
-            case 'phoneNumber':
-              if (phoneNumber.length === 10 && phoneNumber.indexOf('-') < 0) {
-                phoneNumber = `${phoneNumber.substr(0, 3)}-${phoneNumber.substr(3, 3)}-${phoneNumber.substr(6)}`;
-                $('input[name=phoneNumber]').val(phoneNumber);
-                frm.formValidation('revalidateField', 'phoneNumber');
-              }
-              break;
-            default:
-              frm.formValidation('revalidateField', tempKey);
+          case 'postalCode':
+            if ($input.val() !== tmpZipCode) {
+              tmpZipCode = $input.val();
+              loadStateFromZip();
+            }
+            break;
+          case 'phoneNumber':
+            if (phoneNumber.length === 10 && phoneNumber.indexOf('-') < 0) {
+              phoneNumber = `${phoneNumber.substr(0, 3)}-${phoneNumber.substr(3, 3)}-${phoneNumber.substr(6)}`;
+              $('input[name=phoneNumber]').val(phoneNumber);
+              frm.formValidation('revalidateField', 'phoneNumber');
+            }
+            break;
+          default:
+            frm.formValidation('revalidateField', tempKey);
           }
         }
       });
