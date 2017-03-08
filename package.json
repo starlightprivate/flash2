@@ -97,8 +97,6 @@
     "gulp-uglify": "^2.0.0",
     "htmlhint": "^0.9.13",
     "husky": "^0.13.2",
-    "jshint": "^2.9.4",
-    "jshint-stylish": "^2.2.1",
     "lodash": "^4.17.4",
     "mocha": "^3.1.2",
     "nyc": "^10.1.2",
