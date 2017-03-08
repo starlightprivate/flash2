@@ -9,7 +9,7 @@ engines:
 ratings:
   paths:
     - frontend/scripts/app/**
-    # Add paths for backend code checks
+    - api/**
 exclude_paths:
   - node_modules/*
   - eslint-rules/*
