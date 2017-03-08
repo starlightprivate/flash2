@@ -1,4 +1,6 @@
 engines:
+  eslint:
+    enabled: true
   duplication:
     enabled: true
     config:
@@ -7,7 +9,10 @@ engines:
 ratings:
   paths:
     - frontend/scripts/app/**
+    - api/**/*
+    - config/routes/**/*
 exclude_paths:
-  - node_modules/*
-  - eslint-rules/*
-  - frontend/scripts/libs/*
+  - tests/**/*
+  - "**/node_modules/**/*"
+  - "**/eslint-rules/**/*"
+  - "**/frontend/scripts/libs/**/*"
