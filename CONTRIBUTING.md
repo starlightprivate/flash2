@@ -1,7 +1,7 @@
 How to push code to this repository.
 ======================
-1. Verify you have sane local setup - `nodejs` of `7.5.0`, npm of `^4.1.2`, redis (`^3.0.6`) database with stack 
-settings listening on `localhost:6379` without PASSWORD. You can use `docker-compose up` to help you. 
+1. Verify you have sane local setup - `nodejs` of `7.5.0`, npm of `^4.1.2`, redis (`^3.0.6`) database with stack
+settings listening on `localhost:6379` without PASSWORD. You can use `docker-compose up` to help you.
 Anatolij works mainly with fedora linux and has ~0 skills with Windows and Macos, so he apologies if development
 is more tricky on OSes other than linux.
 
@@ -44,17 +44,17 @@ The`NODE_ENV` have to be `staging`.
 Contributors
 =====================
 
-- Anatolij (Github - [vodolaz095](http://github.com/vodolaz095/)) - backend developer. 
+- Anatolij (Github - [vodolaz095](http://github.com/vodolaz095/)) - backend developer.
 Uses Fedora Linux since 2002 year. Uses Docker. Can setup CI. Knows nodejs, redis.
 Has little knowledge of frontend (jquery, angular1, gulp, bootstrap).
 Wrote ~50% of nodejs backend code and all unit tests.
-Has no skills of Windows, MacOS, and fancy recent browsers like Google Chrome, Safari and so on. 
+Has no skills of Windows, MacOS, and fancy recent browsers like Google Chrome, Safari and so on.
 Lives by [Moscow](https://www.worldtimebuddy.com/?pl=1&lid=524901&h=524901) timezone.
-Is prone to sins of rage and pride. On Sunday he goes to Church and is totally offline.  
+Is prone to sins of rage and pride. On Sunday he goes to Church and is totally offline.
 Can be reached by [anatolii@starlightgroup.io], slackchat - [@anatolij](https://starlightads.slack.com/messages/@anatolij/)
 Has bachelor degree at mathematics, self educated programmer.
 
- 
+
 - Kenji (Github - [KenKimura88](http://github.com/KenKimura88/)) - security expert, javascript developer. Uses MacOS.
 
 Full Stack Developer( knows front end and back end programming and architecture ).
@@ -64,3 +64,4 @@ Can be reached by ken.kimura1988@outlook.com, slackchat - [@kenji](https://starl
 
 - Sachin (Github - [asharma-ror](http://github.com/asharma-ror/) - nodejs and ROR developer. Uses Ubuntu.
 
+- Ming (Github - [ming-soon](https://github.com/ming-soon)) - JavaScript Developer. Uses Ubuntu 16.04 LTS. Full-stack developer with knowledge of Node/Express.js, React/Redux, Angular, Python/Django, and PHP/Laravel.
