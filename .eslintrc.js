@@ -5,7 +5,8 @@ module.exports = {
   // 'extends': 'eslint:recommended',
   'extends': 'airbnb-base',
   'parser': 'babel-eslint',
-  'plugins': ['async-await','babel','import'],
+  // 'plugins': ['async-await','babel','import'],
+  'plugins': ['babel','import'],
   'env': {
     'browser': true,
     'commonjs': true,
@@ -43,8 +44,8 @@ module.exports = {
       'error',
       'always'
     ],
-    'async-await/space-after-async': 2,
-    'async-await/space-after-await': 2
+    // 'async-await/space-after-async': 2,
+    // 'async-await/space-after-await': 2
   },
   rulePaths: ['./eslint-rules'],
 };
