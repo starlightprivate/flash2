@@ -1,39 +1,38 @@
-/*eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
+/* eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
 
 import Autopilot from 'autopilot-api';
 import phone from 'phone';
+import util from 'util';
 import xss from 'xss';
-
-import config from '../../server-config';
 import zipcodes from 'zipcodes';
 
-/*
- * DO NOT REMOVE THIS COMMENT!!!
- * I know that code is quite ugly in this file.
- * Be carefull with changing it.
- * We have unit tests that covers nearly all actions called by frontend code.
- * But if you change code here, you will have to
- * 1) verify that unit tests PASS (quite simple)
- * 2) verify that frontend code is not broken. It is much more complicated task - frontend code has worse quality.
- *
- *
- * - Anatolij
- */
+import config from '../../server-config';
 
+// DO NOT REMOVE THIS COMMENT!!!
+//  I know that code is quite ugly in this file.
+//  Be carefull with changing it.
+//  We have unit tests that covers nearly all actions called by frontend code.
+//  But if you change code here, you will have to
+//  1) verify that unit tests PASS (quite simple)
+//  2) verify that frontend code is not broken.
+//  It is much more complicated task - frontend code has worse quality.
+//
+//
+//  - Anatolij
 
 const autopilot = new Autopilot(config.autopilot.key);
 
 function getStateInfo(req, res) {
   const stateNumber = xss(req.params.stateNumber);
-  let addr = zipcodes.lookup(stateNumber);
-  if (addr != undefined) {
-    return res.success({data: addr});
+  const addr = zipcodes.lookup(stateNumber);
+  if (addr !== undefined) {
+    return res.success({ data: addr });
   }
-  res.error('state not found', 200);
+  return res.error('state not found', 200);
 }
 
 async function triggerJourney(req, res) {
-  const {contactid} = req.query;
+  const { contactid } = req.query;
   const hookid = xss(req.query.hookid) || '0001';
   const response = await autopilot.journeys.add(hookid, xss(contactid));
   console.log(response);
@@ -68,10 +67,10 @@ export function mapToAutopilotJson(data) {
     LastName: xss(data.lastName),
     Email: xss(data.emailAddress),
     MobilePhone: xss(data.phoneNumber),
-    MailingStreet: xss(data.address1) + ' ' + xss(data.address2),
+    MailingStreet: util.format('%s %s', xss(data.address1), xss(data.address2)),
     MailingCity: xss(data.city),
     MailingState: xss(data.state),
-    MailingPostalCode: xss(data.postalCode)
+    MailingPostalCode: xss(data.postalCode),
   };
 }
 
@@ -81,10 +80,10 @@ export function mapToLeadoutpostJson(data) {
     lastName: xss(data.lastName),
     email: xss(data.emailAddress),
     phone: xss(data.phoneNumber),
-    address: xss(data.address1) + ' ' + xss(data.address2),
+    address: util.format('%s %s', xss(data.address1), xss(data.address2)),
     city: xss(data.city),
     state: xss(data.state),
-    zip: xss(data.postalCode)
+    zip: xss(data.postalCode),
   };
 }
 
@@ -95,16 +94,16 @@ function verifyPhoneNumber(req, res) {
     return res.error('Invalid phone number');
   }
 
-  return res.success({formatted: phone(number, 'US')[0]});
+  return res.success({ formatted: phone(number, 'US')[0] });
 }
 
 function ping(req, res) {
-  return res.send({msg: 'PONG'});
+  return res.json({ msg: 'PONG' });
 }
 
 export default {
-  getStateInfo: getStateInfo,
-  triggerJourney: triggerJourney,
-  verifyPhoneNumber: verifyPhoneNumber,
-  ping: ping
+  getStateInfo,
+  triggerJourney,
+  verifyPhoneNumber,
+  ping,
 };
