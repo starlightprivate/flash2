@@ -19,7 +19,6 @@ module.exports = {
     'no-undef': 1,
     'babel/new-cap': 1,
     'no-await-in-loop': 1,
-    'babel/no-invalid-this': 1,
     'require-await':[
       2
     ],
