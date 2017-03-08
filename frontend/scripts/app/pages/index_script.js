@@ -3,12 +3,9 @@ function initFieldFv(e, data) {
   const $field = data.element;
   const bv = data.fv;
 
-  const $span =
-   $('<small/>')
-    .addClass('help-block validMessage text-success')
-    .attr('data-field', field)
-    .insertAfter($field)
-    .hide();
+  const $span = $field.siblings('.validMessage');
+  $span.attr('data-field', field);
+
   // Retrieve the valid message via getOptions()
   const message = filterXSS(bv.getOptions(field).validMessage);
   if (message) {
@@ -18,12 +15,12 @@ function initFieldFv(e, data) {
 function successFieldFv(e, data) {
   const field = filterXSS(data.field);
   const $field = data.element;
-  $field.next(`.validMessage[data-field='${field}']`).show();
+  $field.siblings(`.validMessage[data-field='${field}']`).show();
 }
 function errFieldFv(e, data) {
   const field = filterXSS(data.field);
   const $field = data.element;
-  $field.next(`.validMessage[data-field='${field}']`).hide();
+  $field.siblings(`.validMessage[data-field='${field}']`).hide();
 }
 function openContactModal() {
   $('#modal-contact').modal('show');

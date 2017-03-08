@@ -205,6 +205,9 @@ body > div {
     animation-delay:0.1s;
 }
 
+.message-hidden {
+    display: none;
+}
 
 html:hover [class^="ss-"] {
     -ms-zoom:1;

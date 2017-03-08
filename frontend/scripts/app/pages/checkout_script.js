@@ -147,11 +147,8 @@
     const field = filterXSS(data.field);
     const $field = data.element;
     const bv = data.fv;
-    const $span = $('<small/>')
-      .addClass('help-block validMessage text-success')
-      .attr('data-field', field)
-      .insertAfter($field)
-      .hide();
+    const $span = $field.siblings('.validMessage');
+    $span.attr('data-field', field);
     const message = filterXSS(bv.getOptions(field).validMessage);
     if (message) {
       $span.text(message);
