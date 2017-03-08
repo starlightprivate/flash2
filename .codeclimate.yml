@@ -1,6 +1,11 @@
 engines:
   eslint:
     enabled: true
+    checks:
+      async-await/space-after-async:
+        enabled: false
+      async-await/space-after-await:
+        enabled: false
   duplication:
     enabled: true
     config:
