@@ -35,6 +35,7 @@ gulp.task('eslint', function () {
     config.src + '/scripts/app/**/*.js',
     'api/**/*.js',
     '*.js',
+    '!gulpfile.js',
     'config/redis.js',
     'config/**/*.js',
     'test/**/*.js'
