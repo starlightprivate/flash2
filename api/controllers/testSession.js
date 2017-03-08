@@ -20,6 +20,6 @@ function testSession(req, res) {
         isBot: !!req.session.isBot,
       });
   }
-};
+}
 
 export default testSession;

@@ -1,5 +1,4 @@
 import mailCtrl from '../../api/controllers/mail';
-// import smsCtrl from '../../api/controllers/sms';
 import leadoutpostCtrl from '../../api/controllers/leadoutpost';
 import konnektiveCtrl from '../../api/controllers/konnektive';
 import testSession from '../../api/controllers/testSession';
@@ -47,6 +46,7 @@ function route(router) {
 
   router.get('/state/:stateNumber', mailCtrl.getStateInfo); // ###, 3 times)
   router.get('/ping', mailCtrl.ping); // ###
+
   router.post('/add-contact', leadoutpostCtrl.addContact); // ###
   router.post('/update-contact', leadoutpostCtrl.updateContact);// ###
   // router.post('/add-leadoutpost', leadoutpostCtrl.addLeadoutpost);

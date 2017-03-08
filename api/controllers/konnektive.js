@@ -1,24 +1,23 @@
 /* eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
-// import Autopilot from 'autopilot-api';
-import request from 'request-promise';
-import config from '../../server-config';
 import xss from 'xss';
 import util from 'util';
 
+import request from 'request-promise';
+import config from '../../server-config';
+
 // const autopilot = new Autopilot(config.autopilot.key);
 
-/*
- * DO NOT REMOVE THIS COMMENT!!!
- * I know that code is quite ugly in this file.
- * Be carefull with changing it.
- * We have unit tests that covers nearly all actions called by frontend code.
- * But if you change code here, you will have to
- * 1) verify that unit tests PASS (quite simple)
- * 2) verify that frontend code is not broken. It is much more complicated task - frontend code has worse quality.
- *
- *
- * - Anatolij
- */
+// DO NOT REMOVE THIS COMMENT!!!
+//  I know that code is quite ugly in this file.
+//  Be carefull with changing it.
+//  We have unit tests that covers nearly all actions called by frontend code.
+//  But if you change code here, you will have to
+//  1) verify that unit tests PASS (quite simple)
+//  2) verify that frontend code is not broken.
+//  It is much more complicated task - frontend code has worse quality.
+//
+//
+//  - Anatolij
 
 
 // On development environment we use proxy to connective api.
@@ -71,16 +70,16 @@ async function addKonnektiveOrder(req, res) {
   body.country = 'US';
 
   if (!req.body.shipAddress1) {
-    body['shipAddress1'] = body['address1'];
-    body['shipAddress2'] = body['address2'];
-    body['shipCity'] = body['city'];
-    body['shipState'] = body['state'];
-    body['shipPostalCode'] = body['postalCode'];
-    body['shipCountry'] = body['country'];
+    body.shipAddress1 = body.address1;
+    body.shipAddress2 = body.address2;
+    body.shipCity = body.city;
+    body.shipState = body.state;
+    body.shipPostalCode = body.postalCode;
+    body.shipCountry = body.country;
   }
 
   if (req.body.cardSecurityCode) {
-    delete req.body.cardSecurityCode;
+    delete req.body.cardSecurityCode; // eslint-disable-line no-param-reassign
   }
   // req.body.cardSecurityCode = '100';
 
@@ -106,12 +105,10 @@ async function addKonnektiveOrder(req, res) {
   const response = await request(options);
   console.log(response);
 
-  if (response.result == 'ERROR') {
-    res.error(response.message, 200);
+  if (response.result === 'ERROR') {
+    return res.error(response.message, 200);
   }
-  else {
-    res.success(response.message);
-  }
+  return res.success(response.message);
 }
 
 async function getLead(req, res) {
@@ -133,12 +130,10 @@ async function getLead(req, res) {
 
   const response = JSON.parse(await request(options));
   console.log(response);
-  if (response.result == 'ERROR') {
-    res.error(response.message);
+  if (response.result === 'ERROR') {
+    return res.error(response.message);
   }
-  else {
-    res.success(response.message);
-  }
+  return res.success(response.message);
 }
 
 async function getTrans(req, res) {
@@ -158,12 +153,10 @@ async function getTrans(req, res) {
     json: true, // Automatically parses the JSON string in the response
   };
   const response = JSON.parse(await request(options));
-  if (response.result == 'ERROR') {
-    res.error(response.message);
+  if (response.result === 'ERROR') {
+    return res.error(response.message);
   }
-  else {
-    res.success(response.message);
-  }
+  return res.success(response.message);
 }
 
 async function createKonnektiveLead(req, res) {
@@ -195,42 +188,36 @@ async function createKonnektiveLead(req, res) {
   };
   const response = await request(options);
   console.log('response...', response);
-  if (response.result == 'ERROR') {
-    res.error(response.message);
+  if (response.result === 'ERROR') {
+    return res.error(response.message);
   }
-  else {
-    res.success(response.message);
-  }
+  return res.success(response.message);
 }
 
 
 async function upsell(req, res) {
-  const {productId, productQty} = req.body;
+  const { productId, productQty } = req.body;
   if (!productId || !productQty) {
-    res.error('Invalid Upsell Data');
+    return res.error('Invalid Upsell Data');
   }
-  else {
-    console.log('Preparing to send data to /upsale/import', req.body);
-    req.body.loginId = konnectiveLogin;
-    req.body.password = konnectivePassword;
-    const options = {
-      uri: util.format('%supsale/import/', connectiveApiURL),
-      qs: req.body,
-      headers: {
-        'api-key': proxyApiKey,
-        'User-Agent': 'Request-Promise',
-      },
-      json: true, // Automatically parses the JSON string in the response
-    };
-    const response = await request(options);
-    console.log(response);
-    if (response.result == 'ERROR') {
-      res.error(response.message);
-    }
-    else {
-      res.success(response.message);
-    }
+  console.log('Preparing to send data to /upsale/import', req.body);
+  req.body.loginId = konnectiveLogin; // eslint-disable-line no-param-reassign
+  req.body.password = konnectivePassword;// eslint-disable-line no-param-reassign
+  const options = {
+    uri: util.format('%supsale/import/', connectiveApiURL),
+    qs: req.body,
+    headers: {
+      'api-key': proxyApiKey,
+      'User-Agent': 'Request-Promise',
+    },
+    json: true, // Automatically parses the JSON string in the response
+  };
+  const response = await request(options);
+  console.log(response);
+  if (response.result === 'ERROR') {
+    return res.error(response.message);
   }
+  return res.success(response.message);
 }
 
 export default {

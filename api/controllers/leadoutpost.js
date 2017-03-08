@@ -1,33 +1,32 @@
 /* eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
 
-import Autopilot from 'autopilot-api';
-import config from '../../server-config';
 import request from 'request-promise';
 import xss from 'xss';
 import phone from 'phone';
+import Autopilot from 'autopilot-api';
 
-/*
- * DO NOT REMOVE THIS COMMENT!!!
- * I know that code is quite ugly in this file.
- * Be carefull with changing it.
- * We have unit tests that covers nearly all actions called by frontend code.
- * But if you change code here, you will have to
- * 1) verify that unit tests PASS (quite simple)
- * 2) verify that frontend code is not broken. It is much more complicated task - frontend code has worse quality.
- *
- *
- * - Anatolij
- */
+import config from '../../server-config';
+import { mapToAutopilotJson, mapToLeadoutpostJson } from './mail';
+
+// DO NOT REMOVE THIS COMMENT!!!
+// I know that code is quite ugly in this file.
+// Be carefull with changing it.
+// We have unit tests that covers nearly all actions called by frontend code.
+// But if you change code here, you will have to
+// 1) verify that unit tests PASS (quite simple)
+// 2) verify that frontend code is not broken. It is much more complicated task
+// - frontend code has worse quality.
+// - Anatolij
 
 
 const autopilot = new Autopilot(config.autopilot.key);
-import {mapToAutopilotJson, mapToLeadoutpostJson} from './mail';
+
 
 async function migrate(req, res) {
   let contacts = await autopilot.lists.roster(config.autopilot.clientlist, 'person_0E8607F2-E308-438F-BF16-FB627DB4A4C9');
   while (contacts.data.contacts.length >= 100) {
     let contact = {};
-    for (contact of contacts.data.contacts) {
+    for (contact of contacts.data.contacts) { // eslint-disable-line
       if (contact.Phone && phone(contact.Phone, 'US')[0]) {
         const leadoutpost = {
           firstName: contact.FirstName,
@@ -46,13 +45,20 @@ async function migrate(req, res) {
           json: true, // Automatically parses the JSON string in the response
         };
         await request.post(options); // eslint-disable-line no-await-in-loop
-        console.log(contact.contact_id, contact.Email, contact.Phone, contact.FirstName, contact.LastName);
+        console.log(
+          contact.contact_id,
+          contact.Email,
+          contact.Phone,
+          contact.FirstName,
+          contact.LastName);
       }
     }
-    contacts = await autopilot.lists.roster(config.autopilot.clientlist, contact.contact_id); // eslint-disable-line no-await-in-loop
+// eslint-disable-next-line no-await-in-loop
+    contacts = await autopilot.lists.roster(config.autopilot.clientlist, contact.contact_id);
+
     console.log('last----------------', contact.contact_id);
   }
-  res.success({length: contacts.data.contacts.length});
+  res.success({ length: contacts.data.contacts.length });
 }
 
 /*
@@ -77,14 +83,15 @@ function addContact(req, res) {
       phone: xss(req.body.MobilePhone) || xss(req.body.Phone),
     };
     if (!req.body.MobilePhone) {
-      req.body.MobilePhone = xss(req.body.Phone);
+      req.body.MobilePhone = xss(req.body.Phone); // eslint-disable-line no-param-reassign
     }
 
     if (!req.body.Phone) {
-      req.body.Phone = xss(req.body.MobilePhone);
+      req.body.Phone = xss(req.body.MobilePhone); // eslint-disable-line no-param-reassign
     }
     // await sendAffiliateEmail(req.body);
-    req.body._autopilot_list = config.autopilot.clientlist;
+    // eslint-disable-next-line no-underscore-dangle
+    req.body._autopilot_list = config.autopilot.clientlist; // eslint-disable-line no-param-reassign
     autopilot.contacts.upsert(req.body);
 
     leadoutpost.apiKey = config.leadoutpost.apiKey;
@@ -98,9 +105,8 @@ function addContact(req, res) {
       json: true, // Automatically parses the JSON string in the response
     };
     request.post(options);
-    res.success();
-  }
-  catch (error) {
+    return res.success();
+  } catch (error) {
     return res.error(error.message);
   }
 }
@@ -111,6 +117,7 @@ function updateContact(req, res) {
 
   try {
     // await sendAffiliateEmail(req.body);
+    // eslint-disable-next-line no-underscore-dangle
     contactData._autopilot_list = config.autopilot.clientlist;
     autopilot.contacts.upsert(contactData);
     res.success();
@@ -127,16 +134,15 @@ function updateContact(req, res) {
       json: true, // Automatically parses the JSON string in the response
     };
 
-    request.post(options);
-  }
-  catch (error) {
+    return request.post(options);
+  } catch (error) {
     return res.error(error.message);
   }
 }
 
 async function addLeadoutpost(req, res) {
-  req.body.apiKey = config.leadoutpost.apiKey;
-  req.body.campaignId = config.leadoutpost.campaignId;
+  req.body.apiKey = config.leadoutpost.apiKey; // eslint-disable-line no-param-reassign
+  req.body.campaignId = config.leadoutpost.campaignId; // eslint-disable-line no-param-reassign
   const options = {
     uri: 'https://www.leadoutpost.com/api/v1/lead',
     qs: req.body,
