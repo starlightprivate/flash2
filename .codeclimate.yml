@@ -2,10 +2,7 @@ engines:
   eslint:
     enabled: true
     config:
-      extensions:
-        - .es7
-        - .es6
-        - .js
+      config: .eslintrc.codeclimate.js
   duplication:
     enabled: true
     config:
