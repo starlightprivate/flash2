@@ -1,3 +1,5 @@
+/* global $, filterXSS, jQuery, callAPI, UniversalStorage */
+/* global bootstrapModal, customWrapperForIsMobileDevice */
 (() => {
   if (customWrapperForIsMobileDevice()) {
     $('#checkout-wrapper').addClass('mobile-mode');

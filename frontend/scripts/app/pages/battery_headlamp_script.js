@@ -1,3 +1,6 @@
+/* global $, filterXSS, jQuery, callAPI, UniversalStorage */
+/* global customWrapperForIsMobileDevice, bootstrapModal, getJson */
+// eslint-disable-file babel/no-invalid-this
 (() => {
   let upsellID = null;
   if (window.location.pathname.indexOf('us_batteryoffer') >= 0) {

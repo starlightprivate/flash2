@@ -1,3 +1,5 @@
+/* global $, filterXSS, jQuery, callAPI, UniversalStorage */
+/* global loadStateFromZip, customWrapperForIsMobileDevice */
 (() => {
   let tmpZipCode = '';
   /* eslint-disable no-unused-vars */
