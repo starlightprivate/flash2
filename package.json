@@ -19,7 +19,7 @@
     "test:frontend": "snyk test && gulp xsslint",
     "dev": "gulp",
     "prepublish": "npm run snyk-protect",
-    "lint:frontend": "gulp lint &&  node_modules/.bin/htmlhint --config .htmlhintrc frontend/html/*.html"
+    "lint:frontend": "gulp eslint &&  node_modules/.bin/htmlhint --config .htmlhintrc frontend/html/*.html"
   },
   "repository": {
     "type": "git",
