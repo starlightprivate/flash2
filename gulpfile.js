@@ -16,7 +16,8 @@ let _ = require('lodash'),
   XSSLint     = require("xsslint"),
   debug = require('gulp-debug'),
   stripCssComments = require('gulp-strip-css-comments'),
-  htmlhint = require("gulp-htmlhint");
+  htmlhint = require("gulp-htmlhint"),
+  watch = require('gulp-watch');
 
 const config = {
   src: 'frontend', // source directory
@@ -193,7 +194,7 @@ gulp.task('clean-all', function (cb) {
 
 // Clean Temp Dir
 gulp.task('cleantemp', function (cb) {
-  del([config.dist + '/assets/temp'], cb);
+  return del([config.dist + '/assets/temp'], cb);
 });
 
 // String Validation and Sanitization
@@ -238,5 +239,9 @@ gulp.task('build', ['clean-all'], function (done) {
   );
 });
 
+gulp.task('watch', function() {
+  gulp.watch('frontend/**/*', ['build']);
+});
+
 // Default task
-gulp.task('default', ['build']);
+gulp.task('default', ['watch']);

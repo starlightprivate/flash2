@@ -20,7 +20,7 @@
     "prepublish": "npm run snyk-protect",
     "lint": "gulp test",
     "build": "npm run lint && gulp build",
-    "lint:backend":"./node_modules/.bin/eslint api/ config/ app.js index.js server-config.js  trace.config.js test/"
+    "lint:backend": "./node_modules/.bin/eslint api/ config/ app.js index.js server-config.js  trace.config.js test/"
   },
   "repository": {
     "type": "git",
@@ -95,6 +95,7 @@
     "gulp-size": "^2.1.0",
     "gulp-strip-css-comments": "^1.2.0",
     "gulp-uglify": "^2.0.0",
+    "gulp-watch": "^4.3.11",
     "htmlhint": "^0.9.13",
     "husky": "^0.13.2",
     "lodash": "^4.17.4",
