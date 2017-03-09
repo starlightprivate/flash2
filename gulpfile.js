@@ -18,7 +18,8 @@ let _ = require('lodash'),
   stripCssComments = require('gulp-strip-css-comments'),
   htmlhint = require("gulp-htmlhint"),
   watch = require('gulp-watch'),
-  sass = require('gulp-sass');
+  sass = require('gulp-sass'),
+  sassLint = require('gulp-sass-lint');
 
 const config = {
   src: 'frontend', // source directory
@@ -68,8 +69,15 @@ gulp.task('xsslint', function() {
   });
 });
 
+gulp.task('sasslint', function() {
+  return gulp.src(config.src + '/styles/**/*.s+(a|c)ss')
+    .pipe(sassLint())
+    .pipe(sassLint.format())
+    .pipe(sassLint.failOnError())
+});
+
 // Test Task !
-gulp.task('test', ['eslint', 'xsslint', 'html-lint'], function (cb) {
+gulp.task('test', ['eslint', 'xsslint', 'html-lint', 'sasslint'], function (cb) {
   console.log('Test finished!');
   process.nextTick(cb);
 });
