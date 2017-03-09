@@ -91,6 +91,12 @@ async function addKonnektiveOrder(req, res) {
   // req.body.cardExpiryDate = `${req.body.month}/${req.body.year}`;
   // delete req.body.productId;
 
+  if (!useProxy) {
+    body.loginId = konnectiveLogin;
+    body.password = konnectivePassword;
+  }
+
+
   const options = {
     method: 'GET',
     uri: util.format('%s%s', connectiveApiURL, 'order/import/'),
