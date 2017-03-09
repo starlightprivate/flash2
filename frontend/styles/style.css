@@ -2212,3 +2212,10 @@ input::-webkit-contacts-auto-fill-button {
         font-size:18px;
     }
 }
+.error-message {
+    color: red;
+    display: block;
+}
+.error-message::first-letter {
+    text-transform: uppercase;
+}
