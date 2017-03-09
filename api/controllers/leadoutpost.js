@@ -6,6 +6,7 @@ import phone from 'phone';
 import Autopilot from 'autopilot-api';
 
 import config from '../../server-config';
+import logger from './../logger';
 import { mapToAutopilotJson, mapToLeadoutpostJson } from './mail';
 
 // DO NOT REMOVE THIS COMMENT!!!
@@ -104,8 +105,12 @@ function addContact(req, res) {
       },
       json: true, // Automatically parses the JSON string in the response
     };
-    request.post(options);
-    return res.success();
+    return request
+      .post(options)
+      .then((data) => {
+        logger('info', 'addContact', req, data); // TODO - think of data required for logs
+        return res.success();
+      });
   } catch (error) {
     return res.error(error.message);
   }
@@ -133,14 +138,18 @@ function updateContact(req, res) {
       },
       json: true, // Automatically parses the JSON string in the response
     };
-
-    return request.post(options);
+    return request
+      .post(options)
+      .then((data) => {
+        logger('info', 'updateContact', req, data); // TODO - think of data required for logs
+        return res.success();
+      });
   } catch (error) {
     return res.error(error.message);
   }
 }
 
-async function addLeadoutpost(req, res) {
+function addLeadoutpost(req, res) {
   req.body.apiKey = config.leadoutpost.apiKey; // eslint-disable-line no-param-reassign
   req.body.campaignId = config.leadoutpost.campaignId; // eslint-disable-line no-param-reassign
   const options = {
@@ -152,8 +161,12 @@ async function addLeadoutpost(req, res) {
     json: true, // Automatically parses the JSON string in the response
   };
 
-  const response = await request.post(options);
-  res.send(response);
+  return request
+    .post(options)
+    .then((data) => {
+      logger('info', 'addLeadoutpost', req, data); // TODO - think of data required for logs
+      return res.send(data);
+    });
 }
 
 export default {
