@@ -16,7 +16,9 @@ let _ = require('lodash'),
   XSSLint     = require("xsslint"),
   debug = require('gulp-debug'),
   stripCssComments = require('gulp-strip-css-comments'),
-  htmlhint = require("gulp-htmlhint");
+  htmlhint = require("gulp-htmlhint"),
+  watch = require('gulp-watch'),
+  batch = require('gulp-batch');
 
 const config = {
   src: 'frontend', // source directory
@@ -236,6 +238,12 @@ gulp.task('build', ['clean-all'], function (done) {
       done();
     }
   );
+});
+
+gulp.task('watch', function () {
+  watch('frontend/**/*', batch(function (events, done) {
+    gulp.start('build', done);
+  }));
 });
 
 // Default task
