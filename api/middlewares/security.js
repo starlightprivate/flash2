@@ -87,7 +87,7 @@ function verifyThatSiteIsAccessedFromCloudflare(req, res, next) {
     path: req.originalUrl,
     query: req.query,
     body: req.body,
-    userAgent: req.get('User-Agent'),
+    userAgent: req.headers['User-Agent'],
   });
 
   return res
