@@ -74,9 +74,9 @@ function openContactModal() {
   // This switches between contact modal & address modal
   function submitContactForm() {
     const data = {
-      Email: filterXSS($('[name=email]').val()),
-      FirstName: filterXSS($('[name=contactModalName]').val()),
-      MobilePhone: filterXSS($('[name=phoneNumber]').val()),
+      Email: $('[name=email]').safeVal(),
+      FirstName: $('[name=contactModalName]').safeVal(),
+      MobilePhone: $('[name=phoneNumber]').safeVal(),
       LastName: 'NA',
     };
 
@@ -123,7 +123,7 @@ function openContactModal() {
     ];
     const tmp = {};
     addressFormFields.forEach((field) => {
-      const value = filterXSS($(`[name=${field}]`).val());
+      const value = $(`[name=${field}]`).safeVal();
       UniversalStorage.saveCheckoutField(field, value);
       tmp[field] = value;
     });
