@@ -1,6 +1,6 @@
 .pg-index {
   background-color:#000;
-  background-image:url(../images/bg-index.jpg);
+  background-image:url(../../images/bg-index.jpg);
   background-repeat:no-repeat;
   background-position:top center;
   background-size:100% auto;
@@ -38,7 +38,7 @@
   .feature {
     background:linear-gradient(180deg,#515151 0,#2d2d2d 50%,#0d0d0d 100%);
     border-radius:10px 10px 0 0;
-  
+
     .feature-item {
       display:inline-block;
       position:relative;
@@ -133,7 +133,7 @@
     text-transform:uppercase;
     border:none;
     box-shadow:0 3px 1px rgba(0,0,0,0.8);
-  
+
 
     .btn:active {
       box-shadow:none;
@@ -196,7 +196,7 @@
       top:0;
       bottom:0;
       width:165px;
-      background-image:url(../images/icon-btn-call.png);
+      background-image:url(../../images/icon-btn-call.png);
       background-position:center;
       background-repeat:no-repeat;
     }

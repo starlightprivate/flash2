@@ -99,7 +99,7 @@
       }
     }
   }
-  
+
   .state-col label {
     display:block;
     width:100%;
@@ -142,7 +142,7 @@
     border-radius:18px;
     overflow:hidden;
     border:1px solid #bdbdbd;
-    background:#e0e0e0 url(../images/th.png) repeat top center;
+    background:#e0e0e0 url(../../images/th.png) repeat top center;
     box-shadow:0 2px 2px 0 rgba(0,0,0,0.05), 0 1px 4px 0 rgba(0,0,0,0.08), 1px 3px 1px -1px rgba(0,0,0,0.5);
     max-width:400px;
     width:107%;
@@ -195,24 +195,24 @@
     }
 
     .cc-sm.cc-visa {
-      background-image:url(../images/cc-visa.svg);
+      background-image:url(../../images/cc-visa.svg);
       background-color:#194ba0;
       background-size:95%;
     }
 
     .cc-sm.cc-mc {
-      background-image:url(../images/cc-mastercard.jpg);
+      background-image:url(../../images/cc-mastercard.jpg);
       background-size:90%;
       background-color:#000;
     }
 
     .cc-sm.cc-american {
-      background-image:url(../images/cc-amex.svg);
+      background-image:url(../../images/cc-amex.svg);
       background-size:120%;
     }
 
     .cc-sm.cc-discover {
-      background-image:url(../images/cc-discover.jpg);
+      background-image:url(../../images/cc-discover.jpg);
       background-size:100%;
     }
 
@@ -324,7 +324,7 @@
       height:67px;
       display:table-cell;
       vertical-align:middle;
-      background-image:url(../images/icon-truck.png);
+      background-image:url(../../images/icon-truck.png);
       background-repeat:no-repeat;
       background-position:center;
 
