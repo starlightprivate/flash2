@@ -10,6 +10,9 @@
 
   $('input[name=cardNumber]').attr('maxlength', '19');
 
+  const humanizeObject = message => Object.keys(message).map(key => filterXSS(`${key} : ${message[key]}`))
+    .join('<br/>');
+
   function submitOrderForm() {
     const $loadingBar = $('div#js-div-loading-bar');
     $loadingBar.show();
@@ -84,7 +87,8 @@
           let errBody;
           if (responseMessage !== 'Invalid Credit Card Number') {
             errHead = 'Payment validation failed:  Processor Declined.';
-            responseMessage = filterXSS(responseMessage);
+            responseMessage = responseMessage.constructor !== Object ?
+            filterXSS(responseMessage) : humanizeObject(responseMessage);
             responseMessage += '<br><br>For security reasons, you must re-enter a new card number.<br><br>';
             responseMessage += 'Tip: you may try another card or call <a href=\'tel:+18558807233\'>(855) 880-7233</a>.';
           }
