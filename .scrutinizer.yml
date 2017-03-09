@@ -14,5 +14,4 @@ build:
       - eslint-run "api/**/*.js"
       - eslint-run "config/**/*.js"
       - eslint-run "test/**/*.js"
-      - eslint-run "test/**/*.js"
       - eslint-run "*.js"
