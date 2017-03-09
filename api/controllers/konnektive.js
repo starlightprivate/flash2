@@ -95,8 +95,8 @@ async function addKonnektiveOrder(req, res) {
     body.loginId = konnectiveLogin;
     body.password = konnectivePassword;
   }
-
-
+// documentation for api
+// https://api.konnektive.com/docs/order_import/
   const options = {
     method: 'GET',
     uri: util.format('%s%s', connectiveApiURL, 'order/import/'),
@@ -119,6 +119,10 @@ async function addKonnektiveOrder(req, res) {
 
 function getLead(req, res) {
   const id = xss(req.params.id);
+
+// documentation for api
+// https://api.konnektive.com/docs/order_query/
+
   const options = {
     method: 'GET',
     uri: util.format('%sorder/query/', connectiveApiURL),
@@ -193,9 +197,12 @@ async function createKonnektiveLead(req, res) {
 
   console.log(body);
 
-  body.loginId = konnectiveLogin;
-  body.password = konnectivePassword;
-
+  if (!useProxy) {
+    body.loginId = konnectiveLogin;
+    body.password = konnectivePassword;
+  }
+  // documentation on api
+  // https://api.konnektive.com/docs/leads_import/
   const options = {
     uri: util.format('%sleads/import/', connectiveApiURL),
     qs: body,
@@ -220,8 +227,13 @@ async function upsell(req, res) {
     return res.error('Invalid Upsell Data');
   }
   console.log('Preparing to send data to /upsale/import', req.body);
-  req.body.loginId = konnectiveLogin; // eslint-disable-line no-param-reassign
-  req.body.password = konnectivePassword;// eslint-disable-line no-param-reassign
+  if (!useProxy) {
+    req.body.loginId = konnectiveLogin; // eslint-disable-line no-param-reassign
+    req.body.password = konnectivePassword; // eslint-disable-line no-param-reassign
+  }
+  // documentation on api
+  // https://api.konnektive.com/docs/upsale_import/
+
   const options = {
     uri: util.format('%supsale/import/', connectiveApiURL),
     qs: req.body,
