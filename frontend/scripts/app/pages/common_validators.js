@@ -1,3 +1,4 @@
+/* global $, filterXSS, jQuery, callAPI, UniversalStorage, customWrapperForIsMobileDevice */
 function validate() {
   // Look for ios devices and safari
   const isMobileSafari = window.navigator.userAgent.match(/(iPod|iPhone|iPad)/) && window.navigator.userAgent.match(/AppleWebKit/);
