@@ -35,7 +35,7 @@ let konnectiveLogin;
 let konnectivePassword;
 const useProxy = config.ENV === 'development';
 
-if (useProxy) {
+if (!useProxy) {
   connectiveApiURL = config.konnective.proxy;
   proxyApiKey = config.konnective.proxyApiKey;
 } else {
@@ -111,15 +111,15 @@ async function addKonnektiveOrder(req, res) {
   return res.success(response.message);
 }
 
-async function getLead(req, res) {
-  const orderId = xss(req.params.id);
+function getLead(req, res) {
+  const id = xss(req.params.id);
   const options = {
     method: 'GET',
     uri: util.format('%sorder/query/', connectiveApiURL),
     qs: {
       loginId: konnectiveLogin,
       password: konnectivePassword,
-      orderId,
+      orderId: id,
     },
     headers: {
       'api-key': proxyApiKey,
@@ -128,15 +128,21 @@ async function getLead(req, res) {
     json: true, // Automatically parses the JSON string in the response
   };
 
-  const response = JSON.parse(await request(options));
-  console.log(response);
-  if (response.result === 'ERROR') {
-    return res.error(response.message);
-  }
-  return res.success(response.message);
+  return request(options)
+    .then((response) => {
+      // console.log('raw response', response);
+      if (response.result === 'ERROR') {
+        return res.error(response.message);
+      }
+      return res.success(response.message);
+    })
+    .catch((err) => {
+      console.error(err);
+      return res.error('bad response');
+    });
 }
 
-async function getTrans(req, res) {
+function getTrans(req, res) {
   const orderId = xss(req.params.id);
   const options = {
     method: 'GET',
@@ -152,11 +158,18 @@ async function getTrans(req, res) {
     },
     json: true, // Automatically parses the JSON string in the response
   };
-  const response = JSON.parse(await request(options));
-  if (response.result === 'ERROR') {
-    return res.error(response.message);
-  }
-  return res.success(response.message);
+  return request(options)
+    .then((response) => {
+      // console.log('raw response', response);
+      if (response.result === 'ERROR') {
+        return res.error(response.message);
+      }
+      return res.success(response.message);
+    })
+    .catch((err) => {
+      console.error(err);
+      return res.error('bad response');
+    });
 }
 
 async function createKonnektiveLead(req, res) {

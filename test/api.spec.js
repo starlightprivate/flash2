@@ -418,6 +418,13 @@ describe('web application', function () { // eslint-disable-line func-names
           }
           if (res.body.success) {
             res.body.data.should.exist; // eslint-disable-line no-unused-expressions
+            res.body.data.should.be.an.Array; // eslint-disable-line no-unused-expressions
+            res.body.data.length.should.be.equal(1); // eslint-disable-line no-unused-expressions
+            res.body.totalResults.should.be.equal(1); // eslint-disable-line no-unused-expressions
+            // eslint-disable-next-line no-unused-expressions
+            res.body.resultsPerPage.should.be.equal(25);
+            res.body.page.should.be.equal(1); // eslint-disable-line no-unused-expressions
+            // console.log(res.body);
           } else {
             res.body.error.should.exist; // eslint-disable-line no-unused-expressions
           }
