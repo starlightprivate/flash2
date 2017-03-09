@@ -4,7 +4,7 @@ import util from 'util';
 
 import request from 'request-promise';
 import config from '../../server-config';
-
+import logger from './../logger';
 // const autopilot = new Autopilot(config.autopilot.key);
 
 // DO NOT REMOVE THIS COMMENT!!!
@@ -110,7 +110,7 @@ async function addKonnektiveOrder(req, res) {
 
   const response = await request(options);
   console.log(response);
-
+  logger('info', 'konnectiveNewOrder', req, {}); // TODO - think of data required for logs
   if (response.result === 'ERROR') {
     return res.error(response.message, 200);
   }
@@ -144,6 +144,7 @@ function getLead(req, res) {
       if (response.result === 'ERROR') {
         return res.error(response.message);
       }
+      logger('info', 'getLead', req, {}); // TODO - think of data required for logs
       return res.success(response.message);
     })
     .catch((err) => {
@@ -174,6 +175,7 @@ function getTrans(req, res) {
       if (response.result === 'ERROR') {
         return res.error(response.message);
       }
+      logger('info', 'getTrans', req, {}); // TODO - think of data required for logs
       return res.success(response.message);
     })
     .catch((err) => {
@@ -214,6 +216,7 @@ async function createKonnektiveLead(req, res) {
   };
   const response = await request(options);
   console.log('response...', response);
+  logger('info', 'createKonnektiveLead', req, {}); // TODO - think of data required for logs
   if (response.result === 'ERROR') {
     return res.error(response.message);
   }
@@ -245,6 +248,7 @@ async function upsell(req, res) {
   };
   const response = await request(options);
   console.log(response);
+  logger('info', 'upsell', req, {}); // TODO - think of data required for logs
   if (response.result === 'ERROR') {
     return res.error(response.message);
   }

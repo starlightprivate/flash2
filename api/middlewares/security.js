@@ -3,7 +3,7 @@
 // it makes api return 403 error and sets `req.session.isBot` to true
 
 import xss from 'xss';
-
+import winston from 'winston';
 import rangeCheck from 'range_check';
 import config from './../../server-config';
 
@@ -54,7 +54,6 @@ const cloudFlareIp6Range = [
   '2a06:98c0::/29',
 ];
 
-
 // this middleware have to be the first!!!
 // https://starlightgroup.atlassian.net/projects/SG/issues/SG-35
 function verifyThatSiteIsAccessedFromCloudflare(req, res, next) {
@@ -81,6 +80,16 @@ function verifyThatSiteIsAccessedFromCloudflare(req, res, next) {
   if (isOk) {
     return next();
   }
+
+  winston.info('[SECURITY] non cloudflare access %s', rIp, {
+    method: req.method,
+    ip: rIp,
+    path: req.originalUrl,
+    query: req.query,
+    body: req.body,
+    userAgent: req.headers['User-Agent'],
+  });
+
   return res
     .status(500)
     .end('NOT OK');
@@ -98,6 +107,22 @@ function getIp(req) {
   return req.connection.remoteAddress;
 }
 
+
+function logBotAction(req, punishReason) {
+  const ip = getIp(req);
+  return winston.info('[SECURITY] bot punished %s', ip, {
+    ip: getIp(req),
+    method: req.method,
+    entryPoint: req.session.entryPoint,
+    path: req.originalUrl,
+    query: req.query,
+    body: req.body,
+    userAgent: req.get('User-Agent'),
+    punishedBy: punishReason,
+  });
+}
+
+
 // related issues for punishing middlewares:
 // https://starlightgroup.atlassian.net/browse/SG-5
 // https://starlightgroup.atlassian.net/browse/SG-8
@@ -109,6 +134,7 @@ function punishForEnteringSiteFromBadLocation(req, res, next) {
       if (config.ENV !== 'production') {
         res.set('X-PUNISHEDBY', 'BAD LOCATION');
       }
+      logBotAction(req, 'BAD_LOCATION');
       req.session.isBot = true;  // eslint-disable-line no-param-reassign
       return res.status(403).send('Invalid API Key');
     }
@@ -123,8 +149,9 @@ function punishForChangingIP(req, res, next) {
     const rIp = getIp(req);
     if (req.session.ip !== rIp) {
       if (config.ENV !== 'production') {
-        res.set('X-PUNISHEDBY', 'BAD LOCATION');
+        res.set('X-PUNISHEDBY', 'BAD_IP');
       }
+      logBotAction(req, 'BAD_IP');
       req.session.isBot = true; // eslint-disable-line no-param-reassign
       return res.status(403).send('Invalid API Key');
     }
@@ -138,8 +165,9 @@ function punishForChangingUserAgent(req, res, next) {
     const ua = req.get('User-Agent');
     if (req.session.userAgent !== ua) {
       if (config.ENV !== 'production') {
-        res.set('X-PUNISHEDBY', 'BAD UA');
+        res.set('X-PUNISHEDBY', 'BAD_UA');
       }
+      logBotAction(req, 'BAD_UA');
       req.session.isBot = true; // eslint-disable-line no-param-reassign
       return res.status(403).send('Invalid API Key');
     }

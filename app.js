@@ -4,6 +4,7 @@
 
 import path from 'path';
 
+import winston from 'winston';
 import express from 'express';
 import bodyParser from 'body-parser';
 import expressPromiseRouter from 'express-promise-router';
@@ -217,17 +218,25 @@ app.use('/tacticalsales/', express.static(path.join(__dirname, 'public')));
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
-  console.error(err); // output error to STDERR proccess stream
   if (err.code === 'EBADCSRFTOKEN') {
-    res.status(403).send('Invalid API Key');
-  } else {
-    if (typeof err.status !== 'undefined') res.status(err.status);
-    if (res.error) {
-      res.error(err.message || err);
-    } else {
-      res.status(err.code || 500).send(err.message || 'Server error');
-    }
+    return res.status(403).send('Invalid API Key');
   }
+  winston.error('expressjs error %s %s %s', err.code, err.message, err.status, {
+    ip: security.getIp(req),
+    method: req.method,
+    entryPoint: req.session.entryPoint,
+    path: req.originalUrl,
+    query: req.query,
+    body: req.body,
+    isBot: req.session.isBot,
+    userAgent: req.get('User-Agent'),
+    code: err.code,
+    message: err.message,
+    status: err.status,
+  });
+  return res
+    .status(500)
+    .send('server error');
 });
 
 module.exports = app;
