@@ -1,0 +1,65 @@
+.pg-receipt {
+  background-image:url(../images/bg-receipt.jpg);
+  background-repeat:no-repeat;
+  background-size:cover;
+  padding-bottom:50px;
+  color:#5A5B5D;
+  font-family:"Open Sans", sans-serif;
+  font-weight:300;
+
+  .container {
+    max-width:925px;
+    width:95%;
+    text-align:center;
+    padding:0;
+  }
+
+  .info {
+    background:#fff;
+    border-radius:10px;
+    padding:40px;
+
+    .title {
+      text-transform:uppercase;
+      font-family:EurostileLTStd, sans-serif;
+      color:#DB2927;
+      font-weight:500;
+      font-size:33px;
+      line-height:44px;
+
+      span {
+        color:#5A5B5D;
+        font-size:45px;
+        display:block;
+      }
+    }
+
+    .note {
+      color:#787878;
+
+      strong {
+        font-weight:600;
+      }
+    }
+
+    .accent {
+      color:#DB2927;
+    }
+
+    .accentBox {
+      background:#DB2927;
+      color:#fff;
+      font-family:EurostileLTStd;
+      font-size:16px;
+      display:inline-block;
+      border-radius:5px;
+      text-transform:uppercase;
+      margin:35px;
+      padding:10px 35px 5px;
+    }
+
+    .orderId {
+      margin-bottom:40px;
+    }
+  }
+}

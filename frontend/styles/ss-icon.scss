@@ -1,0 +1,171 @@
+.ss-icon,[class^="ss-"]:before,
+[class*=" ss-"]:before,
+[class^="ss-"].right:after,
+[class*=" ss-"].right:after {
+  font-style:normal;
+  text-decoration:none;
+  text-rendering:optimizeLegibility;
+  white-space:nowrap;
+  -webkit-font-feature-settings:liga;
+  -moz-font-feature-settings:liga;
+  -ms-font-feature-settings:liga 1;
+  -o-font-feature-settings:liga;
+  font-feature-settings:liga;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  font-weight:400;
+  font-family:"SS BlackTie-Solid";
+}
+
+[class^="ss-"].right:before,[class*=" ss-"].right:before {
+  display:none;
+  content:'';
+}
+
+.ss-search:before,.ss-search.right:after {
+  content:'🔎';
+}
+
+.ss-folder:before,.ss-folder.right:after {
+  content:'📁';
+}
+
+.ss-loading:before,.ss-loading.right:after {
+  content:'';
+}
+
+.ss-share:before,.ss-share.right:after {
+  content:'';
+}
+
+.ss-code:before,.ss-code.right:after {
+  content:'';
+}
+
+.ss-circle:before,.ss-circle.right:after {
+  content:'○';
+}
+
+.ss-up:before,.ss-up.right:after {
+  content:'⬆';
+}
+
+.ss-link:before,.ss-link.right:after {
+  content:'🔗';
+}
+
+.ss-indent:before,.ss-indent.right:after {
+  content:'';
+}
+
+.ss-location:before,.ss-location.right:after {
+  content:'';
+}
+
+.ss-warehouse:before,.ss-warehouse.right:after {
+  content:'';
+}
+
+.ss-creditcard:before,.ss-creditcard.right:after {
+  content:'💳';
+}
+
+.ss-zoom:before,.ss-zoom.right:after {
+  content:'';
+}
+
+.ss-delete:before,.ss-delete.right:after {
+  content:'␡';
+}
+
+.ss-plus:before,.ss-plus.right:after {
+  content:'+';
+}
+
+.ss-info:before,.ss-info.right:after {
+  content:'ℹ';
+}
+
+.ss-gift:before,.ss-gift.right:after {
+  content:'🎁';
+}
+
+.ss-help:before,.ss-help.right:after {
+  content:'❓';
+}
+
+.ss-stop:before,.ss-stop.right:after {
+  content:'■';
+}
+
+.ss-skip:before,.ss-skip.right:after {
+  content:'⏭';
+}
+
+.ss-left:before,.ss-left.right:after {
+  content:'⬅';
+}
+
+.ss-right:before,.ss-right.right:after {
+  content:'➡';
+}
+
+.ss-home:before,.ss-home.right:after {
+  content:'⌂';
+}
+
+.ss-tablet:before,.ss-tablet.right:after {
+  content:'';
+}
+
+.ss-mail:before,.ss-mail.right:after {
+  content:'✉';
+}
+
+.ss-phone:before,.ss-phone.right:after {
+  content:'📞';
+}
+
+.ss-check:before,.ss-check.right:after {
+  content:'✓';
+}
+
+.ss-like:before,.ss-like.right:after {
+  content:'👍';
+}
+
+.ss-video:before,.ss-video.right:after {
+  content:'📹';
+}
+
+.ss-list:before,.ss-list.right:after {
+  content:'';
+}
+
+.ss-refresh:before,.ss-refresh.right:after {
+  content:'↻';
+}
+
+.ss-desktop:before,.ss-desktop.right:after {
+  content:'💻';
+}
+
+.ss-user:before,.ss-user.right:after {
+  content:'👤';
+}
+
+.ss-lock:before,.ss-lock.right:after {
+  content:'🔒';
+}
+
+.ss-view:before,.ss-view.right:after {
+  content:'👀';
+}
+
+.ss-tag:before,.ss-tag.right:after {
+  content:'';
+}
+
+.ss-picture:before,.ss-picture.right:after {
+  content:'🌄';
+}

@@ -17,7 +17,8 @@ let _ = require('lodash'),
   debug = require('gulp-debug'),
   stripCssComments = require('gulp-strip-css-comments'),
   htmlhint = require("gulp-htmlhint"),
-  watch = require('gulp-watch');
+  watch = require('gulp-watch'),
+  sass = require('gulp-sass');
 
 const config = {
   src: 'frontend', // source directory
@@ -150,22 +151,24 @@ gulp.task('transpile-and-jscopy', function() {
  */
 
 // Copy Css
-gulp.task('csscopy', function () {
-  return gulp.src([config.src + '/styles/style.css'])
+gulp.task('compile-sass-and-copy', function () {
+  // return gulp.src([config.src + '/styles/style.css'])
+  return gulp.src(config.src + '/styles/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
     .pipe(newer(config.dist + '/assets/temp'))
     .pipe(gulp.dest(config.dist + '/assets/temp'));
 });
 
 // Strip comments from CSS using strip-css-comments
 gulp.task('stripcss', function () {
-  return gulp.src(config.dist + '/assets/temp/style.css')
+  return gulp.src(config.dist + '/assets/temp/**/*.css')
     .pipe(stripCssComments())
     .pipe(gulp.dest(config.dist + '/assets/temp/'));
 });
 
 // Remove unnecessary css
 gulp.task('csspurify', function () {
-  return gulp.src(config.dist + '/assets/temp/style.css')
+  return gulp.src(config.dist + '/assets/temp/**/*.css')
     .pipe(purify([
       config.src + '/scripts/app/config.js',
       config.src + '/scripts/app/utils.js',
@@ -227,7 +230,7 @@ gulp.task('build', ['clean-all'], function (done) {
     'html',
 
 // css
-    'csscopy',
+    'compile-sass-and-copy',
     'stripcss',
     'csspurify',
 //???

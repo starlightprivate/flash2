@@ -1,0 +1,218 @@
+@font-face {
+  font-family: "SS BlackTie-Solid";
+  src: url("../fonts/ss-black-tie/ss-black-tie-bold.eot");
+  src: url("../fonts/ss-black-tie/ss-black-tie-bold.eot?#iefix") format("embedded-opentype"), url("../fonts/ss-black-tie/ss-black-tie-solid.woff") format("woff"), url("../fonts/ss-black-tie/ss-black-tie-bold.ttf") format("truetype"), url("../fonts/ss-black-tie/ss-black-tie-bold.svg#BlackTie-Solid") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.invisible {
+  visibility:hidden;
+}
+
+html,body {
+  height:100%;
+}
+
+body {
+  padding-right:0;
+}
+
+body > div {
+  min-height:100%;
+}
+
+.modal {
+  -webkit-overflow-scrolling:auto;
+}
+
+.faded{
+  opacity: 0.5;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+html:hover [class^="ss-"] {
+  -ms-zoom:1;
+}
+
+img.resp {
+  width:100%;
+  border: 2px solid white;
+  -webkit-box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+     -moz-box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+  border-radius: 7px;
+}
+
+input#creditcard{
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+}
+input#creditcard::-webkit-inner-spin-button,
+input#creditcard::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+.fv-control-feedback {
+  position:absolute;
+  top:0;
+  right:0;
+  z-index:3;
+  display:block;
+  text-align:center;
+}
+
+.fv-form-bootstrap .help-block {
+  margin-bottom:0;
+}
+
+.fv-form-bootstrap .fv-bootstrap-icon-input-group {
+  z-index:100;
+}
+
+.fv-form-bootstrap4 .fv-control-feedback {
+  width:38px;
+  height:38px;
+  line-height:38px;
+}
+
+.fv-form-bootstrap4 .form-group.row .fv-control-feedback {
+  right:15px;
+}
+
+.fv-form-bootstrap4:not(.form-inline) label~.fv-control-feedback {
+  top:27px;
+}
+
+.fv-form-bootstrap4:not(.form-inline) .form-check~.fv-control-feedback {
+  top:27px;
+}
+
+.fv-form-bootstrap4 .has-success label,.fv-form-bootstrap4 .has-success .fv-control-feedback {
+  color:#5cb85c;
+}
+
+.fv-form-bootstrap4 .has-warning label,.fv-form-bootstrap4 .has-warning .fv-control-feedback {
+  color:#f0ad4e;
+}
+
+.hidden-xs-up,.custom-modal .modal-content .has-warning #email ~ [data-fv-validator="emailAddress"] {
+  display:none;
+}
+
+.custom-modal .address-2,.pg-index .feature .feature-bar,.pg-index .feature .feature-item:nth-child(5):after,.pg-checkout .light-info .info-middle br,.pg-checkout .step .step-content .label-mobile,.pg-checkout .img-shipping,.pg-checkout .radio-box input[type="radio"],.pg-checkout.mobile-mode #step-2,.pg-checkout.mobile-mode #step-3,.pg-checkout.mobile-mode #step-1 .step-content .radio-box {
+  display:none;
+}
+
+.fv-form [placeholder]::-ms-clear {
+  display:none;
+}
+
+.pg-checkout .radio-box input[type="radio"]{
+  display: none;
+}
+.pg-index .header .logo-holder img,.pg-index .function img,.pg-battery .upsell .card img {
+  width:100%;
+}
+
+.pg-index .feature .feature-item:nth-child(2),.pg-index .feature .feature-item:nth-child(3) {
+  width:18.5%;
+}
+
+.pg-index .footer p,.pg-checkout .footer p {
+  font-size:15px;
+  color:#c4c4c4;
+  margin-bottom:10px;
+}
+
+.pg-index .footer p a,.pg-checkout .footer p a {
+  color:#c4c4c4;
+}
+
+.pg-index .footer ul,.pg-checkout .footer ul {
+  padding-left:0;
+  margin-bottom:0;
+}
+
+.pg-index .footer ul li,.pg-checkout .payment .payment-icon a,.pg-checkout .footer ul li {
+  display:inline-block;
+}
+
+.pg-index .footer ul li:not(:last-child):after,.pg-checkout .footer ul li:not(:last-child):after {
+  content:"-";
+  margin-left:8px;
+  margin-right:6px;
+  color:rgba(196,196,196,0.5);
+}
+
+.pg-index .footer ul li a,.pg-checkout .footer ul li a {
+  font-size:15px;
+  color:#FFF;
+  text-decoration:none;
+}
+
+.pg-checkout .step .payment-holder,.pg-tm3 .btn-holder {
+  text-align:center;
+}
+
+.pg-checkout .exp-detail,.fv-has-feedback {
+  position:relative;
+}
+
+.pg-battery .logo,.pg-receipt .logo {
+  padding:25px 0;
+}
+
+.pg-battery .logo img,.pg-receipt .logo img {
+  width:100%;
+  max-width:340px;
+}
+
+.pg-tm3 .article .img-block a,.fv-help-block {
+  display:block;
+}
+
+.form-inline.fv-form-bootstrap .form-group,.fv-form-bootstrap4.form-inline .form-group {
+  vertical-align:top;
+}
+
+.fv-form-bootstrap4 .form-group.row .form-check~.fv-control-feedback,.fv-form-bootstrap4:not(.form-inline) label.sr-only~.fv-control-feedback {
+  top:-7px;
+}
+
+
+/* Wistia */
+.wistia_responsive_padding_alt {
+  padding: 56.25% 0 0 0;
+  position: relative;
+}
+
+.wistia_responsive_wrapper_alt {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.wistia_embed_alt {
+  height: 100%;
+  width: 100%
+}
+
+.hide-element {
+  display: none;
+}
+
+input::-webkit-contacts-auto-fill-button {
+  visibility: hidden;
+  display: none !important;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
