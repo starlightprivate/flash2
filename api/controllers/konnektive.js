@@ -35,7 +35,7 @@ let konnectiveLogin;
 let konnectivePassword;
 const useProxy = config.ENV === 'development';
 
-if (!useProxy) {
+if (useProxy) {
   connectiveApiURL = config.konnective.proxy;
   proxyApiKey = config.konnective.proxyApiKey;
 } else {
