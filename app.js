@@ -75,7 +75,12 @@ app.use(bodyParser.json());
 // it is endpoint that recieves CSP rules violation info
 // from hemlet-csp middleware - see `./api/middlewares/csp.js`
 app.post('/a434819b5a5f4bfeeaa5d47c8af8ac87', (req, res) => {
-  console.log(req.body);
+  winston.error('csp error', {
+    ip: security.getIp(req),
+    path: req.originalUrl,
+    userAgent: req.get('User-Agent'),
+    error: JSON.stringify(req.body),
+  });
   res.status(200).send('ok');
 });
 
