@@ -731,3 +731,36 @@ describe('web application', function () { // eslint-disable-line func-names
     });
   });
 });
+
+
+describe('testing error reporter', () => {
+  let testErrorSessionId;
+
+  it('has anything on / but we need to start session to run tests properly', (done) => {
+    supertest(app)
+      .get('/')
+      .expect('X-Powered-By', 'TacticalMastery')
+      .expect('phpsessid', /[a-zA-Z0-9-]+/)
+      .expect('XSRF-TOKEN', /[a-zA-Z0-9-]+/)
+      .end((error, res) => {
+        if (error) {
+          return done(error);
+        }
+        const sId = extractCookie(res, sessionIdCookieRegex);
+        if (sId === false) {
+          return done(new Error('PHPSESSID cookie provided set!'));
+        }
+        testErrorSessionId = res.headers.phpsessid;
+        return done();
+      });
+  });
+
+
+  it('has 500 on GET /api/v2/testError', (done) => {
+    supertest(app)
+      .get('/api/v2/testError')
+      .set('PHPSESSID', testErrorSessionId)
+      .expect(500)
+      .end(done);
+  });
+});
