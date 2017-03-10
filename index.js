@@ -14,7 +14,7 @@ if (config.ENV === 'development') {
 }
 
 winston.add(Sentry, {
-  level: 'verbose',
+  level: 'warn',
   dsn: config.sentryDSN,
 });
 
