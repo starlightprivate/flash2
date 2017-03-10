@@ -73,7 +73,9 @@ function verifyThatSiteIsAccessedFromCloudflare(req, res, next) {
   }
 // https://www.ultratools.com/tools/ipv6CIDRToRangeResult?ipAddress=2400%3Acb00%3A%3A%2F32
   cloudFlareIp6Range.map((ipRange) => {
-    if (isOk) return null;
+    if (isOk) {
+      return null;
+    }
     isOk = rangeCheck.inRange(rIp, ipRange);
     return null;
   });
