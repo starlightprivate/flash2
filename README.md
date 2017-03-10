@@ -21,6 +21,7 @@ Or
 How to start
 =================
 
+With nodejs (>=7.5.0) and redis on local machine:
 
 1. npm install
 2. npm run-script frontend
@@ -28,10 +29,20 @@ How to start
 4. Open `http://localhost:8000`
 
 
-Or
+With `docker` and `docker-compose` installed
 
-1. docker-compose up --build
-2. Open `http://localhost:8000`
+1. Edit `/etc/hosts` to add `flash2.local` as alias for localhost.
+
+```bash
+
+    [root@ivory vodolaz095]# cat /etc/hosts
+    127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4 flash2.local
+    ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6 flash2.local
+
+```
+
+2. docker-compose up --build
+3. Open `http://flash2.local`
 
 How to build frontend code
 ==================

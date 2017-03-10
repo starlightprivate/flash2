@@ -125,7 +125,6 @@ function updateContact(req, res) {
     // eslint-disable-next-line no-underscore-dangle
     contactData._autopilot_list = config.autopilot.clientlist;
     autopilot.contacts.upsert(contactData);
-    res.success();
 
     leadoutpostData.apiKey = config.leadoutpost.apiKey;
     leadoutpostData.campaignId = config.leadoutpost.campaignId;

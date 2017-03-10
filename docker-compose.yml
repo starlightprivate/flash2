@@ -7,6 +7,16 @@ app-server:
   environment:
     - NODE_ENV=development
     - REDIS_AUTH=tlergerbyhormecielkwarsiblevateximethanimpsonaturyotholholonitervusebardebedaphorgebulgibroperymbeam
+
 redis:
   build: ./redis
+
+nginx:
+  build: ./nginx
+  links:
+    - app-server:app-server
+  ports:
+    - "80:80"
+    - "443:443"
+
 

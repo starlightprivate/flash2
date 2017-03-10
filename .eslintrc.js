@@ -19,6 +19,7 @@ module.exports = {
     'no-undef': 1,
     'babel/new-cap': 1,
     'no-await-in-loop': 1,
+    'import/extensions': ["off", "never"],
     'require-await':[
       2
     ],
