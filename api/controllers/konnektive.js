@@ -67,15 +67,7 @@ async function addKonnektiveOrder(req, res) {
   body.productId = xss(req.body.productId);
   body.state = xss(req.body.state);
   body.country = 'US';
-
-  if (!req.body.shipAddress1) {
-    body.shipAddress1 = body.address1;
-    body.shipAddress2 = body.address2;
-    body.shipCity = body.city;
-    body.shipState = body.state;
-    body.shipPostalCode = body.postalCode;
-    body.shipCountry = body.country;
-  }
+  body.billShipSame = 1;
 
   if (req.body.cardSecurityCode) {
     delete req.body.cardSecurityCode; // eslint-disable-line no-param-reassign
