@@ -112,7 +112,7 @@ function getIp(req) {
 
 function logBotAction(req, punishReason) {
   const ip = getIp(req);
-  return winston.info('[SECURITY] bot punished %s', ip, {
+  return winston.info('[SECURITY] bot punished %s - %s', ip, punishReason, {
     ip: getIp(req),
     method: req.method,
     entryPoint: req.session.entryPoint,

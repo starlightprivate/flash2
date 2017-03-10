@@ -75,7 +75,12 @@ app.use(bodyParser.json());
 // it is endpoint that recieves CSP rules violation info
 // from hemlet-csp middleware - see `./api/middlewares/csp.js`
 app.post('/a434819b5a5f4bfeeaa5d47c8af8ac87', (req, res) => {
-  console.log(req.body);
+  winston.error('csp error', {
+    ip: security.getIp(req),
+    path: req.originalUrl,
+    userAgent: req.get('User-Agent'),
+    error: JSON.stringify(req.body),
+  });
   res.status(200).send('ok');
 });
 
@@ -222,14 +227,14 @@ app.use((err, req, res, next) => {
   if (err.code === 'EBADCSRFTOKEN') {
     return res.status(403).send('Invalid API Key');
   }
-  winston.error('expressjs error %s %s %s', err.code, err.message, err.status, {
+  winston.error('expressjs error : %s', err.message, {
     ip: security.getIp(req),
     method: req.method,
-    entryPoint: req.session.entryPoint,
+    entryPoint: req.session ? req.session.entryPoint : null,
     path: req.originalUrl,
     query: req.query,
     body: req.body,
-    isBot: req.session.isBot,
+    isBot: req.session ? req.session.isBot : null,
     userAgent: req.get('User-Agent'),
     code: err.code,
     message: err.message,
