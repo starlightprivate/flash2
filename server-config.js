@@ -58,4 +58,7 @@ module.exports = {
     campaignId: process.env.LEADOUTPOST_CAMPAIGN_ID || 5,
   },
   email: process.env.ADMIN_EMAIL || 'support@tacticalmastery.com',
+
+// https://sentry.io/starlight-group/node-api/settings/keys/
+  sentryDSN: process.env.SENTRY_DSN || 'https://68ae2c197a6440efac407117aec0326f:f64d954adde3493ab03f86d94815e814@sentry.io/133524',
 };

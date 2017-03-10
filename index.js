@@ -5,12 +5,18 @@ const winston = require('winston');
 const http = require('http');
 const config = require('./server-config.js');
 const app = require('./app.js');
+const Sentry = require('winston-sentry');
 
 if (config.ENV === 'development') {
   winston.cli();
 } else {
   winston.remove(winston.transports.Console);
 }
+
+winston.add(Sentry, {
+  level: 'verbose',
+  dsn: config.sentryDSN,
+});
 
 process.title = 'flash2';
 process.on('SIGINT', () => {
