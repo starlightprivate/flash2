@@ -160,17 +160,18 @@ app.use((req, res, next) => {
   res.set('X-Powered-By', 'TacticalMastery');
   // do not expose, that it is expressJS application
   // https://www.npmjs.com/package/express-session#reqsessionid-1
-  res.set('PHPSESSID', req.sessionID);
-
-  if (!req.session.ip) {
-    req.session.ip = security.getIp(req); // eslint-disable-line no-param-reassign
-  }
-  if (!req.session.entryPoint) {
-    // http://expressjs.com/en/api.html#req.originalUrl
-    req.session.entryPoint = req.originalUrl; // eslint-disable-line no-param-reassign
-  }
-  if (!req.session.userAgent) {
-    req.session.userAgent = req.get('User-Agent'); // eslint-disable-line no-param-reassign
+  if (req.session) {
+    res.set('PHPSESSID', req.sessionID);
+    if (!req.session.ip) {
+      req.session.ip = security.getIp(req); // eslint-disable-line no-param-reassign
+    }
+    if (!req.session.entryPoint) {
+      // http://expressjs.com/en/api.html#req.originalUrl
+      req.session.entryPoint = req.originalUrl; // eslint-disable-line no-param-reassign
+    }
+    if (!req.session.userAgent) {
+      req.session.userAgent = req.get('User-Agent'); // eslint-disable-line no-param-reassign
+    }
   }
   return next();
 });
