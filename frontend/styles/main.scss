@@ -216,3 +216,13 @@ input::-webkit-contacts-auto-fill-button {
   position: absolute;
   right: 0;
 }
+.error-message {
+    color: red;
+    display: block;
+}
+.error-message::first-letter {
+    text-transform: uppercase;
+}
+.message-hidden {
+    display: none;
+}
