@@ -1,4 +1,3 @@
-/* eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
 import xss from 'xss';
 import util from 'util';
 
@@ -109,8 +108,23 @@ async function addKonnektiveOrder(req, res) {
   };
 
   const response = await request(options);
-  console.log(response);
-  logger('info', 'konnectiveNewOrder', req, {}); // TODO - think of data required for logs
+  // console.log(response);
+  // TODO - think of data required for logs
+  logger('info', 'konnectiveNewOrder', req, {
+    country: 'US',
+    state: body.state,
+    city: body.city,
+    address1: body.address1,
+    address2: body.address2,
+    postalCode: body.postalCode,
+
+    campaignId: body.campaignId,
+    firstName: body.firstName,
+    lastName: body.lastName,
+    emailAddress: body.emailAddress,
+    apiResponse: JSON.stringify(response), //verify it do not have sensitive data like CC numbers
+  });
+
   if (response.result === 'ERROR') {
     return res.error(response.message, 200);
   }
@@ -144,11 +158,16 @@ function getLead(req, res) {
       if (response.result === 'ERROR') {
         return res.error(response.message);
       }
-      logger('info', 'getLead', req, {}); // TODO - think of data required for logs
+      logger('info', 'getLead', req, {
+        orderId: id,
+      }); // TODO - think of data required for logs
       return res.success(response.message);
     })
     .catch((err) => {
-      console.error(err);
+      logger('error', 'getLead', req, {
+        err,
+        orderId: id,
+      }); // TODO - think of data required for logs
       return res.error('bad response');
     });
 }
@@ -175,17 +194,23 @@ function getTrans(req, res) {
       if (response.result === 'ERROR') {
         return res.error(response.message);
       }
-      logger('info', 'getTrans', req, {}); // TODO - think of data required for logs
+      // TODO - think of data required for logs
+      logger('info', 'getTrans', req, {
+        orderId,
+      });
       return res.success(response.message);
     })
     .catch((err) => {
-      console.error(err);
+      logger('error', 'getTrans', req, {
+        err,
+        orderId,
+      }); // TODO - think of data required for logs
       return res.error('bad response');
     });
 }
 
 async function createKonnektiveLead(req, res) {
-  console.log('createKonnektiveLead create-lead...');
+  // console.log('createKonnektiveLead create-lead...');
 
   const campaignId = 3;
 
@@ -197,7 +222,7 @@ async function createKonnektiveLead(req, res) {
   body.phoneNumber = xss(req.body.phoneNumber);
   body.emailAddress = xss(req.body.emailAddress) || config.email;
 
-  console.log(body);
+  // console.log(body);
 
   if (!useProxy) {
     body.loginId = konnectiveLogin;
@@ -215,11 +240,17 @@ async function createKonnektiveLead(req, res) {
     json: true, // Automatically parses the JSON string in the response
   };
   const response = await request(options);
-  console.log('response...', response);
-  logger('info', 'createKonnektiveLead', req, {}); // TODO - think of data required for logs
+  // console.log('response...', response);
   if (response.result === 'ERROR') {
     return res.error(response.message);
   }
+  logger('info', 'createKonnektiveLead', req, {
+    firstName: body.firstName,
+    lastName: body.lastName,
+    phoneNumber: body.phoneNumber,
+    emailAddress: body.emailAddress,
+    apiResponse: JSON.stringify(response),
+  }); // TODO - think of data required for logs
   return res.success(response.message);
 }
 
@@ -229,7 +260,7 @@ async function upsell(req, res) {
   if (!productId || !productQty) {
     return res.error('Invalid Upsell Data');
   }
-  console.log('Preparing to send data to /upsale/import', req.body);
+  // console.log('Preparing to send data to /upsale/import', req.body);
   if (!useProxy) {
     req.body.loginId = konnectiveLogin; // eslint-disable-line no-param-reassign
     req.body.password = konnectivePassword; // eslint-disable-line no-param-reassign
@@ -247,8 +278,11 @@ async function upsell(req, res) {
     json: true, // Automatically parses the JSON string in the response
   };
   const response = await request(options);
-  console.log(response);
-  logger('info', 'upsell', req, {}); // TODO - think of data required for logs
+  // console.log(response);
+  logger('info', 'upsell', req, {
+    data: req.body, // probably something have to be filtered?
+    apiResponse: JSON.stringify(response),
+  }); // TODO - think of data required for logs
   if (response.result === 'ERROR') {
     return res.error(response.message);
   }
