@@ -1,0 +1,26 @@
+/* Main CSS Files 
+
+Including
+Loading-bar.scss
+Main.scss
+Modal.scss
+Responsive.scss
+ss-icon.scss
+
+Pages/Battery.scss
+Pages/Checkout.scss
+Pages/Index.scss
+Pages/receipt.scss
+Pages/tm3.scss
+*/
+
+@import 'loading-bar';
+@import 'main';
+@import 'modal';
+@import 'responsive';
+@import 'ss-icon';
+@import 'pages/battery';
+@import 'pages/checkout';
+@import 'pages/index';
+@import 'pages/receipt';
+@import 'pages/tm3';

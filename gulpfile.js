@@ -161,7 +161,7 @@ gulp.task('transpile-and-jscopy', function() {
 // Copy Css
 gulp.task('compile-sass-and-copy', function () {
   // return gulp.src([config.src + '/styles/style.css'])
-  return gulp.src(config.src + '/styles/**/*.scss')
+  return gulp.src(config.src + '/styles/style.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(newer(config.dist + '/assets/temp'))
     .pipe(gulp.dest(config.dist + '/assets/temp'));
