@@ -1,6 +1,6 @@
 import xss from 'xss';
 import util from 'util';
-import trace from '@risingstack/trace';
+import trace from './../../risingStack';
 
 import request from 'request-promise';
 import config from '../../server-config';

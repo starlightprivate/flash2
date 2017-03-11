@@ -1,6 +1,6 @@
 // Middleware reporting response time
-import trace from '@risingstack/trace';
 import util from 'util';
+import trace from './../../risingStack';
 
 // https://github.com/vodolaz095/hunt/blob/master/lib/http/expressApp.js#L854-L855
 

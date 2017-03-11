@@ -1,4 +1,4 @@
-import trace from '@risingstack/trace';
+import trace from './../../risingStack';
 
 export default (req, res, next) => {
   trace.incrementMetric('resSuccess');

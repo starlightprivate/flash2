@@ -4,7 +4,7 @@ import request from 'request-promise';
 import xss from 'xss';
 import phone from 'phone';
 import Autopilot from 'autopilot-api';
-import trace from '@risingstack/trace';
+import trace from './../../risingStack';
 
 import config from '../../server-config';
 import logger from './../logger';

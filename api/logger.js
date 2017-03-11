@@ -1,7 +1,7 @@
 import winston from 'winston';
-import trace from '@risingstack/trace';
 import security from './middlewares/security';
 
+import trace from './../risingStack';
 
 // It is default logger being used for all api endpoints
 

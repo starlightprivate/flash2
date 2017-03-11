@@ -3,12 +3,12 @@
 // it makes api return 403 error and sets `req.session.isBot` to true
 
 import util from 'util';
-import trace from '@risingstack/trace';
 import xss from 'xss';
 import winston from 'winston';
 import rangeCheck from 'range_check';
 import config from './../../server-config';
 
+import trace from './../../risingStack';
 
 // This is first pages of site, that real users usually visits
 // TODO - verify that nothing is missing

@@ -9,7 +9,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import expressPromiseRouter from 'express-promise-router';
 import expressContentLength from 'express-content-length-validator';
-import trace from '@risingstack/trace';
 
 // proper session implementation
 // https://starlightgroup.atlassian.net/browse/SG-5
@@ -19,6 +18,8 @@ import connectRedis from 'connect-redis';// store session data in redis database
 import csurf from 'csurf'; // add CSRF protection https://www.npmjs.com/package/csurf
 import helmet from 'helmet';
 import hpp from 'hpp';
+
+import trace from './risingStack';
 
 import config from './server-config';
 import redis from './config/redis'; // load redis client

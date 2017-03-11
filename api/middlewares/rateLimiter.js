@@ -1,7 +1,7 @@
 // Middleware for rate limiting
 import RateLimiter from 'strict-rate-limiter';
 import util from 'util';
-import trace from '@risingstack/trace';
+import trace from './../../risingStack';
 
 import security from './security';
 import redis from './../../config/redis';
