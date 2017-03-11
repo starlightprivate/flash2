@@ -4,9 +4,11 @@
 import util from 'util';
 import supertest from 'supertest';
 import should from 'should'; // eslint-disable-line no-unused-vars
+import request from 'request-promise';
 
 import app from '../app';
 import redis from './../config/redis';
+import config from './../server-config';
 
 const sessionIdCookieRegex = /^PHPSESSID=([^;]+); Path=\/; HttpOnly/;
 const csrfTokenCookieRegex = /^XSRF-TOKEN=([^;]+); Path=\//;
@@ -32,6 +34,19 @@ function extractCookie(res, rgx) {
 }
 
 console.log('NodeJS version being used - %s for %s', process.version, process.arch);
+
+describe('proxy', function () { // eslint-disable-line func-names
+// eslint-disable-next-line
+  this.timeout(10000); //not everybody have good internet connection, including codeship
+  it('is in place', (done) => {
+    request(config.konnective.proxy)
+      .then((response) => {
+        response.statusCode.should.be.equal(200);
+        response.body.should.be.equal('Working somehow...');
+        return done();
+      }, done);
+  });
+});
 
 describe('web application', function () { // eslint-disable-line func-names
 // eslint-disable-next-line
