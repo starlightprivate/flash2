@@ -1,5 +1,7 @@
 // Middleware for rate limiting
 import RateLimiter from 'strict-rate-limiter';
+import util from 'util';
+import trace from '@risingstack/trace';
 
 import security from './security';
 import redis from './../../config/redis';
@@ -49,6 +51,7 @@ export default (req, res, next) => {
     // limit exceeded
     res.setHeader('Retry-After', Math.floor((reset - new Date()) / 1000));
     res.statusCode = 429; // eslint-disable-line no-param-reassign
+    trace.incrementMetric(util.format('security/rateLimit'));
     return res.end('Rate limit exceeded.');
   });
 };

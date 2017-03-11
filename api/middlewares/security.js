@@ -2,6 +2,8 @@
 // Entry points, ip tampering, and so on
 // it makes api return 403 error and sets `req.session.isBot` to true
 
+import util from 'util';
+import trace from '@risingstack/trace';
 import xss from 'xss';
 import winston from 'winston';
 import rangeCheck from 'range_check';
@@ -91,7 +93,7 @@ function verifyThatSiteIsAccessedFromCloudflare(req, res, next) {
     body: req.body,
     userAgent: req.headers['User-Agent'],
   });
-
+  trace.incrementMetric('security/NonCloudflareAccess');
   return res
     .status(500)
     .end('NOT OK');
@@ -112,6 +114,7 @@ function getIp(req) {
 
 function logBotAction(req, punishReason) {
   const ip = getIp(req);
+  trace.incrementMetric(util.format('security/BotPunished/%s', punishReason));
   return winston.info('[SECURITY] bot punished %s - %s', ip, punishReason, {
     ip: getIp(req),
     method: req.method,

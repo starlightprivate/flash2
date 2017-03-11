@@ -9,6 +9,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import expressPromiseRouter from 'express-promise-router';
 import expressContentLength from 'express-content-length-validator';
+import trace from '@risingstack/trace';
+
 // proper session implementation
 // https://starlightgroup.atlassian.net/browse/SG-5
 import expressSession from 'express-session'; // initialize sessions
@@ -81,6 +83,7 @@ app.post('/a434819b5a5f4bfeeaa5d47c8af8ac87', (req, res) => {
     userAgent: req.get('User-Agent'),
     error: JSON.stringify(req.body),
   });
+  trace.incrementMetric('error/csp');
   res.status(200).send('ok');
 });
 
@@ -240,6 +243,7 @@ app.use((err, req, res, next) => {
     message: err.message,
     status: err.status,
   });
+  trace.incrementMetric('error/express');
   return res
     .status(500)
     .send('server error');
