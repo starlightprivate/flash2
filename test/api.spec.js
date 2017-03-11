@@ -41,8 +41,7 @@ describe('proxy', function () { // eslint-disable-line func-names
   it('is in place', (done) => {
     request(config.konnective.proxy)
       .then((response) => {
-        response.statusCode.should.be.equal(200);
-        response.body.should.be.equal('Working somehow...');
+        response.should.be.equal('Working somehow...');
         return done();
       }, done);
   });
