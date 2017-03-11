@@ -1,8 +1,8 @@
 import xss from 'xss';
 import util from 'util';
-import trace from './../../risingStack';
-
 import request from 'request-promise';
+
+import trace from './../../risingStack';
 import config from '../../server-config';
 import logger from './../logger';
 // const autopilot = new Autopilot(config.autopilot.key);
