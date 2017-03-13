@@ -1,8 +1,10 @@
+/* global process */
 require('babel-register');
 require('@risingstack/trace');
 
 const winston = require('winston');
 const http = require('http');
+const os = require('os');
 const config = require('./server-config.js');
 const app = require('./app.js');
 const Sentry = require('winston-sentry');
@@ -39,5 +41,13 @@ http
     if (error) {
       throw error;
     }
-    winston.verbose('HTTP Server Started at %s:%s', config.HOST, config.PORT);
+    winston.verbose('HTTP Server Started at %s:%s', config.HOST, config.PORT, {
+      type: 'server:start',
+      nodejs: process.version,
+      arch: process.arch,
+      hostname: os.hostname(),
+      osType: os.type(),
+      osPlatform: os.platform(),
+      osRelease: os.release(),
+    });
   });
