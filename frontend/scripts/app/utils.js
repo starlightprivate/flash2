@@ -74,8 +74,8 @@ function loadStateFromZip() { // eslint-disable-line no-unused-vars
   const params = [];
   if (fZipVal.length === 5) {
     fZip.addClass('processed');
-    $('#state, #city').prop('disabled', true);
-    $('#state + small + i, #city + small + i').show();
+    $('.state, #city').prop('disabled', true);
+    $('.state + small + i, #city + small + i').show();
     callAPI(`state/${fZipVal}`, params, 'GET', (resp) => {
       const jData = resp.data;
       if (resp.success) {
@@ -86,17 +86,17 @@ function loadStateFromZip() { // eslint-disable-line no-unused-vars
         }
 
         if (jData.state !== undefined && jData.state !== '' && jData.state !== null) {
-          $('#state').val(jData.state).trigger('change');
+          $('.state').val(jData.state).trigger('change');
         } else {
-          $('#state').val('');
+          $('.state').val('');
         }
         $('input[name=address1]').focus();
       }
       // remove fa spin icons and do formvalidation
-      $('#state, #city').prop('disabled', false);
+      $('.state, #city').prop('disabled', false);
       let frm;
-      if ($('#form-address').length > 0) {
-        frm = $('#form-address');
+      if ($('.form-address').length > 0) {
+        frm = $('.form-address');
       } else {
         frm = $('#checkoutForm');
       }

@@ -92,7 +92,7 @@ function openContactModal() {
       }, () => {});
       $('#modal-contact').modal('hide');
     } else {
-      const $loadingBar = $('div#js-div-loading-bar');
+      const $loadingBar = $('div.js-div-loading-bar');
       $loadingBar.show();
       callAPI('add-contact', data, 'POST', (response) => {
         if (response.success) {
@@ -186,7 +186,7 @@ function openContactModal() {
   });
 
   // Address Form Validator
-  $('#form-address').on('init.field.fv', initFieldFv).formValidation({
+  $('.form-address').on('init.field.fv', initFieldFv).formValidation({
     framework: 'bootstrap4',
     icon: {
       valid: 'ss-check',
@@ -237,7 +237,7 @@ function openContactModal() {
   })
   .on('success.field.fv', successFieldFv)
   .on('err.field.fv', errFieldFv);
-  $('#form-address').submit((e) => {
+  $('.form-address').submit((e) => {
     e.preventDefault();
   });
   $('input[name=postalCode]').mask('00000', { translation: { 0: { pattern: /[0-9]/ } } });

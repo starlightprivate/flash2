@@ -1,65 +1,67 @@
+@import '../variables';
+
 .pg-receipt {
-  background-image:url(../../images/bg-receipt.jpg);
-  background-repeat:no-repeat;
-  background-size:cover;
-  padding-bottom:50px;
-  color:#5A5B5D;
-  font-family:"Open Sans", sans-serif;
-  font-weight:300;
+  background-image: url('../images/bg-receipt.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: $color-text1;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  padding-bottom: 50px;
 
   .container {
-    max-width:925px;
-    width:95%;
-    text-align:center;
-    padding:0;
+    max-width: 925px;
+    padding: 0;
+    text-align: center;
+    width: 95%;
   }
 
   .info {
-    background:#fff;
-    border-radius:10px;
-    padding:40px;
+    background: $color-white;
+    border-radius: 10px;
+    padding: 40px;
 
     .title {
-      text-transform:uppercase;
-      font-family:EurostileLTStd, sans-serif;
-      color:#DB2927;
-      font-weight:500;
-      font-size:33px;
-      line-height:44px;
+      color: $color-red3;
+      font-family: EurostileLTStd, sans-serif;
+      font-size: 33px;
+      font-weight: 500;
+      line-height: 44px;
+      text-transform: uppercase;
 
       span {
-        color:#5A5B5D;
-        font-size:45px;
-        display:block;
+        color: $color-text1;
+        display: block;
+        font-size: 45px;
       }
     }
 
     .note {
-      color:#787878;
+      color: $color-dark;
 
       strong {
-        font-weight:600;
+        font-weight: 600;
       }
     }
 
     .accent {
-      color:#DB2927;
+      color: $color-red3;
     }
 
-    .accentBox {
-      background:#DB2927;
-      color:#fff;
-      font-family:EurostileLTStd;
-      font-size:16px;
-      display:inline-block;
-      border-radius:5px;
-      text-transform:uppercase;
-      margin:35px;
-      padding:10px 35px 5px;
+    .accent-box {
+      background: $color-red3;
+      border-radius: 5px;
+      color: $color-white;
+      display: inline-block;
+      font-family: EurostileLTStd;
+      font-size: 16px;
+      margin: 35px;
+      padding: 10px 35px 5px;
+      text-transform: uppercase;
     }
 
-    .orderId {
-      margin-bottom:40px;
+    .order-id {
+      margin-bottom: 40px;
     }
   }
 }

@@ -71,7 +71,10 @@ gulp.task('xsslint', function() {
 
 gulp.task('sasslint', function() {
   return gulp.src(config.src + '/styles/**/*.s+(a|c)ss')
-    .pipe(sassLint())
+    .pipe(sassLint({
+      rules: {
+        'nesting-depth': 0
+      }}))
     .pipe(sassLint.format())
     .pipe(sassLint.failOnError())
 });

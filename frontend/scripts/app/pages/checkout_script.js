@@ -3,18 +3,15 @@
 (() => {
   if (customWrapperForIsMobileDevice()) {
     $('#checkout-wrapper').addClass('mobile-mode');
-    $('#step-4 .step-title span').html('Step #2 :');
+    $('.step-4 .step-title span').html('Step #2 :');
   }
   $('input[name=phoneNumber]').mask('000-000-0000', { translation: { 0: { pattern: /[0-9*]/ } } });
   const MediaStorage = UniversalStorage.getCheckoutDetails();
 
   $('input[name=cardNumber]').attr('maxlength', '19');
 
-  const humanizeObject = message => Object.keys(message).map(key => `<span class='error-message'>${filterXSS(`${key} ${message[key]}`)}</span>`)
-    .join('');
-
   function submitOrderForm() {
-    const $loadingBar = $('div#js-div-loading-bar');
+    const $loadingBar = $('div.js-div-loading-bar');
     $loadingBar.show();
     const year = $('select[name=year]').val();
     const month = $('select[name=month]').val();
@@ -81,16 +78,16 @@
         window.location = `us_batteryoffer.html?orderId=${filterXSS(MediaStorage.orderId)}&pId=${filterXSS(orderDetails.productId)}`;
       } else {
         $('#checkoutForm .btn-complete').removeClass('pulse');
-        let responseMessage = resp.message.constructor !== Object ?
-            filterXSS(resp.message) : humanizeObject(resp.message);
+        let responseMessage = resp.message;
         if (responseMessage) {
           let errHead = 'Problem with your order';
           let errBody;
-          if (responseMessage === 'Invalid Credit Card Number') {
+          if (responseMessage !== 'Invalid Credit Card Number') {
             errHead = 'Payment validation failed:  Processor Declined.';
-            responseMessage += '<br><br>For security reasons, you must re-enter a new card number.';
+            responseMessage = filterXSS(responseMessage);
+            responseMessage += '<br><br>For security reasons, you must re-enter a new card number.<br><br>';
+            responseMessage += 'Tip: you may try another card or call <a href=\'tel:+18558807233\'>(855) 880-7233</a>.';
           }
-          responseMessage += '<br><br>Tip: you may try another card or call <a href=\'tel:+18558807233\'>(855) 880-7233</a>.';
           errBody = '<span style=\'font-size:20px\'>';
           errBody += responseMessage;
           errBody += '<span>';

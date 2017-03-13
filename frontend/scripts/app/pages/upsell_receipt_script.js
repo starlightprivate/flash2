@@ -34,9 +34,9 @@
         if (resp.data) {
           const firstRow = resp.data[0];
           if (firstRow && firstRow.merchant) {
-            $('#ccIdentity').text(`${filterXSS(firstRow.merchant)}`);
+            $('#ccIdentity').text(`&lt;br&gt;${filterXSS(firstRow.merchant)}`);
           } else {
-            $('#ccIdentity').text('Tactical Mastery');
+            $('#ccIdentity').text('&lt;br&gt;Tactical Mastery');
           }
         }
       }
