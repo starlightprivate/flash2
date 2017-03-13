@@ -360,7 +360,6 @@
         const $iconMasterCard = $('.payment-icon .cc-icon.cc-mastercard');
         const $iconAmex = $('.payment-icon .cc-icon.cc-american-express');
         const $iconDiscover = $('.payment-icon .cc-icon.cc-discover');
-        console.info(data.result);
         switch (data.result.type) {
         case 'VISA':
           $iconVisa.parents('a')

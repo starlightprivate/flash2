@@ -1,21 +1,21 @@
 /* global $, filterXSS, jQuery, callAPI, UniversalStorage, customWrapperForIsMobileDevice */
 function validate() {
-  var cardNumberConfigurations = {
-    amex:{
-          mask:{
-            pattern:'0000 000000 00000',
-            config: { translation: { 0: { pattern: /[0-9]/ } } }
-          },
-          maxLength: '17'
-        },
-    defaultCC:{
-          mask:{
-            pattern:'0000 0000 0000 0000',
-            config: { translation: { 0: { pattern: /[0-9]/ } } }
-          },
-          maxLength: '19'
-        }
-  }
+  const cardNumberConfigurations = {
+    amex: {
+      mask: {
+        pattern: '0000 000000 00000',
+        config: { translation: { 0: { pattern: /[0-9]/ } } },
+      },
+      maxLength: '17',
+    },
+    defaultCC: {
+      mask: {
+        pattern: '0000 0000 0000 0000',
+        config: { translation: { 0: { pattern: /[0-9]/ } } },
+      },
+      maxLength: '19',
+    },
+  };
   // Look for ios devices and safari
   const isMobileSafari = window.navigator.userAgent.match(/(iPod|iPhone|iPad)/) && window.navigator.userAgent.match(/AppleWebKit/);
   if (isMobileSafari) {
@@ -29,17 +29,15 @@ function validate() {
   }
   let numbstr = '';
 
-  function setCCActive(className)
-  {
+  function setCCActive(className) {
     $('.payment-icon .cc-icon').addClass('faded');
-    $('.payment-icon .'+className).removeClass('faded').addClass('active');
+    $(`.payment-icon .${className}`).removeClass('faded').addClass('active');
   }
 
-  function configureCCInput(config)
-  {
-      var $inputCardNumber = $('input[name=cardNumber]');
-      $inputCardNumber.mask(config.mask.pattern, config.mask.config);
-      $inputCardNumber.attr('maxlength', config.maxLength);
+  function configureCCInput(config) {
+    const $inputCardNumber = $('input[name=cardNumber]');
+    $inputCardNumber.mask(config.mask.pattern, config.mask.config);
+    $inputCardNumber.attr('maxlength', config.maxLength);
   }
 
   function keyupEvent(event) {
@@ -47,7 +45,6 @@ function validate() {
       numbstr = event.target.value.replace(/\s/g, '');
       let stcase = numbstr.slice(0, 2);
       stcase = parseInt(stcase, 10);
-      
       if (stcase === 34 || stcase === 37) {
         if (event.target.value.length === 17) return;
         setCCActive('cc-american-express');
@@ -65,10 +62,8 @@ function validate() {
         $('#last').addClass('cc-maestro').removeClass('cc-discover');
         setCCActive('cc-maestro');
         configureCCInput(cardNumberConfigurations.defaultCC);
-      }
-      else
-      {
-         configureCCInput(cardNumberConfigurations.defaultCC);
+      } else {
+        configureCCInput(cardNumberConfigurations.defaultCC);
       }
     }
     if (event.target.value.length >= 7) {
