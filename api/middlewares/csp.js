@@ -98,10 +98,10 @@ export default csp({
 
     // objectSrc: ["'none'"],
     mediaSrc: [
-      "'self'",
+      "'self'", // eslint-disable-line quotes
       'data:',
-      '*.wistia.com'
-      ],
+      '*.wistia.com',
+    ],
 
     // on development environment, being run on http://localhost:8000
     // it makes download all scripts via HTTPS,while locally we serve site using HTTP and it fails
