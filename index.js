@@ -7,6 +7,8 @@ const config = require('./server-config.js');
 const app = require('./app.js');
 const Sentry = require('winston-sentry');
 
+require('winston-loggly-bulk');
+
 if (config.ENV === 'development') {
   winston.cli();
 } else {
@@ -16,6 +18,12 @@ if (config.ENV === 'development') {
 winston.add(Sentry, {
   level: 'warn',
   dsn: config.sentryDSN,
+});
+
+winston.add(winston.transports.Loggly, {
+  token: config.loggly.token,
+  subdomain: config.loggly.subdomain,
+  json: true,
 });
 
 process.title = 'flash2';

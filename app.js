@@ -76,6 +76,7 @@ app.use(bodyParser.json());
 // from hemlet-csp middleware - see `./api/middlewares/csp.js`
 app.post('/a434819b5a5f4bfeeaa5d47c8af8ac87', (req, res) => {
   winston.error('csp error', {
+    env: config.ENV,
     ip: security.getIp(req),
     path: req.originalUrl,
     userAgent: req.get('User-Agent'),
@@ -228,6 +229,7 @@ app.use((err, req, res, next) => {
     return res.status(403).send('Invalid API Key');
   }
   winston.error('expressjs error : %s', err.message, {
+    env: config.ENV,
     ip: security.getIp(req),
     method: req.method,
     entryPoint: req.session ? req.session.entryPoint : null,

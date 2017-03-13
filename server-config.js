@@ -61,4 +61,10 @@ module.exports = {
 
 // https://sentry.io/starlight-group/node-api/settings/keys/
   sentryDSN: process.env.SENTRY_DSN || 'https://68ae2c197a6440efac407117aec0326f:f64d954adde3493ab03f86d94815e814@sentry.io/133524',
+
+// TODO - this is access tokens of Anatolij - because Larby provided him wrong loggly password!
+  loggly: {
+    token: process.env.LOGGLY_TOKEN || 'd7c17837-6270-41bd-a58f-9bb1bd2c6e1c',
+    subdomain: process.env.LOGGLY_SUBDOMAIN || 'vodolaz095',
+  },
 };

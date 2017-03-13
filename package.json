@@ -53,6 +53,7 @@
     "strict-rate-limiter": "^0.2.0",
     "validator": "^7.0.0",
     "winston": "^2.3.0",
+    "winston-loggly-bulk": "^1.4.1",
     "winston-sentry": "^0.1.5",
     "xss": "^0.3.3",
     "zipcodes": "^2.1.0"
