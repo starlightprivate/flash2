@@ -360,6 +360,7 @@
         const $iconMasterCard = $('.payment-icon .cc-icon.cc-mastercard');
         const $iconAmex = $('.payment-icon .cc-icon.cc-american-express');
         const $iconDiscover = $('.payment-icon .cc-icon.cc-discover');
+        console.info(data.result);
         switch (data.result.type) {
         case 'VISA':
           $iconVisa.parents('a')
@@ -386,7 +387,7 @@
               .removeClass('active')
               .addClass('inactive');
           $iconAmex.removeClass('inactive faded').addClass('active');
-          $inputCardNumber.attr('maxlength', '18');
+          $inputCardNumber.attr('maxlength', '17');
           break;
         case 'DISCOVER':
           $iconDiscover.parents('a')
