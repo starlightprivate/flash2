@@ -21,6 +21,7 @@ winston.add(Sentry, {
 });
 
 winston.add(winston.transports.Loggly, {
+  level: 'verbose',
   token: config.loggly.token,
   subdomain: config.loggly.subdomain,
   json: true,

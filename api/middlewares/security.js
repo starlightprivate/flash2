@@ -122,6 +122,7 @@ function logBotAction(req, punishReason) {
     body: req.body,
     userAgent: req.get('User-Agent'),
     punishedBy: punishReason,
+    timestamp: new Date(),
   });
 }
 

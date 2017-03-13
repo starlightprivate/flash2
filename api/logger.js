@@ -18,5 +18,6 @@ export default function (level, name, req, metadata) {
   data.body = req.body;
   data.userAgent = req.get('User-Agent');
   data.env = config.ENV;
+  data.timestamp = new Date();
   return winston[level](name, data);
 }
