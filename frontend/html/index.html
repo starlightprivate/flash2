@@ -263,7 +263,7 @@
                   placeholder="Your Name"
                   autocomplete="name"
                   autocorrect="off">
-                <small class="help-block validMessage text-success message-hidden"></small>
+                <small class="help-block valid-message text-success message-hidden"></small>
                 <span class="icon-field ss-user"></span>
               </div>
 
@@ -271,14 +271,13 @@
                 <label for="email">Email Address *:</label>
                 <input
                   type="email"
-                  class="form-control  scrollFix clearable"
+                  class="form-control  scrollFix clearable email"
                   name="email"
-                  id="email"
                   autocomplete="email"
                   placeholder="email@example.com"
                   autocapitalize="off"
                   autocorrect="off">
-                <small class="help-block validMessage text-success message-hidden"></small>
+                <small class="help-block valid-message text-success message-hidden"></small>
                 <div>
                   <span id="suggestedEmail"></span>
                 </div>
@@ -295,7 +294,7 @@
                   placeholder="888-888-8888"
                   autocomplete="tel"
                   autocorrect="off">
-                <small class="help-block validMessage text-success message-hidden"></small>
+                <small class="help-block valid-message text-success message-hidden"></small>
                 <span class="icon-field ss-phone"></span>
               </div>
 
@@ -318,7 +317,7 @@
     <!-- Contact Modal -->
 
     <!-- Address Modal -->
-    <form id="form-address" method="POST">
+    <form class="form-address" method="POST">
       <div
         id="modal-address"
         class="modal fade modal-usage custom-modal"
@@ -358,14 +357,14 @@
                       autocomplete="postal-code"
                       inputmode="numeric"
                       onkeyup="loadStateFromZip()">
-                    <small class="help-block validMessage text-success message-hidden"></small>
+                    <small class="help-block valid-message text-success message-hidden"></small>
                   </div>
                 </div>
 
                 <div class="col-sm-5 col-xs-5 state-col">
                   <div class="form-group clearfix">
                     <label for="state">State *:</label>
-                    <select id="state" class="form-control required" name="state">
+                    <select class="form-control required state" name="state">
                       <option disabled="" selected="" value="">--</option>
                       <option value="AL">AL</option>
                       <option value="AK">AK</option>
@@ -431,7 +430,7 @@
                       <option value="WI">WI</option>
                       <option value="WY">WY</option>
                     </select>
-                    <small class="help-block validMessage text-success message-hidden"></small>
+                    <small class="help-block valid-message text-success message-hidden"></small>
                   </div>
                 </div>
               </div>
@@ -446,7 +445,7 @@
                   placeholder="Your City"
                   autocomplete="on"
                   autocorrect="off"/>
-                <small class="help-block validMessage text-success message-hidden"></small>
+                <small class="help-block valid-message text-success message-hidden"></small>
               </div>
 
               <div class="form-group clearfix">
@@ -459,7 +458,7 @@
                   placeholder="Your Address"
                   autocomplete="address-line1"
                   autocorrect="off"/>
-                <small class="help-block validMessage text-success message-hidden"></small>
+                <small class="help-block valid-message text-success message-hidden"></small>
               </div>
 
               <button type="submit" class="btn btn-danger btn-lg btn-block btn-modal-confirm">
@@ -474,7 +473,7 @@
     <!-- Address Modal -->
 
     <!-- Loading Icons -->
-    <div id="js-div-loading-bar">
+    <div class="js-div-loading-bar">
       <div class="sk-circle">
         <div class="sk-circle1 sk-child"></div>
         <div class="sk-circle2 sk-child"></div>

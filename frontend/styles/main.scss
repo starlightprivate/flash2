@@ -1,0 +1,435 @@
+@font-face {
+  font-family: 'SS BlackTie-Solid';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/ss-black-tie/ss-black-tie-bold.eot'),
+  url('../fonts/ss-black-tie/ss-black-tie-bold.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/ss-black-tie/ss-black-tie-solid.woff') format('woff'),
+  url('../fonts/ss-black-tie/ss-black-tie-bold.ttf') format('truetype'),
+  url('../fonts/ss-black-tie/ss-black-tie-bold.svg#BlackTie-Solid') format('svg');
+}
+
+@import './variables';
+
+html {
+  height: 100%;
+
+  &:hover [class^='ss-'] {
+    zoom: 1;
+  }
+}
+
+body {
+  height: 100%;
+  padding-right: 0;
+}
+
+body > div {
+  min-height: 100%;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.hide-element {
+  display: none;
+}
+
+.faded {
+  opacity: .5;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+img {
+  &.resp {
+    border: 2px solid $color-white;
+    border-radius: 7px;
+    box-shadow: 2px 2px 6px $color-black-dot3;
+    width: 100%;
+  }
+}
+
+.creditcard {
+  appearance: textfield;
+
+  &::inner-spin-button,
+  &::outer-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+}
+
+.fv-control-feedback {
+  display: block;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  z-index: 3;
+}
+
+.fv-form-bootstrap {
+  .help-block {
+    margin-bottom: 0;
+  }
+
+  .fv-bootstrap-icon-input-group {
+    z-index: 100;
+  }
+}
+
+.fv-form-bootstrap4 {
+  .fv-control-feedback {
+    height: 38px;
+    line-height: 38px;
+    width: 38px;
+  }
+
+  &.form-inline {
+    .form-group {
+      vertical-align: top;
+    }
+  }
+
+  .form-group {
+    &.row {
+      .fv-control-feedback {
+        right: 15px;
+      }
+
+      .form-check ~ {
+        .fv-control-feedback {
+          top: -7px;
+        }
+      }
+    }
+  }
+
+  &:not(.form-inline) {
+    label ~ {
+      .fv-control-feedback {
+        top: 27px;
+      }
+    }
+
+    .form-check ~ {
+      .fv-control-feedback {
+        top: 27px;
+      }
+    }
+
+    label {
+      &.sr-only ~ {
+        .fv-control-feedback {
+          top: -7px;
+        }
+      }
+    }
+  }
+
+  .has-success {
+    label,
+    .fv-control-feedback {
+      color: $color-green;
+    }
+  }
+
+  .has-warning {
+    label,
+    .fv-control-feedback {
+      color: $color-orange;
+    }
+  }
+}
+
+.hidden-xs-up,
+.custom-modal {
+  .address-2 {
+    display: none;
+  }
+
+  .modal-content {
+    .has-warning {
+      .email ~ {
+        [data-fv-validator='emailAddress'] {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.pg-index {
+  .feature {
+    .feature-item {
+      &:nth-child(3),
+      &:nth-child(2) {
+        width: 18.5%;
+      }
+
+      &:nth-child(5) {
+        &::after {
+          display: none;
+        }
+      }
+    }
+
+    .feature-bar {
+      display: none;
+    }
+  }
+
+  .header {
+    .logo-holder {
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .function {
+    img {
+      width: 100%;
+    }
+  }
+
+  .footer {
+    p {
+      color: $color-gray;
+      font-size: 15px;
+      margin-bottom: 10px;
+
+      a {
+        color: $color-gray;
+      }
+    }
+
+    ul {
+      margin-bottom: 0;
+      padding-left: 0;
+
+      li {
+        display: inline-block;
+
+        &:not(:last-child) {
+          &::after {
+            color: $color-text2;
+            content: '-';
+            margin-left: 8px;
+            margin-right: 6px;
+          }
+        }
+
+        a {
+          color: $color-white;
+          font-size: 15px;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+.pg-checkout {
+  .light-info {
+    .info-middle {
+      br {
+        display: none;
+      }
+    }
+  }
+
+  .radio-box {
+    [type='radio'] {
+      display: none;
+    }
+  }
+
+  .step {
+    .step-content {
+      .label-mobile {
+        display: none;
+      }
+    }
+
+    .payment-holder {
+      text-align: center;
+    }
+  }
+
+  .img-shipping {
+    display: none;
+  }
+
+  &.mobile-mode {
+    .step-2,
+    .step-3,
+    .step-1 {
+      display: none;
+    }
+  }
+
+  .footer {
+    p {
+      color: $color-gray;
+      font-size: 15px;
+      margin-bottom: 10px;
+
+      a {
+        color: $color-gray;
+      }
+    }
+
+    ul {
+      margin-bottom: 0;
+      padding-left: 0;
+
+      li {
+        display: inline-block;
+
+        &:not(:last-child) {
+          &::after {
+            color: $color-text2;
+            content: '-';
+            margin-left: 8px;
+            margin-right: 6px;
+          }
+        }
+
+        a {
+          color: $color-white;
+          font-size: 15px;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .payment {
+    .payment-icon {
+      a {
+        display: inline-block;
+      }
+    }
+  }
+
+  .exp-detail {
+    position: relative;
+  }
+}
+
+.step-content {
+  .radio-box {
+    display: none;
+  }
+}
+
+.fv-form {
+  [placeholder] {
+    &::clear {
+      display: none;
+    }
+  }
+}
+
+.fv-has-feedback {
+  position: relative;
+}
+
+.pg-battery {
+  .logo {
+    padding: 25px 0;
+
+    img {
+      max-width: 340px;
+      width: 100%;
+    }
+  }
+
+  .upsell {
+    .card {
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.pg-receipt {
+  .logo {
+    padding: 25px 0;
+  }
+
+  img {
+    max-width: 340px;
+    width: 100%;
+  }
+}
+
+.pg-tm3 {
+  .article {
+    .img-block {
+      a {
+        display: block;
+      }
+    }
+  }
+
+  .btn-holder {
+    text-align: center;
+  }
+}
+
+.fv-help-block {
+  display: block;
+}
+
+.form-inline {
+  .fv-form-bootstrap {
+    .form-group {
+      vertical-align: top;
+    }
+  }
+}
+
+.wistia-responsive-padding-alt {
+  padding: 56.25% 0 0;
+  position: relative;
+}
+
+.wistia-responsive-wrapper-alt {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.wistia-embed-alt {
+  height: 100%;
+  width: 100%;
+}
+
+input {
+  &::contacts-auto-fill-button {
+    display: none;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    visibility: hidden;
+  }
+}
+
+.message-hidden {
+  display: none;
+}
+
+.cc-identity {
+  display: block;
+}
