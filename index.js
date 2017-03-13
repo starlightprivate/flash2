@@ -11,6 +11,7 @@ require('winston-loggly-bulk');
 
 if (config.ENV === 'development') {
   winston.cli();
+  winston.level = 'silly';
 } else {
   winston.remove(winston.transports.Console);
 }

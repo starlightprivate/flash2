@@ -9,6 +9,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import expressPromiseRouter from 'express-promise-router';
 import expressContentLength from 'express-content-length-validator';
+import expressWinston from 'express-winston';
+
 // proper session implementation
 // https://starlightgroup.atlassian.net/browse/SG-5
 import expressSession from 'express-session'; // initialize sessions
@@ -34,6 +36,16 @@ import rateLimiter from './api/middlewares/rateLimiter';
 const app = express();
 console.log('Currently Running On : ', config.ENV);
 const isProtectedByCloudflare = ['production', 'staging'].indexOf(config.ENV) !== -1;
+
+app.use(expressWinston.logger({
+  transports: [
+    winston,
+  ],
+  meta: true,
+  level: 'verbose',
+  expressFormat: true,
+  colorize: false,
+}));
 
 
 // verify that site is requested from Cloudflare
