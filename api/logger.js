@@ -1,4 +1,5 @@
 import winston from 'winston';
+import util from 'util';
 import config from './../server-config';
 import security from './middlewares/security';
 
@@ -19,5 +20,6 @@ export default function (level, name, req, metadata) {
   data.userAgent = req.get('User-Agent');
   data.env = config.ENV;
   data.timestamp = new Date();
+  data.type = util.format('api:%s', name);
   return winston[level](name, data);
 }

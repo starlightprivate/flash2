@@ -45,6 +45,22 @@ app.use(expressWinston.logger({
   level: 'verbose',
   expressFormat: true,
   colorize: false,
+  dynamicMeta: ((req, res) => { // eslint-disable-line arrow-body-style
+    return {
+      type: 'http:ok',
+      env: config.ENV,
+      ip: security.getIp(req),
+      method: req.method,
+      entryPoint: req.session ? req.session.entryPoint : null,
+      path: req.originalUrl,
+      query: req.query,
+      body: req.body,
+      sessionId: req.session ? req.sessionID : null,
+      isBot: req.session ? req.session.isBot : null,
+      userAgent: req.get('User-Agent'),
+      status: res.statusCode,
+    };
+  }),
 }));
 
 
@@ -241,6 +257,7 @@ app.use((err, req, res, next) => {
     return res.status(403).send('Invalid API Key');
   }
   winston.error('expressjs error : %s', err.message, {
+    type: 'http-error',
     env: config.ENV,
     ip: security.getIp(req),
     method: req.method,
@@ -249,6 +266,7 @@ app.use((err, req, res, next) => {
     query: req.query,
     body: req.body,
     isBot: req.session ? req.session.isBot : null,
+    sessionId: req.session ? req.sessionID : null,
     userAgent: req.get('User-Agent'),
     code: err.code,
     message: err.message,
