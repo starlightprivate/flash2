@@ -4,8 +4,8 @@ function validate() {
   const isMobileSafari = window.navigator.userAgent.match(/(iPod|iPhone|iPad)/) && window.navigator.userAgent.match(/AppleWebKit/);
   if (isMobileSafari) {
     // Search for credit card input and change it to text field
-    if ($('input#creditcard').length > 0) {
-      $('input#creditcard').attr('type', 'text');
+    if ($('input.creditcard').length > 0) {
+      $('input.creditcard').attr('type', 'text');
     }
   }
   if (!customWrapperForIsMobileDevice()) {
@@ -97,7 +97,7 @@ function validate() {
       $('#last').addClass('cc-discover').removeClass('cc-diners-club cc-enroute cc-jcb cc-maestro');
     }
   }
-  $('#creditcard').keyup(keyupEvent);
+  $('.creditcard').keyup(keyupEvent);
 
   function blurEvent() {
     const domains = ['hotmail.com', 'gmail.com', 'aol.com'];

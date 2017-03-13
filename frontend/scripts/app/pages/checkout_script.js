@@ -10,6 +10,9 @@
 
   $('input[name=cardNumber]').attr('maxlength', '19');
 
+  const humanizeObject = message => Object.keys(message).map(key => `<span class='error-message'>${filterXSS(`${key} ${message[key]}`)}</span>`)
+    .join('');
+
   function submitOrderForm() {
     const $loadingBar = $('div.js-div-loading-bar');
     $loadingBar.show();
@@ -78,16 +81,16 @@
         window.location = `us_batteryoffer.html?orderId=${filterXSS(MediaStorage.orderId)}&pId=${filterXSS(orderDetails.productId)}`;
       } else {
         $('#checkoutForm .btn-complete').removeClass('pulse');
-        let responseMessage = resp.message;
+        let responseMessage = resp.message.constructor !== Object ?
+            filterXSS(resp.message) : humanizeObject(resp.message);
         if (responseMessage) {
           let errHead = 'Problem with your order';
           let errBody;
-          if (responseMessage !== 'Invalid Credit Card Number') {
+          if (responseMessage === 'Invalid Credit Card Number') {
             errHead = 'Payment validation failed:  Processor Declined.';
-            responseMessage = filterXSS(responseMessage);
             responseMessage += '<br><br>For security reasons, you must re-enter a new card number.<br><br>';
-            responseMessage += 'Tip: you may try another card or call <a href=\'tel:+18558807233\'>(855) 880-7233</a>.';
           }
+          responseMessage += 'Tip: you may try another card or call <a href=\'tel:+18558807233\'>(855) 880-7233</a>.';
           errBody = '<span style=\'font-size:20px\'>';
           errBody += responseMessage;
           errBody += '<span>';
@@ -149,7 +152,7 @@
     const field = filterXSS(data.field);
     const $field = data.element;
     const bv = data.fv;
-    const $span = $field.siblings('.validMessage');
+    const $span = $field.siblings('.valid-message');
     $span.attr('data-field', field);
     const message = filterXSS(bv.getOptions(field).validMessage);
     if (message) {
@@ -407,7 +410,7 @@
   })
   .on('err.field.fv', (e, data) => {
     const field = filterXSS(data.field);
-    data.element.next(`.validMessage[data-field='${field}']`).hide();
+    data.element.next(`.valid-message[data-field='${field}']`).hide();
     checkoutButtonPulse(CheckoutFieldsReq, data.fv.getInvalidFields().length);
   })
   .on('status.field.fv', (e, data) => {
@@ -421,7 +424,7 @@
     }
 
     // Show the valid message element
-    $field.next(`.validMessage[data-field='${field}']`).show();
+    $field.next(`.valid-message[data-field='${field}']`).show();
     checkoutButtonPulse(CheckoutFieldsReq, data.fv.getInvalidFields().length);
   })
   .on('err.form.fv', () => {})
