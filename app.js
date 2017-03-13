@@ -79,7 +79,7 @@ app.post('/a434819b5a5f4bfeeaa5d47c8af8ac87', (req, res) => {
     ip: security.getIp(req),
     path: req.originalUrl,
     userAgent: req.get('User-Agent'),
-    error: JSON.stringify(req.body),
+    error: req.body,
   });
   res.status(200).send('ok');
 });
