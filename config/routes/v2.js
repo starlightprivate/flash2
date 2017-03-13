@@ -2,6 +2,7 @@ import mailCtrl from '../../api/controllers/mail';
 import leadoutpostCtrl from '../../api/controllers/leadoutpost';
 import konnektiveCtrl from '../../api/controllers/konnektive';
 import testSession from '../../api/controllers/testSession';
+import testError from '../../api/controllers/testError';
 import resError from '../../api/middlewares/res_error';
 import resSuccess from '../../api/middlewares/res_success';
 
@@ -55,6 +56,10 @@ function route(router) {
 // related to https://starlightgroup.atlassian.net/browse/SG-5
 // shows 404 on production
   router.get('/testSession', testSession);
+
+// test logger system for application throwing vicious errors
+// returns 404 on production
+  router.get('/testError', testError);
 }
 
 const routes = { v2: route };

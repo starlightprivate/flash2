@@ -1,10 +1,9 @@
-/* eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
 import xss from 'xss';
 import util from 'util';
 
 import request from 'request-promise';
 import config from '../../server-config';
-
+import logger from './../logger';
 // const autopilot = new Autopilot(config.autopilot.key);
 
 // DO NOT REMOVE THIS COMMENT!!!
@@ -68,15 +67,7 @@ async function addKonnektiveOrder(req, res) {
   body.productId = xss(req.body.productId);
   body.state = xss(req.body.state);
   body.country = 'US';
-
-  if (!req.body.shipAddress1) {
-    body.shipAddress1 = body.address1;
-    body.shipAddress2 = body.address2;
-    body.shipCity = body.city;
-    body.shipState = body.state;
-    body.shipPostalCode = body.postalCode;
-    body.shipCountry = body.country;
-  }
+  body.billShipSame = 1;
 
   if (req.body.cardSecurityCode) {
     delete req.body.cardSecurityCode; // eslint-disable-line no-param-reassign
@@ -95,8 +86,8 @@ async function addKonnektiveOrder(req, res) {
     body.loginId = konnectiveLogin;
     body.password = konnectivePassword;
   }
-
-
+// documentation for api
+// https://api.konnektive.com/docs/order_import/
   const options = {
     method: 'GET',
     uri: util.format('%s%s', connectiveApiURL, 'order/import/'),
@@ -109,7 +100,22 @@ async function addKonnektiveOrder(req, res) {
   };
 
   const response = await request(options);
-  console.log(response);
+  // console.log(response);
+  // TODO - think of data required for logs
+  logger('info', 'konnectiveNewOrder', req, {
+    country: 'US',
+    state: body.state,
+    city: body.city,
+    address1: body.address1,
+    address2: body.address2,
+    postalCode: body.postalCode,
+
+    campaignId: body.campaignId,
+    firstName: body.firstName,
+    lastName: body.lastName,
+    emailAddress: body.emailAddress,
+    apiResponse: JSON.stringify(response), //verify it do not have sensitive data like CC numbers
+  });
 
   if (response.result === 'ERROR') {
     return res.error(response.message, 200);
@@ -119,6 +125,10 @@ async function addKonnektiveOrder(req, res) {
 
 function getLead(req, res) {
   const id = xss(req.params.id);
+
+// documentation for api
+// https://api.konnektive.com/docs/order_query/
+
   const options = {
     method: 'GET',
     uri: util.format('%sorder/query/', connectiveApiURL),
@@ -140,10 +150,16 @@ function getLead(req, res) {
       if (response.result === 'ERROR') {
         return res.error(response.message);
       }
+      logger('info', 'getLead', req, {
+        orderId: id,
+      }); // TODO - think of data required for logs
       return res.success(response.message);
     })
     .catch((err) => {
-      console.error(err);
+      logger('error', 'getLead', req, {
+        err,
+        orderId: id,
+      }); // TODO - think of data required for logs
       return res.error('bad response');
     });
 }
@@ -170,16 +186,23 @@ function getTrans(req, res) {
       if (response.result === 'ERROR') {
         return res.error(response.message);
       }
+      // TODO - think of data required for logs
+      logger('info', 'getTrans', req, {
+        orderId,
+      });
       return res.success(response.message);
     })
     .catch((err) => {
-      console.error(err);
+      logger('error', 'getTrans', req, {
+        err,
+        orderId,
+      }); // TODO - think of data required for logs
       return res.error('bad response');
     });
 }
 
 async function createKonnektiveLead(req, res) {
-  console.log('createKonnektiveLead create-lead...');
+  // console.log('createKonnektiveLead create-lead...');
 
   const campaignId = 3;
 
@@ -191,11 +214,14 @@ async function createKonnektiveLead(req, res) {
   body.phoneNumber = xss(req.body.phoneNumber);
   body.emailAddress = xss(req.body.emailAddress) || config.email;
 
-  console.log(body);
+  // console.log(body);
 
-  body.loginId = konnectiveLogin;
-  body.password = konnectivePassword;
-
+  if (!useProxy) {
+    body.loginId = konnectiveLogin;
+    body.password = konnectivePassword;
+  }
+  // documentation on api
+  // https://api.konnektive.com/docs/leads_import/
   const options = {
     uri: util.format('%sleads/import/', connectiveApiURL),
     qs: body,
@@ -206,10 +232,17 @@ async function createKonnektiveLead(req, res) {
     json: true, // Automatically parses the JSON string in the response
   };
   const response = await request(options);
-  console.log('response...', response);
+  // console.log('response...', response);
   if (response.result === 'ERROR') {
     return res.error(response.message);
   }
+  logger('info', 'createKonnektiveLead', req, {
+    firstName: body.firstName,
+    lastName: body.lastName,
+    phoneNumber: body.phoneNumber,
+    emailAddress: body.emailAddress,
+    apiResponse: JSON.stringify(response),
+  }); // TODO - think of data required for logs
   return res.success(response.message);
 }
 
@@ -219,9 +252,14 @@ async function upsell(req, res) {
   if (!productId || !productQty) {
     return res.error('Invalid Upsell Data');
   }
-  console.log('Preparing to send data to /upsale/import', req.body);
-  req.body.loginId = konnectiveLogin; // eslint-disable-line no-param-reassign
-  req.body.password = konnectivePassword;// eslint-disable-line no-param-reassign
+  // console.log('Preparing to send data to /upsale/import', req.body);
+  if (!useProxy) {
+    req.body.loginId = konnectiveLogin; // eslint-disable-line no-param-reassign
+    req.body.password = konnectivePassword; // eslint-disable-line no-param-reassign
+  }
+  // documentation on api
+  // https://api.konnektive.com/docs/upsale_import/
+
   const options = {
     uri: util.format('%supsale/import/', connectiveApiURL),
     qs: req.body,
@@ -232,7 +270,11 @@ async function upsell(req, res) {
     json: true, // Automatically parses the JSON string in the response
   };
   const response = await request(options);
-  console.log(response);
+  // console.log(response);
+  logger('info', 'upsell', req, {
+    data: req.body, // probably something have to be filtered?
+    apiResponse: JSON.stringify(response),
+  }); // TODO - think of data required for logs
   if (response.result === 'ERROR') {
     return res.error(response.message);
   }

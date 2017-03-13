@@ -1,13 +1,24 @@
 require('babel-register');
 require('@risingstack/trace');
 
-/* eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
-
+const winston = require('winston');
 const http = require('http');
 const config = require('./server-config.js');
 const app = require('./app.js');
+const Sentry = require('winston-sentry');
 
-process.title = 'myserver';
+if (config.ENV === 'development') {
+  winston.cli();
+} else {
+  winston.remove(winston.transports.Console);
+}
+
+winston.add(Sentry, {
+  level: 'warn',
+  dsn: config.sentryDSN,
+});
+
+process.title = 'flash2';
 process.on('SIGINT', () => {
   process.exit();
 });
@@ -18,5 +29,5 @@ http
     if (error) {
       throw error;
     }
-    console.log('HTTP Server Started at %s:%s', config.HOST, config.PORT);
+    winston.verbose('HTTP Server Started at %s:%s', config.HOST, config.PORT);
   });

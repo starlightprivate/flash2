@@ -84,6 +84,7 @@ export default csp({
       'data:',
       '*.akamaihd.net',
       '*.wistia.com',
+      '*.litix.io',
       'www.google-analytics.com',
       'stats.g.doubleclick.net',
       'www.google.com',
@@ -96,7 +97,11 @@ export default csp({
 // seems like it works for reporto only?
 
     // objectSrc: ["'none'"],
-    mediaSrc: ['data:'],
+    mediaSrc: [
+      "'self'", // eslint-disable-line quotes
+      'data:',
+      '*.wistia.com',
+    ],
 
     // on development environment, being run on http://localhost:8000
     // it makes download all scripts via HTTPS,while locally we serve site using HTTP and it fails

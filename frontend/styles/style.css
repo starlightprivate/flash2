@@ -205,10 +205,6 @@ body > div {
     animation-delay:0.1s;
 }
 
-.message-hidden {
-    display: none;
-}
-
 html:hover [class^="ss-"] {
     -ms-zoom:1;
 }
@@ -2212,3 +2208,17 @@ input::-webkit-contacts-auto-fill-button {
         font-size:18px;
     }
 }
+.error-message {
+    color: red;
+    display: block;
+}
+.error-message::first-letter {
+    text-transform: uppercase;
+}
+#ccIdentity {
+    display: block;
+}
+.message-hidden {
+    display: none;
+}
+
