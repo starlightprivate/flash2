@@ -2,7 +2,11 @@
 
 import util from 'util';
 
-let redisUrl = 'redis://localhost:6379/';
+
+// let redisUrl = 'redis://localhost:6379/'; // local server
+// redis lab server set up by Melvin
+
+let redisUrl = 'redis://usernameIgnored:3957fbd1ea5ea884c4bb2f5d8966ede0@pub-redis-12107.us-central1-1-1.gce.garantiadata.com:12107';
 
 if (process.env.REDIS_URL) {
   redisUrl = process.env.REDIS_URL;
