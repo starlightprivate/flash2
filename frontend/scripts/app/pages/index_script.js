@@ -245,4 +245,26 @@ function openContactModal() {
   $('.footer-image').click(() => {
     openContactModal();
   });
+
+  const toggleModalIfModalContact = () => {
+    if (window.location.hash === '#modal-contact') { $('#modal-contact').modal('toggle'); }
+  };
+
+  toggleModalIfModalContact();
+  $(window).bind('hashchange', () => {
+    toggleModalIfModalContact();
+  });
+
+  const removeHashUrl = () => {
+    const original = window.location.href.substr(0, window.location.href.indexOf('#'));
+    history.replaceState({}, document.title, original);
+  };
+
+  $('button[data-dismiss="modal"]').click(() => {
+    removeHashUrl();
+  });
+
+  $('#modal-contact').on('hidden.bs.modal', () => {
+    removeHashUrl();
+  });
 })();

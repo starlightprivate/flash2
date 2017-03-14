@@ -524,21 +524,5 @@
     <script type="text/javascript" src="assets/js/validate_form_fields.js"></script>
     <script type="text/javascript" src="assets/js/index_script.js"></script>
     <script type="text/javascript" src="assets/js/common_validators.js"></script>
-    <script type="text/javascript">
-      window.wistiaDisableMux = true;
-      window._wq = window._ws || [];
-      _wq.push({
-        id: "sg6u0amacm",
-        onReady: function (video) {
-          video.bind('secondchange', function (s) {
-            $('.has-url span').html("Click Here");
-            $('.has-url').attr("href", "javascript:openContactModal();");
-          });
-          video.bind('end', function () {
-            openContactModal();
-          });
-        }
-      });
-    </script>
   </body>
 </html>
