@@ -246,7 +246,7 @@ function openContactModal() {
     openContactModal();
   });
 
-  const toggleModalIfModalContact = () => {
+  const toggleModalIfHashUrl = () => {
     if (window.location.hash === '#modal-contact') { $('#modal-contact').modal('toggle'); }
   };
 
@@ -255,8 +255,8 @@ function openContactModal() {
     history.replaceState({}, document.title, original);
   };
 
-  toggleModalIfModalContact();
-  $(window).bind('hashchange', () => toggleModalIfModalContact());
+  toggleModalIfHashUrl();
+  $(window).bind('hashchange', () => toggleModalIfHashUrl());
   $('button[data-dismiss="modal"]').click(() => removeHashUrl());
   $('#modal-contact').on('hidden.bs.modal', () => removeHashUrl());
 })();
