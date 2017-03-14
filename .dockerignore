@@ -8,8 +8,6 @@ bower_components/
 npm-debug.log*
 public/
 
-
-test/
 Dockerfile
 docker-compose.yml
 redis/
