@@ -14,7 +14,6 @@ import expressWinston from 'express-winston';
 // proper session implementation
 // https://starlightgroup.atlassian.net/browse/SG-5
 import expressSession from 'express-session'; // initialize sessions
-import cookieParser from 'cookie-parser'; // parse cookies to start sessions from
 import connectRedis from 'connect-redis';// store session data in redis database
 import csurf from 'csurf'; // add CSRF protection https://www.npmjs.com/package/csurf
 import helmet from 'helmet';
@@ -138,7 +137,6 @@ if (isProtectedByCloudflare) {
   app.enable('trust proxy'); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
 }
 
-app.use(cookieParser(config.secret));
 app.use(expressSession({
   key: 'PHPSESSID',
   // LOL, let they waste some time hacking in assumption
