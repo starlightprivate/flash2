@@ -1,19 +1,14 @@
-/* global process */
 require('babel-register');
 require('@risingstack/trace');
 
 const winston = require('winston');
 const http = require('http');
-const os = require('os');
 const config = require('./server-config.js');
 const app = require('./app.js');
 const Sentry = require('winston-sentry');
 
-require('winston-loggly-bulk');
-
 if (config.ENV === 'development') {
   winston.cli();
-  winston.level = 'silly';
 } else {
   winston.remove(winston.transports.Console);
 }
@@ -21,13 +16,6 @@ if (config.ENV === 'development') {
 winston.add(Sentry, {
   level: 'warn',
   dsn: config.sentryDSN,
-});
-
-winston.add(winston.transports.Loggly, {
-  level: 'verbose',
-  token: config.loggly.token,
-  subdomain: config.loggly.subdomain,
-  json: true,
 });
 
 process.title = 'flash2';
@@ -41,13 +29,5 @@ http
     if (error) {
       throw error;
     }
-    winston.verbose('HTTP Server Started at %s:%s', config.HOST, config.PORT, {
-      type: 'server:start',
-      nodejs: process.version,
-      arch: process.arch,
-      hostname: os.hostname(),
-      osType: os.type(),
-      osPlatform: os.platform(),
-      osRelease: os.release(),
-    });
+    winston.verbose('HTTP Server Started at %s:%s', config.HOST, config.PORT);
   });

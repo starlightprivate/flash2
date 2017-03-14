@@ -2,11 +2,7 @@
 
 import util from 'util';
 
-
-// let redisUrl = 'redis://localhost:6379/'; // local server
-// redis lab server set up by Melvin
-
-let redisUrl = 'redis://usernameIgnored:3957fbd1ea5ea884c4bb2f5d8966ede0@pub-redis-12107.us-central1-1-1.gce.garantiadata.com:12107';
+let redisUrl = 'redis://localhost:6379/';
 
 if (process.env.REDIS_URL) {
   redisUrl = process.env.REDIS_URL;
@@ -65,9 +61,4 @@ module.exports = {
 
 // https://sentry.io/starlight-group/node-api/settings/keys/
   sentryDSN: process.env.SENTRY_DSN || 'https://68ae2c197a6440efac407117aec0326f:f64d954adde3493ab03f86d94815e814@sentry.io/133524',
-
-  loggly: {
-    token: process.env.LOGGLY_TOKEN || 'a52a98a7-c97f-40d5-bb5b-b544716b04c3',
-    subdomain: process.env.LOGGLY_SUBDOMAIN || 'starlightgroup',
-  },
 };

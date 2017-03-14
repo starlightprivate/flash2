@@ -3,7 +3,6 @@
 // it makes api return 403 error and sets `req.session.isBot` to true
 
 import xss from 'xss';
-import util from 'util';
 import winston from 'winston';
 import rangeCheck from 'range_check';
 import config from './../../server-config';
@@ -90,7 +89,6 @@ function verifyThatSiteIsAccessedFromCloudflare(req, res, next) {
     path: req.originalUrl,
     query: req.query,
     body: req.body,
-    type: 'security:nonCloudflareAccess',
     userAgent: req.headers['User-Agent'],
   });
 
@@ -115,17 +113,14 @@ function getIp(req) {
 function logBotAction(req, punishReason) {
   const ip = getIp(req);
   return winston.info('[SECURITY] bot punished %s - %s', ip, punishReason, {
-    env: config.ENV,
     ip: getIp(req),
     method: req.method,
-    entryPoint: req.session ? req.session.entryPoint : null,
+    entryPoint: req.session.entryPoint,
     path: req.originalUrl,
     query: req.query,
     body: req.body,
     userAgent: req.get('User-Agent'),
     punishedBy: punishReason,
-    type: util.format('security:botPunished:%s', punishReason),
-    timestamp: new Date(),
   });
 }
 
