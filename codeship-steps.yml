@@ -1,0 +1,9 @@
+## Deploying With Google
+- service: googleclouddeployment
+  command: deploy/staging/deploy_to_google.sh
+- service: googleclouddeployment
+  type: push
+  tag: staging
+  image_name: gcr.io/steady-computer-156807/flashlight_app_staging
+  registry: https://gcr.io
+  encrypted_dockercfg_path: .dockercfg.encrypted

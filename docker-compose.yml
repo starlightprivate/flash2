@@ -5,8 +5,13 @@ app-server:
   links:
     - redis
   environment:
-    - NODE_ENV=development
-    - REDIS_AUTH=tlergerbyhormecielkwarsiblevateximethanimpsonaturyotholholonitervusebardebedaphorgebulgibroperymbeam
+    # Now, devops should be managing the NODE_ENV and REDIS_AUTH
+    # We already have these initialized with double pipes in
+    # the `server-config` file. Why do we need these?
+    # - NODE_ENV=development
+    # - REDIS_AUTH=tlergerbyhormecielkwarsiblevateximethanimpsonaturyotholholonitervusebardebedaphorgebulgibroperymbeam
+    - NODE_ENV=
+    - REDIS_AUTH=
 
 redis:
   build: ./redis
@@ -18,5 +23,3 @@ nginx:
   ports:
     - "80:80"
     - "443:443"
-
-
