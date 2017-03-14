@@ -247,11 +247,7 @@
               const VALID_CARD_NUMBER = '4444111144441111';
 
               // Get the number pr by user
-              let value = $field.val();
-              const CountOfChars = parseInt($field.val().length, 10);
-              if (CountOfChars === 17) {
-                value = value.substr(0, CountOfChars - 1);
-              }
+              const value = $field.val();
 
               // Check if it"s one of test card numbers
               if (value !== '' && $.inArray(value, TEST_CARD_NUMBERS) !== -1) {
@@ -386,7 +382,7 @@
               .removeClass('active')
               .addClass('inactive');
           $iconAmex.removeClass('inactive faded').addClass('active');
-          $inputCardNumber.attr('maxlength', '18');
+          $inputCardNumber.attr('maxlength', '17');
           break;
         case 'DISCOVER':
           $iconDiscover.parents('a')
