@@ -1,17 +1,14 @@
 # https://documentation.codeship.com/pro/continuous-deployment/google-cloud/
 googleclouddeployment:
   image: codeship/google-cloud-deployment
-  encrypted_env_file: google_deployment.env.encrypted
+  encrypted_env_file: codeship-services-googleclouddeployment.env.encrypted
   # Add Docker if you want to interact with the Google Container Engine and Google Container Registry
   add_docker: true
+  dockerfile: Dockerfile
   volumes:
     - ./:/deploy
-
-  # This will authenticate with GCP and then let you interact with any resources in the Google Cloud.
-    - service: googleclouddeployment
-      command: /deploy/scripts/deploy_to_gcp.sh
 
 gcr_dockercfg:
   image: codeship/gcr-dockercfg-generator
   add_docker: true
-  encrypted_env_file: google_deployment.env.encrypted
+  encrypted_env_file: gcr.env.encrypted
