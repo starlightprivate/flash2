@@ -1,0 +1,13 @@
+app-server:
+  build: .
+  links:
+    - redis
+  environment:
+    - NODE_ENV=development
+    - REDIS_AUTH=tlergerbyhormecielkwarsiblevateximethanimpsonaturyotholholonitervusebardebedaphorgebulgibroperymbeam
+  entrypoint: /src/app/tests.sh
+
+redis:
+  image: redis:3.2.8
+
+
