@@ -4,7 +4,6 @@
 
 import util from 'util';
 import xss from 'xss';
-import util from 'util';
 import winston from 'winston';
 import rangeCheck from 'range_check';
 import config from './../../server-config';
