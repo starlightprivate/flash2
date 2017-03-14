@@ -48,7 +48,7 @@ function callAPI(endpoint, data, method, callback, err) {
 
   // https://starlightgroup.atlassian.net/browse/SG-14
   if (['PUT', 'POST', 'PATCH', 'DELETE'].indexOf(method) !== -1) {
-    params._csrf = $.cookie('XSRF-TOKEN'); // eslint-disable-line no-underscore-dangle
+    params._csrf = Cookies.get('XSRF-TOKEN'); // eslint-disable-line no-underscore-dangle
   }
 
   jQuery.ajax({
