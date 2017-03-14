@@ -1,4 +1,4 @@
-FROM node:7.5.0
+FROM node:7.7.2
 
 # Build node_modules - they will be cached - they are changing more slowly than source code of `node-api`
 RUN mkdir -p /src/app

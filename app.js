@@ -19,6 +19,8 @@ import csurf from 'csurf'; // add CSRF protection https://www.npmjs.com/package/
 import helmet from 'helmet';
 import hpp from 'hpp';
 
+import trace from './risingStack';
+
 import config from './server-config';
 import redis from './config/redis'; // load redis client
 import csp from './api/middlewares/csp'; // CSP middleware
@@ -108,6 +110,7 @@ app.post('/a434819b5a5f4bfeeaa5d47c8af8ac87', (req, res) => {
     userAgent: req.get('User-Agent'),
     error: req.body,
   });
+  trace.incrementMetric('error/csp');
   res.status(200).send('ok');
 });
 
@@ -269,6 +272,7 @@ app.use((err, req, res, next) => {
     message: err.message,
     status: err.status,
   });
+  trace.incrementMetric('error/express');
   return res
     .status(500)
     .send('server error');

@@ -5,12 +5,11 @@
 import supertest from 'supertest';
 import whilst from 'async/whilst';
 import util from 'util';
+import assert from 'assert';
 
 import app from '../app';
 import redis from './../config/redis';
 
-
-require('should');
 
 const sessionIdCookieRegex = /^PHPSESSID=([^;]+); Path=\/; HttpOnly/;
 
@@ -101,10 +100,9 @@ describe('RateLimiter', function () { //eslint-disable-line
              JSON.stringify(response.body),
              remaining);
              */
-            response.statusCode.should.be.equal(200);
-            response.body.msg.should.be.equal('PONG');
-            remaining.should.be.equal((100 - count).toString(10));
-
+            assert.equal(response.statusCode, 200);
+            assert.equal(response.body.msg, 'PONG');
+            assert.equal(remaining, (100 - count).toString(10));
             return callback();
           });
       }, done);

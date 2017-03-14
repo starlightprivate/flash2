@@ -4,6 +4,7 @@ import request from 'request-promise';
 import xss from 'xss';
 import phone from 'phone';
 import Autopilot from 'autopilot-api';
+import trace from './../../risingStack';
 
 import config from '../../server-config';
 import logger from './../logger';
@@ -109,6 +110,7 @@ function addContact(req, res) {
       .post(options)
       .then((data) => {
         logger('info', 'addContact', req, data); // TODO - think of data required for logs
+        trace.incrementMetric('addContact');
         return res.success();
       });
   } catch (error) {
@@ -141,6 +143,7 @@ function updateContact(req, res) {
       .post(options)
       .then((data) => {
         logger('info', 'updateContact', req, data); // TODO - think of data required for logs
+        trace.incrementMetric('updateContact');
         return res.success();
       });
   } catch (error) {
@@ -149,6 +152,7 @@ function updateContact(req, res) {
 }
 
 function addLeadoutpost(req, res) {
+  // TODO - this function is never used - it is commented in config/routes/v2.js
   req.body.apiKey = config.leadoutpost.apiKey; // eslint-disable-line no-param-reassign
   req.body.campaignId = config.leadoutpost.campaignId; // eslint-disable-line no-param-reassign
   const options = {
@@ -164,6 +168,7 @@ function addLeadoutpost(req, res) {
     .post(options)
     .then((data) => {
       logger('info', 'addLeadoutpost', req, data); // TODO - think of data required for logs
+      trace.incrementMetric('addLeadoutpost');
       return res.send(data);
     });
 }

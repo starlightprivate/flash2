@@ -3,6 +3,8 @@ import util from 'util';
 import config from './../server-config';
 import security from './middlewares/security';
 
+import trace from './../risingStack';
+
 // It is default logger being used for all api endpoints
 
 export default function (level, name, req, metadata) {
@@ -19,7 +21,7 @@ export default function (level, name, req, metadata) {
   data.body = req.body;
   data.userAgent = req.get('User-Agent');
   data.env = config.ENV;
-  data.timestamp = new Date();
   data.type = util.format('api:%s', name);
+  trace.incrementMetric('logEventsFired');
   return winston[level](name, data);
 }

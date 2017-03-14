@@ -1,7 +1,8 @@
 import xss from 'xss';
 import util from 'util';
-
 import request from 'request-promise';
+
+import trace from './../../risingStack';
 import config from '../../server-config';
 import logger from './../logger';
 // const autopilot = new Autopilot(config.autopilot.key);
@@ -102,6 +103,7 @@ async function addKonnektiveOrder(req, res) {
   const response = await request(options);
   // console.log(response);
   // TODO - think of data required for logs
+  trace.incrementMetric('konnectiveNewOrder');
   logger('info', 'konnectiveNewOrder', req, {
     country: 'US',
     state: body.state,
@@ -235,6 +237,7 @@ async function createKonnektiveLead(req, res) {
   if (response.result === 'ERROR') {
     return res.error(response.message);
   }
+  trace.incrementMetric('createKonnektiveLead');
   logger('info', 'createKonnektiveLead', req, {
     firstName: body.firstName,
     lastName: body.lastName,
@@ -270,6 +273,7 @@ async function upsell(req, res) {
   };
   const response = await request(options);
   // console.log(response);
+  trace.incrementMetric('upsell');
   logger('info', 'upsell', req, {
     data: req.body, // probably something have to be filtered?
     apiResponse: JSON.stringify(response),

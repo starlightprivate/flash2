@@ -1,7 +1,7 @@
 /* global it, describe, process */
 
 import rangeCheck from 'range_check';
-import should from 'should';
+import assert from 'assert';
 import util from 'util';
 
 // unit tests to prove https://starlightgroup.atlassian.net/browse/SG-35
@@ -45,13 +45,11 @@ describe('security', () => {
 
   describe('range_check', () => {
     it('it works for good ip', () => {
-      // eslint-disable-next-line no-unused-expressions
-      rangeCheck.inRange(validIp, ipRange).should.be.true;
+      assert(rangeCheck.inRange(validIp, ipRange));
     });
 
     it('it fails as intended for bad ip', () => {
-      // eslint-disable-next-line no-unused-expressions
-      rangeCheck.inRange(invalidIp, ipRange).should.be.false;
+      assert(!rangeCheck.inRange(invalidIp, ipRange));
     });
   });
 
@@ -59,16 +57,18 @@ describe('security', () => {
   describe('#verifyThatSiteIsAccessedFromCloudflare', () => {
     it('is a function', () => {
       // eslint-disable-next-line no-unused-expressions
-      security.verifyThatSiteIsAccessedFromCloudflare.should.be.a.Function;
+      assert.equal(typeof security.verifyThatSiteIsAccessedFromCloudflare, 'function');
     });
 
     it('do not works with IPv4 from not cloudflare', (done) => {
       const req = new RequestMock(invalidIp);
       const res = new ResponseMock((error, code, message) => {
-        should.not.exist(error);
-        code.should.be.equal(500);
-        message.should.be.equal('NOT OK');
-        done();
+        if (error) {
+          return done(error);
+        }
+        assert.equal(code, 500);
+        assert.equal(message, 'NOT OK');
+        return done();
       });
 
       security.verifyThatSiteIsAccessedFromCloudflare(req, res, (error) => {
