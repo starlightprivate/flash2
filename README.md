@@ -79,3 +79,15 @@ In case, you cannot install redis server, you can use this one:
 Note that it is Free Tier Redis server on [RedisToGo](https://elements.heroku.com/addons/redistogo).
 It has 5 connections limit. It has 5 MB memory limit. But it works ok, if you cannot install redis for your
 local development.
+
+
+How to run unit tests using docker-compose
+===================
+
+```bash
+
+    # docker-compose -f docker-compose.testing.yaml up --build
+
+```
+
+It have to provide result like this ![test result](https://vvv.msk0.ru/s/gDOOFgX2z.png)
