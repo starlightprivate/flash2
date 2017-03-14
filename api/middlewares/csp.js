@@ -98,7 +98,8 @@ export default csp({
 
     // objectSrc: ["'none'"],
     mediaSrc: [
-      "'self'", // eslint-disable-line quotes
+      '\'self\'',
+      'blob:',
       'data:',
       '*.wistia.com',
     ],
