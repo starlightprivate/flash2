@@ -1,4 +1,4 @@
-/* global $, MobileDetect, jQuery*/
+/* global $, MobileDetect, jQuery, Cookies*/
 const md = new MobileDetect(window.navigator.userAgent);
 
 function customWrapperForIsMobileDevice() { // eslint-disable-line no-unused-vars
