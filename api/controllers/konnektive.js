@@ -143,7 +143,6 @@ function getLead(req, res) {
     },
     json: true, // Automatically parses the JSON string in the response
   };
-
   return request(options)
     .then((response) => {
       // console.log('raw response', response);
@@ -172,7 +171,7 @@ function getTrans(req, res) {
     qs: {
       loginId: konnectiveLogin,
       password: konnectivePassword,
-      orderId,
+      id: orderId,
     },
     headers: {
       'api-key': proxyApiKey,

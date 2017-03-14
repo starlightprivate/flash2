@@ -18,7 +18,7 @@
   }
   // Upsell functions
   function doUpsellYes(sellID, productId) {
-    const $loadingBar = $('div#js-div-loading-bar');
+    const $loadingBar = $('div.js-div-loading-bar');
     $loadingBar.show();
     const usParams = {};
     let productIdForUserParams = {};
@@ -70,7 +70,7 @@
     }
   }
   function doUpsellNo(sellID) {
-    $('div#js-div-loading-bar').show();
+    $('div.js-div-loading-bar').show();
     let nextPage = `receipt.html?orderId=${filterXSS(MediaStorage.orderId)}`;
     if (sellID === 'battery') {
       nextPage = `us_headlampoffer.html?orderId=${filterXSS(MediaStorage.orderId)}`;

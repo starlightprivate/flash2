@@ -105,7 +105,7 @@
                 <div class="text-xs-center">
                   <img class="resp" src="assets/images/img-certificate.jpg" alt="">
                 </div>
-                <div id="step-1" class="step" style="margin-top:6px">
+                <div class="step step-1" style="margin-top:6px">
                   <h2 class="step-title">
                     <span>Step #1 :</span>
                     SELECT QUANTITY
@@ -161,7 +161,7 @@
                   </div>
                 </div>
                 <!-- STEP2 -->
-                <div id="step-2" class="step">
+                <div class="step step-2">
                   <h2 class="step-title">
                     <span>Step #2 :</span>
                     CONTACT INFORMATION
@@ -195,9 +195,8 @@
                         <label for="email">Email Address *:</label>
                         <input
                           type="email"
-                          class="form-control clearable required"
+                          class="form-control clearable required email"
                           name="emailAddress"
-                          id="email"
                           placeholder="email@example.com"
                           autocomplete="email"
                           autocapitalize="off"
@@ -232,7 +231,7 @@
             <div class="col-md-12 col-lg-4">
               <div class="sidebar">
                 <!-- STEP 3 -->
-                <div id="step-3" class="step">
+                <div class="step step-3">
                   <h2 class="step-title">
                     <span>Step #3 :</span>
                     SHIPPING ADDRESS</h2>
@@ -258,7 +257,7 @@
                       <div class="col-sm-5 col-xs-5 state-col">
                         <div class="form-group">
                           <label for="state">State *:</label>
-                          <select id="state" class="form-control required" name="state">
+                          <select class="form-control required state" name="state">
                             <option disabled="" selected="" value="">--</option>
                             <option value="AL">AL</option>
                             <option value="AK">AK</option>
@@ -355,7 +354,7 @@
                   </div>
                 </div>
                 <!-- STEP 4 -->
-                <div id="step-4" class="step">
+                <div class="step step-4">
                   <h2 class="step-title step-title-4">
                     <span>Step #4 :</span>
                     payment method</h2>
@@ -384,9 +383,8 @@
                         <div class="form-group">
                           <label for="creditcard">Card Number *</label>
                           <input
-                            class="form-control clearable required numfield"
+                            class="form-control clearable required numfield creditcard"
                             name="cardNumber"
-                            id="creditcard"
                             inputmode="numeric"
                             pattern="[0-9]*"
                             placeholder="•••• •••• •••• ••••"
@@ -401,8 +399,7 @@
                           <div class="col-xs-4">
                             <div class="form-group text-xs-left">
                               <select
-                                id="month"
-                                class="form-control custom-select required"
+                                class="form-control custom-select required month"
                                 name="month"
                                 autocomplete="cc-exp-month">
                                 <option disabled="" selected="" value="">– –</option>
@@ -425,8 +422,7 @@
                           <div class="col-xs-4 exp-year">
                             <div class="form-group text-xs-left">
                               <select
-                                id="year"
-                                class="form-control custom-select required"
+                                class="form-control custom-select required year"
                                 name="year"
                                 autocomplete="cc-exp-year">
                                 <option disabled="" selected="" value="">– –</option>
@@ -491,7 +487,7 @@
       </div>
     </div>
     <!-- Loading Icons -->
-    <div id="js-div-loading-bar">
+    <div class="js-div-loading-bar">
       <div class="sk-circle">
         <div class="sk-circle1 sk-child"></div>
         <div class="sk-circle2 sk-child"></div>

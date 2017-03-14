@@ -1,0 +1,502 @@
+.ss-icon,
+[class^='ss-'] {
+  &::before {
+    font-family: 'SS BlackTie-Solid';
+    font-feature-settings: liga;
+    font-style: normal;
+    font-weight: 400;
+    text-decoration: none;
+    text-rendering: optimizeLegibility;
+    white-space: nowrap;
+  }
+
+  &.right {
+    &::before {
+      content: '';
+      display: none;
+    }
+
+    &::after {
+      font-family: 'SS BlackTie-Solid';
+      font-feature-settings: liga;
+      font-style: normal;
+      font-weight: 400;
+      text-decoration: none;
+      text-rendering: optimizeLegibility;
+      white-space: nowrap;
+    }
+  }
+}
+
+[class*=' ss-'] {
+  &::before {
+    font-family: 'SS BlackTie-Solid';
+    font-feature-settings: liga;
+    font-style: normal;
+    font-weight: 400;
+    text-decoration: none;
+    text-rendering: optimizeLegibility;
+    white-space: nowrap;
+  }
+
+  &.right {
+    &::before {
+      content: '';
+      display: none;
+    }
+
+    &::after {
+      font-family: 'SS BlackTie-Solid';
+      font-feature-settings: liga;
+      font-style: normal;
+      font-weight: 400;
+      text-decoration: none;
+      text-rendering: optimizeLegibility;
+      white-space: nowrap;
+    }
+  }
+}
+
+.ss-search {
+  &::before {
+    content: '🔎';
+  }
+
+  &.right {
+    &::after {
+      content: '🔎';
+    }
+  }
+}
+
+.ss-folder {
+  &::before {
+    content: '📁';
+  }
+
+  &.right {
+    &::after {
+      content: '📁';
+    }
+  }
+}
+
+.ss-loading {
+  &::before {
+    content: '';
+  }
+
+  &.right {
+    &::after {
+      content: '';
+    }
+  }
+}
+
+.ss-share {
+  &::before {
+    content: '';
+  }
+
+  .right {
+    &::after {
+      content: '';
+    }
+  }
+}
+
+.ss-code {
+  &::before {
+    content: '';
+  }
+
+  &.right {
+    &::after {
+      content: '';
+    }
+  }
+}
+
+.ss-circle {
+  &::before {
+    content: '○';
+  }
+
+  &.right {
+    &::after {
+      content: '○';
+    }
+  }
+}
+
+.ss-up {
+  &::before {
+    content: '⬆';
+  }
+
+  &.right {
+    &::after {
+      content: '⬆';
+    }
+  }
+}
+
+.ss-link {
+  &::before {
+    content: '🔗';
+  }
+
+  &.right {
+    &::after {
+      content: '🔗';
+    }
+  }
+}
+
+.ss-indent {
+  &::before {
+    content: '';
+  }
+
+  &.right {
+    &::after {
+      content: '';
+    }
+  }
+}
+
+.ss-location {
+  &::before {
+    content: '';
+  }
+
+  &.right {
+    &::after {
+      content: '';
+    }
+  }
+}
+
+.ss-warehouse {
+  &::before {
+    content: '';
+  }
+
+  &.right {
+    &::after {
+      content: '';
+    }
+  }
+}
+
+.ss-creditcard {
+  &::before {
+    content: '💳';
+  }
+
+  &.right {
+    &::after {
+      content: '💳';
+    }
+  }
+}
+
+.ss-zoom {
+  &::before {
+    content: '';
+  }
+
+  &.right {
+    &::after {
+      content: '';
+    }
+  }
+}
+
+.ss-delete {
+  &::before {
+    content: '␡';
+  }
+
+  &.right {
+    &::after {
+      content: '␡';
+    }
+  }
+}
+
+.ss-plus {
+  &::before {
+    content: '+';
+  }
+
+  &.right {
+    &::after {
+      content: '+';
+    }
+  }
+}
+
+.ss-info {
+  &::before {
+    content: 'ℹ';
+  }
+
+  &.right {
+    &::after {
+      content: 'ℹ';
+    }
+  }
+}
+
+.ss-gift {
+  &::before {
+    content: '🎁';
+  }
+
+  &.right {
+    &::after {
+      content: '🎁';
+    }
+  }
+}
+
+.ss-help {
+  &::before {
+    content: '❓';
+  }
+
+  &.right {
+    &::after {
+      content: '❓';
+    }
+  }
+}
+
+.ss-stop {
+  &::before {
+    content: '■';
+  }
+
+  &.right {
+    &::after {
+      content: '■';
+    }
+  }
+}
+
+.ss-skip {
+  &::before {
+    content: '⏭';
+  }
+
+  &.right {
+    &::after {
+      content: '⏭';
+    }
+  }
+}
+
+.ss-left {
+  &::before {
+    content: '⬅';
+  }
+
+  &.right {
+    &::after {
+      content: '⬅';
+    }
+  }
+}
+
+.ss-right {
+  &::before {
+    content: '➡';
+  }
+
+  &.right {
+    &::after {
+      content: '➡';
+    }
+  }
+}
+
+.ss-home {
+  &::before {
+    content: '⌂';
+  }
+
+  &.right {
+    &::after {
+      content: '⌂';
+    }
+  }
+}
+
+.ss-tablet {
+  &::before {
+    content: '';
+  }
+
+  &.right {
+    &::after {
+      content: '';
+    }
+  }
+}
+
+.ss-mail {
+  &::before {
+    content: '✉';
+  }
+
+  &.right {
+    &::after {
+      content: '✉';
+    }
+  }
+}
+
+.ss-phone {
+  &::before {
+    content: '📞';
+  }
+
+  &.right {
+    &::after {
+      content: '📞';
+    }
+  }
+}
+
+.ss-check {
+  &::before {
+    content: '✓';
+  }
+
+  &.right {
+    &::after {
+      content: '✓';
+    }
+  }
+}
+
+.ss-like {
+  &::before {
+    content: '👍';
+  }
+
+  &.right {
+    &::after {
+      content: '👍';
+    }
+  }
+}
+
+.ss-video {
+  &::before {
+    content: '📹';
+  }
+
+  &.right {
+    &::after {
+      content: '📹';
+    }
+  }
+}
+
+.ss-list {
+  &::before {
+    content: '';
+  }
+
+  &.right {
+    &::after {
+      content: '';
+    }
+  }
+}
+
+.ss-refresh {
+  &::before {
+    content: '↻';
+  }
+
+  &.right {
+    &::after {
+      content: '↻';
+    }
+  }
+}
+
+.ss-desktop {
+  &::before {
+    content: '💻';
+  }
+
+  &.right {
+    &::after {
+      content: '💻';
+    }
+  }
+}
+
+.ss-user {
+  &::before {
+    content: '👤';
+  }
+
+  &.right {
+    &::after {
+      content: '👤';
+    }
+  }
+}
+
+.ss-lock {
+  &::before {
+    content: '🔒';
+  }
+
+  &.right {
+    &::after {
+      content: '🔒';
+    }
+  }
+}
+
+.ss-view {
+  &::before {
+    content: '👀';
+  }
+
+  &.right {
+    &::after {
+      content: '👀';
+    }
+  }
+}
+
+.ss-tag {
+  &::before {
+    content: '';
+  }
+
+  &.right {
+    &::after {
+      content: '';
+    }
+  }
+}
+
+.ss-picture {
+  &::before {
+    content: '🌄';
+  }
+
+  &.right {
+    &::after {
+      content: '🌄';
+    }
+  }
+}

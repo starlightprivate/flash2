@@ -3,7 +3,7 @@
 (() => {
   if (customWrapperForIsMobileDevice()) {
     $('#checkout-wrapper').addClass('mobile-mode');
-    $('#step-4 .step-title span').html('Step #2 :');
+    $('.step-4 .step-title span').html('Step #2 :');
   }
   $('input[name=phoneNumber]').mask('000-000-0000', { translation: { 0: { pattern: /[0-9*]/ } } });
   const MediaStorage = UniversalStorage.getCheckoutDetails();
@@ -14,7 +14,7 @@
     .join('');
 
   function submitOrderForm() {
-    const $loadingBar = $('div#js-div-loading-bar');
+    const $loadingBar = $('div.js-div-loading-bar');
     $loadingBar.show();
     const year = $('select[name=year]').val();
     const month = $('select[name=month]').val();
@@ -88,9 +88,9 @@
           let errBody;
           if (responseMessage === 'Invalid Credit Card Number') {
             errHead = 'Payment validation failed:  Processor Declined.';
-            responseMessage += '<br><br>For security reasons, you must re-enter a new card number.';
+            responseMessage += '<br><br>For security reasons, you must re-enter a new card number.<br><br>';
           }
-          responseMessage += '<br><br>Tip: you may try another card or call <a href=\'tel:+18558807233\'>(855) 880-7233</a>.';
+          responseMessage += 'Tip: you may try another card or call <a href=\'tel:+18558807233\'>(855) 880-7233</a>.';
           errBody = '<span style=\'font-size:20px\'>';
           errBody += responseMessage;
           errBody += '<span>';
@@ -152,7 +152,7 @@
     const field = filterXSS(data.field);
     const $field = data.element;
     const bv = data.fv;
-    const $span = $field.siblings('.validMessage');
+    const $span = $field.siblings('.valid-message');
     $span.attr('data-field', field);
     const message = filterXSS(bv.getOptions(field).validMessage);
     if (message) {
@@ -247,11 +247,7 @@
               const VALID_CARD_NUMBER = '4444111144441111';
 
               // Get the number pr by user
-              let value = $field.val();
-              const CountOfChars = parseInt($field.val().length, 10);
-              if (CountOfChars === 17) {
-                value = value.substr(0, CountOfChars - 1);
-              }
+              const value = $field.val();
 
               // Check if it"s one of test card numbers
               if (value !== '' && $.inArray(value, TEST_CARD_NUMBERS) !== -1) {
@@ -410,7 +406,7 @@
   })
   .on('err.field.fv', (e, data) => {
     const field = filterXSS(data.field);
-    data.element.next(`.validMessage[data-field='${field}']`).hide();
+    data.element.next(`.valid-message[data-field='${field}']`).hide();
     checkoutButtonPulse(CheckoutFieldsReq, data.fv.getInvalidFields().length);
   })
   .on('status.field.fv', (e, data) => {
@@ -424,7 +420,7 @@
     }
 
     // Show the valid message element
-    $field.next(`.validMessage[data-field='${field}']`).show();
+    $field.next(`.valid-message[data-field='${field}']`).show();
     checkoutButtonPulse(CheckoutFieldsReq, data.fv.getInvalidFields().length);
   })
   .on('err.form.fv', () => {})

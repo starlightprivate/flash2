@@ -1,0 +1,67 @@
+@import '../variables';
+
+.pg-receipt {
+  background-image: url('../images/bg-receipt.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: $color-text1;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  padding-bottom: 50px;
+
+  .container {
+    max-width: 925px;
+    padding: 0;
+    text-align: center;
+    width: 95%;
+  }
+
+  .info {
+    background: $color-white;
+    border-radius: 10px;
+    padding: 40px;
+
+    .title {
+      color: $color-red3;
+      font-family: EurostileLTStd, sans-serif;
+      font-size: 33px;
+      font-weight: 500;
+      line-height: 44px;
+      text-transform: uppercase;
+
+      span {
+        color: $color-text1;
+        display: block;
+        font-size: 45px;
+      }
+    }
+
+    .note {
+      color: $color-dark;
+
+      strong {
+        font-weight: 600;
+      }
+    }
+
+    .accent {
+      color: $color-red3;
+    }
+
+    .accent-box {
+      background: $color-red3;
+      border-radius: 5px;
+      color: $color-white;
+      display: inline-block;
+      font-family: EurostileLTStd;
+      font-size: 16px;
+      margin: 35px;
+      padding: 10px 35px 5px;
+      text-transform: uppercase;
+    }
+
+    .order-id {
+      margin-bottom: 40px;
+    }
+  }
+}
