@@ -34,7 +34,10 @@ function extractCookie(res, rgx) {
   return false;
 }
 
-describe('RateLimiter', () => {
+describe('RateLimiter', function () { //eslint-disable-line
+
+  this.timeout(10000); // not everybody have good PC
+
   let
     sessionId;
 
