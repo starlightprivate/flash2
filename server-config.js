@@ -61,4 +61,9 @@ module.exports = {
 
 // https://sentry.io/starlight-group/node-api/settings/keys/
   sentryDSN: process.env.SENTRY_DSN || 'https://68ae2c197a6440efac407117aec0326f:f64d954adde3493ab03f86d94815e814@sentry.io/133524',
+
+  loggly: {
+    token: process.env.LOGGLY_TOKEN || 'a52a98a7-c97f-40d5-bb5b-b544716b04c3',
+    subdomain: process.env.LOGGLY_SUBDOMAIN || 'starlightgroup',
+  },
 };

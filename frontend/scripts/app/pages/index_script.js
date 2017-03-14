@@ -4,7 +4,7 @@ function initFieldFv(e, data) {
   const $field = data.element;
   const bv = data.fv;
 
-  const $span = $field.siblings('.validMessage');
+  const $span = $field.siblings('.valid-message');
   $span.attr('data-field', field);
 
   // Retrieve the valid message via getOptions()
@@ -16,12 +16,12 @@ function initFieldFv(e, data) {
 function successFieldFv(e, data) {
   const field = filterXSS(data.field);
   const $field = data.element;
-  $field.siblings(`.validMessage[data-field='${field}']`).show();
+  $field.siblings(`.valid-message[data-field='${field}']`).show();
 }
 function errFieldFv(e, data) {
   const field = filterXSS(data.field);
   const $field = data.element;
-  $field.siblings(`.validMessage[data-field='${field}']`).hide();
+  $field.siblings(`.valid-message[data-field='${field}']`).hide();
 }
 function openContactModal() {
   $('#modal-contact').modal('show');
@@ -92,7 +92,7 @@ function openContactModal() {
       }, () => {});
       $('#modal-contact').modal('hide');
     } else {
-      const $loadingBar = $('div#js-div-loading-bar');
+      const $loadingBar = $('div.js-div-loading-bar');
       $loadingBar.show();
       callAPI('add-contact', data, 'POST', (response) => {
         if (response.success) {
@@ -186,7 +186,7 @@ function openContactModal() {
   });
 
   // Address Form Validator
-  $('#form-address').on('init.field.fv', initFieldFv).formValidation({
+  $('.form-address').on('init.field.fv', initFieldFv).formValidation({
     framework: 'bootstrap4',
     icon: {
       valid: 'ss-check',
@@ -237,7 +237,7 @@ function openContactModal() {
   })
   .on('success.field.fv', successFieldFv)
   .on('err.field.fv', errFieldFv);
-  $('#form-address').submit((e) => {
+  $('.form-address').submit((e) => {
     e.preventDefault();
   });
   $('input[name=postalCode]').mask('00000', { translation: { 0: { pattern: /[0-9]/ } } });

@@ -1,9 +1,16 @@
 node_modules/
 bower_components/
 .idea/
-.DS_Store/
+.DS_Store*
 .dist/
 .vscode/
 .nyc_output/
 npm-debug.log*
 public
+
+# codeship credentials required to be deployed to Google Cloud
+# @see https://documentation.codeship.com/pro/getting-started/encryption/
+codeship.aes
+google_deployment.env
+
+*.rdb

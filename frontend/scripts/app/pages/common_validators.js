@@ -1,51 +1,69 @@
 /* global $, filterXSS, jQuery, callAPI, UniversalStorage, customWrapperForIsMobileDevice */
 function validate() {
+  const cardNumberConfigurations = {
+    amex: {
+      mask: {
+        pattern: '0000 000000 00000',
+        config: { translation: { 0: { pattern: /[0-9]/ } } },
+      },
+      maxLength: '17',
+    },
+    defaultCC: {
+      mask: {
+        pattern: '0000 0000 0000 0000',
+        config: { translation: { 0: { pattern: /[0-9]/ } } },
+      },
+      maxLength: '19',
+    },
+  };
   // Look for ios devices and safari
   const isMobileSafari = window.navigator.userAgent.match(/(iPod|iPhone|iPad)/) && window.navigator.userAgent.match(/AppleWebKit/);
   if (isMobileSafari) {
     // Search for credit card input and change it to text field
-    if ($('input#creditcard').length > 0) {
-      $('input#creditcard').attr('type', 'text');
+    if ($('input.creditcard').length > 0) {
+      $('input.creditcard').attr('type', 'text');
     }
   }
   if (!customWrapperForIsMobileDevice()) {
     $('input[type=number]').attr('type', 'text');
   }
   let numbstr = '';
+
+  function setCCActive(className) {
+    $('.payment-icon .cc-icon').addClass('faded');
+    $(`.payment-icon .${className}`).removeClass('faded').addClass('active');
+  }
+
+  function configureCCInput(config) {
+    const $inputCardNumber = $('input[name=cardNumber]');
+    $inputCardNumber.mask(config.mask.pattern, config.mask.config);
+    $inputCardNumber.attr('maxlength', config.maxLength);
+  }
+
   function keyupEvent(event) {
     if (event.target.value.length >= 2) {
       numbstr = event.target.value.replace(/\s/g, '');
       let stcase = numbstr.slice(0, 2);
       stcase = parseInt(stcase, 10);
       if (stcase === 34 || stcase === 37) {
-        if (event.target.value.length === 18) return;
-        $('.payment-icon .cc-american-express').removeClass('faded').addClass('active');
-        $('.payment-icon .cc-visa').addClass('faded');
-        $('.payment-icon .cc-mastercard').addClass('faded');
-        $('.payment-icon .cc-discover').addClass('faded');
-        $('input[name=cardNumber]').mask('0000 000000 00000', { translation: { 0: { pattern: /[0-9]/ } } });
+        if (event.target.value.length === 17) return;
+        setCCActive('cc-american-express');
+        configureCCInput(cardNumberConfigurations.amex);
       } else if (stcase >= 40 && stcase <= 49) {
         if (event.target.value.length === 19) return;
-        $('.payment-icon .cc-visa').removeClass('faded').addClass('active');
-        $('.payment-icon .cc-american-express').addClass('faded');
-        $('.payment-icon .cc-mastercard').addClass('faded');
-        $('.payment-icon .cc-discover').addClass('faded');
-        $('input[name=cardNumber]').mask('0000 0000 0000 0000', { translation: { 0: { pattern: /[0-9]/ } } });
+        setCCActive('cc-visa');
+        configureCCInput(cardNumberConfigurations.defaultCC);
       } else if ((stcase > 21 && stcase < 28) || (stcase > 50 && stcase < 56)) {
         if (event.target.value.length === 19) return;
-        $('.payment-icon .cc-mastercard').removeClass('faded').addClass('active');
-        $('.payment-icon .cc-visa').addClass('faded');
-        $('.payment-icon .cc-discover').addClass('faded');
-        $('.payment-icon .cc-american-express').addClass('faded');
-        $('input[name=cardNumber]').mask('0000 0000 0000 0000', { translation: { 0: { pattern: /[0-9]/ } } });
+        setCCActive('cc-mastercard');
+        configureCCInput(cardNumberConfigurations.defaultCC);
       } else if ((stcase > 56 && stcase <= 59) || (stcase > 66 && stcase < 69) || stcase === 50) {
         if (event.target.value.length === 19) return;
         $('#last').addClass('cc-maestro').removeClass('cc-discover');
-        $('.payment-icon .cc-maestro').removeClass('faded').addClass('active');
-        $('.payment-icon .cc-visa').addClass('faded');
-        $('.payment-icon .cc-mastercard').addClass('faded');
-        $('.payment-icon .cc-american-express').addClass('faded');
-        $('input[name=cardNumber]').mask('0000 0000 0000 0000', { translation: { 0: { pattern: /[0-9]/ } } });
+        setCCActive('cc-maestro');
+        configureCCInput(cardNumberConfigurations.defaultCC);
+      } else {
+        configureCCInput(cardNumberConfigurations.defaultCC);
       }
     }
     if (event.target.value.length >= 7) {
@@ -97,7 +115,7 @@ function validate() {
       $('#last').addClass('cc-discover').removeClass('cc-diners-club cc-enroute cc-jcb cc-maestro');
     }
   }
-  $('#creditcard').keyup(keyupEvent);
+  $('.creditcard').keyup(keyupEvent);
 
   function blurEvent() {
     const domains = ['hotmail.com', 'gmail.com', 'aol.com'];
@@ -106,7 +124,7 @@ function validate() {
       domains,
       topLevelDomains,
       suggested(element, suggestion) {
-        $('#email + small').html(`Did you mean <a href='javascript:void(0)'>${filterXSS(suggestion.full)}</a>`).show();
+        $('.email + small').html(`Did you mean <a href='javascript:void(0)'>${filterXSS(suggestion.full)}</a>`).show();
       },
       empty() {
       },
@@ -114,18 +132,18 @@ function validate() {
   }
 
   function clickEvent() {
-    $('#email').val($(this).html());
-    $('#email + small').hide().html('Great! We will send you a confirmation e-mail with tracking # after purchasing.');
+    $('.email').val($(this).html());
+    $('.email + small').hide().html('Great! We will send you a confirmation e-mail with tracking # after purchasing.');
     if ($('form').length > 0) {
       $('form').formValidation('revalidateField', 'email');
     }
   }
 
   // Mailcheck Plugin Code here
-  if ($('#email').length > 0) {
-    $('#email').on('blur', blurEvent);
+  if ($('.email').length > 0) {
+    $('.email').on('blur', blurEvent);
     // If user click on the suggested email, it will replace that email with suggested one.
-    $('body').on('click', '#email + small a', clickEvent);
+    $('body').on('click', '.email + small a', clickEvent);
   }
 }
 validate();

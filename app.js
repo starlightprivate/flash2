@@ -9,11 +9,11 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import expressPromiseRouter from 'express-promise-router';
 import expressContentLength from 'express-content-length-validator';
+import expressWinston from 'express-winston';
 
 // proper session implementation
 // https://starlightgroup.atlassian.net/browse/SG-5
 import expressSession from 'express-session'; // initialize sessions
-import cookieParser from 'cookie-parser'; // parse cookies to start sessions from
 import connectRedis from 'connect-redis';// store session data in redis database
 import csurf from 'csurf'; // add CSRF protection https://www.npmjs.com/package/csurf
 import helmet from 'helmet';
@@ -37,6 +37,30 @@ import rateLimiter from './api/middlewares/rateLimiter';
 const app = express();
 console.log('Currently Running On : ', config.ENV);
 const isProtectedByCloudflare = ['production', 'staging'].indexOf(config.ENV) !== -1;
+
+app.use(expressWinston.logger({
+  transports: [
+    winston,
+  ],
+  meta: true,
+  level: 'verbose',
+  expressFormat: true,
+  colorize: false,
+  dynamicMeta: ((req, res) => ({
+    type: 'http:ok',
+    env: config.ENV,
+    ip: security.getIp(req),
+    method: req.method,
+    entryPoint: req.session ? req.session.entryPoint : null,
+    path: req.originalUrl,
+    query: req.query,
+    body: req.body,
+    sessionId: req.session ? req.sessionID : null,
+    isBot: req.session ? req.session.isBot : null,
+    userAgent: req.get('User-Agent'),
+    status: res.statusCode,
+  })),
+}));
 
 
 // verify that site is requested from Cloudflare
@@ -78,11 +102,13 @@ app.use(bodyParser.json());
 // it is endpoint that recieves CSP rules violation info
 // from hemlet-csp middleware - see `./api/middlewares/csp.js`
 app.post('/a434819b5a5f4bfeeaa5d47c8af8ac87', (req, res) => {
-  winston.error('csp error', {
+  winston.error('error:csp', {
+    env: config.ENV,
+    type: 'error:csp',
     ip: security.getIp(req),
     path: req.originalUrl,
     userAgent: req.get('User-Agent'),
-    error: JSON.stringify(req.body),
+    error: req.body,
   });
   trace.incrementMetric('error/csp');
   res.status(200).send('ok');
@@ -114,7 +140,6 @@ if (isProtectedByCloudflare) {
   app.enable('trust proxy'); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
 }
 
-app.use(cookieParser(config.secret));
 app.use(expressSession({
   key: 'PHPSESSID',
   // LOL, let they waste some time hacking in assumption
@@ -232,6 +257,8 @@ app.use((err, req, res, next) => {
     return res.status(403).send('Invalid API Key');
   }
   winston.error('expressjs error : %s', err.message, {
+    type: 'http:error',
+    env: config.ENV,
     ip: security.getIp(req),
     method: req.method,
     entryPoint: req.session ? req.session.entryPoint : null,
@@ -239,6 +266,7 @@ app.use((err, req, res, next) => {
     query: req.query,
     body: req.body,
     isBot: req.session ? req.session.isBot : null,
+    sessionId: req.session ? req.sessionID : null,
     userAgent: req.get('User-Agent'),
     code: err.code,
     message: err.message,

@@ -1,9 +1,10 @@
-/* global $, MobileDetect, store*/
+/* global $, MobileDetect, store, Cookies*/
 /**
  * The storage wrapper.
  * @type {Object}
  */
 const UniversalStorage = {
+  store: Cookies,
   /**
    * The key for checkout details on storage.
    * @type {String}
