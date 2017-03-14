@@ -164,14 +164,14 @@ function getLead(req, res) {
 }
 
 function getTrans(req, res) {
-  const orderId = xss(req.params.id);
+  const id = xss(req.params.id);
   const options = {
     method: 'GET',
     uri: util.format('%stransactions/query/', connectiveApiURL),
     qs: {
       loginId: konnectiveLogin,
       password: konnectivePassword,
-      id: orderId,
+      orderId: id,
     },
     headers: {
       'api-key': proxyApiKey,
@@ -187,14 +187,14 @@ function getTrans(req, res) {
       }
       // TODO - think of data required for logs
       logger('info', 'getTrans', req, {
-        orderId,
+        orderId: id,
       });
       return res.success(response.message);
     })
     .catch((err) => {
       logger('error', 'getTrans', req, {
         err,
-        orderId,
+        orderId: id,
       }); // TODO - think of data required for logs
       return res.error('bad response');
     });
