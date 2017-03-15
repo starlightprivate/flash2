@@ -9,5 +9,12 @@
 		"lint": {
 			"engine": "eslint"
 		}
+	},
+	"dependencies": {
+		"unused-ignores": [
+			"validator",
+			"snyk",
+			"minimatch"
+		]
 	}
 }

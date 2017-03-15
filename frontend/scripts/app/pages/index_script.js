@@ -245,4 +245,7 @@ function openContactModal() {
   $('.footer-image').click(() => {
     openContactModal();
   });
+  $('.video-container').on('click', 'a.has-url', () => {
+    openContactModal();
+  });
 })();
