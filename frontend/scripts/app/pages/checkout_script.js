@@ -286,9 +286,6 @@
                       .addClass('has-success');
                   form.find('[name=year]')
                       .parents('.form-group')
-                      .find('.fv-control-feedback');
-                  form.find('[name=year]')
-                      .parents('.form-group')
                       .find('.form-control-feedback')
                       .hide();
                 } else {
@@ -296,9 +293,6 @@
                       .parents('.form-group')
                       .removeClass('has-success')
                       .addClass('has-warning');
-                  form.find('[name=year]')
-                      .parents('.form-group')
-                      .find('.fv-control-feedback');
                   form.find('[name=year]')
                       .parents('.form-group')
                       .find('[data-fv-validator=\'callback\']')
@@ -310,9 +304,6 @@
                   .parents('.form-group')
                   .removeClass('has-warning')
                   .addClass('has-success');
-              form.find('[name=year]')
-                  .parents('.form-group')
-                  .find('.fv-control-feedback');
               form.find('[name=year]')
                   .parents('.form-group')
                   .find('.form-control-feedback')
