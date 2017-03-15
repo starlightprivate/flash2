@@ -14,6 +14,7 @@ import trace from './../../risingStack';
 // TODO - verify that nothing is missing
 const validEntryPoints = [
   '/',
+  '/robots.txt',
   '/index.html',
   '/checkout.html',
   '/us_headlampoffer.html',
@@ -187,6 +188,7 @@ function punishForChangingUserAgent(req, res, next) {
 
 
 export default {
+  validEntryPoints,
   verifyThatSiteIsAccessedFromCloudflare,
   getIp,
   punishForEnteringSiteFromBadLocation,
