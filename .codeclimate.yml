@@ -1,6 +1,6 @@
 engines:
   duplication:
-    enabled: true
+    enabled: false
     config:
       languages:
         - javascript
@@ -10,8 +10,12 @@ ratings:
     - api/**
     - config/**
     - test/**
+    - index.js
+    - app.js
+    - server-config.js
+    - risingStack.js
+    - trace.config.js
 exclude_paths:
-  - tests/**/*
   - "**/node_modules/**/*"
   - "**/eslint-rules/**/*"
   - "**/frontend/scripts/libs/**/*"
