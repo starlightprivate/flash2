@@ -76,5 +76,5 @@ module.exports = {
     subdomain: process.env.LOGGLY_SUBDOMAIN || 'starlightgroup',
   },
 
-  buildId,
+  buildId: util.format('https://github.com/starlightgroup/flash2/commit/%s', buildId),
 };
