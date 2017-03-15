@@ -530,10 +530,6 @@
       _wq.push({
         id: "sg6u0amacm",
         onReady: function (video) {
-          video.bind('secondchange', function (s) {
-            $('.has-url span').html("Click Here");
-            $('.has-url').attr("href", "javascript:openContactModal();");
-          });
           video.bind('end', function () {
             openContactModal();
           });
