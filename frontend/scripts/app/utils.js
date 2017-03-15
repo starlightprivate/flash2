@@ -1,4 +1,4 @@
-/* global $, MobileDetect, jQuery, Cookies*/
+/* global $, MobileDetect, jQuery, Cookies, UniversalStorage */
 const md = new MobileDetect(window.navigator.userAgent);
 
 function customWrapperForIsMobileDevice() { // eslint-disable-line no-unused-vars
@@ -48,7 +48,7 @@ function callAPI(endpoint, data, method, callback, err) {
 
   // https://starlightgroup.atlassian.net/browse/SG-14
   if (['PUT', 'POST', 'PATCH', 'DELETE'].indexOf(method) !== -1) {
-    params._csrf = Cookies.get('XSRF-TOKEN'); // eslint-disable-line no-underscore-dangle
+    params._csrf = UniversalStorage.getToken(); // eslint-disable-line no-underscore-dangle
   }
 
   jQuery.ajax({
