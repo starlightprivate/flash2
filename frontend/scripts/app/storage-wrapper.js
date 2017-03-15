@@ -70,9 +70,7 @@ const UniversalStorage = {
    * Retrieve XSRF Token
    * @return Token
    */
-  getToken: () => { // eslint-disable-line
-    return Cookies.get('XSRF-TOKEN');
-  },
+  getToken: () => Cookies.get('XSRF-TOKEN'),
   /**
    * Save checkout details to storage.
    * @param {Object} checkoutDetails The dictionary of checkout details.
