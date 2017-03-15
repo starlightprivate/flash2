@@ -270,6 +270,8 @@ async function upsell(req, res) {
   // documentation on api
   // https://api.konnektive.com/docs/upsale_import/
 
+  req.body.orderId = req.session.orderId;  // eslint-disable-line no-param-reassign
+
   const options = {
     uri: util.format('%supsale/import/', connectiveApiURL),
     qs: req.body,
