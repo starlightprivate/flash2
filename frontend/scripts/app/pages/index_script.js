@@ -245,4 +245,19 @@ function openContactModal() {
   $('.footer-image').click(() => {
     openContactModal();
   });
+
+  const removeHashUrl = () => {
+    const original = window.location.href.substr(0, window.location.href.indexOf('#'));
+    history.replaceState({}, document.title, original);
+  };
+
+  const toggleModalIfHashUrl = () => {
+    if (window.location.hash === '#modal-contact') {
+      $('#modal-contact').modal('toggle');
+      removeHashUrl();
+    }
+  };
+
+  toggleModalIfHashUrl();
+  $(window).bind('hashchange', () => toggleModalIfHashUrl());
 })();
