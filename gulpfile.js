@@ -129,21 +129,21 @@ gulp.task('libcopy', function () {
     config.src + '/scripts/libs/formvalidation/js/framework/bootstrap4.min.js',
     config.src + '/scripts/libs/store.everything.min.js',
     'node_modules/validator/validator.min.js',
+    config.src + '/scripts/app/config.js' ,
+    config.src + '/scripts/app/utils.js' ,
+    config.src + '/scripts/app/storage-wrapper.js' ,
+    config.src + '/scripts/app/safty-overrides.js' ,
   ])
   .pipe(concat('libs.js'))
   .pipe(gulp.dest(config.dist + '/assets/js'));
 });
 
 // Copy Custom JS
-gulp.task('transpile-and-jscopy', function() {
+gulp.task('jscopy', function() {
   return gulp.src([
-    config.src + '/scripts/app/config.js' ,
-    config.src + '/scripts/app/utils.js' ,
-    config.src + '/scripts/app/storage-wrapper.js' ,
-    config.src + '/scripts/app/safty-overrides.js' ,
     config.src + '/scripts/app/pages/*.js',
   ])
-  .pipe(concat('app.js'))
+  .pipe(newer(config.dist + '/assets/js'))
   .pipe(gulp.dest(config.dist + '/assets/js'));
 });
 
@@ -226,7 +226,7 @@ gulp.task('build', ['clean-all'], function (done) {
 
 //process js
     'libcopy',
-    'transpile-and-jscopy',
+    'jscopy',
     // 'jscopy',
 
 //process other assets
