@@ -34,10 +34,24 @@ function getJson(e) { // eslint-disable-line no-unused-vars
   return json;
 }
 
+$(document).ready(() => {
+  if (!UniversalStorage.cookiesEnabled) {
+    jQuery.ajax({
+      type: 'GET',
+      url: '/robots.txt',
+      complete: (request) => {
+        UniversalStorage.saveStorageItem('PHPSESSID', request.getResponseHeader('phpsessid'));
+        UniversalStorage.saveStorageItem('XSRF-TOKEN', request.getResponseHeader('xsrf-token'));
+      },
+    });
+  }
+});
+
 // call API
 function callAPI(endpoint, data, method, callback, err) {
   let params = data;
   let ApiUrl = `/api/v2/${endpoint}/`;
+  let headers = {};
   const httpMethod = method || 'POST';
   // if data is an array pass as post,
   // otherwise the string is a simple get and needs to append to the end of the uri
@@ -46,14 +60,20 @@ function callAPI(endpoint, data, method, callback, err) {
     params = null;
   }
 
-  // https://starlightgroup.atlassian.net/browse/SG-14
+  if (!UniversalStorage.cookiesEnabled) {
+    headers = { PHPSESSID: UniversalStorage.getStorageItem('PHPSESSID'),
+      'XSRF-TOKEN': UniversalStorage.getStorageItem('XSRF-TOKEN'),
+    };
+  }
+
   if (['PUT', 'POST', 'PATCH', 'DELETE'].indexOf(method) !== -1) {
-    params._csrf = UniversalStorage.getToken(); // eslint-disable-line no-underscore-dangle
+    params._csrf = UniversalStorage.getStorageItem('XSRF-TOKEN'); // eslint-disable-line no-underscore-dangle
   }
 
   jQuery.ajax({
     method: httpMethod,
     url: ApiUrl,
+    headers,
     data: params,
     beforeSend(xhr) { xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded'); },
   }).done((msg) => {

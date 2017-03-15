@@ -222,10 +222,12 @@ app.use(csurf({ cookie: false }));
 // https://starlightgroup.atlassian.net/browse/SG-14
 app.use((req, res, next) => {
   if (req.session) {
-    const token = req.csrfToken();
-    res.locals.csrf = token; // eslint-disable-line no-param-reassign
-    res.cookie('XSRF-TOKEN', token, { secure: isProtectedByCloudflare });
-    res.set('XSRF-TOKEN', token);
+    if (security.validEntryPoints.indexOf(req.session.entryPoint) !== -1) {
+      const token = req.csrfToken();
+      res.locals.csrf = token; // eslint-disable-line no-param-reassign
+      res.cookie('XSRF-TOKEN', token, { secure: isProtectedByCloudflare });
+      res.set('XSRF-TOKEN', token);
+    }
   }
   next();
 });

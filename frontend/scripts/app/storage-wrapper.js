@@ -4,7 +4,16 @@
  * @type {Object}
  */
 const UniversalStorage = {
-  store: Cookies,
+  cookiesAreEnabled: () => {
+    let cookiesEnabled = window.navigator.cookieEnabled;
+    if (typeof window.navigator.cookieEnabled === 'undefined' && !cookiesEnabled) {
+      document.cookie = 'testcookie';
+      cookiesEnabled = document.cookie.indexOf('testcookie') !== -1;
+    }
+    return cookiesEnabled;
+  },
+
+  cookiesEnabled: true,
   /**
    * The key for checkout details on storage.
    * @type {String}
@@ -35,10 +44,17 @@ const UniversalStorage = {
    * @return {[type]} [description]
    */
   initializeStorage: () => {
-    if (typeof store !== 'undefined') {
-      const defaults = {};
-      defaults[UniversalStorage.storageKey] = {};
-      store.defaults(defaults);
+    UniversalStorage.cookiesEnabled = UniversalStorage.cookiesAreEnabled();
+    if (!UniversalStorage.cookiesEnabled && typeof store !== 'undefined') {
+      const checkout = store.get(UniversalStorage.storageKey);
+      if (!checkout) {
+        store.set(UniversalStorage.storageKey, {});
+      }
+    } else {
+      const checkout = Cookies.get(UniversalStorage.storageKey);
+      if (!checkout) {
+        Cookies.set(UniversalStorage.storageKey, {});
+      }
     }
   },
   /**
@@ -47,11 +63,11 @@ const UniversalStorage = {
    * @param  {[type]} value [description]
    */
   saveStorageItem: (key, value) => {
-    if (typeof store !== 'undefined') {
+    if (UniversalStorage.cookiesEnabled) {
+      Cookies.set(key, value);
+    } else if (typeof store !== 'undefined') {
       store.set(key, value);
-    } else {
-      // Fallback to window.localStorage.
-      window.localStorage.setItem(key, value);
+      store.get(key);
     }
   },
   /**
@@ -60,17 +76,19 @@ const UniversalStorage = {
    * @return {[type]}     [description]
    */
   getStorageItem: (key) => {
-    if (typeof store !== 'undefined') {
+    if (UniversalStorage.cookiesEnabled) {
+      return Cookies.get(key);
+    } else if (typeof store !== 'undefined') {
       return store.get(key);
     }
-    // Fallback to window.localStorage.
-    return window.localStorage.getItem(key);
+    return null;
   },
+
   /**
    * Retrieve XSRF Token
    * @return Token
    */
-  getToken: () => Cookies.get('XSRF-TOKEN'),
+  getToken: () => UniversalStorage.getStorageItem('XSRF-TOKEN'),
   /**
    * Save checkout details to storage.
    * @param {Object} checkoutDetails The dictionary of checkout details.
@@ -84,18 +102,27 @@ const UniversalStorage = {
     });
   },
   /**
+   * Wrapper which convert from json to object if cookies are enabled.
+   * @return {Object}
+   */
+  toObjectIfCookies: (obj) => {
+    if (UniversalStorage.cookiesEnabled) {
+      return JSON.parse(obj);
+    }
+    return obj;
+  },
+  /**
    * Retrieve checkout details saved to storage.
    * @return {Object}
    */
   getCheckoutDetails: () => { // eslint-disable-line no-unused-vars
     // Retrieve item from storage.
-    const value = UniversalStorage.getStorageItem(UniversalStorage.storageKey);
-
+    const value = UniversalStorage.toObjectIfCookies(
+      UniversalStorage.getStorageItem(UniversalStorage.storageKey));
     const details = {};
     UniversalStorage.whiteList.forEach((key) => {
       details[key] = value[key];
     });
-
     return details;
   },
   /**
@@ -109,7 +136,8 @@ const UniversalStorage = {
     }
 
     // Retrieve item from storage.
-    const details = UniversalStorage.getStorageItem(UniversalStorage.storageKey);
+    const details = UniversalStorage.toObjectIfCookies(
+      UniversalStorage.getStorageItem(UniversalStorage.storageKey));
     details[field] = value;
     // Save to storage.
     UniversalStorage.saveStorageItem(UniversalStorage.storageKey, details);
@@ -127,7 +155,8 @@ const UniversalStorage = {
    */
   getOrderId: () => {
     // Retrieve item from storage.
-    const value = UniversalStorage.getStorageItem(UniversalStorage.storageKey);
+    const value = UniversalStorage.toObjectIfCookies(
+      UniversalStorage.getStorageItem(UniversalStorage.storageKey));
     return value[UniversalStorage.storageKeyForOrderId];
   },
 };
