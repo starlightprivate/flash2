@@ -7,6 +7,8 @@ bower_components/
 .nyc_output/
 npm-debug.log*
 public
+coverage/
+
 
 # codeship credentials required to be deployed to Google Cloud
 # @see https://documentation.codeship.com/pro/getting-started/encryption/

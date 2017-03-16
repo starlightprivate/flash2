@@ -11,4 +11,4 @@ public/
 Dockerfile
 docker-compose.yml
 redis/
-
+coverage/
