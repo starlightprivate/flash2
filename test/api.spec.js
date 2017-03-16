@@ -215,7 +215,6 @@ describe('web application', function () { // eslint-disable-line func-names
           if (error) {
             return done(error);
           }
-          // console.log(response);
           response.body.success.should.be.true; // eslint-disable-line no-unused-expressions
           response.body.data.should.exist; // eslint-disable-line no-unused-expressions
           response.body.data.someValue.should.be.equal('something'); // eslint-disable-line no-unused-expressions
