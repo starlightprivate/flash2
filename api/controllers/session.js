@@ -11,8 +11,23 @@ function saveSession(req, res) {
 }
 
 function loadSession(req, res) {
-  req.session.custom = req.session.custom || {}; // eslint-disable-line no-param-reassign
-  res.success({ data: req.session.custom });
+  if (req.session) {
+    req.session.custom = req.session.custom || {}; // eslint-disable-line no-param-reassign
+    return res.success({ data: req.session.custom });
+  }
+  const sessionId = xss(req.query.PHPSESSID);
+  return req.sessionStore.load(sessionId, (err, sess) => {
+    if (err) {
+      console.error('error getting session', err);
+      // TODO more testing what errors can bubble up
+    }
+    if (sess) {
+      return res.success({
+        data: sess.custom || {},
+      });
+    }
+    return res.success({ data: {} });
+  });
 }
 
 
