@@ -34,18 +34,44 @@ function getJson(e) { // eslint-disable-line no-unused-vars
   return json;
 }
 
-$(document).ready(() => {
+function getUrlParameter(sParam) {
+  const sPageURL = decodeURIComponent(window.location.search.substring(1));
+  const sURLVariables = sPageURL.split('&');
+  let sParameterName;
+  let i;
+
+  for (i = 0; i < sURLVariables.length; i++) {
+    sParameterName = sURLVariables[i].split('=');
+
+    if (sParameterName[0] === sParam) {
+      return sParameterName[1] === undefined ? true : sParameterName[1];
+    }
+  }
+  return null;
+}
+
+function initSessionIfNoCookies(cb) { // eslint-disable-line no-unused-vars
   if (!UniversalStorage.cookiesEnabled) {
+    const sessId = getUrlParameter('PHPSESSID');
     jQuery.ajax({
       type: 'GET',
       url: '/robots.txt',
       complete: (request) => {
-        UniversalStorage.saveStorageItem('PHPSESSID', request.getResponseHeader('phpsessid'));
+        if (sessId) {
+          UniversalStorage.saveStorageItem('PHPSESSID', sessId);
+        } else {
+          UniversalStorage.saveStorageItem('PHPSESSID', request.getResponseHeader('phpsessid'));
+        }
         UniversalStorage.saveStorageItem('XSRF-TOKEN', request.getResponseHeader('xsrf-token'));
+        if (cb) {
+          cb();
+        }
       },
     });
+  } else if (cb) {
+    cb();
   }
-});
+}
 
 // call API
 function callAPI(endpoint, data, method, callback, err) {
@@ -85,6 +111,24 @@ function callAPI(endpoint, data, method, callback, err) {
       err(textStatus);
     }
   });
+}
+
+function storeSessionToServer(data, cb) { // eslint-disable-line no-unused-vars
+  if (!UniversalStorage.cookiesEnabled) {
+    callAPI('session', data, 'POST', (response) => { // eslint-disable-line no-unused-vars
+      cb();
+    }, () => {});
+  } else {
+    cb();
+  }
+}
+
+function wrapLocationChange(route) { // eslint-disable-line no-unused-vars
+  if (!UniversalStorage.cookiesEnabled) {
+    window.location = `${route}?PHPSESSID=${UniversalStorage.getStorageItem('PHPSESSID')}`;
+  } else {
+    window.location = route;
+  }
 }
 // load state from zipcode
 
