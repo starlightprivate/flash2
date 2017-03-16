@@ -1,4 +1,4 @@
-/* global $, filterXSS, jQuery, callAPI, UniversalStorage, customWrapperForIsMobileDevice */
+/* global $, DOMPurify, jQuery, callAPI, UniversalStorage, customWrapperForIsMobileDevice */
 (() => {
   let pageType = null;
   if (window.location.pathname.indexOf('receipt') >= 0) {
@@ -27,14 +27,14 @@
       orderInfo = orderInfos[0];
     }
 
-    const orderId = filterXSS(orderInfo.orderId);
+    const orderId = DOMPurify.sanitize(orderInfo.orderId);
     $('#orderNumber').text(orderId);
     callAPI('get-trans', orderId, 'GET', (resp) => {
       if (resp.success) {
         if (resp.data) {
           const firstRow = resp.data[0];
           if (firstRow && firstRow.merchant) {
-            $('#ccIdentity').text(filterXSS(firstRow.merchant));
+            $('#ccIdentity').text(DOMPurify.sanitize(firstRow.merchant));
           } else {
             $('#ccIdentity').text('Tactical Mastery');
           }
@@ -42,7 +42,7 @@
       }
     });
   }
-  callAPI('get-lead', filterXSS(myOrderID), 'GET', (resp) => {
+  callAPI('get-lead', DOMPurify.sanitize(myOrderID), 'GET', (resp) => {
     if (pageType === 'receipt') {
       if (resp.success) {
         populateThanksPage(resp.data);
@@ -56,7 +56,7 @@
           // they can be on an upsell page up to an hour after the initial sale
         let doThatPop = true;
         if (pageType === 'upsell') {
-          const gmtStr = `${filterXSS(resp.message.data[0].dateUpdated)} GMT-0400`;
+          const gmtStr = `${DOMPurify.sanitize(resp.message.data[0].dateUpdated)} GMT-0400`;
           const orderDate = new Date(gmtStr);
           const nowDate = new Date();
           const minutesSince = (nowDate - orderDate) / 1000 / 60;

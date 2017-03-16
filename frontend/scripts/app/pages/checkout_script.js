@@ -1,4 +1,4 @@
-/* global $, filterXSS, jQuery, callAPI, UniversalStorage */
+/* global $, DOMPurify, jQuery, callAPI, UniversalStorage */
 /* global bootstrapModal, customWrapperForIsMobileDevice */
 (() => {
   if (customWrapperForIsMobileDevice()) {
@@ -10,14 +10,14 @@
 
   $('input[name=cardNumber]').attr('maxlength', '19');
 
-  const humanizeObject = message => Object.keys(message).map(key => `<span class='error-message'>${filterXSS(`${key} ${message[key]}`)}</span>`)
+  const humanizeObject = message => Object.keys(message).map(key => `<span class='error-message'>${DOMPurify.sanitize(`${key} ${message[key]}`)}</span>`)
     .join('');
 
   function submitOrderForm() {
     const $loadingBar = $('div.js-div-loading-bar');
     $loadingBar.show();
-    const year = $('select[name=year]').val();
-    const month = $('select[name=month]').val();
+    const year = $('select[name=year]').safeVal();
+    const month = $('select[name=month]').safeVal();
     const d = new Date();
     const currentYear = d.getFullYear().toString().substr(2, 2);
     const currentMonth = (`0${d.getMonth() + 1}`).slice(-2);
@@ -46,15 +46,15 @@
     apiFields.forEach((key) => {
       let dirty;
       if (key !== 'productId') {
-        dirty = $(`[name=${key}]`).val();
+        dirty = $(`[name=${key}]`).safeVal();
       } else {
-        dirty = $('input[name=\'productId\']:checked', '#checkoutForm').val();
+        dirty = $('input[name=\'productId\']:checked', '#checkoutForm').safeVal();
       }
-      orderDetails[key] = filterXSS(dirty);
+      orderDetails[key] = DOMPurify.sanitize(dirty);
     });
 
-    orderDetails.cardMonth = filterXSS(month);
-    orderDetails.cardYear = filterXSS(year);
+    orderDetails.cardMonth = DOMPurify.sanitize(month);
+    orderDetails.cardYear = DOMPurify.sanitize(year);
     orderDetails.lastName = 'NA';
     orderDetails.orderId = MediaStorage.orderId;
 
@@ -74,15 +74,15 @@
       if (resp.success) {
         $('#checkoutForm .btn-complete').removeClass('pulse');
         if (resp.orderId) {
-          UniversalStorage.saveOrderId(filterXSS(resp.orderId));
+          UniversalStorage.saveOrderId(DOMPurify.sanitize(resp.orderId));
         }
         // window.location = GlobalConfig.BasePagePath + "us_batteryoffer.html?orderId="
         // + MediaStorage.orderId + "&pId=" + orderDetails.productId;
-        window.location = `us_batteryoffer.html?orderId=${filterXSS(MediaStorage.orderId)}&pId=${filterXSS(orderDetails.productId)}`;
+        window.location = `us_batteryoffer.html?orderId=${DOMPurify.sanitize(MediaStorage.orderId)}&pId=${DOMPurify.sanitize(orderDetails.productId)}`;
       } else {
         $('#checkoutForm .btn-complete').removeClass('pulse');
         let responseMessage = resp.message.constructor !== Object ?
-            filterXSS(resp.message) : humanizeObject(resp.message);
+            DOMPurify.sanitize(resp.message) : humanizeObject(resp.message);
         if (responseMessage) {
           let errHead = 'Problem with your order';
           let errBody;
@@ -133,7 +133,7 @@
     }
 
     CheckoutFields.forEach((field) => {
-      if ($(`[name='${filterXSS(field)}'].required`).parents('.form-group').hasClass('has-success')) { icfCount += 1; }
+      if ($(`[name='${DOMPurify.sanitize(field)}'].required`).parents('.form-group').hasClass('has-success')) { icfCount += 1; }
     });
 
     if (invalidFieldsCount === 0) {
@@ -149,12 +149,12 @@
     }
   }
   $('#checkoutForm').on('init.field.fv', (e, data) => {
-    const field = filterXSS(data.field);
+    const field = DOMPurify.sanitize(data.field);
     const $field = data.element;
     const bv = data.fv;
     const $span = $field.siblings('.valid-message');
     $span.attr('data-field', field);
-    const message = filterXSS(bv.getOptions(field).validMessage);
+    const message = DOMPurify.sanitize(bv.getOptions(field).validMessage);
     if (message) {
       $span.text(message);
     }
@@ -247,7 +247,7 @@
               const VALID_CARD_NUMBER = '4444111144441111';
 
               // Get the number pr by user
-              const value = $field.val();
+              const value = $field.safeVal();
 
               // Check if it"s one of test card numbers
               if (value !== '' && $.inArray(value, TEST_CARD_NUMBERS) !== -1) {
@@ -271,11 +271,11 @@
               const form = $field.parents('form');
               const currentDate = new Date();
               const year = parseInt(currentDate.getYear(), 10);
-              const yearVal = parseInt(form.find('[name=year]').val(), 10);
+              const yearVal = parseInt(form.find('[name=year]').safeVal(), 10);
               if (isNaN(yearVal) || yearVal === null || yearVal === undefined) {
                 return true;
               }
-              const selectedYear = 100 + (parseInt(form.find('[name=year]').val(), 10) || 0);
+              const selectedYear = 100 + (parseInt(form.find('[name=year]').safeVal(), 10) || 0);
               const currentMonth = parseInt(value, 10) -
                                    1 >= parseInt(currentDate.getMonth(), 10);
               if (selectedYear === year) {
@@ -405,7 +405,7 @@
     }
   })
   .on('err.field.fv', (e, data) => {
-    const field = filterXSS(data.field);
+    const field = DOMPurify.sanitize(data.field);
     data.element.next(`.valid-message[data-field='${field}']`).hide();
     checkoutButtonPulse(CheckoutFieldsReq, data.fv.getInvalidFields().length);
   })
@@ -413,7 +413,7 @@
     data.fv.disableSubmitButtons(false);
   })
   .on('success.field.fv', (e, data) => {
-    const field = filterXSS(data.field);
+    const field = DOMPurify.sanitize(data.field);
     const $field = data.element;
     if (data.fv.getSubmitButton()) {
       data.fv.disableSubmitButtons(false);
@@ -447,10 +447,10 @@
   ];
   // Load cached values
   $.each(checkoutFields, (index, value) => {
-    const tempValue = filterXSS(value);
-    const uVal = filterXSS(MediaStorage[value]);
+    const tempValue = DOMPurify.sanitize(value);
+    const uVal = DOMPurify.sanitize(MediaStorage[value]);
     if (uVal && uVal !== null && uVal !== 'null') {
-      $(`[name=${tempValue}]`).val(uVal);
+      $(`[name=${tempValue}]`).safeVal(uVal);
       $(`[name=${tempValue}]`).data('previousValue', uVal);
       $('#checkoutForm').formValidation('revalidateField', value);
     }

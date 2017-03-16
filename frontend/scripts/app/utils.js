@@ -70,7 +70,7 @@ function callAPI(endpoint, data, method, callback, err) {
 
 function loadStateFromZip() { // eslint-disable-line no-unused-vars
   const fZip = $('#zipcode');
-  const fZipVal = fZip.val();
+  const fZipVal = fZip.safeVal();
   const params = [];
   if (fZipVal.length === 5) {
     fZip.addClass('processed');
@@ -80,15 +80,15 @@ function loadStateFromZip() { // eslint-disable-line no-unused-vars
       const jData = resp.data;
       if (resp.success) {
         if (jData.city !== undefined && jData.city !== '' && jData.city !== null) {
-          $('#city').val(jData.city);
+          $('#city').safeVal(jData.city);
         } else {
-          $('#city').val('');
+          $('#city').safeVal('');
         }
 
         if (jData.state !== undefined && jData.state !== '' && jData.state !== null) {
-          $('.state').val(jData.state).trigger('change');
+          $('.state').safeVal(jData.state).trigger('change');
         } else {
-          $('.state').val('');
+          $('.state').safeVal('');
         }
         $('input[name=address1]').focus();
       }
