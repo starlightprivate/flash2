@@ -122,11 +122,15 @@ async function addKonnektiveOrder(req, res) {
   if (response.result === 'ERROR') {
     return res.error(response.message, 200);
   }
+  req.session.orderId = response.message.orderId; // eslint-disable-line no-param-reassign
   return res.success(response.message);
 }
 
 function getLead(req, res) {
-  const id = xss(req.params.id);
+  const id = req.session.orderId;
+  if (!id) {
+    return res.error('bad response');
+  }
 
 // documentation for api
 // https://api.konnektive.com/docs/order_query/
@@ -166,7 +170,11 @@ function getLead(req, res) {
 }
 
 function getTrans(req, res) {
-  const id = xss(req.params.id);
+  const id = req.session.orderId;
+  if (!id) {
+    return res.error('bad response');
+  }
+
   const options = {
     method: 'GET',
     uri: util.format('%stransactions/query/', connectiveApiURL),
@@ -261,6 +269,8 @@ async function upsell(req, res) {
   }
   // documentation on api
   // https://api.konnektive.com/docs/upsale_import/
+
+  req.body.orderId = req.session.orderId;  // eslint-disable-line no-param-reassign
 
   const options = {
     uri: util.format('%supsale/import/', connectiveApiURL),
