@@ -207,7 +207,7 @@ describe('web application', function () { // eslint-disable-line func-names
         .expect(201, 'Created', done);
     });
 
-    it.skip('allows to retrieve custom session data by GET /api/v2/session with session token provided', (done) => {
+    it('allows to retrieve custom session data by GET /api/v2/session with session token provided', (done) => {
       supertest(app)
         .get('/api/v2/session')
         .set('Cookie', [util.format('PHPSESSID=%s', sessionIdSes)])
@@ -215,9 +215,10 @@ describe('web application', function () { // eslint-disable-line func-names
           if (error) {
             return done(error);
           }
-          response.success.should.be.true; // eslint-disable-line no-unused-expressions
-          response.data.should.exist; // eslint-disable-line no-unused-expressions
-          response.data.someValue.should.be.equal('something'); // eslint-disable-line no-unused-expressions
+          // console.log(response);
+          response.body.success.should.be.true; // eslint-disable-line no-unused-expressions
+          response.body.data.should.exist; // eslint-disable-line no-unused-expressions
+          response.body.data.someValue.should.be.equal('something'); // eslint-disable-line no-unused-expressions
           return done();
         });
     });
