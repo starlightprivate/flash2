@@ -1,0 +1,678 @@
+[INFO  - 2017-03-16T17:24:22.399Z] GhostDriver - Main - running on port 12524
+[INFO  - 2017-03-16T17:24:22.662Z] Session [655fce20-0a6d-11e7-85cb-f71db9ff8e5a] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2017-03-16T17:24:22.663Z] Session [655fce20-0a6d-11e7-85cb-f71db9ff8e5a] - page.customHeaders:  - {}
+[INFO  - 2017-03-16T17:24:22.663Z] Session [655fce20-0a6d-11e7-85cb-f71db9ff8e5a] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"mac-10.11 (El Capitan)-64bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2017-03-16T17:24:22.663Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 655fce20-0a6d-11e7-85cb-f71db9ff8e5a
+[ERROR - 2017-03-16T17:24:37.878Z] Session [655fce20-0a6d-11e7-85cb-f71db9ff8e5a] - page.onError - msg: SecurityError: DOM Exception 18: An attempt was made to break through the security policy of the user agent.
+[ERROR - 2017-03-16T17:24:37.879Z] Session [655fce20-0a6d-11e7-85cb-f71db9ff8e5a] - page.onError - stack:
+  cookie (http://fast.wistia.com/assets/external/E-v1.js:1610)
+  cookieValue (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  savedValue (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  e (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  initVisitorKey (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  initializeOnce (http://fast.wistia.com/assets/external/E-v1.js:1712)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:1712)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:1712)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:1538)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:4168)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:47)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:40)
+[ERROR - 2017-03-16T17:24:45.597Z] Session [655fce20-0a6d-11e7-85cb-f71db9ff8e5a] - page.onError - msg: SecurityError: DOM Exception 18: An attempt was made to break through the security policy of the user agent.
+[ERROR - 2017-03-16T17:24:45.598Z] Session [655fce20-0a6d-11e7-85cb-f71db9ff8e5a] - page.onError - stack:
+  o (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+  exports (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+  o (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+  options (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  o (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2)
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  e (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+[INFO  - 2017-03-16T17:29:22.402Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2017-03-16T17:29:59.273Z] ShutdownReqHand - _handle - About to shutdown
+[INFO  - 2017-03-16T17:32:56.309Z] GhostDriver - Main - running on port 4585
+[INFO  - 2017-03-16T17:32:56.420Z] Session [97990e00-0a6e-11e7-8dc4-9f59313edc45] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2017-03-16T17:32:56.420Z] Session [97990e00-0a6e-11e7-8dc4-9f59313edc45] - page.customHeaders:  - {}
+[INFO  - 2017-03-16T17:32:56.421Z] Session [97990e00-0a6e-11e7-8dc4-9f59313edc45] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"mac-10.11 (El Capitan)-64bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2017-03-16T17:32:56.421Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 97990e00-0a6e-11e7-8dc4-9f59313edc45
+[ERROR - 2017-03-16T17:33:09.006Z] Session [97990e00-0a6e-11e7-8dc4-9f59313edc45] - page.onError - msg: SecurityError: DOM Exception 18: An attempt was made to break through the security policy of the user agent.
+[ERROR - 2017-03-16T17:33:09.006Z] Session [97990e00-0a6e-11e7-8dc4-9f59313edc45] - page.onError - stack:
+  cookie (http://fast.wistia.com/assets/external/E-v1.js:1610)
+  cookieValue (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  savedValue (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  e (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  initVisitorKey (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  initializeOnce (http://fast.wistia.com/assets/external/E-v1.js:1712)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:1712)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:1712)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:1538)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:4168)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:47)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:40)
+[ERROR - 2017-03-16T17:33:32.225Z] Session [97990e00-0a6e-11e7-8dc4-9f59313edc45] - page.onError - msg: SecurityError: DOM Exception 18: An attempt was made to break through the security policy of the user agent.
+[ERROR - 2017-03-16T17:33:32.233Z] Session [97990e00-0a6e-11e7-8dc4-9f59313edc45] - page.onError - stack:
+  o (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+  exports (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+  o (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+  options (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  o (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2)
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  e (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+[INFO  - 2017-03-16T17:37:56.313Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2017-03-16T17:38:46.262Z] ShutdownReqHand - _handle - About to shutdown
+[INFO  - 2017-03-16T17:57:04.630Z] GhostDriver - Main - running on port 33865
+[INFO  - 2017-03-16T17:57:04.917Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2017-03-16T17:57:04.917Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.customHeaders:  - {}
+[INFO  - 2017-03-16T17:57:04.917Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"mac-10.11 (El Capitan)-64bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2017-03-16T17:57:04.917Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: f6f80100-0a71-11e7-897d-07c0a7d5b58a
+[ERROR - 2017-03-16T17:57:21.554Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - msg: SecurityError: DOM Exception 18: An attempt was made to break through the security policy of the user agent.
+[ERROR - 2017-03-16T17:57:21.554Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - stack:
+  cookie (http://fast.wistia.com/assets/external/E-v1.js:1610)
+  cookieValue (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  savedValue (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  e (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  initVisitorKey (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  initializeOnce (http://fast.wistia.com/assets/external/E-v1.js:1712)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:1712)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:1712)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:1538)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:4168)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:47)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:40)
+[ERROR - 2017-03-16T17:57:33.825Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+get@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:60476
+options@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:30345
+o@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:29947
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:30746
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:23625
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:29264
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:727
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:569
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:781
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:57:33.837Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+[ERROR - 2017-03-16T17:57:33.839Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+get@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:60476
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+initialize@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:62152
+o@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:30978
+o@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:396
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:607
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:23722
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:29264
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:727
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:569
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:781
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:57:33.839Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+[ERROR - 2017-03-16T17:57:33.840Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+get@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:60476
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+initialize@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:62152
+o@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:30978
+o@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:3370
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:4458
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:23991
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:29264
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:727
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:569
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:781
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:57:33.840Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+[ERROR - 2017-03-16T17:57:33.841Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+get@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:60476
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+options@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:30345
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+_options@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:51187
+o@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:23122
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:750
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:569
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:781
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:57:33.841Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+[ERROR - 2017-03-16T17:57:33.843Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+get@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:60476
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+options@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:30345
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+_options@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:51187
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+initialize@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:47407
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1012
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:57:33.843Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+[ERROR - 2017-03-16T17:57:33.845Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+get@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:60476
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+_loadOldCookie@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:7609
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+load@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:7527
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+initialize@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:47620
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1012
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:57:33.845Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+[ERROR - 2017-03-16T17:57:33.845Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+get@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:60476
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+load@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:74
+load@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:7552
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+initialize@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:47620
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1012
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:57:33.845Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+[ERROR - 2017-03-16T17:57:33.846Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+get@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:60476
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+load@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:74
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+initialize@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:47629
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1012
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:57:33.846Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+[ERROR - 2017-03-16T17:57:33.850Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+anonymousId@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:7235
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+normalize@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:52139
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+page@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:50413
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1937
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:57:33.850Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+[ERROR - 2017-03-16T17:57:33.858Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+cookie@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:3603
+normalize@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:2395
+send@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:3209
+onpage@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:1646
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:2514
+emit@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:40955
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+_invoke@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:51422
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+page@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:50470
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1937
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:57:33.859Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+[ERROR - 2017-03-16T17:57:33.859Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+cookie@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:3603
+referrerId@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:3914
+normalize@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:2551
+send@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:3209
+onpage@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:1646
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:2514
+emit@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:40955
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+_invoke@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:51422
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+page@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:50470
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1937
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:57:33.859Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+[ERROR - 2017-03-16T17:57:33.861Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+cookie@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:3603
+ampId@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:2915
+normalize@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:2854
+send@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:3209
+onpage@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:1646
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:2514
+emit@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:40955
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+_invoke@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:51422
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+page@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:50470
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1937
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:57:33.861Z] Session [f6f80100-0a71-11e7-897d-07c0a7d5b58a] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+[INFO  - 2017-03-16T17:58:41.297Z] GhostDriver - Main - running on port 47560
+[INFO  - 2017-03-16T17:58:41.702Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2017-03-16T17:58:41.702Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.customHeaders:  - {}
+[INFO  - 2017-03-16T17:58:41.702Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"mac-10.11 (El Capitan)-64bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2017-03-16T17:58:41.702Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 30a86020-0a72-11e7-87ee-e94ed39d71bc
+[ERROR - 2017-03-16T17:58:55.457Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - msg: SecurityError: DOM Exception 18: An attempt was made to break through the security policy of the user agent.
+[ERROR - 2017-03-16T17:58:55.457Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - stack:
+  cookie (http://fast.wistia.com/assets/external/E-v1.js:1610)
+  cookieValue (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  savedValue (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  e (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  initVisitorKey (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  initializeOnce (http://fast.wistia.com/assets/external/E-v1.js:1712)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:1712)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:1712)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:1538)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:4168)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:47)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:40)
+[ERROR - 2017-03-16T17:59:15.961Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+get@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:60476
+options@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:30345
+o@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:29947
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:30746
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:23625
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:29264
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:727
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:569
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:781
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:59:15.962Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+[ERROR - 2017-03-16T17:59:15.964Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+get@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:60476
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+initialize@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:62152
+o@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:30978
+o@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:396
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:607
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:23722
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:29264
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:727
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:569
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:781
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:59:15.964Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+[ERROR - 2017-03-16T17:59:15.965Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+get@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:60476
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+initialize@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:62152
+o@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:30978
+o@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:3370
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:4458
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:23991
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:29264
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:727
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:569
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:781
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:59:15.965Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+[ERROR - 2017-03-16T17:59:15.966Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+get@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:60476
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+options@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:30345
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+_options@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:51187
+o@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:23122
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:750
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:569
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:362
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:781
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:59:15.966Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+[ERROR - 2017-03-16T17:59:15.968Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+get@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:60476
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+options@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:30345
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+_options@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:51187
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+initialize@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:47407
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1012
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:59:15.968Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+[ERROR - 2017-03-16T17:59:15.971Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+get@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:60476
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+_loadOldCookie@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:7609
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+load@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:7527
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+initialize@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:47620
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1012
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:59:15.971Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+[ERROR - 2017-03-16T17:59:15.971Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+get@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:60476
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+load@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:74
+load@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:7552
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+initialize@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:47620
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1012
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:59:15.971Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+[ERROR - 2017-03-16T17:59:15.972Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+get@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:60476
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+load@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:74
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+initialize@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:47629
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1012
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:59:15.972Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+[ERROR - 2017-03-16T17:59:15.977Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+anonymousId@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2:7235
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+normalize@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:52139
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+page@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:50413
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1937
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:59:15.977Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+[ERROR - 2017-03-16T17:59:15.979Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+cookie@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:3603
+normalize@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:2395
+send@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:3209
+onpage@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:1646
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:2514
+emit@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:40955
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+_invoke@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:51422
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+page@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:50470
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1937
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:59:15.979Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+[ERROR - 2017-03-16T17:59:15.979Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+cookie@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:3603
+referrerId@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:3914
+normalize@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:2551
+send@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:3209
+onpage@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:1646
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:2514
+emit@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:40955
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+_invoke@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:51422
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+page@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:50470
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1937
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:59:15.979Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)
+[ERROR - 2017-03-16T17:59:15.981Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - msg: i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36330
+r@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36479
+exports@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:36927
+cookie@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:3603
+ampId@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:2915
+normalize@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:2854
+send@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:3209
+onpage@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:1646
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3:2514
+emit@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:40955
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+_invoke@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:51422
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+page@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:50470
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4:17434
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1937
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:1970
+i@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:314
+e@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:478
+http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1:494
+global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:6:22893
+[ERROR - 2017-03-16T17:59:15.981Z] Session [30a86020-0a72-11e7-87ee-e94ed39d71bc] - page.onError - stack:
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:4)

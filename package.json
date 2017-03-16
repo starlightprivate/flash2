@@ -105,6 +105,7 @@
     "lodash": "^4.17.4",
     "mocha": "^3.1.2",
     "nyc": "^10.1.2",
+    "phantomjs-prebuilt": "^2.1.14",
     "run-sequence": "^1.2.2",
     "safe-regex": "^1.1.0",
     "should": "^11.2.0",
