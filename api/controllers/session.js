@@ -18,7 +18,7 @@ function loadSession(req, res) {
   const sessionId = xss(req.query.PHPSESSID);
   return req.sessionStore.load(sessionId, (err, sess) => {
     if (err) {
-      console.error('error getting session', err);
+      console.error('error getting session', err); // eslint-disable-line
       // TODO more testing what errors can bubble up
     }
     if (sess) {
