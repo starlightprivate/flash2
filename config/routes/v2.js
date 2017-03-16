@@ -2,6 +2,7 @@ import mailCtrl from '../../api/controllers/mail';
 import leadoutpostCtrl from '../../api/controllers/leadoutpost';
 import konnektiveCtrl from '../../api/controllers/konnektive';
 import testSession from '../../api/controllers/testSession';
+import session from '../../api/controllers/session';
 import testError from '../../api/controllers/testError';
 import resError from '../../api/middlewares/res_error';
 import resSuccess from '../../api/middlewares/res_success';
@@ -60,6 +61,10 @@ function route(router) {
 // test logger system for application throwing vicious errors
 // returns 404 on production
   router.get('/testError', testError);
+
+// save/load session data
+  router.get('/session', session.loadSession);
+  router.post('/session/:valueName', session.saveSession);
 }
 
 const routes = { v2: route };
