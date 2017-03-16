@@ -251,8 +251,12 @@ Object.keys(routes).forEach((r) => {
   app.use(`/api/${r}`, router);
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/tacticalsales/', express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {
+  maxAge: (config.ENV === 'development') ? -1 : 31557600,
+}));
+app.use('/tacticalsales/', express.static(path.join(__dirname, 'public'), {
+  maxAge: (config.ENV === 'development') ? -1 : 31557600,
+}));
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
