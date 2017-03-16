@@ -48,6 +48,7 @@ app.use(expressWinston.logger({
   colorize: false,
   dynamicMeta: ((req, res) => ({
     type: 'http:ok',
+    buildId: config.buildId,
     env: config.ENV,
     ip: security.getIp(req),
     method: req.method,
@@ -102,13 +103,15 @@ app.use(bodyParser.json());
 // it is endpoint that recieves CSP rules violation info
 // from hemlet-csp middleware - see `./api/middlewares/csp.js`
 app.post('/a434819b5a5f4bfeeaa5d47c8af8ac87', (req, res) => {
+  console.log(req.body); // temporary solution - i need to verify it actually sends data
   winston.error('error:csp', {
+    buildId: config.buildId,
     env: config.ENV,
     type: 'error:csp',
     ip: security.getIp(req),
     path: req.originalUrl,
     userAgent: req.get('User-Agent'),
-    error: req.body,
+    error: req.body.toString(),
   });
   trace.incrementMetric('error/csp');
   res.status(200).send('ok');
@@ -259,6 +262,7 @@ app.use((err, req, res, next) => {
     return res.status(403).send('Invalid API Key');
   }
   winston.error('expressjs error : %s', err.message, {
+    buildId: config.buildId,
     type: 'http:error',
     env: config.ENV,
     ip: security.getIp(req),

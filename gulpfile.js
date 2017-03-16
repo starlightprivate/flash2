@@ -19,7 +19,8 @@ let _ = require('lodash'),
   htmlhint = require("gulp-htmlhint"),
   watch = require('gulp-watch'),
   sass = require('gulp-sass'),
-  sassLint = require('gulp-sass-lint');
+  sassLint = require('gulp-sass-lint'),
+  concat = require('gulp-concat');
 
 const config = {
   src: 'frontend', // source directory
@@ -120,37 +121,30 @@ gulp.task('html', function () {
  * JS related tasks
  */
 
-// Copy JS libraries
+// // Copy JS libraries
 gulp.task('libcopy', function () {
-  return gulp.src([config.src + '/scripts/libs/**/*'], {base: config.src + '/scripts/libs'})
-    .pipe(newer(config.dist + '/assets/libs'))
-    .pipe(gulp.dest(config.dist + '/assets/libs'));
-});
-
-//copy validator library???
-gulp.task('jscopy', function () {
   return gulp.src([
-    'node_modules/validator/validator.min.js'
-  ])
-    .pipe(newer(config.dist + '/assets/js'))
-    .pipe(gulp.dest(config.dist + '/assets/js'));
-});
-
-
-// Copy Custom JS
-gulp.task('transpile-and-jscopy', function() {
-  return gulp.src([
-    config.src + '/scripts/app/pages/*.js',
+    config.src + '/scripts/libs/xss.js' ,
+    config.src + '/scripts/libs/formvalidation/js/formValidation.min.js',
+    config.src + '/scripts/libs/formvalidation/js/framework/bootstrap4.min.js',
+    config.src + '/scripts/libs/store.everything.min.js',
+    'node_modules/validator/validator.min.js',
     config.src + '/scripts/app/config.js' ,
     config.src + '/scripts/app/utils.js' ,
     config.src + '/scripts/app/storage-wrapper.js' ,
     config.src + '/scripts/app/safty-overrides.js' ,
-    config.src + '/scripts/libs/xss.js' ,
-    config.src + '/scripts/vendor/addclear.js',
-    config.src + '/scripts/vendor/xss.js',
   ])
-    .pipe(newer(config.dist + '/assets/js'))
-    .pipe(gulp.dest(config.dist + '/assets/js'));
+  .pipe(concat('libs.js'))
+  .pipe(gulp.dest(config.dist + '/assets/js'));
+});
+
+// Copy Custom JS
+gulp.task('jscopy', function() {
+  return gulp.src([
+    config.src + '/scripts/app/pages/*.js',
+  ])
+  .pipe(newer(config.dist + '/assets/js'))
+  .pipe(gulp.dest(config.dist + '/assets/js'));
 });
 
 /*
@@ -232,8 +226,8 @@ gulp.task('build', ['clean-all'], function (done) {
 
 //process js
     'libcopy',
-    'transpile-and-jscopy',
     'jscopy',
+    // 'jscopy',
 
 //process other assets
     'fonts',

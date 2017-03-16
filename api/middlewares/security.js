@@ -120,6 +120,7 @@ function logBotAction(req, punishReason) {
   return winston.info('[SECURITY] bot punished %s - %s', ip, punishReason, {
     env: config.ENV,
     ip: getIp(req),
+    buildId: config.buildId,
     method: req.method,
     entryPoint: req.session ? req.session.entryPoint : null,
     path: req.originalUrl,
