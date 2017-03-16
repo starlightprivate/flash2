@@ -19,14 +19,15 @@
   .info {
     background: $color-white;
     border-radius: 10px;
-    padding: 40px;
+
 
     .title {
       color: $color-red3;
       font-family: EurostileLTStd, sans-serif;
-      font-size: 33px;
+      font-size: 21px;
       font-weight: 500;
       line-height: 44px;
+      padding-top: 25px;
       text-transform: uppercase;
 
       span {
@@ -37,7 +38,8 @@
     }
 
     .note {
-      color: $color-dark;
+      padding-bottom: 20px;
+      padding-top: 20px;
 
       strong {
         font-weight: 600;
@@ -59,9 +61,50 @@
       padding: 10px 35px 5px;
       text-transform: uppercase;
     }
+  }
+}
 
-    .order-id {
-      margin-bottom: 40px;
-    }
+.well {
+  background: $color-cream;
+  padding: 10px;
+  text-align: left;
+
+  h3 {
+    font-size: 22px;
+    font-weight: 700;
+  }
+}
+
+.order-detail {
+  display: inline-block;
+  text-align: center;
+  vertical-align: top;
+  width: 100%;
+
+  p {
+    display: inline-block;
+  }
+
+  span {
+    display: inline-block;
+    font-size: 21px;
+    font-weight: 700;
+  }
+}
+
+.item-detail-table {
+  border-bottom: 1px $color-border solid;
+  border-left: 1px $color-border solid;
+  border-right: 1px $color-border solid;
+
+  tr {
+    text-align: left;
+  }
+
+  .total-amount {
+    border-left: 1px $color-border solid;
+    border-right: 1px $color-border solid;
+    font-size: 22px;
+    font-weight: 700;
   }
 }
