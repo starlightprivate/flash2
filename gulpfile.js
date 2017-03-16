@@ -130,7 +130,7 @@ gulp.task('libcopy', function () {
 //copy validator library???
 gulp.task('jscopy', function () {
   return gulp.src([
-    'node_modules/dompurify/dist/purify.min.js',
+    config.src + '/scripts/libs/purify.min.js',
     config.src + '/scripts/libs/formvalidation/js/formValidation.min.js',
     config.src + '/scripts/libs/formvalidation/js/framework/bootstrap4.min.js',
     config.src + '/scripts/libs/store.everything.min.js',
