@@ -59,6 +59,17 @@ How to run tests
 1. npm run-script eslint (works for backend code mainly)
 2. npm test (unit tests for backend code, supertest and mocha)
 
+
+### E2E tests with protractor
+
+#### Install & Setup(See http://www.protractortest.org/)
+1. npm install -g protractor
+2. webdriver-manager update
+
+#### Run tests
+1. webdriver-manager start
+2. npm run protractor
+
 How to contribute to this repo
 ==================
 

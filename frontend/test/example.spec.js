@@ -4,17 +4,16 @@ const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 
-describe('Protractor Demo App', function() {
-  it('should add one and two', function(done) {
+describe.skip('Protractor Demo App', function() {
+  it('should add one and two', function() {
     browser.get('http://juliemr.github.io/protractor-demo/');
+
     element(by.model('first')).sendKeys(1);
     element(by.model('second')).sendKeys(2);
-
     element(by.id('gobutton')).click();
 
-    element(by.binding('latest')).getText().then((text) => {
-      expect(text).to.equal('3'); // This is wrong!
-      done();
-    });
+    browser.sleep(3000);
+
+    expect(element(by.binding('latest')).getText()).to.eventually.equal('3');
   });
 });
