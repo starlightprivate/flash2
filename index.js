@@ -42,6 +42,7 @@ http
       throw error;
     }
     winston.verbose('HTTP Server Started at %s:%s', config.HOST, config.PORT, {
+      buildId: config.buildId,
       type: 'server:start',
       nodejs: process.version,
       arch: process.arch,

@@ -1,6 +1,15 @@
 /* global process */
 
 import util from 'util';
+import fs from 'fs';
+import path from 'path';
+
+const buildIdPath = path.join(__dirname, 'public', 'build.txt');
+let buildId = 'unknown';
+
+if (fs.existsSync(buildIdPath)) {
+  buildId = fs.readFileSync(buildIdPath);
+}
 
 let redisUrl = 'redis://localhost:6379/';
 
@@ -66,4 +75,6 @@ module.exports = {
     token: process.env.LOGGLY_TOKEN || 'a52a98a7-c97f-40d5-bb5b-b544716b04c3',
     subdomain: process.env.LOGGLY_SUBDOMAIN || 'starlightgroup',
   },
+
+  buildId: util.format('https://github.com/starlightgroup/flash2/commit/%s', buildId),
 };
