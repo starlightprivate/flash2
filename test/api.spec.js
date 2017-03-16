@@ -133,10 +133,36 @@ describe('web application', function () { // eslint-disable-line func-names
 
   describe('testing sessions', () => {
 // https://starlightgroup.atlassian.net/browse/SG-5
+    let sessionIdSes;
+    let csrfTokenSes;
+
+    it('has anything on / but we need to start session properly to run tests', (done) => {
+      supertest(app)
+        .get('/')
+        .expect('X-Powered-By', 'TacticalMastery')
+        .end((error, res) => {
+          if (error) {
+            return done(error);
+          }
+          // console.log('/api/v2/ping cookies ',res.headers['set-cookie']);
+          const sId = extractCookie(res, sessionIdCookieRegex);
+          if (sId === false) {
+            return done(new Error('PHPSESSID not set!'));
+          }
+          const csrf = extractCookie(res, csrfTokenCookieRegex);
+          if (csrf === false) {
+            return done(new Error('XSRF-TOKEN not set!'));
+          }
+          sessionIdSes = sId;
+          csrfTokenSes = csrf;
+          return done();
+        });
+    });
+
     it('sets proper data for /api/v2/testSession WITH session token provided', (done) => {
       supertest(app)
         .get('/api/v2/testSession')
-        .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
+        .set('Cookie', [util.format('PHPSESSID=%s', sessionIdSes)])
         .expect('X-Powered-By', 'TacticalMastery')
         .expect(200)
         .end((error, res) => {
@@ -151,12 +177,13 @@ describe('web application', function () { // eslint-disable-line func-names
           if (csrf === false) {
             return done(new Error('XSRF-TOKEN not set!'));
           }
-          csrfToken = csrf;
+          csrfTokenSes = csrf;
 
           const sId = extractCookie(res, sessionIdCookieRegex);
           if (sId === false) {
             return done();
           }
+          sessionIdSes = sId;
           return done(new Error('PHPSESSID is reset! Bad session behaviour'));
         });
     });
@@ -168,58 +195,87 @@ describe('web application', function () { // eslint-disable-line func-names
         .expect('X-PUNISHEDBY', 'BAD LOCATION')
         .expect(403, 'Invalid API Key', done);
     });
+
+    it('allows to save custom session data by POST /api/v2/session/someValue with session token provided', (done) => {
+      supertest(app)
+        .post('/api/v2/session/someValue')
+        .set('Cookie', [util.format('PHPSESSID=%s', sessionIdSes)])
+        .send({
+          value: 'something',
+          _csrf: csrfTokenSes,
+        })
+        .expect(201, 'Created', done);
+    });
+
+    it.skip('allows to retrieve custom session data by GET /api/v2/session with session token provided', (done) => {
+      supertest(app)
+        .get('/api/v2/session')
+        .set('Cookie', [util.format('PHPSESSID=%s', sessionIdSes)])
+        .expect(200, (error, response) => {
+          if (error) {
+            return done(error);
+          }
+          response.success.should.be.true; // eslint-disable-line no-unused-expressions
+          response.data.should.exist; // eslint-disable-line no-unused-expressions
+          response.data.someValue.should.be.equal('something'); // eslint-disable-line no-unused-expressions
+          return done();
+        });
+    });
   });
 
-  it('has 200 and NY on /api/v2/state/00544', (done) => {
-    supertest(app)
-      .get('/api/v2/state/00544')
-      .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
-      .expect(200)
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        res.body.should.exist;// eslint-disable-line no-unused-expressions
-        res.body.data.should.exist;// eslint-disable-line no-unused-expressions
-        res.body.data.state.should.exist;// eslint-disable-line no-unused-expressions
-        res.body.data.state.should.be.equal('NY');
-        return done();
-      });
+  describe('/api/v2/state', () => {
+    it('has 200 and NY on GET /api/v2/state/00544', (done) => {
+      supertest(app)
+        .get('/api/v2/state/00544')
+        .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
+        .expect(200)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          res.body.should.exist;// eslint-disable-line no-unused-expressions
+          res.body.data.should.exist;// eslint-disable-line no-unused-expressions
+          res.body.data.state.should.exist;// eslint-disable-line no-unused-expressions
+          res.body.data.state.should.be.equal('NY');
+          return done();
+        });
+    });
+
+    it('has 200 and Marion city on GET /api/v2/state/62959', (done) => {
+      supertest(app)
+        .get('/api/v2/state/62959')
+        .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
+        .expect(200)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          res.body.should.exist; // eslint-disable-line no-unused-expressions
+          res.body.data.should.exist; // eslint-disable-line no-unused-expressions
+          res.body.data.city.should.exist; // eslint-disable-line no-unused-expressions
+          res.body.data.city.should.be.equal('Marion');
+          return done();
+        });
+    });
+
+    it('has 200 and Beverly Hills on GET /api/v2/state/90210', (done) => {
+      supertest(app)
+        .get('/api/v2/state/90210')
+        .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
+        .expect(200)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          res.body.should.exist; // eslint-disable-line no-unused-expressions
+          res.body.data.should.exist; // eslint-disable-line no-unused-expressions
+          res.body.data.city.should.exist; // eslint-disable-line no-unused-expressions
+          res.body.data.city.should.be.equal('Beverly Hills');
+          return done();
+        });
+    });
   });
 
-  it('has 200 and Marion city on /api/v2/state/62959', (done) => {
-    supertest(app)
-      .get('/api/v2/state/62959')
-      .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
-      .expect(200)
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        res.body.should.exist; // eslint-disable-line no-unused-expressions
-        res.body.data.should.exist; // eslint-disable-line no-unused-expressions
-        res.body.data.city.should.exist; // eslint-disable-line no-unused-expressions
-        res.body.data.city.should.be.equal('Marion');
-        return done();
-      });
-  });
-
-  it('has 200 and Beverly Hills on /api/v2/state/90210', (done) => {
-    supertest(app)
-      .get('/api/v2/state/90210')
-      .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
-      .expect(200)
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        res.body.should.exist; // eslint-disable-line no-unused-expressions
-        res.body.data.should.exist; // eslint-disable-line no-unused-expressions
-        res.body.data.city.should.exist; // eslint-disable-line no-unused-expressions
-        res.body.data.city.should.be.equal('Beverly Hills');
-        return done();
-      });
-  });
 
   describe('/api/v2/add-contact', () => {
     let acCsrfToken;
