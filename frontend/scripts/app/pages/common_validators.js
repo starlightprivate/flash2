@@ -1,4 +1,4 @@
-/* global $, filterXSS, jQuery, callAPI, UniversalStorage, customWrapperForIsMobileDevice */
+/* global $, DOMPurify, jQuery, callAPI, UniversalStorage, customWrapperForIsMobileDevice */
 function validate() {
   const cardNumberConfigurations = {
     amex: {
@@ -110,7 +110,7 @@ function validate() {
         $('.payment-icon .cc-american-express').addClass('faded');
       }
     }
-    if ($(this).val() === '') {
+    if ($(this).safeVal() === '') {
       $('.payment-icon .cc-icon').removeClass('inactive active faded');
       $('#last').addClass('cc-discover').removeClass('cc-diners-club cc-enroute cc-jcb cc-maestro');
     }
@@ -124,7 +124,7 @@ function validate() {
       domains,
       topLevelDomains,
       suggested(element, suggestion) {
-        $('.email + small').html(`Did you mean <a href='javascript:void(0)'>${filterXSS(suggestion.full)}</a>`).show();
+        $('.email + small').html(`Did you mean <a href='javascript:void(0)'>${DOMPurify.sanitize(suggestion.full)}</a>`).show();
       },
       empty() {
       },
@@ -132,7 +132,7 @@ function validate() {
   }
 
   function clickEvent() {
-    $('.email').val($(this).html());
+    $('.email').safeVal($(this).html());
     $('.email + small').hide().html('Great! We will send you a confirmation e-mail with tracking # after purchasing.');
     if ($('form').length > 0) {
       $('form').formValidation('revalidateField', 'email');
