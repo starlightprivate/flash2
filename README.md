@@ -1,10 +1,18 @@
 # flash2
 Merge of frontend and backend code into single container that is ok for developers to deploy on their local PC
 
-
+Badges
+=================
 
 [ ![Codeship Status for starlightgroup/flash2](https://app.codeship.com/projects/5ec6e150-e305-0134-1b72-664f30205a5b/status?branch=master)](https://app.codeship.com/projects/205942)
+[![bitHound Overall Score](https://www.bithound.io/projects/badges/9e423400-03cc-11e7-8b82-1d4d2e7ee639/score.svg)](https://www.bithound.io/github/starlightgroup/flash2)
+[![bitHound Dev Dependencies](https://www.bithound.io/projects/badges/9e423400-03cc-11e7-8b82-1d4d2e7ee639/devDependencies.svg)](https://www.bithound.io/github/starlightgroup/flash2/master/dependencies/npm)
+[![bitHound Code](https://www.bithound.io/projects/badges/9e423400-03cc-11e7-8b82-1d4d2e7ee639/code.svg)](https://www.bithound.io/github/starlightgroup/flash2)
+[![Code Climate](https://codeclimate.com/repos/58be6b3139404c025a0024b8/badges/1865a39a9ceafd4895ba/gpa.svg)](https://codeclimate.com/repos/58be6b3139404c025a0024b8/feed)
+[![Test Coverage](https://codeclimate.com/repos/58be6b3139404c025a0024b8/badges/1865a39a9ceafd4895ba/coverage.svg)](https://codeclimate.com/repos/58be6b3139404c025a0024b8/coverage)
+[![Issue Count](https://codeclimate.com/repos/58be6b3139404c025a0024b8/badges/1865a39a9ceafd4895ba/issue_count.svg)](https://codeclimate.com/repos/58be6b3139404c025a0024b8/feed)
 
+To feed our sin of pride,
 
 Requirements
 =================

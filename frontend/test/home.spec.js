@@ -13,11 +13,11 @@ describe('Home page', function() {
     browser.get('');
   });
 
-  it.skip('should have title as \'Tactical Mastery Flashlights\'', function() {
+  it('should have title as \'Tactical Mastery Flashlights\'', function() {
     expect(browser.getTitle()).to.eventually.equal('Tactical Mastery Flashlights');
   });
 
-  it.skip('should open contact popup when click on \'Click Here\' of hero video', function() {
+  it('should open contact popup when click on \'Click Here\' of hero video', function() {
     const videoContainer = '.video-container';
     const buttonId = 'wistia_22_midrollLink_link';
     const contactPopupId = 'modal-contact';
@@ -30,7 +30,7 @@ describe('Home page', function() {
     browser.wait(EC.visibilityOf(popupEl));
   });
 
-  it('should open contact popup when the hero video ends', function() {
+  it.skip('should open contact popup when the hero video ends', function() {
     return 'pending';
   });
 
