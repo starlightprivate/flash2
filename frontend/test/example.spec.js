@@ -1,11 +1,9 @@
-import chai from 'chai';
-const chaiAsPromised = require('chai-as-promised');
+import { describe, expect, it, browser, element, by } from './globals';
 
-chai.use(chaiAsPromised);
-const expect = chai.expect;
+browser.ignoreSynchronization = false;
 
-describe.skip('Protractor Demo App', function() {
-  it('should add one and two', function() {
+describe.skip('Protractor Demo App', () => {
+  it('should add one and two', () => {
     browser.get('http://juliemr.github.io/protractor-demo/');
 
     element(by.model('first')).sendKeys(1);

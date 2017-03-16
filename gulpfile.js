@@ -37,9 +37,9 @@ gulp.task('eslint', function () {
   const eslint = require('gulp-eslint');
   return gulp.src([
     config.src + '/scripts/app/**/*.js',
+    config.src + '/test/**/*.spec.js',
     'api/**/*.js',
     '*.js',
-    '!gulpfile.js',
     'config/redis.js',
     'config/**/*.js',
     'test/**/*.js',
