@@ -43,6 +43,7 @@ gulp.task('eslint', function () {
     'config/redis.js',
     'config/**/*.js',
     'test/**/*.js',
+    'frontend/test/*.js',
     '!gulpfile.js'
   ])
     .pipe(debug({title: 'Eslint this file:'}))
