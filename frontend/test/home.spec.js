@@ -1,5 +1,7 @@
 import { describe, before, expect, it, browser, element, by, EC } from './globals';
 
+browser.ignoreSynchronization = true;
+
 describe('Home page', () => {
   const videoContainer = '.video-container';
   const contactPopupId = 'modal-contact';
