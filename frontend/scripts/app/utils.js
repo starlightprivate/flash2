@@ -58,10 +58,11 @@ function initSessionIfNoCookies(cb) { // eslint-disable-line no-unused-vars
       url: '/robots.txt',
       complete: (request) => {
         if (sessId) {
-          UniversalStorage.saveStorageItem('PHPSESSID', sessId);
+          UniversalStorage.saveStorageItem('PREVPHPSESSID', sessId);
         } else {
-          UniversalStorage.saveStorageItem('PHPSESSID', request.getResponseHeader('phpsessid'));
+          UniversalStorage.saveStorageItem('PREVPHPSESSID', request.getResponseHeader('phpsessid'));
         }
+        UniversalStorage.saveStorageItem('PHPSESSID', request.getResponseHeader('phpsessid'));
         UniversalStorage.saveStorageItem('XSRF-TOKEN', request.getResponseHeader('xsrf-token'));
         if (cb) {
           cb();
@@ -87,9 +88,15 @@ function callAPI(endpoint, data, method, callback, err) {
   }
 
   if (!UniversalStorage.cookiesEnabled) {
-    headers = { PHPSESSID: UniversalStorage.getStorageItem('PHPSESSID'),
-      'XSRF-TOKEN': UniversalStorage.getStorageItem('XSRF-TOKEN'),
-    };
+    if (endpoint === 'session' && method === 'GET') {
+      headers = { PHPSESSID: UniversalStorage.getStorageItem('PREVPHPSESSID'),
+        'XSRF-TOKEN': UniversalStorage.getStorageItem('XSRF-TOKEN'),
+      };
+    } else {
+      headers = { PHPSESSID: UniversalStorage.getStorageItem('PHPSESSID'),
+        'XSRF-TOKEN': UniversalStorage.getStorageItem('XSRF-TOKEN'),
+      };
+    }
   }
 
   if (['PUT', 'POST', 'PATCH', 'DELETE'].indexOf(method) !== -1) {
@@ -125,7 +132,11 @@ function storeSessionToServer(data, cb) { // eslint-disable-line no-unused-vars
 
 function wrapLocationChange(route) { // eslint-disable-line no-unused-vars
   if (!UniversalStorage.cookiesEnabled) {
-    window.location = `${route}?PHPSESSID=${UniversalStorage.getStorageItem('PHPSESSID')}`;
+    if (route.indexOf('?') === -1) {
+      window.location = `${route}?PHPSESSID=${UniversalStorage.getStorageItem('PHPSESSID')}`;
+    } else {
+      window.location = `${route}&PHPSESSID=${UniversalStorage.getStorageItem('PHPSESSID')}`;
+    }
   } else {
     window.location = route;
   }

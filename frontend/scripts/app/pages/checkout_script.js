@@ -1,5 +1,6 @@
 /* global $, filterXSS, jQuery, callAPI, UniversalStorage */
-/* global bootstrapModal, customWrapperForIsMobileDevice, initSessionIfNoCookies */
+/* global bootstrapModal, customWrapperForIsMobileDevice, wrapLocationChange,
+initSessionIfNoCookies, storeSessionToServer */
 (() => {
   function init() {
     if (customWrapperForIsMobileDevice()) {
@@ -78,9 +79,11 @@
           if (resp.orderId) {
             UniversalStorage.saveOrderId(filterXSS(resp.orderId));
           }
-        // window.location = GlobalConfig.BasePagePath + "us_batteryoffer.html?orderId="
-        // + MediaStorage.orderId + "&pId=" + orderDetails.productId;
-          window.location = `us_batteryoffer.html?orderId=${filterXSS(MediaStorage.orderId)}&pId=${filterXSS(orderDetails.productId)}`;
+          // window.location = GlobalConfig.BasePagePath + "us_batteryoffer.html?orderId="
+          // + MediaStorage.orderId + "&pId=" + orderDetails.productId;
+          storeSessionToServer(UniversalStorage.getCheckoutDetails(), () => {
+            wrapLocationChange(`us_batteryoffer.html?orderId=${filterXSS(MediaStorage.orderId)}&pId=${filterXSS(orderDetails.productId)}`);
+          });
         } else {
           $('#checkoutForm .btn-complete').removeClass('pulse');
           let responseMessage = resp.message.constructor !== Object ?
@@ -459,7 +462,6 @@
     if (!UniversalStorage.cookiesEnabled) {
       callAPI('session', null, 'GET', (response) => {
         if (response.success) {
-          console.info(response);
           UniversalStorage.saveCheckoutDetails(response.data);
         }
         init();
