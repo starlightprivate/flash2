@@ -26,8 +26,7 @@ initSessionIfNoCookies, storeSessionToServer, wrapLocationChange */
     if (UniversalStorage.getStorageItem(myOrderID)) {
       window.location = 'index.html';
     } else if (!UniversalStorage.cookiesEnabled) {
-      console.info(`sending ${myOrderID}`);
-      callAPI(`/session/${myOrderID}`, { value: true });
+      callAPI(`session/${myOrderID}`, { value: true }, 'POST');
     } else {
       UniversalStorage.saveStorageItem(myOrderID, true);
       console.info(`setted ${myOrderID}`);
@@ -88,8 +87,15 @@ initSessionIfNoCookies, storeSessionToServer, wrapLocationChange */
       callAPI('session', null, 'GET', (response) => {
         if (response.success) {
           UniversalStorage.saveCheckoutDetails(response.data);
+          const orderId = UniversalStorage.getOrderId();
+          callAPI(`session/${orderId}`, null, 'GET', (resp) => {
+            console.info(resp);
+            if (resp.success && resp.data) {
+              UniversalStorage.saveStorageItem(orderId, resp.data);
+            }
+            init();
+          });
         }
-        init();
       });
     } else {
       init();

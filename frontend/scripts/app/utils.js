@@ -77,7 +77,7 @@ function initSessionIfNoCookies(cb) { // eslint-disable-line no-unused-vars
 // call API
 function callAPI(endpoint, data, method, callback, err) {
   let params = data;
-  let ApiUrl = `/api/v2/${endpoint}`;
+  let ApiUrl = `/api/v2/${endpoint}/`;
   let headers = {};
   const httpMethod = method || 'POST';
   // if data is an array pass as post,
@@ -88,7 +88,7 @@ function callAPI(endpoint, data, method, callback, err) {
   }
 
   if (!UniversalStorage.cookiesEnabled) {
-    if (endpoint === 'session' && method === 'GET') {
+    if (endpoint === 'session' && httpMethod === 'GET') {
       headers = { PHPSESSID: UniversalStorage.getStorageItem('PREVPHPSESSID'),
         //'XSRF-TOKEN': UniversalStorage.getStorageItem('XSRF-TOKEN'),
       };
@@ -99,7 +99,7 @@ function callAPI(endpoint, data, method, callback, err) {
     }
   }
 
-  if (['PUT', 'POST', 'PATCH', 'DELETE'].indexOf(method) !== -1) {
+  if (['PUT', 'POST', 'PATCH', 'DELETE'].indexOf(httpMethod) !== -1) {
     params._csrf = UniversalStorage.getStorageItem('XSRF-TOKEN'); // eslint-disable-line no-underscore-dangle
   }
 
@@ -108,6 +108,14 @@ function callAPI(endpoint, data, method, callback, err) {
     url: ApiUrl,
     headers,
     data: params,
+    complete: (request) => {
+      const csrfTokenValue = request.getResponseHeader('XSRF-TOKEN');
+      if (csrfTokenValue) {
+        console.info(endpoint);
+        console.info(csrfTokenValue);
+        UniversalStorage.saveStorageItem('XSRF-TOKEN', csrfTokenValue);
+      }
+    },
     beforeSend(xhr) { xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded'); },
   }).done((msg) => {
     if (typeof callback === 'function') {
