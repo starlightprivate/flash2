@@ -25,6 +25,10 @@ redis.on('error', () => {
     type: 'redis:error',
     env: config.ENV,
   });
+  throw new Error('redis:error');
+  // because application cannot work without redis
+  // if redis database failed, application have to fail
+  // because without redis it gives 500 errors to users
 });
 
 export default redis;
