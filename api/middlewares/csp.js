@@ -32,6 +32,7 @@ export default csp({
       'cdn.segment.com/analytics.js',
       '*.akamaihd.net',
       'api.segment.io',
+      'sentry.io/api/',
       'data:',
       'blob:',
     ],
@@ -96,6 +97,9 @@ export default csp({
       'www.google.co.il',
       'www.google.de',
       'www.google.ca',
+    ],
+    connectSrc: [ // https://sentry.io/starlight-group/node-api/issues/236397284/
+      'sentry.io/api/133525/store/',
     ],
     sandbox: ['allow-forms', 'allow-scripts'],
     reportUri: '/a434819b5a5f4bfeeaa5d47c8af8ac87',
