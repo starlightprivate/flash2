@@ -1,4 +1,4 @@
-/* global $, filterXSS, jQuery, callAPI, UniversalStorage */
+/* global $, DOMPurify, jQuery, callAPI, UniversalStorage */
 /* global customWrapperForIsMobileDevice, bootstrapModal, getJson, wrapLocationChange,
 storeSessionToServer, initSessionIfNoCookies */
 // eslint-disable-file babel/no-invalid-this
@@ -25,7 +25,7 @@ storeSessionToServer, initSessionIfNoCookies */
       const usParams = {};
       let productIdForUserParams = {};
       if (MediaStorage.orderId) {
-        usParams.orderId = filterXSS(MediaStorage.orderId);
+        usParams.orderId = DOMPurify.sanitize(MediaStorage.orderId);
         usParams.productQty = 1;
 
         switch (sellID) {
@@ -40,10 +40,10 @@ storeSessionToServer, initSessionIfNoCookies */
         }
 
         if (productIdForUserParams) {
-          usParams.productId = filterXSS(productIdForUserParams);
-          let nextPage = `receipt.html?orderId=${filterXSS(MediaStorage.orderId)}`;
+          usParams.productId = DOMPurify.sanitize(productIdForUserParams);
+          let nextPage = `receipt.html?orderId=${DOMPurify.sanitize(MediaStorage.orderId)}`;
           if (sellID === 'battery') {
-            nextPage = `us_headlampoffer.html?orderId=${filterXSS(MediaStorage.orderId)}`;
+            nextPage = `us_headlampoffer.html?orderId=${DOMPurify.sanitize(MediaStorage.orderId)}`;
           }
           callAPI('upsell', usParams, 'POST', (e) => {
             const json = getJson(e);
@@ -62,10 +62,10 @@ storeSessionToServer, initSessionIfNoCookies */
                   return;
                 }
               } else {
-                const messages = Object.keys(json.message).map(key => `${filterXSS(key)}:${filterXSS(json.message[key])}&lt;br&gt;`);
+                const messages = Object.keys(json.message).map(key => `${DOMPurify.sanitize(key)}:${DOMPurify.sanitize(json.message[key])}&lt;br&gt;`);
                 messageOut = messages.join('');
               }
-              bootstrapModal(filterXSS(messageOut), 'Problem with your Addon');
+              bootstrapModal(DOMPurify.sanitize(messageOut), 'Problem with your Addon');
             }
             $loadingBar.hide();
           });
@@ -77,9 +77,9 @@ storeSessionToServer, initSessionIfNoCookies */
     }
     function doUpsellNo(sellID) {
       $('div.js-div-loading-bar').show();
-      let nextPage = `receipt.html?orderId=${filterXSS(MediaStorage.orderId)}`;
+      let nextPage = `receipt.html?orderId=${DOMPurify.sanitize(MediaStorage.orderId)}`;
       if (sellID === 'battery') {
-        nextPage = `us_headlampoffer.html?orderId=${filterXSS(MediaStorage.orderId)}`;
+        nextPage = `us_headlampoffer.html?orderId=${DOMPurify.sanitize(MediaStorage.orderId)}`;
       }
       storeSessionToServer(UniversalStorage.getCheckoutDetails(), () => {
         wrapLocationChange(nextPage);
@@ -89,7 +89,7 @@ storeSessionToServer, initSessionIfNoCookies */
       doUpsellNo(upsellID);
     });
     $('.doupsellyes').click(() => {
-      doUpsellYes(upsellID, filterXSS($(this).data('productid')));
+      doUpsellYes(upsellID, DOMPurify.sanitize($(this).data('productid')));
     });
   }
   initSessionIfNoCookies(() => {

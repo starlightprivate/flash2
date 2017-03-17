@@ -1,4 +1,4 @@
-/* global $, filterXSS, jQuery, callAPI, UniversalStorage, initSessionIfNoCookies
+/* global $, DOMPurify, jQuery, callAPI, UniversalStorage, initSessionIfNoCookies
 customWrapperForIsMobileDevice, wrapLocationChange, storeSessionToServer */
 
 function initFieldFv(e, data) {
