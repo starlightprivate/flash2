@@ -9,14 +9,19 @@ exports.config = {
   framework: 'mocha',
   seleniumAddress: 'http://localhost:4444/wd/hub',
   specs: ['./frontend/test/**/*.spec.js'],
-  baseUrl: 'http://localhost:' + serverConfig.PORT,
+  baseUrl: 'http://' + serverConfig.HOST + ':' + serverConfig.PORT,
   mochaOpts: {
     reporter: 'spec',
-    timeout: 300000
+    timeout: 60000
   },
   capabilities: {
-    'browserName': 'phantomjs',
+    'browserName': 'phantomjs', //phantomjs, chrome, firefox,
+
     'phantomjs.binary.path': require('phantomjs-prebuilt').path,
-    'phantomjs.ghostdriver.cli.args': ['--loglevel=DEBUG']
+    'phantomjs.ghostdriver.cli.args': ['--loglevel=DEBUG'],
+
+    'chromeOptions': {
+      'args': ['show-fps-counter=true']
+    },
   }
 }
