@@ -221,14 +221,14 @@ app.use(csurf({ cookie: false }));
 // provide CSRF token in Anatolij's way - it works with angular 1.x from the box
 // https://starlightgroup.atlassian.net/browse/SG-14
 app.use((req, res, next) => {
-  if (req.originalUrl === '/robots.txt' || req.originalUrl.indexOf('/api/v2/') === 0) {
-    if (req.session) {
-      const token = req.csrfToken();
-      res.locals.csrf = token; // eslint-disable-line no-param-reassign
-      res.cookie('XSRF-TOKEN', token, { secure: isProtectedByCloudflare });
-      res.set('XSRF-TOKEN', token);
-    }
+  // if (req.originalUrl === '/robots.txt' || req.originalUrl.indexOf('/api/v2/') === 0) {
+  if (req.session) {
+    const token = req.csrfToken();
+    res.locals.csrf = token; // eslint-disable-line no-param-reassign
+    res.cookie('XSRF-TOKEN', token, { secure: isProtectedByCloudflare });
+    res.set('XSRF-TOKEN', token);
   }
+  // }
   next();
 });
 // END of SG-14
