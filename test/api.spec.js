@@ -196,6 +196,30 @@ describe('web application', function () { // eslint-disable-line func-names
         .expect(403, 'Invalid API Key', done);
     });
 
+
+    it('allows to save custom session data by POST /api/v2/session/ with session token provided', (done) => {
+      supertest(app)
+        .post('/api/v2/session')
+        .set('Cookie', [util.format('PHPSESSID=%s', sessionIdSes)])
+        .send({
+          someOtherValue: 'something',
+          _csrf: csrfTokenSes,
+        })
+        .expect(201, 'Created')
+        .end((error, res) => {
+          if (error) {
+            return done(error);
+          }
+
+          const csrf = extractCookie(res, csrfTokenCookieRegex);
+          if (csrf === false) {
+            return done(new Error('XSRF-TOKEN not set!'));
+          }
+          csrfTokenSes = csrf;
+          return done();
+        });
+    });
+
     it('allows to save custom session data by POST /api/v2/session/someValue with session token provided', (done) => {
       supertest(app)
         .post('/api/v2/session/someValue')
@@ -218,6 +242,7 @@ describe('web application', function () { // eslint-disable-line func-names
           response.body.success.should.be.true; // eslint-disable-line no-unused-expressions
           response.body.data.should.exist; // eslint-disable-line no-unused-expressions
           response.body.data.someValue.should.be.equal('something'); // eslint-disable-line no-unused-expressions
+          response.body.data.someOtherValue.should.be.equal('something'); // eslint-disable-line no-unused-expressions
           return done();
         });
     });
