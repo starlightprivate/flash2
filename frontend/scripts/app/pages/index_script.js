@@ -46,11 +46,12 @@ function openContactModal() {
       MediaStorage.phoneNumber = data.MobilePhone;
       MediaStorage.emailAddress = data.Email;
 
-    callAPI('create-lead', crmLead, 'POST', (resp) => {
-      if (resp.success) {
-        if (resp.orderId) {
-          MediaStorage.orderId = DOMPurify.sanitize(resp.orderId);
-          UniversalStorage.saveOrderId(DOMPurify.sanitize(resp.orderId));
+      callAPI('create-lead', crmLead, 'POST', (resp) => {
+        if (resp.success) {
+          if (resp.orderId) {
+            MediaStorage.orderId = DOMPurify.sanitize(resp.orderId);
+            UniversalStorage.saveOrderId(DOMPurify.sanitize(resp.orderId));
+          }
         }
         callback(resp.success);
       }, (textStatus) => {
