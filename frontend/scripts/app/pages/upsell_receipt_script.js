@@ -1,4 +1,4 @@
-/* global $, filterXSS, jQuery, callAPI, UniversalStorage, customWrapperForIsMobileDevice,
+/* global $, DOMPurify, jQuery, callAPI, UniversalStorage, customWrapperForIsMobileDevice,
 initSessionIfNoCookies, storeSessionToServer, wrapLocationChange */
 (() => {
   function init() {
@@ -27,7 +27,7 @@ initSessionIfNoCookies, storeSessionToServer, wrapLocationChange */
       window.location = 'index.html';
     } else if (!UniversalStorage.cookiesEnabled) {
       console.info(`sending ${myOrderID}`);
-      callAPI(`/session/${myOrderID}`, { value: myOrderID });
+      callAPI(`/session/${myOrderID}`, { value: true });
     } else {
       UniversalStorage.saveStorageItem(myOrderID, true);
       console.info(`setted ${myOrderID}`);
@@ -38,14 +38,14 @@ initSessionIfNoCookies, storeSessionToServer, wrapLocationChange */
         orderInfo = orderInfos[0];
       }
 
-      const orderId = filterXSS(orderInfo.orderId);
+      const orderId = DOMPurify.sanitize(orderInfo.orderId);
       $('#orderNumber').text(orderId);
       callAPI('get-trans', orderId, 'GET', (resp) => {
         if (resp.success) {
           if (resp.data) {
             const firstRow = resp.data[0];
             if (firstRow && firstRow.merchant) {
-              $('#ccIdentity').text(filterXSS(firstRow.merchant));
+              $('#ccIdentity').text(DOMPurify.sanitize(firstRow.merchant));
             } else {
               $('#ccIdentity').text('Tactical Mastery');
             }
@@ -53,7 +53,7 @@ initSessionIfNoCookies, storeSessionToServer, wrapLocationChange */
         }
       });
     }
-    callAPI('get-lead', filterXSS(myOrderID), 'GET', (resp) => {
+    callAPI('get-lead', DOMPurify.sanitize(myOrderID), 'GET', (resp) => {
       if (pageType === 'receipt') {
         if (resp.success) {
           populateThanksPage(resp.data);
@@ -67,7 +67,7 @@ initSessionIfNoCookies, storeSessionToServer, wrapLocationChange */
             // they can be on an upsell page up to an hour after the initial sale
           let doThatPop = true;
           if (pageType === 'upsell') {
-            const gmtStr = `${filterXSS(resp.message.data[0].dateUpdated)} GMT-0400`;
+            const gmtStr = `${DOMPurify.sanitize(resp.message.data[0].dateUpdated)} GMT-0400`;
             const orderDate = new Date(gmtStr);
             const nowDate = new Date();
             const minutesSince = (nowDate - orderDate) / 1000 / 60;
@@ -87,7 +87,7 @@ initSessionIfNoCookies, storeSessionToServer, wrapLocationChange */
     if (!UniversalStorage.cookiesEnabled) {
       callAPI('session', null, 'GET', (response) => {
         if (response.success) {
-          UniversalStorage.initServerSession(response.data);
+          UniversalStorage.saveCheckoutDetails(response.data);
         }
         init();
       });
