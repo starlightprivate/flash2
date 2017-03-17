@@ -221,6 +221,21 @@ describe('web application', function () { // eslint-disable-line func-names
           return done();
         });
     });
+    it('allows to retrieve custom session data by GET /api/v2/session/someValue with session token provided', (done) => {
+      supertest(app)
+        .get('/api/v2/session/someValue')
+        .set('Cookie', [util.format('PHPSESSID=%s', sessionIdSes)])
+        .expect(200, (error, response) => {
+          if (error) {
+            return done(error);
+          }
+          console.log(response.body);
+          response.body.success.should.be.true; // eslint-disable-line no-unused-expressions
+          response.body.data.should.exist; // eslint-disable-line no-unused-expressions
+          response.body.data.should.be.equal('something'); // eslint-disable-line no-unused-expressions
+          return done();
+        });
+    });
   });
 
   describe('/api/v2/state', () => {
