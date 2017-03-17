@@ -170,7 +170,7 @@ function getLead(req, res) {
 }
 
 function getTrans(req, res) {
-  const id = req.session.orderId || xss(req.params.id);
+  const id = req.session.orderId;// || xss(req.params.id);
   if (!id) {
     return res.error('bad response');
   }
