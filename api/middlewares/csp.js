@@ -99,11 +99,17 @@ export default csp({
       'www.google.ca',
     ],
     connectSrc: [
-      'sentry.io/api/133525/store/', // https://sentry.io/starlight-group/node-api/issues/236397284/
-      'api.segment.io/v1/p', // https://sentry.io/starlight-group/node-api/issues/236628285/
-      'distillery.wistia.com', // https://sentry.io/starlight-group/node-api/issues/236628785/
-      'pipedream.wistia.com', // https://sentry.io/starlight-group/node-api/issues/236628787/
-      'embed.wistia.com', // https://sentry.io/starlight-group/node-api/issues/236628780/
+      "'self'", // eslint-disable-line quotes
+      'cdn.jsdelivr.net',
+      '*.segment.com',
+      'segment.com',
+      '*.wistia.com',
+      'cdn.segment.com/analytics.js',
+      '*.akamaihd.net',
+      'api.segment.io',
+      'sentry.io/api/',
+      'data:',
+      'blob:',
     ],
     sandbox: ['allow-forms', 'allow-scripts'],
     reportUri: 'https://sentry.io/api/133524/csp-report/?sentry_key=68ae2c197a6440efac407117aec0326f',
