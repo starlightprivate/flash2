@@ -58,11 +58,11 @@ function initSessionIfNoCookies(cb) { // eslint-disable-line no-unused-vars
       url: '/robots.txt',
       complete: (request) => {
         if (sessId) {
-          UniversalStorage.saveStorageItem('PREVPHPSESSID', sessId);
+          UniversalStorage.saveStorageItem('PHPSESSID', sessId);
         } else {
-          UniversalStorage.saveStorageItem('PREVPHPSESSID', request.getResponseHeader('phpsessid'));
+          UniversalStorage.saveStorageItem('PHPSESSID', request.getResponseHeader('phpsessid'));
         }
-        UniversalStorage.saveStorageItem('PHPSESSID', request.getResponseHeader('phpsessid'));
+        // UniversalStorage.saveStorageItem('PHPSESSID', request.getResponseHeader('phpsessid'));
         UniversalStorage.saveStorageItem('XSRF-TOKEN', request.getResponseHeader('xsrf-token'));
         if (cb) {
           cb();
@@ -89,7 +89,7 @@ function callAPI(endpoint, data, method, callback, err) {
 
   if (!UniversalStorage.cookiesEnabled) {
     if (endpoint === 'session' && method === 'GET') {
-      headers = { PHPSESSID: UniversalStorage.getStorageItem('PREVPHPSESSID'),
+      headers = { PHPSESSID: UniversalStorage.getStorageItem('PHPSESSID'),
         //'XSRF-TOKEN': UniversalStorage.getStorageItem('XSRF-TOKEN'),
       };
     } else {
