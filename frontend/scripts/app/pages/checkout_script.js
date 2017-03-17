@@ -16,8 +16,8 @@
   function submitOrderForm() {
     const $loadingBar = $('div.js-div-loading-bar');
     $loadingBar.show();
-    const year = $('select[name=year]').safeVal();
-    const month = $('select[name=month]').safeVal();
+    const year = $('select[name=year]').val();
+    const month = $('select[name=month]').val();
     const d = new Date();
     const currentYear = d.getFullYear().toString().substr(2, 2);
     const currentMonth = (`0${d.getMonth() + 1}`).slice(-2);
@@ -46,9 +46,9 @@
     apiFields.forEach((key) => {
       let dirty;
       if (key !== 'productId') {
-        dirty = $(`[name=${key}]`).safeVal();
+        dirty = $(`[name=${key}]`).val();
       } else {
-        dirty = $('input[name=\'productId\']:checked', '#checkoutForm').safeVal();
+        dirty = $('input[name=\'productId\']:checked', '#checkoutForm').val();
       }
       orderDetails[key] = DOMPurify.sanitize(dirty);
     });
@@ -247,7 +247,7 @@
               const VALID_CARD_NUMBER = '4444111144441111';
 
               // Get the number pr by user
-              const value = $field.safeVal();
+              const value = $field.val();
 
               // Check if it"s one of test card numbers
               if (value !== '' && $.inArray(value, TEST_CARD_NUMBERS) !== -1) {
@@ -271,11 +271,11 @@
               const form = $field.parents('form');
               const currentDate = new Date();
               const year = parseInt(currentDate.getYear(), 10);
-              const yearVal = parseInt(form.find('[name=year]').safeVal(), 10);
+              const yearVal = parseInt(form.find('[name=year]').val(), 10);
               if (isNaN(yearVal) || yearVal === null || yearVal === undefined) {
                 return true;
               }
-              const selectedYear = 100 + (parseInt(form.find('[name=year]').safeVal(), 10) || 0);
+              const selectedYear = 100 + (parseInt(form.find('[name=year]').val(), 10) || 0);
               const currentMonth = parseInt(value, 10) -
                                    1 >= parseInt(currentDate.getMonth(), 10);
               if (selectedYear === year) {
@@ -435,7 +435,7 @@
     const tempValue = DOMPurify.sanitize(value);
     const uVal = DOMPurify.sanitize(MediaStorage[value]);
     if (uVal && uVal !== null && uVal !== 'null') {
-      $(`[name=${tempValue}]`).safeVal(uVal);
+      $(`[name=${tempValue}]`).val(uVal);
       $(`[name=${tempValue}]`).data('previousValue', uVal);
       $('#checkoutForm').formValidation('revalidateField', value);
     }
@@ -445,7 +445,7 @@
   const saveToStorage = () => {
     const checkoutDetails = {};
     checkoutFields.forEach((field) => {
-      checkoutDetails[field] = $(`[name=${field}]`).safeVal();
+      checkoutDetails[field] = $(`[name=${field}]`).val();
     });
     UniversalStorage.saveCheckoutDetails(checkoutDetails);
   };
