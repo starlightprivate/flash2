@@ -90,11 +90,11 @@ function callAPI(endpoint, data, method, callback, err) {
   if (!UniversalStorage.cookiesEnabled) {
     if (endpoint === 'session' && method === 'GET') {
       headers = { PHPSESSID: UniversalStorage.getStorageItem('PREVPHPSESSID'),
-        'XSRF-TOKEN': UniversalStorage.getStorageItem('XSRF-TOKEN'),
+        //'XSRF-TOKEN': UniversalStorage.getStorageItem('XSRF-TOKEN'),
       };
     } else {
       headers = { PHPSESSID: UniversalStorage.getStorageItem('PHPSESSID'),
-        'XSRF-TOKEN': UniversalStorage.getStorageItem('XSRF-TOKEN'),
+        //'XSRF-TOKEN': UniversalStorage.getStorageItem('XSRF-TOKEN'),
       };
     }
   }
