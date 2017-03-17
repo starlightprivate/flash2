@@ -2,29 +2,30 @@ import mailCtrl from '../../api/controllers/mail';
 import leadoutpostCtrl from '../../api/controllers/leadoutpost';
 import konnektiveCtrl from '../../api/controllers/konnektive';
 import testSession from '../../api/controllers/testSession';
+import session from '../../api/controllers/session';
 import testError from '../../api/controllers/testError';
 import resError from '../../api/middlewares/res_error';
 import resSuccess from '../../api/middlewares/res_success';
 
 
- // DO NOT REMOVE THIS COMMENT!!!
- // I know that code is quite ugly in this file.
- //  Be carefull with changing it.
- //  We have unit tests that covers nearly all actions called by frontend code.
- //  But if you change code here, you will have to
- //  1) verify that unit tests PASS (quite simple)
- //  2) verify that frontend code is not broken.
- //  It is much more complicated task - frontend code has worse quality.
- //
- //
- //  - Anatolij
- //
- //  In this file router handlers depicted with ### has server side unit tests.
- //
- //
- //  For this file - it bounds various controllers from `api/v2/controllers` to expess router,
- //  and than exports this router for being served as webserver.
- //
+// DO NOT REMOVE THIS COMMENT!!!
+// I know that code is quite ugly in this file.
+//  Be carefull with changing it.
+//  We have unit tests that covers nearly all actions called by frontend code.
+//  But if you change code here, you will have to
+//  1) verify that unit tests PASS (quite simple)
+//  2) verify that frontend code is not broken.
+//  It is much more complicated task - frontend code has worse quality.
+//
+//
+//  - Anatolij
+//
+//  In this file router handlers depicted with ### has server side unit tests.
+//
+//
+//  For this file - it bounds various controllers from `api/v2/controllers` to expess router,
+//  and than exports this router for being served as webserver.
+//
 
 
 function route(router) {
@@ -60,6 +61,13 @@ function route(router) {
 // test logger system for application throwing vicious errors
 // returns 404 on production
   router.get('/testError', testError);
+
+// save/load session data
+  router.get('/session', session.loadSessionAll);
+  router.post('/session', session.saveSessionAll);
+
+  router.get('/session/:valueName', session.loadSession);
+  router.post('/session/:valueName', session.saveSession);
 }
 
 const routes = { v2: route };
