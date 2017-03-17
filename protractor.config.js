@@ -12,10 +12,10 @@ exports.config = {
   baseUrl: 'http://' + serverConfig.HOST + ':' + serverConfig.PORT,
   mochaOpts: {
     reporter: 'spec',
-    timeout: 60000
+    timeout: 300000
   },
   capabilities: {
-    'browserName': 'phantomjs', //phantomjs, chrome, firefox,
+    'browserName': 'chrome', //phantomjs, chrome, firefox,
 
     'phantomjs.binary.path': require('phantomjs-prebuilt').path,
     'phantomjs.ghostdriver.cli.args': ['--loglevel=DEBUG'],

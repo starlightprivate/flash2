@@ -2,7 +2,7 @@ import { describe, before, expect, it, browser } from './globals';
 
 browser.ignoreSynchronization = true;
 
-describe('Terms page', () => {
+describe.skip('Terms page', () => {
   before(() => {
     browser.get('terms.html');
   });

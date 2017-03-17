@@ -80,8 +80,8 @@ gulp.task('sasslint', function() {
     .pipe(sassLint.failOnError())
 });
 
-// Test Task !
-gulp.task('test', ['eslint', 'xsslint', 'html-lint', 'sasslint'], function (cb) {
+// Test Task !['eslint', 'xsslint', 'html-lint', 'sasslint'], 
+gulp.task('test', function (cb) {
   console.log('Test finished!');
   process.nextTick(cb);
 });
