@@ -127,7 +127,7 @@ async function addKonnektiveOrder(req, res) {
 }
 
 function getLead(req, res) {
-  const id = req.session.orderId;
+  const id = req.session.orderId || xss(req.params.id);
   if (!id) {
     return res.error('bad response');
   }
@@ -170,7 +170,7 @@ function getLead(req, res) {
 }
 
 function getTrans(req, res) {
-  const id = req.session.orderId;
+  const id = req.session.orderId || xss(req.params.id);
   if (!id) {
     return res.error('bad response');
   }
@@ -256,7 +256,7 @@ async function createKonnektiveLead(req, res) {
   return res.success(response.message);
 }
 
-
+/* eslint-disable no-param-reassign */
 async function upsell(req, res) {
   const { productId, productQty } = req.body;
   if (!productId || !productQty) {
@@ -264,13 +264,13 @@ async function upsell(req, res) {
   }
   // console.log('Preparing to send data to /upsale/import', req.body);
   if (!useProxy) {
-    req.body.loginId = konnectiveLogin; // eslint-disable-line no-param-reassign
-    req.body.password = konnectivePassword; // eslint-disable-line no-param-reassign
+    req.body.loginId = konnectiveLogin;
+    req.body.password = konnectivePassword;
   }
   // documentation on api
   // https://api.konnektive.com/docs/upsale_import/
 
-  req.body.orderId = req.session.orderId;  // eslint-disable-line no-param-reassign
+  req.body.orderId = req.session.orderId || req.body.orderId;
 
   const options = {
     uri: util.format('%supsale/import/', connectiveApiURL),
