@@ -16,4 +16,6 @@ codeship.aes
 google_deployment.env
 
 *.rdb
+!/public/robots.txt
+
 *.log

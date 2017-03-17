@@ -12,3 +12,4 @@ Dockerfile
 docker-compose.yml
 redis/
 coverage/
+!/public/robots.txt
