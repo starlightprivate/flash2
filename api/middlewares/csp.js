@@ -100,7 +100,10 @@ export default csp({
     ],
     connectSrc: [
       'sentry.io/api/133525/store/', // https://sentry.io/starlight-group/node-api/issues/236397284/
-      'api.segment.io/v1/p', //https://sentry.io/starlight-group/node-api/issues/236628285/
+      'api.segment.io/v1/p', // https://sentry.io/starlight-group/node-api/issues/236628285/
+      'distillery.wistia.com', // https://sentry.io/starlight-group/node-api/issues/236628785/
+      'pipedream.wistia.com', // https://sentry.io/starlight-group/node-api/issues/236628787/
+      'embed.wistia.com', // https://sentry.io/starlight-group/node-api/issues/236628780/
     ],
     sandbox: ['allow-forms', 'allow-scripts'],
     reportUri: '/a434819b5a5f4bfeeaa5d47c8af8ac87',
