@@ -460,7 +460,7 @@
   const saveToStorage = () => {
     const checkoutDetails = {};
     checkoutFields.forEach((field) => {
-      checkoutDetails[field] = $(`[name=${field}]`).safeVal();
+      checkoutDetails[field] = $(`[name=${field}]`).val();
     });
     UniversalStorage.saveCheckoutDetails(checkoutDetails);
   };

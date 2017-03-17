@@ -10,7 +10,7 @@
         const tempKey = filterXSS(key);
         const $input = $(`input[name=${tempKey}]`);
         if ($input.length > 0 && $input.val() !== '') {
-          let phoneNumber = $('input[name=phoneNumber]').safeVal();
+          let phoneNumber = $('input[name=phoneNumber]').val();
           switch (tempKey) {
           case 'postalCode':
             if ($input.val() !== tmpZipCode) {
