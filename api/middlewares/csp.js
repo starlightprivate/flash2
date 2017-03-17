@@ -98,8 +98,12 @@ export default csp({
       'www.google.de',
       'www.google.ca',
     ],
-    connectSrc: [ // https://sentry.io/starlight-group/node-api/issues/236397284/
-      'sentry.io/api/133525/store/',
+    connectSrc: [
+      'sentry.io/api/133525/store/', // https://sentry.io/starlight-group/node-api/issues/236397284/
+      'api.segment.io/v1/p', // https://sentry.io/starlight-group/node-api/issues/236628285/
+      'distillery.wistia.com', // https://sentry.io/starlight-group/node-api/issues/236628785/
+      'pipedream.wistia.com', // https://sentry.io/starlight-group/node-api/issues/236628787/
+      'embed.wistia.com', // https://sentry.io/starlight-group/node-api/issues/236628780/
     ],
     sandbox: ['allow-forms', 'allow-scripts'],
     reportUri: 'https://sentry.io/api/133524/csp-report/?sentry_key=68ae2c197a6440efac407117aec0326f',
