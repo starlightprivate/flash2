@@ -112,7 +112,7 @@ function callAPI(endpoint, data, method, callback, err) {
   }).done((msg, textStatus, request) => {
     // http://stackoverflow.com/a/4236041/1885921
     if (!UniversalStorage.cookiesEnabled) {
-      const csrfTokenValue = request.getResponseHeader('XSRF-token');
+      const csrfTokenValue = request.getResponseHeader('XSRF-TOKEN');
       UniversalStorage.saveStorageItem('XSRF-token', csrfTokenValue);
     }
     if (typeof callback === 'function') {
@@ -120,7 +120,7 @@ function callAPI(endpoint, data, method, callback, err) {
     }
   }).fail((jqXHR, textStatus, request) => {
     if (!UniversalStorage.cookiesEnabled) {
-      const csrfTokenValue = request.getResponseHeader('XSRF-token');
+      const csrfTokenValue = request.getResponseHeader('XSRF-TOKEN');
       UniversalStorage.saveStorageItem('XSRF-token', csrfTokenValue);
     }
     if (typeof err === 'function') {
