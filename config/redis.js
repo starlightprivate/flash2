@@ -1,3 +1,4 @@
+/* global process */
 import RedisClient from 'ioredis';
 import winston from 'winston';
 
