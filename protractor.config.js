@@ -12,7 +12,7 @@ exports.config = {
   baseUrl: 'http://' + serverConfig.HOST + ':' + serverConfig.PORT,
   mochaOpts: {
     reporter: 'spec',
-    timeout: 300000
+    timeout: 120000
   },
   capabilities: {
     'browserName': 'chrome', //phantomjs, chrome, firefox,

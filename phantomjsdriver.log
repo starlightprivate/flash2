@@ -3148,3 +3148,100 @@ global code@http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyok
   e (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
   (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
 [INFO  - 2017-03-17T13:02:43.251Z] ShutdownReqHand - _handle - About to shutdown
+[INFO  - 2017-03-17T18:11:39.897Z] GhostDriver - Main - running on port 34290
+[INFO  - 2017-03-17T18:11:40.024Z] Session [2afca340-0b3d-11e7-a8e1-f7ee4b7a1ef1] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2017-03-17T18:11:40.024Z] Session [2afca340-0b3d-11e7-a8e1-f7ee4b7a1ef1] - page.customHeaders:  - {}
+[INFO  - 2017-03-17T18:11:40.024Z] Session [2afca340-0b3d-11e7-a8e1-f7ee4b7a1ef1] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"mac-10.11 (El Capitan)-64bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2017-03-17T18:11:40.025Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 2afca340-0b3d-11e7-a8e1-f7ee4b7a1ef1
+[ERROR - 2017-03-17T18:11:48.442Z] Session [2afca340-0b3d-11e7-a8e1-f7ee4b7a1ef1] - page.onError - msg: SecurityError: DOM Exception 18: An attempt was made to break through the security policy of the user agent.
+[ERROR - 2017-03-17T18:11:48.451Z] Session [2afca340-0b3d-11e7-a8e1-f7ee4b7a1ef1] - page.onError - stack:
+  cookie (http://fast.wistia.com/assets/external/E-v1.js:1610)
+  cookieValue (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  savedValue (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  e (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  initVisitorKey (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  initializeOnce (http://fast.wistia.com/assets/external/E-v1.js:1712)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:1712)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:1712)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:1538)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:4168)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:47)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:40)
+[ERROR - 2017-03-17T18:11:53.878Z] Session [2afca340-0b3d-11e7-a8e1-f7ee4b7a1ef1] - page.onError - msg: SecurityError: DOM Exception 18: An attempt was made to break through the security policy of the user agent.
+[ERROR - 2017-03-17T18:11:53.878Z] Session [2afca340-0b3d-11e7-a8e1-f7ee4b7a1ef1] - page.onError - stack:
+  o (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3)
+  exports (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3)
+  o (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3)
+  options (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  o (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2)
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  e (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+[INFO  - 2017-03-17T18:43:54.792Z] GhostDriver - Main - running on port 48513
+[INFO  - 2017-03-17T18:43:55.010Z] Session [ac53ead0-0b41-11e7-ad7b-834506788756] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2017-03-17T18:43:55.010Z] Session [ac53ead0-0b41-11e7-ad7b-834506788756] - page.customHeaders:  - {}
+[INFO  - 2017-03-17T18:43:55.010Z] Session [ac53ead0-0b41-11e7-ad7b-834506788756] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"mac-10.11 (El Capitan)-64bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2017-03-17T18:43:55.010Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: ac53ead0-0b41-11e7-ad7b-834506788756
+[ERROR - 2017-03-17T18:44:02.893Z] Session [ac53ead0-0b41-11e7-ad7b-834506788756] - page.onError - msg: SecurityError: DOM Exception 18: An attempt was made to break through the security policy of the user agent.
+[ERROR - 2017-03-17T18:44:02.893Z] Session [ac53ead0-0b41-11e7-ad7b-834506788756] - page.onError - stack:
+  cookie (http://fast.wistia.com/assets/external/E-v1.js:1610)
+  cookieValue (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  savedValue (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  e (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  initVisitorKey (http://fast.wistia.com/assets/external/E-v1.js:1809)
+  initializeOnce (http://fast.wistia.com/assets/external/E-v1.js:1712)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:1712)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:1712)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:1538)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:4168)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:47)
+  __webpack_require__ (http://fast.wistia.com/assets/external/E-v1.js:20)
+  (anonymous function) (http://fast.wistia.com/assets/external/E-v1.js:40)
+[ERROR - 2017-03-17T18:44:05.791Z] Session [ac53ead0-0b41-11e7-ad7b-834506788756] - page.onError - msg: SecurityError: DOM Exception 18: An attempt was made to break through the security policy of the user agent.
+[ERROR - 2017-03-17T18:44:05.791Z] Session [ac53ead0-0b41-11e7-ad7b-834506788756] - page.onError - stack:
+  o (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3)
+  exports (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3)
+  o (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:3)
+  options (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  o (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:2)
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  i (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  e (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+  (anonymous function) (http://cdn.segment.com/analytics.js/v1/7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd/analytics.min.js:1)
+[INFO  - 2017-03-17T18:44:09.775Z] ShutdownReqHand - _handle - About to shutdown
