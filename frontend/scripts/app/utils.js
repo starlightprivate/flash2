@@ -118,7 +118,7 @@ function callAPI(endpoint, data, method, callback, err) {
     if (typeof callback === 'function') {
       callback(msg);
     }
-  }).fail((jqXHR, textStatus) => {
+  }).fail((jqXHR, textStatus, request) => {
     if (!UniversalStorage.cookiesEnabled) {
       const csrfTokenValue = request.getResponseHeader('XSRF-token');
       UniversalStorage.saveStorageItem('XSRF-token', csrfTokenValue);
