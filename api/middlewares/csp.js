@@ -98,8 +98,9 @@ export default csp({
       'www.google.de',
       'www.google.ca',
     ],
-    connectSrc: [ // https://sentry.io/starlight-group/node-api/issues/236397284/
-      'sentry.io/api/133525/store/',
+    connectSrc: [
+      'sentry.io/api/133525/store/', // https://sentry.io/starlight-group/node-api/issues/236397284/
+      'api.segment.io/v1/p', //https://sentry.io/starlight-group/node-api/issues/236628285/
     ],
     sandbox: ['allow-forms', 'allow-scripts'],
     reportUri: '/a434819b5a5f4bfeeaa5d47c8af8ac87',
