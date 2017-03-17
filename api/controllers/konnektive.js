@@ -127,7 +127,7 @@ async function addKonnektiveOrder(req, res) {
 }
 
 function getLead(req, res) {
-  const id = req.session.orderId || xss(req.params.id);
+  const id = req.session.orderId;// || xss(req.params.id);
   if (!id) {
     return res.error('bad response');
   }
@@ -270,7 +270,7 @@ async function upsell(req, res) {
   // documentation on api
   // https://api.konnektive.com/docs/upsale_import/
 
-  req.body.orderId = req.session.orderId || req.body.orderId;
+  req.body.orderId = req.session.orderId;// || req.body.orderId;
 
   const options = {
     uri: util.format('%supsale/import/', connectiveApiURL),
