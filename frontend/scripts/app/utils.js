@@ -109,11 +109,20 @@ function callAPI(endpoint, data, method, callback, err) {
     headers,
     data: params,
     beforeSend(xhr) { xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded'); },
-  }).done((msg) => {
+  }).done((msg, textStatus, request) => {
+    // http://stackoverflow.com/a/4236041/1885921
+    if (!UniversalStorage.cookiesEnabled) {
+      const csrfTokenValue = request.getResponseHeader('XSRF-token');
+      UniversalStorage.saveStorageItem('XSRF-token', csrfTokenValue);
+    }
     if (typeof callback === 'function') {
       callback(msg);
     }
   }).fail((jqXHR, textStatus) => {
+    if (!UniversalStorage.cookiesEnabled) {
+      const csrfTokenValue = request.getResponseHeader('XSRF-token');
+      UniversalStorage.saveStorageItem('XSRF-token', csrfTokenValue);
+    }
     if (typeof err === 'function') {
       err(textStatus);
     }
