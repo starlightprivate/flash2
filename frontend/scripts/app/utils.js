@@ -77,7 +77,7 @@ function initSessionIfNoCookies(cb) { // eslint-disable-line no-unused-vars
 // call API
 function callAPI(endpoint, data, method, callback, err) {
   let params = data;
-  let ApiUrl = `/api/v2/${endpoint}/`;
+  let ApiUrl = `/api/v2/${endpoint}`;
   let headers = {};
   const httpMethod = method || 'POST';
   // if data is an array pass as post,

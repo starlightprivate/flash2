@@ -26,7 +26,8 @@ initSessionIfNoCookies, storeSessionToServer, wrapLocationChange */
     if (UniversalStorage.getStorageItem(myOrderID)) {
       window.location = 'index.html';
     } else if (!UniversalStorage.cookiesEnabled) {
-      callAPI(`session/${myOrderID}`, { value: true }, 'POST');
+      console.info(`sending ${myOrderID}`);
+      callAPI(`/session/${myOrderID}`, { value: true });
     } else {
       UniversalStorage.saveStorageItem(myOrderID, true);
       console.info(`setted ${myOrderID}`);
