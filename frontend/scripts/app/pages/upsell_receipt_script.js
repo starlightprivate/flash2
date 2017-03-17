@@ -23,6 +23,15 @@ initSessionIfNoCookies, storeSessionToServer, wrapLocationChange */
       window.location = 'checkout.html';
       return;
     }
+    if (UniversalStorage.getStorageItem(myOrderID)) {
+      window.location = 'index.html';
+    } else if (!UniversalStorage.cookiesEnabled) {
+      console.info(`sending ${myOrderID}`);
+      callAPI(`/session/${myOrderID}`, { value: true });
+    } else {
+      UniversalStorage.saveStorageItem(myOrderID, true);
+      console.info(`setted ${myOrderID}`);
+    }
     function populateThanksPage(orderInfos) {
       let orderInfo = orderInfos;
       if ($.type(orderInfos) === 'array') {
@@ -79,8 +88,15 @@ initSessionIfNoCookies, storeSessionToServer, wrapLocationChange */
       callAPI('session', null, 'GET', (response) => {
         if (response.success) {
           UniversalStorage.saveCheckoutDetails(response.data);
+          const orderId = UniversalStorage.getOrderId();
+          callAPI(`session/${orderId}`, null, 'GET', (resp) => {
+            console.info(resp);
+            if (resp.success && resp.data) {
+              UniversalStorage.saveStorageItem(orderId, resp.data);
+            }
+            init();
+          });
         }
-        init();
       });
     } else {
       init();

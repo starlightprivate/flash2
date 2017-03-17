@@ -101,6 +101,16 @@ const UniversalStorage = {
       UniversalStorage.saveCheckoutField(field, checkoutDetails[field]);
     });
   },
+
+  initServerSession: (data) => { // eslint-disable-line no-unused-vars
+    Object.keys(data).forEach((field) => {
+      if (UniversalStorage.whiteList.indexOf(field) > -1 && typeof data[field] !== 'undefined') {
+        UniversalStorage.saveCheckoutField(field, data[field]);
+      } else {
+        UniversalStorage.saveStorageItem(field, data[field]);
+      }
+    });
+  },
   /**
    * Wrapper which convert from json to object if cookies are enabled.
    * @return {Object}
