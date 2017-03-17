@@ -109,28 +109,30 @@ function callAPI(endpoint, data, method, callback, err) {
     headers,
     data: params,
     complete: (request) => {
-      const csrfTokenValue = request.getResponseHeader('XSRF-TOKEN');
-      if (csrfTokenValue) {
-        console.info(endpoint);
-        console.info(csrfTokenValue);
-        UniversalStorage.saveStorageItem('XSRF-TOKEN', csrfTokenValue);
+      if (!UniversalStorage.cookiesEnabled) {
+        const csrfTokenValue = request.getResponseHeader('XSRF-TOKEN');
+        if (csrfTokenValue) {
+          console.info(endpoint);
+          console.info(csrfTokenValue);
+          UniversalStorage.saveStorageItem('XSRF-TOKEN', csrfTokenValue);
+        }
       }
     },
     beforeSend(xhr) { xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded'); },
-  }).done((msg, textStatus, request) => {
+  }).done((msg/* , textStatus , request */) => {
     // http://stackoverflow.com/a/4236041/1885921
-    if (!UniversalStorage.cookiesEnabled) {
-      const csrfTokenValue = request.getResponseHeader('XSRF-TOKEN');
-      UniversalStorage.saveStorageItem('XSRF-TOKEN', csrfTokenValue);
-    }
+    // if (!UniversalStorage.cookiesEnabled) {
+    //   const csrfTokenValue = request.getResponseHeader('XSRF-TOKEN');
+    //   UniversalStorage.saveStorageItem('XSRF-TOKEN', csrfTokenValue);
+    // }
     if (typeof callback === 'function') {
       callback(msg);
     }
-  }).fail((jqXHR, textStatus, request) => {
-    if (!UniversalStorage.cookiesEnabled) {
-      const csrfTokenValue = request.getResponseHeader('XSRF-TOKEN');
-      UniversalStorage.saveStorageItem('XSRF-TOKEN', csrfTokenValue);
-    }
+  }).fail((jqXHR, textStatus/* , request */) => {
+    // if (!UniversalStorage.cookiesEnabled) {
+    //   const csrfTokenValue = request.getResponseHeader('XSRF-TOKEN');
+    //   UniversalStorage.saveStorageItem('XSRF-TOKEN', csrfTokenValue);
+    // }
     if (typeof err === 'function') {
       err(textStatus);
     }
