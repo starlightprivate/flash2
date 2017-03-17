@@ -1,8 +1,8 @@
-/* global $, filterXSS, jQuery, callAPI, UniversalStorage, initSessionIfNoCookies
+/* global $, DOMPurify, jQuery, callAPI, UniversalStorage, initSessionIfNoCookies
 customWrapperForIsMobileDevice, wrapLocationChange, storeSessionToServer */
 
 function initFieldFv(e, data) {
-  const field = filterXSS(data.field);
+  const field = DOMPurify.sanitize(data.field);
   const $field = data.element;
   const bv = data.fv;
 
@@ -10,18 +10,18 @@ function initFieldFv(e, data) {
   $span.attr('data-field', field);
 
   // Retrieve the valid message via getOptions()
-  const message = filterXSS(bv.getOptions(field).validMessage);
+  const message = DOMPurify.sanitize(bv.getOptions(field).validMessage);
   if (message) {
     $span.text(message);
   }
 }
 function successFieldFv(e, data) {
-  const field = filterXSS(data.field);
+  const field = DOMPurify.sanitize(data.field);
   const $field = data.element;
   $field.siblings(`.valid-message[data-field='${field}']`).show();
 }
 function errFieldFv(e, data) {
-  const field = filterXSS(data.field);
+  const field = DOMPurify.sanitize(data.field);
   const $field = data.element;
   $field.siblings(`.valid-message[data-field='${field}']`).hide();
 }
@@ -49,8 +49,8 @@ function openContactModal() {
       callAPI('create-lead', crmLead, 'POST', (resp) => {
         if (resp.success) {
           if (resp.orderId) {
-            MediaStorage.orderId = filterXSS(resp.orderId);
-            UniversalStorage.saveOrderId(filterXSS(resp.orderId));
+            MediaStorage.orderId = DOMPurify.sanitize(resp.orderId);
+            UniversalStorage.saveOrderId(DOMPurify.sanitize(resp.orderId));
           }
         }
         callback(resp.success);

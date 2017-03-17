@@ -102,20 +102,20 @@ app.use(bodyParser.json());
 // this strange thing is made for reason
 // it is endpoint that recieves CSP rules violation info
 // from hemlet-csp middleware - see `./api/middlewares/csp.js`
-app.post('/a434819b5a5f4bfeeaa5d47c8af8ac87', (req, res) => {
-  console.log(req.body); // temporary solution - i need to verify it actually sends data
-  winston.error('error:csp', {
-    buildId: config.buildId,
-    env: config.ENV,
-    type: 'error:csp',
-    ip: security.getIp(req),
-    path: req.originalUrl,
-    userAgent: req.get('User-Agent'),
-    error: req.body.toString(),
-  });
-  trace.incrementMetric('error/csp');
-  res.status(200).send('ok');
-});
+// app.post('/a434819b5a5f4bfeeaa5d47c8af8ac87', (req, res) => {
+//   console.log(req.body); // temporary solution - i need to verify it actually sends data
+//   winston.error('error:csp', {
+//     buildId: config.buildId,
+//     env: config.ENV,
+//     type: 'error:csp',
+//     ip: security.getIp(req),
+//     path: req.originalUrl,
+//     userAgent: req.get('User-Agent'),
+//     error: JSON.stringify(req.body, null, 2),
+//   });
+//   trace.incrementMetric('error/csp');
+//   res.status(200).send('ok');
+// });
 
 // Protect from parameter pollution
 // https://www.npmjs.com/package/hpp
@@ -253,8 +253,12 @@ Object.keys(routes).forEach((r) => {
   app.use(`/api/${r}`, router);
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/tacticalsales/', express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {
+  maxAge: (config.ENV === 'development') ? -1 : 31557600,
+}));
+app.use('/tacticalsales/', express.static(path.join(__dirname, 'public'), {
+  maxAge: (config.ENV === 'development') ? -1 : 31557600,
+}));
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
