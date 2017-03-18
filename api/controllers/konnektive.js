@@ -1,10 +1,12 @@
 import xss from 'xss';
 import util from 'util';
 import request from 'request-promise';
+import Analytics from 'analytics-node';
 
 import trace from './../../risingStack';
 import config from '../../server-config';
 import logger from './../logger';
+import security from './../middlewares/security';
 // const autopilot = new Autopilot(config.autopilot.key);
 
 // DO NOT REMOVE THIS COMMENT!!!
@@ -34,6 +36,10 @@ let proxyApiKey;
 let konnectiveLogin;
 let konnectivePassword;
 const useProxy = config.ENV === 'development';
+
+
+// Segment analytics https://segment.com/docs/sources/server/node/
+const segmentAnalytics = new Analytics(config.segmentWriteKey);
 
 if (useProxy) {
   connectiveApiURL = config.konnective.proxy;
@@ -118,11 +124,34 @@ async function addKonnektiveOrder(req, res) {
     emailAddress: body.emailAddress,
     apiResponse: JSON.stringify(response), //verify it do not have sensitive data like CC numbers
   });
-
   if (response.result === 'ERROR') {
     return res.error(response.message, 200);
   }
   req.session.orderId = response.message.orderId; // eslint-disable-line no-param-reassign
+
+  // https://segment.com/docs/sources/server/node/#identify
+  segmentAnalytics.track({
+    userId: req.sessionId,
+    event: 'konnectiveNewOrder',
+    properties: {
+      userAgent: xss(req.get('User-Agent')),
+      ip: security.getIp(req),
+      orderId: response.message.orderId,
+// it is all saved in user identity
+      // country: 'US',
+      // state: body.state,
+      // city: body.city,
+      // address1: body.address1,
+      // address2: body.address2,
+      // postalCode: body.postalCode,
+      // campaignId: body.campaignId,
+      // firstName: body.firstName,
+      // lastName: body.lastName,
+      // emailAddress: body.emailAddress,
+      apiResponse: JSON.stringify(response), //verify it do not have sensitive data like CC numbers
+    },
+  });
+
   return res.success(response.message);
 }
 
@@ -291,6 +320,31 @@ async function upsell(req, res) {
   if (response.result === 'ERROR') {
     return res.error(response.message);
   }
+
+  // https://segment.com/docs/sources/server/node/#identify
+  segmentAnalytics.track({
+    userId: req.sessionId,
+    event: 'upsell',
+    properties: {
+      userAgent: xss(req.get('User-Agent')),
+      ip: security.getIp(req),
+      orderId: req.session.orderId,
+// it is all saved in user identity
+      // country: 'US',
+      // state: body.state,
+      // city: body.city,
+      // address1: body.address1,
+      // address2: body.address2,
+      // postalCode: body.postalCode,
+      // campaignId: body.campaignId,
+      // firstName: body.firstName,
+      // lastName: body.lastName,
+      // emailAddress: body.emailAddress,
+      apiResponse: JSON.stringify(response), //verify it do not have sensitive data like CC numbers
+    },
+  });
+
+
   return res.success(response.message);
 }
 
