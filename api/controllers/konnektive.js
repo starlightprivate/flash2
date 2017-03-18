@@ -6,7 +6,7 @@ import Analytics from 'analytics-node';
 import trace from './../../risingStack';
 import config from '../../server-config';
 import logger from './../logger';
-import security from './../middlewares/security';
+
 // const autopilot = new Autopilot(config.autopilot.key);
 
 // DO NOT REMOVE THIS COMMENT!!!
@@ -134,8 +134,6 @@ async function addKonnektiveOrder(req, res) {
     userId: req.sessionId,
     event: 'konnectiveNewOrder',
     properties: {
-      userAgent: xss(req.get('User-Agent')),
-      ip: security.getIp(req),
       orderId: response.message.orderId,
 // it is all saved in user identity
       // country: 'US',
@@ -148,7 +146,9 @@ async function addKonnektiveOrder(req, res) {
       // firstName: body.firstName,
       // lastName: body.lastName,
       // emailAddress: body.emailAddress,
-      apiResponse: JSON.stringify(response), //verify it do not have sensitive data like CC numbers
+
+      //verify it do not have sensitive data like CC numbers
+      // apiResponse: JSON.stringify(response),
     },
   });
 
@@ -285,67 +285,59 @@ async function createKonnektiveLead(req, res) {
   return res.success(response.message);
 }
 
-/* eslint-disable no-param-reassign */
-async function upsell(req, res) {
-  const { productId, productQty } = req.body;
-  if (!productId || !productQty) {
+
+function upsell(req, res) {
+  // documentation on api
+  // https://api.konnektive.com/docs/upsale_import/
+  const body = {};
+  body.productId = xss(req.body.productId);
+  body.productQty = xss(req.body.productQty);
+  if (!body.productId || !body.productQty) {
     return res.error('Invalid Upsell Data');
   }
   // console.log('Preparing to send data to /upsale/import', req.body);
   if (!useProxy) {
-    req.body.loginId = konnectiveLogin;
-    req.body.password = konnectivePassword;
+    body.loginId = konnectiveLogin;
+    body.password = konnectivePassword;
   }
-  // documentation on api
-  // https://api.konnektive.com/docs/upsale_import/
-
-  req.body.orderId = req.session.orderId;// || req.body.orderId;
+  body.orderId = req.session.orderId;
 
   const options = {
     uri: util.format('%supsale/import/', connectiveApiURL),
-    qs: req.body,
+    qs: body,
     headers: {
       'api-key': proxyApiKey,
       'User-Agent': 'Request-Promise',
     },
     json: true, // Automatically parses the JSON string in the response
   };
-  const response = await request(options);
-  // console.log(response);
-  trace.incrementMetric('upsell');
-  logger('info', 'upsell', req, {
-    data: req.body, // probably something have to be filtered?
-    apiResponse: JSON.stringify(response),
-  }); // TODO - think of data required for logs
-  if (response.result === 'ERROR') {
-    return res.error(response.message);
-  }
+  return request(options)
+    .then((response) => {
+      trace.incrementMetric('upsell');
+      logger('info', 'upsell', req, {
+        orderId: body.orderId,
+        productId: body.productId,
+        productQty: body.productQty,
+        apiResponse: JSON.stringify(response),
+      });
+      // TODO - think of data required for logs
 
-  // https://segment.com/docs/sources/server/node/#identify
-  segmentAnalytics.track({
-    userId: req.sessionId,
-    event: 'upsell',
-    properties: {
-      userAgent: xss(req.get('User-Agent')),
-      ip: security.getIp(req),
-      orderId: req.session.orderId,
-// it is all saved in user identity
-      // country: 'US',
-      // state: body.state,
-      // city: body.city,
-      // address1: body.address1,
-      // address2: body.address2,
-      // postalCode: body.postalCode,
-      // campaignId: body.campaignId,
-      // firstName: body.firstName,
-      // lastName: body.lastName,
-      // emailAddress: body.emailAddress,
-      apiResponse: JSON.stringify(response), //verify it do not have sensitive data like CC numbers
-    },
-  });
+      if (response.result === 'ERROR') {
+        return res.error(response.message);
+      }
 
-
-  return res.success(response.message);
+      // https://segment.com/docs/sources/server/node/#identify
+      segmentAnalytics.track({
+        userId: req.sessionId,
+        event: 'upsell',
+        properties: {
+          orderId: body.orderId,
+          productId: body.productId,
+          productQty: body.productQty,
+        },
+      });
+      return res.success(response.message);
+    });
 }
 
 export default {
