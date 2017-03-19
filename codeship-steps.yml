@@ -8,24 +8,24 @@
       image_tag: "{{ .CommitID }}"
       registry: https://gcr.io
       dockercfg_service: gcr_dockercfg
-    - service: nginx
-      type: push
-      image_name: gcr.io/flash2-staging/nginx
-      image_tag: "{{ .CommitID }}"
-      registry: https://gcr.io
-      dockercfg_service: gcr_dockercfg
-    -  service: redis                         
-       type: push
-       image_name: gcr.io/flash2-staging/redis
-       image_tag: latest
-       registry: https://gcr.io
-       dockercfg_service: gcr_dockercfg
+    #- service: nginx
+    #  type: push
+    #  image_name: gcr.io/flash2-staging/nginx
+    #  image_tag: "{{ .CommitID }}"
+    #  registry: https://gcr.io
+    #  dockercfg_service: gcr_dockercfg
+    #-  service: redis                         
+    #   type: push
+    #   image_name: gcr.io/flash2-staging/redis
+    #   image_tag: latest
+    #   registry: https://gcr.io
+    #   dockercfg_service: gcr_dockercfg
 
   - type: parallel
     steps:
     - service: google_cloud_deployment_app
       command: /deploy/deploy_app.sh
-    - service: google_cloud_deployment_nginx
-      command: /deploy/deploy_nginx.sh
+    #- service: google_cloud_deployment_nginx
+    #  command: /deploy/deploy_nginx.sh
     #- service: google_cloud_deployment_redis
     #  command: /deploy/deploy_redis.sh
