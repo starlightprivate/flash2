@@ -1,4 +1,5 @@
-import { describe, before, expect, it, browser } from './globals';
+/* global describe, before, it, browser, protractor */
+import { expect } from './globals';
 
 browser.ignoreSynchronization = true;
 
