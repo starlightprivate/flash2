@@ -15,7 +15,7 @@ exports.config = {
     timeout: 120000
   },
   capabilities: {
-    'browserName': 'chrome', //phantomjs, chrome, firefox,
+    'browserName': process.env.TEST_BROWSER || 'chrome', //phantomjs, chrome, firefox,
 
     'phantomjs.binary.path': require('phantomjs-prebuilt').path,
     'phantomjs.ghostdriver.cli.args': ['--loglevel=DEBUG'],

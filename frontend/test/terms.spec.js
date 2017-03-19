@@ -1,9 +1,9 @@
-/* global describe, before, it, browser, protractor */
+/* global describe, before, it, browser, element, protractor */
 import { expect } from './globals';
 
 browser.ignoreSynchronization = true;
 
-describe.skip('Terms page', () => {
+describe('Terms page', () => {
   before(() => {
     browser.get('terms.html');
   });
