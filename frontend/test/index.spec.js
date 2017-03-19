@@ -52,10 +52,10 @@ describe('Index page', () => {
     const buttonYesEl = element(by.cssContainingText('.btn.btn-danger', 'YES!'));
     const nameEl = element(by.name('contactModalName'));
     const emailEl = element(by.name('email'));
-    // const phoneEl = element(by.name('phoneNumber'));
+    const phoneEl = element(by.name('phoneNumber'));
     const nameGroupEl = element(by.css('.form-group-name'));
     const emailGroupEl = element(by.css('.form-group-email'));
-    // const phoneGroupEl = element(by.css('.form-group-phone'));
+    const phoneGroupEl = element(by.css('.form-group-phone'));
 
     before(() => {
       const buttonEl = element(by.cssContainingText(greenBtnClass, 'Yes! I want 75% Off!'));
@@ -143,6 +143,48 @@ describe('Index page', () => {
 
       it('should validate email when input \'email@test.ok\'', () => {
         emailEl.sendKeys('email@test.ok');
+        expect(rightValidator.isDisplayed()).to.eventually.equal(true);
+      });
+    });
+
+    describe('Phone field', () => {
+      const emptyValidator = phoneGroupEl.element(by.cssContainingText('.form-control-feedback', 'Please supply a phone number'));
+      const formatValidator = phoneGroupEl.element(by.cssContainingText('.form-control-feedback', 'Not a valid 10-digit US phone number'));
+      const rightValidator = phoneGroupEl.element(by.cssContainingText('.valid-message.text-success', 'Success!'));
+
+      beforeEach(() => {
+        phoneEl.clear();
+      });
+
+      it('should validate phone number when input \'\'', () => {
+        phoneEl.sendKeys('');
+        buttonYesEl.click();
+        browser.sleep(1000);
+        expect(emptyValidator.isDisplayed()).to.eventually.equal(true);
+      });
+
+      it('should validate phone number when input single letter \'a\'', () => {
+        phoneEl.sendKeys('a');
+        expect(emptyValidator.isDisplayed()).to.eventually.equal(true);
+      });
+
+      it('should validate phone number when input letters \'test phone number\'', () => {
+        phoneEl.sendKeys('test phone number');
+        expect(emptyValidator.isDisplayed()).to.eventually.equal(true);
+      });
+
+      it('should validate phone number when input short digits \'12345\'', () => {
+        phoneEl.sendKeys('12345');
+        expect(formatValidator.isDisplayed()).to.eventually.equal(true);
+      });
+
+      it('should trim 10 digits and validate phone number when input long digits \'00001111222233334444\'', () => {
+        phoneEl.sendKeys('00001111222233334444');
+        expect(rightValidator.isDisplayed()).to.eventually.equal(true);
+      });
+
+      it('should filter digits and validate phone number when input complex string \'000 a111 222b cc333\'', () => {
+        phoneEl.sendKeys('000 a111 222b cc333');
         expect(rightValidator.isDisplayed()).to.eventually.equal(true);
       });
     });
