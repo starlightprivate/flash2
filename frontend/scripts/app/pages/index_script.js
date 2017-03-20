@@ -1,6 +1,6 @@
-/* global $, filterXSS, jQuery, callAPI, UniversalStorage, customWrapperForIsMobileDevice */
+/* global $, DOMPurify, jQuery, callAPI, UniversalStorage, customWrapperForIsMobileDevice */
 function initFieldFv(e, data) {
-  const field = filterXSS(data.field);
+  const field = DOMPurify.sanitize(data.field);
   const $field = data.element;
   const bv = data.fv;
 
@@ -8,18 +8,18 @@ function initFieldFv(e, data) {
   $span.attr('data-field', field);
 
   // Retrieve the valid message via getOptions()
-  const message = filterXSS(bv.getOptions(field).validMessage);
+  const message = DOMPurify.sanitize(bv.getOptions(field).validMessage);
   if (message) {
     $span.text(message);
   }
 }
 function successFieldFv(e, data) {
-  const field = filterXSS(data.field);
+  const field = DOMPurify.sanitize(data.field);
   const $field = data.element;
   $field.siblings(`.valid-message[data-field='${field}']`).show();
 }
 function errFieldFv(e, data) {
-  const field = filterXSS(data.field);
+  const field = DOMPurify.sanitize(data.field);
   const $field = data.element;
   $field.siblings(`.valid-message[data-field='${field}']`).hide();
 }
@@ -46,8 +46,8 @@ function openContactModal() {
     callAPI('create-lead', crmLead, 'POST', (resp) => {
       if (resp.success) {
         if (resp.orderId) {
-          MediaStorage.orderId = filterXSS(resp.orderId);
-          UniversalStorage.saveOrderId(filterXSS(resp.orderId));
+          MediaStorage.orderId = DOMPurify.sanitize(resp.orderId);
+          UniversalStorage.saveOrderId(DOMPurify.sanitize(resp.orderId));
         }
       }
       callback(resp.success);
@@ -71,9 +71,9 @@ function openContactModal() {
   // This switches between contact modal & address modal
   function submitContactForm() {
     const data = {
-      Email: $('[name=email]').safeVal(),
-      FirstName: $('[name=contactModalName]').safeVal(),
-      MobilePhone: $('[name=phoneNumber]').safeVal(),
+      Email: $('[name=email]').val(),
+      FirstName: $('[name=contactModalName]').val(),
+      MobilePhone: $('[name=phoneNumber]').val(),
       LastName: 'NA',
     };
 
@@ -120,7 +120,7 @@ function openContactModal() {
     ];
     const tmp = {};
     addressFormFields.forEach((field) => {
-      const value = $(`[name=${field}]`).safeVal();
+      const value = $(`[name=${field}]`).val();
       UniversalStorage.saveCheckoutField(field, value);
       tmp[field] = value;
     });
@@ -245,4 +245,19 @@ function openContactModal() {
   $('.footer-image').click(() => {
     openContactModal();
   });
+
+  const removeHashUrl = () => {
+    const original = window.location.href.substr(0, window.location.href.indexOf('#'));
+    history.replaceState({}, document.title, original);
+  };
+
+  const toggleModalIfHashUrl = () => {
+    if (window.location.hash === '#modal-contact') {
+      $('#modal-contact').modal('toggle');
+      removeHashUrl();
+    }
+  };
+
+  toggleModalIfHashUrl();
+  $(window).bind('hashchange', () => toggleModalIfHashUrl());
 })();

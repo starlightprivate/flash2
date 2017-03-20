@@ -15,10 +15,7 @@
     <link rel="icon" href="favicon.ico">
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/g/normalize@5.0.0,bootstrap@4.0.0-alpha.5(css/bootstrap.min.css),fontawesome@4.7.0(css/font-awesome.min.css)">
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Open+Sans:400,600,700,700i,800|Oswald:200,300,400,500,600,700|Roboto:700">
+      href="https://cdn.jsdelivr.net/g/normalize@5.0.0,bootstrap@4.0.0-alpha.5(css/bootstrap.min.css)">
     <link rel="stylesheet" href="assets/css/style.css">
     <script type="text/javascript">
       !function () {
@@ -198,7 +195,6 @@
             <span class="btn-title">EASY 24/7 USA PHONE SALES</span>
             <span class="btn-text">CLICK TO CALL</span>
           </a>
-          <button class="hide-element" data-toggle="modal" data-target="#modal-address"></button>
         </div>
 
         <div class="function">
@@ -511,29 +507,16 @@
     <!-- Loading Icons -->
     <script
       src="https://cdn.jsdelivr.net/g/jquery@3.1.1,js-cookie@2.2.0,tether@1.3.7,bootstrap@4.0.0-alpha.5,jquery.mask@1.14.0,mailcheck@1.1,mobile-detect.js@1.3.4,modernizr@3.3.1"></script>
-    <script type="text/javascript" src="assets/libs/formvalidation/js/formValidation.min.js"></script>
-    <script type="text/javascript" src="assets/libs/formvalidation/js/framework/bootstrap4.js"></script>
-    <script type="text/javascript" src="assets/libs/store.everything.min.js"></script>
-
-    <script type="text/javascript" src="assets/js/validator.min.js"></script>
-
-    <script type="text/javascript" src="assets/js/xss.js"></script>
-    <script type="text/javascript" src="assets/js/safty-overrides.js"></script>
-    <script type="text/javascript" src="assets/js/utils.js"></script>
-    <script type="text/javascript" src="assets/js/storage-wrapper.js"></script>
-    <script type="text/javascript" src="assets/js/validate_form_fields.js"></script>
+    <script type="text/javascript" src="assets/js/libs.js"></script>
     <script type="text/javascript" src="assets/js/index_script.js"></script>
     <script type="text/javascript" src="assets/js/common_validators.js"></script>
+
     <script type="text/javascript">
       window.wistiaDisableMux = true;
       window._wq = window._ws || [];
       _wq.push({
         id: "sg6u0amacm",
         onReady: function (video) {
-          video.bind('secondchange', function (s) {
-            $('.has-url span').html("Click Here");
-            $('.has-url').attr("href", "javascript:openContactModal();");
-          });
           video.bind('end', function () {
             openContactModal();
           });

@@ -16,4 +16,8 @@ RUN ls -l /src/app
 RUN npm run-script frontend
 
 EXPOSE 8000
+
+# Save git revision id in `public/build.txt`
+RUN git log --format='%h' -n 1 > public/build.txt
+
 CMD ["npm","start"]

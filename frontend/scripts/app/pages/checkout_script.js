@@ -1,4 +1,4 @@
-/* global $, filterXSS, jQuery, callAPI, UniversalStorage */
+/* global $, DOMPurify, jQuery, callAPI, UniversalStorage */
 /* global bootstrapModal, customWrapperForIsMobileDevice */
 (() => {
   if (customWrapperForIsMobileDevice()) {
@@ -10,7 +10,7 @@
 
   $('input[name=cardNumber]').attr('maxlength', '19');
 
-  const humanizeObject = message => Object.keys(message).map(key => `<span class='error-message'>${filterXSS(`${key} ${message[key]}`)}</span>`)
+  const humanizeObject = message => Object.keys(message).map(key => `<span class='error-message'>${DOMPurify.sanitize(`${key} ${message[key]}`)}</span>`)
     .join('');
 
   function submitOrderForm() {
@@ -50,11 +50,11 @@
       } else {
         dirty = $('input[name=\'productId\']:checked', '#checkoutForm').val();
       }
-      orderDetails[key] = filterXSS(dirty);
+      orderDetails[key] = DOMPurify.sanitize(dirty);
     });
 
-    orderDetails.cardMonth = filterXSS(month);
-    orderDetails.cardYear = filterXSS(year);
+    orderDetails.cardMonth = DOMPurify.sanitize(month);
+    orderDetails.cardYear = DOMPurify.sanitize(year);
     orderDetails.lastName = 'NA';
     orderDetails.orderId = MediaStorage.orderId;
 
@@ -74,15 +74,15 @@
       if (resp.success) {
         $('#checkoutForm .btn-complete').removeClass('pulse');
         if (resp.orderId) {
-          UniversalStorage.saveOrderId(filterXSS(resp.orderId));
+          UniversalStorage.saveOrderId(DOMPurify.sanitize(resp.orderId));
         }
         // window.location = GlobalConfig.BasePagePath + "us_batteryoffer.html?orderId="
         // + MediaStorage.orderId + "&pId=" + orderDetails.productId;
-        window.location = `us_batteryoffer.html?orderId=${filterXSS(MediaStorage.orderId)}&pId=${filterXSS(orderDetails.productId)}`;
+        window.location = `us_batteryoffer.html?orderId=${DOMPurify.sanitize(MediaStorage.orderId)}&pId=${DOMPurify.sanitize(orderDetails.productId)}`;
       } else {
         $('#checkoutForm .btn-complete').removeClass('pulse');
         let responseMessage = resp.message.constructor !== Object ?
-            filterXSS(resp.message) : humanizeObject(resp.message);
+            DOMPurify.sanitize(resp.message) : humanizeObject(resp.message);
         if (responseMessage) {
           let errHead = 'Problem with your order';
           let errBody;
@@ -133,7 +133,7 @@
     }
 
     CheckoutFields.forEach((field) => {
-      if ($(`[name='${filterXSS(field)}'].required`).parents('.form-group').hasClass('has-success')) { icfCount += 1; }
+      if ($(`[name='${DOMPurify.sanitize(field)}'].required`).parents('.form-group').hasClass('has-success')) { icfCount += 1; }
     });
 
     if (invalidFieldsCount === 0) {
@@ -149,12 +149,12 @@
     }
   }
   $('#checkoutForm').on('init.field.fv', (e, data) => {
-    const field = filterXSS(data.field);
+    const field = DOMPurify.sanitize(data.field);
     const $field = data.element;
     const bv = data.fv;
     const $span = $field.siblings('.valid-message');
     $span.attr('data-field', field);
-    const message = filterXSS(bv.getOptions(field).validMessage);
+    const message = DOMPurify.sanitize(bv.getOptions(field).validMessage);
     if (message) {
       $span.text(message);
     }
@@ -286,11 +286,6 @@
                       .addClass('has-success');
                   form.find('[name=year]')
                       .parents('.form-group')
-                      .find('.fv-control-feedback')
-                      .removeClass('fa-remove')
-                      .addClass('fa-check');
-                  form.find('[name=year]')
-                      .parents('.form-group')
                       .find('.form-control-feedback')
                       .hide();
                 } else {
@@ -298,11 +293,6 @@
                       .parents('.form-group')
                       .removeClass('has-success')
                       .addClass('has-warning');
-                  form.find('[name=year]')
-                      .parents('.form-group')
-                      .find('.fv-control-feedback')
-                      .removeClass('fa-check')
-                      .addClass('fa-remove');
                   form.find('[name=year]')
                       .parents('.form-group')
                       .find('[data-fv-validator=\'callback\']')
@@ -314,11 +304,6 @@
                   .parents('.form-group')
                   .removeClass('has-warning')
                   .addClass('has-success');
-              form.find('[name=year]')
-                  .parents('.form-group')
-                  .find('.fv-control-feedback')
-                  .removeClass('fa-remove')
-                  .addClass('fa-check');
               form.find('[name=year]')
                   .parents('.form-group')
                   .find('.form-control-feedback')
@@ -405,7 +390,7 @@
     }
   })
   .on('err.field.fv', (e, data) => {
-    const field = filterXSS(data.field);
+    const field = DOMPurify.sanitize(data.field);
     data.element.next(`.valid-message[data-field='${field}']`).hide();
     checkoutButtonPulse(CheckoutFieldsReq, data.fv.getInvalidFields().length);
   })
@@ -413,7 +398,7 @@
     data.fv.disableSubmitButtons(false);
   })
   .on('success.field.fv', (e, data) => {
-    const field = filterXSS(data.field);
+    const field = DOMPurify.sanitize(data.field);
     const $field = data.element;
     if (data.fv.getSubmitButton()) {
       data.fv.disableSubmitButtons(false);
@@ -447,8 +432,8 @@
   ];
   // Load cached values
   $.each(checkoutFields, (index, value) => {
-    const tempValue = filterXSS(value);
-    const uVal = filterXSS(MediaStorage[value]);
+    const tempValue = DOMPurify.sanitize(value);
+    const uVal = DOMPurify.sanitize(MediaStorage[value]);
     if (uVal && uVal !== null && uVal !== 'null') {
       $(`[name=${tempValue}]`).val(uVal);
       $(`[name=${tempValue}]`).data('previousValue', uVal);
@@ -460,7 +445,7 @@
   const saveToStorage = () => {
     const checkoutDetails = {};
     checkoutFields.forEach((field) => {
-      checkoutDetails[field] = $(`[name=${field}]`).safeVal();
+      checkoutDetails[field] = $(`[name=${field}]`).val();
     });
     UniversalStorage.saveCheckoutDetails(checkoutDetails);
   };

@@ -15,6 +15,7 @@ export default function (level, name, req, metadata) {
     data.sessionId = req.sessionID;
     data.entryPoint = req.session.entryPoint;
   }
+  data.buildId = config.buildId;
   data.env = config.ENV;
   data.path = req.originalUrl;
   data.query = req.query;
