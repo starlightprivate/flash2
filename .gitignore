@@ -14,6 +14,8 @@ coverage/
 # @see https://documentation.codeship.com/pro/getting-started/encryption/
 codeship.aes
 google_deployment.env
+**/*.decrypted
 
 *.rdb
 !/public/robots.txt
+
