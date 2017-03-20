@@ -2,6 +2,15 @@
   steps:
   - type: parallel
     steps:
+    - name: Testing Frontend
+      service: app
+      command: ./node_modules/.bin/gulp test
+
+    - name: Testing Backend
+      service: app
+      command: npm test
+  - type: parallel
+    steps:
     - service: app
       type: push
       image_name: gcr.io/flash2-staging/app
