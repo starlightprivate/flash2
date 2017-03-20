@@ -130,7 +130,16 @@ gulp.task('libcopy', function () {
 //copy validator library???
 gulp.task('jscopy', function () {
   return gulp.src([
-    'node_modules/validator/validator.min.js'
+    config.src + '/scripts/libs/purify.min.js',
+    config.src + '/scripts/libs/jpurify.js',
+    config.src + '/scripts/libs/formvalidation/js/formValidation.min.js',
+    config.src + '/scripts/libs/formvalidation/js/framework/bootstrap4.min.js',
+    config.src + '/scripts/libs/store.everything.min.js',
+    'node_modules/validator/validator.min.js',
+    config.src + '/scripts/app/config.js' ,
+    config.src + '/scripts/app/utils.js' ,
+    config.src + '/scripts/app/storage-wrapper.js' ,
+    config.src + '/scripts/app/safty-overrides.js' ,
   ])
     .pipe(newer(config.dist + '/assets/js'))
     .pipe(gulp.dest(config.dist + '/assets/js'));

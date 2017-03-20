@@ -1,4 +1,4 @@
-/* global $, filterXSS, jQuery, callAPI, UniversalStorage, customWrapperForIsMobileDevice */
+/* global $, DOMPurify, jQuery, callAPI, UniversalStorage, customWrapperForIsMobileDevice */
 function validate() {
   const cardNumberConfigurations = {
     amex: {
@@ -124,7 +124,7 @@ function validate() {
       domains,
       topLevelDomains,
       suggested(element, suggestion) {
-        $('.email + small').html(`Did you mean <a href='javascript:void(0)'>${filterXSS(suggestion.full)}</a>`).show();
+        $('.email + small').html(`Did you mean <a href='javascript:void(0)'>${DOMPurify.sanitize(suggestion.full)}</a>`).show();
       },
       empty() {
       },
