@@ -17,6 +17,7 @@
       image_tag: "{{ .CommitID }}"
       registry: https://gcr.io
       dockercfg_service: gcr_dockercfg
+      tag: staging
     #- service: nginx
     #  type: push
     #  image_name: gcr.io/flash2-staging/nginx
@@ -34,6 +35,7 @@
     steps:
     - service: google_cloud_deployment_app
       command: /deploy/deploy_app.sh
+      tag: staging
     #- service: google_cloud_deployment_nginx
     #  command: /deploy/deploy_nginx.sh
     #- service: google_cloud_deployment_redis
