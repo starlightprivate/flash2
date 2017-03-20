@@ -4,6 +4,10 @@ app:
     dockerfile_path: Dockerfile
   encrypted_env_file: deploy/staging/environment.env.encrypted
   cached: true
+  links:
+    - redis
+redis:
+  image: redis
 
 #nginx:
 #  build:
