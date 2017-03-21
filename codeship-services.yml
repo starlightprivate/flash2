@@ -4,6 +4,7 @@ app:
     dockerfile_path: Dockerfile
   encrypted_env_file: deploy/staging/environment.env.encrypted
   cached: true
+  default_cache_branch: staging-vlad
   links:
     - redis
 redis:

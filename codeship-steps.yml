@@ -1,17 +1,17 @@
 - type: serial
   steps:
-  - type: parallel
-    steps:
-    - name: Testing Frontend
-      service: app
-      command: ./node_modules/.bin/gulp test
+  #- type: parallel
+  #  steps:
+  #  - name: Testing Frontend
+  #    service: app
+  #    command: ./node_modules/.bin/gulp test
 
-    - name: Testing Backend
-      service: app
-      command: npm test
-    - name: Upload to codeclimate
-      service: app
-      command: ./node_modules/.bin/codeclimate-test-reporter < coverage/lcov.info
+  #  - name: Testing Backend
+  #    service: app
+  #    command: npm test
+  #  - name: Upload to codeclimate
+  #    service: app
+  #    command: ./node_modules/.bin/codeclimate-test-reporter < coverage/lcov.info
   - type: parallel
     steps:
     - service: app
@@ -34,12 +34,12 @@
     #   registry: https://gcr.io
     #   dockercfg_service: gcr_dockercfg
 
-  - type: parallel
-    steps:
-    - service: google_cloud_deployment_app
-      command: /deploy/deploy_app.sh
-      tag: staging
-    #- service: google_cloud_deployment_nginx
-    #  command: /deploy/deploy_nginx.sh
-    #- service: google_cloud_deployment_redis
-    #  command: /deploy/deploy_redis.sh
+  #- type: parallel
+  #  steps:
+  #  - service: google_cloud_deployment_app
+  #    command: /deploy/deploy_app.sh
+  #    tag: staging
+  #  #- service: google_cloud_deployment_nginx
+  #  #  command: /deploy/deploy_nginx.sh
+  #  #- service: google_cloud_deployment_redis
+  #  #  command: /deploy/deploy_redis.sh
