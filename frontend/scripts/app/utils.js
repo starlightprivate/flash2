@@ -112,8 +112,8 @@ function callAPI(endpoint, data, method, callback, err) {
       if (!UniversalStorage.cookiesEnabled) {
         const csrfTokenValue = request.getResponseHeader('XSRF-TOKEN');
         if (csrfTokenValue) {
-          console.info(endpoint);
-          console.info(csrfTokenValue);
+          console.info(endpoint); // eslint-disable-line no-console
+          console.info(csrfTokenValue); // eslint-disable-line no-console
           UniversalStorage.saveStorageItem('XSRF-TOKEN', csrfTokenValue);
         }
       }
