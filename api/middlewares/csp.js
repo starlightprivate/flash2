@@ -104,6 +104,7 @@ export default csp({
       'www.google.de',
       'www.google.ca',
       'www.google.com.pk', // https://sentry.io/starlight-group/node-api/issues/237711249/
+      'www.google.co.in', // https://sentry.io/starlight-group/node-api/issues/236475387/
     ],
     connectSrc: [
       "'self'", // eslint-disable-line quotes
