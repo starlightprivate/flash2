@@ -1,17 +1,17 @@
 - type: serial
   steps:
-  #- type: parallel
-  #  steps:
-  #  - name: Testing Frontend
-  #    service: app
-  #    command: ./node_modules/.bin/gulp test
+  - type: parallel
+    steps:
+    - name: Testing Frontend
+      service: app
+      command: ./node_modules/.bin/gulp test
 
-  #  - name: Testing Backend
-  #    service: app
-  #    command: npm test
-  #  - name: Upload to codeclimate
-  #    service: app
-  #    command: ./node_modules/.bin/codeclimate-test-reporter < coverage/lcov.info
+    - name: Testing Backend
+      service: app
+      command: npm test
+    - name: Upload to codeclimate
+      service: app
+      command: ./node_modules/.bin/codeclimate-test-reporter < coverage/lcov.info
   - type: parallel
     steps:
     - service: app
