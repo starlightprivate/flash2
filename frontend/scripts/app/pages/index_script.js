@@ -75,9 +75,9 @@ function openContactModal() {
   // This switches between contact modal & address modal
     function submitContactForm() {
       const data = {
-        Email: $('[name=email]').safeVal(),
-        FirstName: $('[name=contactModalName]').safeVal(),
-        MobilePhone: $('[name=phoneNumber]').safeVal(),
+        Email: $('[name=email]').val(),
+        FirstName: $('[name=contactModalName]').val(),
+        MobilePhone: $('[name=phoneNumber]').val(),
         LastName: 'NA',
       };
 
@@ -126,7 +126,7 @@ function openContactModal() {
       ];
       const tmp = {};
       addressFormFields.forEach((field) => {
-        const value = $(`[name=${field}]`).safeVal();
+        const value = $(`[name=${field}]`).val();
         UniversalStorage.saveCheckoutField(field, value);
         tmp[field] = value;
       });

@@ -26,11 +26,11 @@ initSessionIfNoCookies, storeSessionToServer, wrapLocationChange */
     if (UniversalStorage.getStorageItem(myOrderID)) {
       window.location = 'index.html';
     } else if (!UniversalStorage.cookiesEnabled) {
-      console.info(`sending ${myOrderID}`);
+      console.info(`sending ${myOrderID}`); // eslint-disable-line no-console
       callAPI(`/session/${myOrderID}`, { value: true });
     } else {
       UniversalStorage.saveStorageItem(myOrderID, true);
-      console.info(`setted ${myOrderID}`);
+      console.info(`setted ${myOrderID}`); // eslint-disable-line no-console
     }
     function populateThanksPage(orderInfos) {
       let orderInfo = orderInfos;
@@ -90,7 +90,7 @@ initSessionIfNoCookies, storeSessionToServer, wrapLocationChange */
           UniversalStorage.saveCheckoutDetails(response.data);
           const orderId = UniversalStorage.getOrderId();
           callAPI(`session/${orderId}`, null, 'GET', (resp) => {
-            console.info(resp);
+            console.info(resp); // eslint-disable-line no-console
             if (resp.success && resp.data) {
               UniversalStorage.saveStorageItem(orderId, resp.data);
             }
