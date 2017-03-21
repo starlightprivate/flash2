@@ -20,7 +20,7 @@
       image_tag: "{{ .CommitID }}"
       registry: https://gcr.io
       dockercfg_service: gcr_dockercfg
-      tag: staging
+      tag: staging-vlad
     #- service: nginx
     #  type: push
     #  image_name: gcr.io/flash2-staging/nginx
