@@ -1,0 +1,23 @@
+apiVersion:  extensions/v1beta1
+kind: Deployment
+metadata:
+  name: app
+spec:
+  replicas: ${APP_REPLICAS}
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+      - name: app
+        image: ${IMAGE_NAME}/app:${CI_COMMIT_ID}
+        ports:
+        - containerPort: 8000
+        env:
+          - name: NODE_ENV
+            value: ${NODE_ENV}
+          - name: REDIS_URL
+            value: ${REDIS_URL}
+          - name: REDIS_AUTH
+            value: ${REDIS_AUTH}

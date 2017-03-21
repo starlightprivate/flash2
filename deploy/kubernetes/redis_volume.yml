@@ -1,0 +1,11 @@
+kind: PersistentVolume
+metadata:
+  name: redis-disk
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteOnce
+  gcePersistentDisk:
+    pdName: redis-disk
+    fsType: ext4
