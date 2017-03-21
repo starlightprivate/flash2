@@ -4,10 +4,12 @@ import request from 'request-promise';
 import xss from 'xss';
 import phone from 'phone';
 import Autopilot from 'autopilot-api';
-import trace from './../../risingStack';
+import Analytics from 'analytics-node';
 
+import trace from './../../risingStack';
 import config from '../../server-config';
 import logger from './../logger';
+import security from './../middlewares/security';
 import { mapToAutopilotJson, mapToLeadoutpostJson } from './mail';
 
 // DO NOT REMOVE THIS COMMENT!!!
@@ -22,6 +24,8 @@ import { mapToAutopilotJson, mapToLeadoutpostJson } from './mail';
 
 
 const autopilot = new Autopilot(config.autopilot.key);
+// Segment analytics https://segment.com/docs/sources/server/node/
+const segmentAnalytics = new Analytics(config.segmentWriteKey);
 
 
 async function migrate(req, res) {
@@ -110,6 +114,20 @@ function addContact(req, res) {
       .post(options)
       .then((data) => {
         logger('info', 'addContact', req, data); // TODO - think of data required for logs
+
+        // https://segment.com/docs/sources/server/node/#identify
+        segmentAnalytics.identify({
+          userId: req.sessionID,
+          traits: {
+            FirstName: leadoutpost.firstName,
+            LastName: leadoutpost.lastName,
+            Email: leadoutpost.email,
+            MobilePhone: leadoutpost.phone,
+            userAgent: xss(req.get('User-Agent')),
+            ip: security.getIp(req),
+          },
+        });
+
         trace.incrementMetric('addContact');
         return res.success();
       });
@@ -144,6 +162,23 @@ function updateContact(req, res) {
       .then((data) => {
         logger('info', 'updateContact', req, data); // TODO - think of data required for logs
         trace.incrementMetric('updateContact');
+
+        // https://segment.com/docs/sources/server/node/#identify
+        segmentAnalytics.identify({
+          userId: req.sessionID,
+          traits: {
+            FirstName: contactData.FirstName,
+            LastName: contactData.LastName,
+            Email: contactData.Email,
+            MobilePhone: contactData.MobilePhone,
+            MailingStreet: contactData.MailingStreet,
+            MailingCity: contactData.MailingCity,
+            MailingState: contactData.MailingState,
+            MailingPostalCode: contactData.MailingPostalCode,
+            userAgent: xss(req.get('User-Agent')),
+            ip: security.getIp(req),
+          },
+        });
         return res.success();
       });
   } catch (error) {
