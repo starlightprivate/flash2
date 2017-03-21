@@ -4,7 +4,7 @@ import { expect, config } from './globals';
 const EC = protractor.ExpectedConditions;
 browser.ignoreSynchronization = true;
 
-describe.skip('Index page', () => {
+describe('Index page', () => {
   const videoContainer = '.video-container';
   const greenBtnClass = '.btn.btn-green';
   const contactPopupEl = element(by.id('modal-contact'));

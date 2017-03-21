@@ -151,7 +151,7 @@ function openContactModal() {
           validators: {
             notEmpty: { message: 'Please enter your name.' },
             stringLength: {
-              max: 50,
+              max: 100,
               message: 'The name must be more than 1 and less than 100 characters long.',
             },
           },
@@ -161,8 +161,8 @@ function openContactModal() {
           validators: {
             notEmpty: { message: 'The email address is required.' },
             stringLength: {
-              min: 1,
-              max: 100,
+              min: 6,
+              max: 30,
               message: 'The email address must be more than 6 and less than 30 characters long.',
             },
             emailAddress: { message: 'The email address is not valid.' },
