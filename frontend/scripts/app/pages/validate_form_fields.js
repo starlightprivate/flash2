@@ -1,6 +1,7 @@
-/* global $, DOMPurify, jQuery, callAPI, UniversalStorage */
-/* global loadStateFromZip, customWrapperForIsMobileDevice */
+/* global $, DOMPurify, jQuery, utils, UniversalStorage */
+
 (() => {
+  const utilsInstance = utils();
   let tmpZipCode = '';
   /* eslint-disable no-unused-vars */
   function validateFields(frm, fields) {
@@ -15,7 +16,7 @@
           case 'postalCode':
             if ($input.val() !== tmpZipCode) {
               tmpZipCode = $input.val();
-              loadStateFromZip();
+              utilsInstance.loadStateFromZip();
             }
             break;
           case 'phoneNumber':

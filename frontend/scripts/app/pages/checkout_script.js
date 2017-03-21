@@ -1,9 +1,9 @@
-/* global $, DOMPurify, jQuery, callAPI, UniversalStorage */
-/* global bootstrapModal, customWrapperForIsMobileDevice, wrapLocationChange,
-initSessionIfNoCookies, storeSessionToServer */
+/* global $, DOMPurify, jQuery, utils, validate, UniversalStorage */
 (() => {
+  const utilsInstance = utils();
   function init() {
-    if (customWrapperForIsMobileDevice()) {
+    validate(utilsInstance);
+    if (utilsInstance.customWrapperForIsMobileDevice()) {
       $('#checkout-wrapper').addClass('mobile-mode');
       $('.step-4 .step-title span').html('Step #2 :');
     }
@@ -15,6 +15,10 @@ initSessionIfNoCookies, storeSessionToServer */
     const humanizeObject = message => Object.keys(message).map(key => `<span class='error-message'>${DOMPurify.sanitize(`${key} ${message[key]}`)}</span>`)
     .join('');
 
+    $('#zipcode').keyup(() => {
+      utilsInstance.loadStateFromZip();
+    });
+
     function submitOrderForm() {
       const $loadingBar = $('div.js-div-loading-bar');
       $loadingBar.show();
@@ -25,7 +29,7 @@ initSessionIfNoCookies, storeSessionToServer */
       const currentMonth = (`0${d.getMonth() + 1}`).slice(-2);
       if (!(currentYear < year || (currentYear === year && currentMonth <= month))) {
         $loadingBar.hide();
-        bootstrapModal('Invalid Expiration Date', 'Problem with your order');
+        utilsInstance.bootstrapModal('Invalid Expiration Date', 'Problem with your order');
         return;
       }
       const apiFields = [
@@ -71,8 +75,8 @@ initSessionIfNoCookies, storeSessionToServer */
         postalCode: orderDetails.postalCode,
       };
 
-      callAPI('update-contact', contactInfo, 'POST', () => {});
-      callAPI('create-order', orderDetails, 'POST', (resp) => {
+      utilsInstance.callAPI('update-contact', contactInfo, 'POST', () => {});
+      utilsInstance.callAPI('create-order', orderDetails, 'POST', (resp) => {
         if (resp.success) {
           $('#checkoutForm .btn-complete').removeClass('pulse');
           if (resp.orderId) {
@@ -80,8 +84,8 @@ initSessionIfNoCookies, storeSessionToServer */
           }
           // window.location = GlobalConfig.BasePagePath + "us_batteryoffer.html?orderId="
           // + MediaStorage.orderId + "&pId=" + orderDetails.productId;
-          storeSessionToServer(UniversalStorage.getCheckoutDetails(), () => {
-            wrapLocationChange(`us_batteryoffer.html?orderId=${DOMPurify.sanitize(MediaStorage.orderId)}&pId=${DOMPurify.sanitize(orderDetails.productId)}`);
+          utilsInstance.storeSessionToServer(UniversalStorage.getCheckoutDetails(), () => {
+            utilsInstance.wrapLocationChange(`us_batteryoffer.html?orderId=${DOMPurify.sanitize(MediaStorage.orderId)}&pId=${DOMPurify.sanitize(orderDetails.productId)}`);
           });
         } else {
           $('#checkoutForm .btn-complete').removeClass('pulse');
@@ -98,7 +102,7 @@ initSessionIfNoCookies, storeSessionToServer */
             errBody = '<span style=\'font-size:20px\'>';
             errBody += responseMessage;
             errBody += '<span>';
-            bootstrapModal(errBody, errHead);
+            utilsInstance.bootstrapModal(errBody, errHead);
           }
         }
         $loadingBar.hide();
@@ -107,7 +111,7 @@ initSessionIfNoCookies, storeSessionToServer */
     }
     // Checkout Form Validator
     let CheckoutFieldsReq;
-    if (!customWrapperForIsMobileDevice()) {
+    if (!utilsInstance.customWrapperForIsMobileDevice()) {
       CheckoutFieldsReq = [
         'firstName',
         'lastName',
@@ -132,7 +136,7 @@ initSessionIfNoCookies, storeSessionToServer */
     function checkoutButtonPulse(CheckoutFields, invalidFieldsCount) {
       const cfCount = CheckoutFields.length;
       let icfCount = 1;
-      if (customWrapperForIsMobileDevice()) {
+      if (utilsInstance.customWrapperForIsMobileDevice()) {
         icfCount = 0;
       }
 
@@ -457,9 +461,9 @@ initSessionIfNoCookies, storeSessionToServer */
     $('form').on('change', saveToStorage);
     window.onbeforeunload = saveToStorage;
   }
-  initSessionIfNoCookies(() => {
+  utilsInstance.initSessionIfNoCookies(() => {
     if (!UniversalStorage.cookiesEnabled) {
-      callAPI('session', null, 'GET', (response) => {
+      utilsInstance.callAPI('session', null, 'GET', (response) => {
         if (response.success) {
           UniversalStorage.saveCheckoutDetails(response.data);
         }
