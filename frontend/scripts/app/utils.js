@@ -112,8 +112,8 @@ function callAPI(endpoint, data, method, callback, err) {
       if (!UniversalStorage.cookiesEnabled) {
         const csrfTokenValue = request.getResponseHeader('XSRF-TOKEN');
         if (csrfTokenValue) {
-          console.info(endpoint);
-          console.info(csrfTokenValue);
+          console.info(endpoint); // eslint-disable-line no-console
+          console.info(csrfTokenValue); // eslint-disable-line no-console
           UniversalStorage.saveStorageItem('XSRF-TOKEN', csrfTokenValue);
         }
       }
@@ -164,7 +164,7 @@ function wrapLocationChange(route) { // eslint-disable-line no-unused-vars
 
 function loadStateFromZip() { // eslint-disable-line no-unused-vars
   const fZip = $('#zipcode');
-  const fZipVal = fZip.safeVal();
+  const fZipVal = fZip.val();
   const params = [];
   if (fZipVal.length === 5) {
     fZip.addClass('processed');
@@ -174,15 +174,15 @@ function loadStateFromZip() { // eslint-disable-line no-unused-vars
       const jData = resp.data;
       if (resp.success) {
         if (jData.city !== undefined && jData.city !== '' && jData.city !== null) {
-          $('#city').safeVal(jData.city);
+          $('#city').val(jData.city);
         } else {
-          $('#city').safeVal('');
+          $('#city').val('');
         }
 
         if (jData.state !== undefined && jData.state !== '' && jData.state !== null) {
-          $('.state').safeVal(jData.state).trigger('change');
+          $('.state').val(jData.state).trigger('change');
         } else {
-          $('.state').safeVal('');
+          $('.state').val('');
         }
         $('input[name=address1]').focus();
       }
