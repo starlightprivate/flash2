@@ -1,4 +1,6 @@
 # flash2
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/starlightgroup/flash2.svg?token=100123660862b7ddbf2e03e015ad4d70de35f224abee21eb8fd75e6ac86de148)](https://greenkeeper.io/)
 Merge of frontend and backend code into single container that is ok for developers to deploy on their local PC
 
 Badges
