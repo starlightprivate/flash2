@@ -131,7 +131,7 @@ async function addKonnektiveOrder(req, res) {
 
   // https://segment.com/docs/sources/server/node/#identify
   segmentAnalytics.track({
-    userId: req.sessionId,
+    userId: req.sessionID,
     event: 'konnectiveNewOrder',
     properties: {
       orderId: response.message.orderId,
@@ -328,7 +328,7 @@ function upsell(req, res) {
 
       // https://segment.com/docs/sources/server/node/#identify
       segmentAnalytics.track({
-        userId: req.sessionId,
+        userId: req.sessionID,
         event: 'upsell',
         properties: {
           orderId: body.orderId,
