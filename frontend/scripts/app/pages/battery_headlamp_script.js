@@ -56,7 +56,6 @@
                 messageOut = json.message;
                 if (messageOut === 'This upsale was already taken.') {
                   utilsInstance.storeSessionToServer(UniversalStorage.getCheckoutDetails(), () => {
-                    console.info('asda');
                     utilsInstance.wrapLocationChange(nextPage);
                   });
                   return;
