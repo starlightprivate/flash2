@@ -4,7 +4,7 @@ import { expect, config } from './globals';
 const EC = protractor.ExpectedConditions;
 browser.ignoreSynchronization = true;
 
-describe('Index page', () => {
+describe.skip('Index page', () => {
   const videoContainer = '.video-container';
   const greenBtnClass = '.btn.btn-green';
   const contactPopupEl = element(by.id('modal-contact'));
@@ -18,7 +18,7 @@ describe('Index page', () => {
     expect(browser.getTitle()).to.eventually.equal('Tactical Mastery Flashlights');
   });
 
-  describe.skip('Contact modal - open', () => {
+  describe('Contact modal - open', () => {
     afterEach(() => {
       contactPopupCloseEl.click();
       browser.wait(EC.invisibilityOf(contactPopupEl), 1000);
@@ -68,7 +68,7 @@ describe('Index page', () => {
 
     describe('Name field', () => {
       const emptyValidator = nameGroupEl.element(by.cssContainingText('.form-control-feedback', 'Please enter your name.'));
-      const lengthValidator = nameGroupEl.element(by.cssContainingText('.form-control-feedback', 'The name must be more than 1 and less than 50'));
+      const lengthValidator = nameGroupEl.element(by.cssContainingText('.form-control-feedback', 'The name must be more than 1 and less than 100'));
       const rightValidator = nameGroupEl.element(by.cssContainingText('.valid-message.text-success', 'Nice to meet you!'));
 
       beforeEach(() => {
@@ -82,13 +82,11 @@ describe('Index page', () => {
         expect(emptyValidator.isDisplayed()).to.eventually.equal(true);
       });
 
-      it('should validate name when input 1', () => {
-        nameEl.sendKeys(1);
-        expect(lengthValidator.isDisplayed()).to.eventually.equal(true);
-      });
-
-      it('should validate name when input long \'0000000000111111111122222222223333333333444444444455555555550\'', () => {
-        const longName = '0000000000111111111122222222223333333333444444444455555555550';
+      it('should validate name when input long length string greater than 100', () => {
+        let longName = '0';
+        for (let i = 0, end = 100; i < end; ++i) {
+          longName = `0${longName}`;
+        }
         nameEl.sendKeys(longName);
         expect(lengthValidator.isDisplayed()).to.eventually.equal(true);
       });
@@ -121,7 +119,7 @@ describe('Index page', () => {
         expect(formatValidator.isDisplayed()).to.eventually.equal(true);
       });
 
-      it('should validate email when input \'wrong@wrong\'', () => {
+      it.skip('should validate email when input \'wrong@wrong\'', () => {
         emailEl.sendKeys('wrong@wrong');
         expect(formatValidator.isDisplayed()).to.eventually.equal(true);
       });

@@ -8,7 +8,10 @@ const serverConfig = require('./server-config');
 exports.config = {
   framework: 'mocha',
   seleniumAddress: 'http://localhost:4444/wd/hub',
-  specs: ['./frontend/test/**/*.spec.js'],
+  specs: [
+    './frontend/test/index.spec.js',
+    './frontend/test/footer.spec.js',
+  ],
   baseUrl: 'http://' + serverConfig.HOST + ':' + serverConfig.PORT,
   mochaOpts: {
     reporter: 'spec',
