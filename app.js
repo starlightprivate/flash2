@@ -38,6 +38,7 @@ const app = express();
 console.log('Currently Running On : ', config.ENV);
 const isProtectedByCloudflare = ['production', 'staging'].indexOf(config.ENV) !== -1;
 
+// Log all HTTP requests as verbose level console messages - usefull on development
 app.use(expressWinston.logger({
   transports: [
     winston,
@@ -65,7 +66,8 @@ app.use(expressWinston.logger({
 
 
 // verify that site is requested from Cloudflare
-// all other sources will get error
+// all other sources will get error 500 NOT OK (cryptic, i know).
+// But this error only fired for non cloudflare access.
 // https://starlightgroup.atlassian.net/projects/SG/issues/SG-35
 if (isProtectedByCloudflare) {
   app.use(security.verifyThatSiteIsAccessedFromCloudflare); // ####
@@ -80,6 +82,9 @@ app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
 // https://helmetjs.github.io/docs/frameguard/
 app.use(helmet.frameguard({ action: 'deny' }));
 
+// This is Content Security Policy for site
+// https://en.wikipedia.org/wiki/Content_Security_Policy
+// see api/middlewares/csp.js for more details
 app.use(csp);
 
 // https://helmetjs.github.io/docs/hsts/
@@ -109,27 +114,9 @@ app.use(helmet.hpkp({
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// this strange thing is made for reason
-// it is endpoint that recieves CSP rules violation info
-// from hemlet-csp middleware - see `./api/middlewares/csp.js`
-// app.post('/a434819b5a5f4bfeeaa5d47c8af8ac87', (req, res) => {
-//   console.log(req.body); // temporary solution - i need to verify it actually sends data
-//   winston.error('error:csp', {
-//     buildId: config.buildId,
-//     env: config.ENV,
-//     type: 'error:csp',
-//     ip: security.getIp(req),
-//     path: req.originalUrl,
-//     userAgent: req.get('User-Agent'),
-//     error: JSON.stringify(req.body, null, 2),
-//   });
-//   trace.incrementMetric('error/csp');
-//   res.status(200).send('ok');
-// });
 
 // Protect from parameter pollution
 // https://www.npmjs.com/package/hpp
-
 app.use(hpp());
 
 // TODO
