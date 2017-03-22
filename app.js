@@ -73,7 +73,7 @@ if (isProtectedByCloudflare) {
 
 // hemlet headers - do not remove
 app.use(helmet());
-app.use(helmet.referrerPolicy());
+app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
 app.use(helmet.frameguard({ action: 'deny' }));
 
 app.use(csp);

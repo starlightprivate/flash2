@@ -47,6 +47,47 @@ describe('proxy', function () { // eslint-disable-line func-names
   });
 });
 
+describe('security headers send by nodejs application', ()=> {
+  it('have X-Frame-Options set to "DENY"', (done) => {
+    supertest(app)
+      .get('/tacticalsales/')
+      .expect('X-Powered-By', 'TacticalMastery')
+      .expect('X-Frame-Options', 'DENY')
+      .end(done);
+  });
+  it('have Referrer-Header set to "same-origin"', (done) => {
+    supertest(app)
+      .get('/tacticalsales/')
+      .expect('X-Powered-By', 'TacticalMastery')
+      .expect('Referrer-Header', 'same-origin')
+      .end(done);
+  });
+
+  it('have X-Content-Type-Options set to "nosniff"', (done) => {
+    supertest(app)
+      .get('/tacticalsales/')
+      .expect('X-Powered-By', 'TacticalMastery')
+      .expect('X-Content-Type-Options', 'nosniff')
+      .end(done);
+  });
+
+  it('have  X-XSS-Protection set to "1; mode=block"', (done) => {
+    supertest(app)
+      .get('/tacticalsales/')
+      .expect('X-Powered-By', 'TacticalMastery')
+      .expect('X-XSS-Protection', '1; mode=block')
+      .end(done);
+  });
+
+  it('have Strict-Transport-Security set to "max-age=31536000; includeSubdomains;"', (done) => {
+    supertest(app)
+      .get('/tacticalsales/')
+      .expect('X-Powered-By', 'TacticalMastery')
+      .expect('Strict-Transport-Security', 'max-age=31536000; includeSubdomains;')
+      .end(done);
+  });
+});
+
 describe('web application', function () { // eslint-disable-line func-names
 // eslint-disable-next-line
   this.timeout(10000); //not everybody have good internet connection, including codeship
