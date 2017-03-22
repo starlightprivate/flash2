@@ -1,10 +1,10 @@
 - type: serial
-  steps:
-  - type: serial
-    #steps:
-    #- name: run test
-    #  service: app
-    #  command: ./tests.sh
+  #steps:
+  #- type: serial
+  #  steps:
+  #  - name: run test
+  #    service: app
+  #    command: ./tests.sh
   
   
   #
