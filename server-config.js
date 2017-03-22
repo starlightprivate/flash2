@@ -75,6 +75,6 @@ module.exports = {
     token: process.env.LOGGLY_TOKEN || 'a52a98a7-c97f-40d5-bb5b-b544716b04c3',
     subdomain: process.env.LOGGLY_SUBDOMAIN || 'starlightgroup',
   },
-
+  segmentWriteKey: process.env.SEGMENT_WRITE_KEY || '7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd', // https://segment.com/docs/sources/server/node/
   buildId: util.format('https://github.com/starlightgroup/flash2/commit/%s', buildId),
 };
