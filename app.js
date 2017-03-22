@@ -73,12 +73,22 @@ if (isProtectedByCloudflare) {
 
 // hemlet headers - do not remove
 app.use(helmet());
+
+// https://helmetjs.github.io/docs/referrer-policy/
 app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
+
+// https://helmetjs.github.io/docs/frameguard/
 app.use(helmet.frameguard({ action: 'deny' }));
 
 app.use(csp);
 
+// https://helmetjs.github.io/docs/hsts/
+app.use(helmet.hsts({
+  maxAge: 31536000,
+  includeSubDomains: true,
+}));
 
+// https://helmetjs.github.io/docs/hpkp/
 app.use(helmet.hpkp({
   maxAge: 2592000, // 30 days
   sha256s: [
