@@ -4,7 +4,7 @@ import util from 'util';
 import fs from 'fs';
 import path from 'path';
 
-const buildIdPath = path.join(__dirname, 'public', 'build.txt');
+const buildIdPath = path.join(__dirname, 'public', 'buildId.txt');
 let buildId = 'unknown';
 
 if (fs.existsSync(buildIdPath)) {

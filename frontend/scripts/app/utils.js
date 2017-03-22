@@ -43,7 +43,7 @@ function utils() { // eslint-disable-line no-unused-vars
       const sessId = getUrlParameter('PHPSESSID');
       jQuery.ajax({
         type: 'GET',
-        url: '/robots.txt',
+        url: '/tacticalsales/robots.txt',
         complete: (request) => {
           if (sessId) {
             UniversalStorage.saveStorageItem('PHPSESSID', sessId);
@@ -65,7 +65,7 @@ function utils() { // eslint-disable-line no-unused-vars
 // call API
   function callAPI(endpoint, data, method, callback, err) {
     let params = data;
-    let ApiUrl = `/api/v2/${endpoint}/`;
+    let ApiUrl = `/tacticalsales/api/v2/${endpoint}/`;
     let headers = {};
     const httpMethod = method || 'POST';
   // if data is an array pass as post,
@@ -162,16 +162,16 @@ function utils() { // eslint-disable-line no-unused-vars
 // Terms and privacy popups
 
   function termsModal() { // eslint-disable-line no-unused-vars
-    popPage('terms.html', 'Terms & Conditions');
+    popPage('tacticalsales/terms.html', 'Terms & Conditions');
   }
   function partnerModal() { // eslint-disable-line no-unused-vars
-    popPage('partner.html', 'Partner');
+    popPage('tacticalsales/partner.html', 'Partner');
   }
   function privacyModal() { // eslint-disable-line no-unused-vars
-    popPage('privacy.html', 'Privacy Policy');
+    popPage('tacticalsales/privacy.html', 'Privacy Policy');
   }
   function custcareModal() { // eslint-disable-line no-unused-vars
-    popPage('customercare.html', 'Customer Care');
+    popPage('tacticalsales/customercare.html', 'Customer Care');
   }
 
   return {
