@@ -1,7 +1,7 @@
 /* global $, DOMPurify, jQuery, utils, validate, UniversalStorage */
 (() => {
   const utilsInstance = utils();
-  const loadStateFromZip = function () { // eslint-disable-line no-unused-vars
+  const loadStateFromZip = () => {
     const fZip = $('#zipcode');
     const fZipVal = fZip.val();
     const params = [];
@@ -39,7 +39,7 @@
     }
   };
 
-  const init = function () {
+  const init = () => {
     validate(utilsInstance);
     if (utilsInstance.customWrapperForIsMobileDevice()) {
       $('#checkout-wrapper').addClass('mobile-mode');
