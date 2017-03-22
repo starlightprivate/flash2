@@ -59,6 +59,10 @@ export default csp({
       'cdn.segment.com',
       '*.litix.io',
       // "'sha256-LC866cQ9tlE73BIp/WFYbgTYkS859vx0Hfk5RBVENLo='"
+
+      'ajax.cloudflare.com', // https://sentry.io/starlight-group/node-api/issues/237652251/
+      'amp.cloudflare.com', // https://sentry.io/starlight-group/node-api/issues/238457702/
+
     ],
     styleSrc: [
       "'self'", // eslint-disable-line quotes
@@ -72,6 +76,8 @@ export default csp({
       // "'sha256-6EANf3q7TA3PzDpgLK8msCpC3+5Oq9al9X2vFTn/4Zo='",
       // "'sha256-7YxZjqgD/pE+dM1CMFFeuqfzrw5kL6AzVXgC130wbtc='",
       // "'sha256-68t8GdqcvIIBWHbcG8ZlsUUhN/8isFuMo7CI53+xcSM='"
+
+      'amp.cloudflare.com', // https://sentry.io/starlight-group/node-api/issues/238457698/
     ],
     fontSrc: [
       "'self'", // eslint-disable-line quotes
@@ -97,6 +103,9 @@ export default csp({
       'www.google.co.il',
       'www.google.de',
       'www.google.ca',
+      'www.google.com.pk', // https://sentry.io/starlight-group/node-api/issues/237711249/
+      'www.google.co.in', // https://sentry.io/starlight-group/node-api/issues/236475387/
+      'www.google.com.tw', // https://sentry.io/starlight-group/node-api/issues/239112816/
     ],
     connectSrc: [
       "'self'", // eslint-disable-line quotes
@@ -131,6 +140,7 @@ export default csp({
       'blob:',
       'data:',
       '*.wistia.com',
+      'embedwistia-a.akamaihd.net', // https://sentry.io/starlight-group/node-api/issues/237778057/
     ],
 
     // on development environment, being run on http://localhost:8000
