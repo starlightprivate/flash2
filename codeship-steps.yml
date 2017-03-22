@@ -50,7 +50,7 @@
       image_tag: "{{.CommitID}}"
       registry: https://gcr.io
       dockercfg_service: prod_gcr_dockercfg
-      tag: ^(production|feature/multibranch)
+      tag: ^(production)
   
   #
   # deploy app to k8s cluster
@@ -66,4 +66,4 @@
       tag: ^(development)
     - service: prod_google_cloud_deployment_app
       command: /deploy/deploy_app.sh
-      tag: ^(production|feature/multibranch)
+      tag: ^(production)
