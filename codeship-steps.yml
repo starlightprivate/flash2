@@ -20,7 +20,7 @@
     - name: run production test
       service: prod_build_app
       command: ./tests.sh
-      tag: ^(production|feature/multibranch)
+      tag: ^(production)
   
   #
   # build docker image and push to registry
