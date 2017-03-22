@@ -1,6 +1,5 @@
-/* global $, DOMPurify, jQuery, callAPI, UniversalStorage, initSessionIfNoCookies
-customWrapperForIsMobileDevice, wrapLocationChange, storeSessionToServer */
-
+/* global $, DOMPurify, jQuery, utils, validate, UniversalStorage */
+const utilsInstance = utils();
 function initFieldFv(e, data) {
   const field = DOMPurify.sanitize(data.field);
   const $field = data.element;
@@ -29,7 +28,8 @@ function openContactModal() {
   $('#modal-contact').modal('show');
 }
 (() => {
-  initSessionIfNoCookies(() => {
+  validate(utilsInstance);
+  utilsInstance.initSessionIfNoCookies(() => {
     $('input[name=phoneNumber]').mask('000-000-0000', { translation: { 0: { pattern: /[0-9*]/ } } });
     const MediaStorage = {};
   // Lead create/update
@@ -46,7 +46,7 @@ function openContactModal() {
       MediaStorage.phoneNumber = data.MobilePhone;
       MediaStorage.emailAddress = data.Email;
 
-      callAPI('create-lead', crmLead, 'POST', (resp) => {
+      utilsInstance.callAPI('create-lead', crmLead, 'POST', (resp) => {
         if (resp.success) {
           if (resp.orderId) {
             MediaStorage.orderId = DOMPurify.sanitize(resp.orderId);
@@ -68,7 +68,7 @@ function openContactModal() {
       crmLead.lastName = MediaStorage.lastName;
       crmLead.phoneNumber = MediaStorage.phoneNumber;
       crmLead.emailAddress = MediaStorage.emailAddress;
-      callAPI('create-lead', crmLead, 'POST', () => {
+      utilsInstance.callAPI('create-lead', crmLead, 'POST', () => {
         cb();
       }, () => {});
     }
@@ -86,9 +86,9 @@ function openContactModal() {
       UniversalStorage.saveCheckoutField('emailAddress', data.Email);
       UniversalStorage.saveCheckoutField('phoneNumber', data.MobilePhone);
 
-      storeSessionToServer(UniversalStorage.getCheckoutDetails(), () => {
-        if (customWrapperForIsMobileDevice()) {
-          callAPI('add-contact', data, 'POST', (response) => {
+      utilsInstance.storeSessionToServer(UniversalStorage.getCheckoutDetails(), () => {
+        if (utilsInstance.customWrapperForIsMobileDevice()) {
+          utilsInstance.callAPI('add-contact', data, 'POST', (response) => {
             if (response.success) {
               createLead(data, () => {
                 $('#modal-address').modal('show');
@@ -99,11 +99,11 @@ function openContactModal() {
         } else {
           const $loadingBar = $('div.js-div-loading-bar');
           $loadingBar.show();
-          callAPI('add-contact', data, 'POST', (response) => {
+          utilsInstance.callAPI('add-contact', data, 'POST', (response) => {
             if (response.success) {
               createLead(data, () => {
               // In case of Mobile devices, show address modal and go to checkout page.
-                wrapLocationChange('checkout.html');
+                utilsInstance.wrapLocationChange('checkout.html');
               }, () => {
                 $loadingBar.hide();
               });
@@ -130,9 +130,9 @@ function openContactModal() {
         UniversalStorage.saveCheckoutField(field, value);
         tmp[field] = value;
       });
-      storeSessionToServer(UniversalStorage.getCheckoutDetails(), () => {
+      utilsInstance.storeSessionToServer(UniversalStorage.getCheckoutDetails(), () => {
         updateLead(tmp, () => {
-          wrapLocationChange('checkout.html');
+          utilsInstance.wrapLocationChange('checkout.html');
         });
       });
     }

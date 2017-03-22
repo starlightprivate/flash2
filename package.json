@@ -31,6 +31,7 @@
   "snyk": true,
   "dependencies": {
     "@risingstack/trace": "^3.4.0",
+    "analytics-node": "^2.4.0",
     "autopilot-api": "^2.0.0",
     "babel-register": "^6.23.0",
     "body-parser": "^1.17.1",

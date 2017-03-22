@@ -1,8 +1,7 @@
-/* global $, DOMPurify, jQuery, callAPI, UniversalStorage */
-/* global customWrapperForIsMobileDevice, bootstrapModal, getJson, wrapLocationChange,
-storeSessionToServer, initSessionIfNoCookies */
+/* global $, DOMPurify, jQuery, utils, UniversalStorage */
 // eslint-disable-file babel/no-invalid-this
 (() => {
+  const utilsInstance = utils();
   function init() {
     let upsellID = null;
     if (window.location.pathname.indexOf('us_batteryoffer') >= 0) {
@@ -45,19 +44,19 @@ storeSessionToServer, initSessionIfNoCookies */
           if (sellID === 'battery') {
             nextPage = `us_headlampoffer.html?orderId=${DOMPurify.sanitize(MediaStorage.orderId)}`;
           }
-          callAPI('upsell', usParams, 'POST', (e) => {
-            const json = getJson(e);
+          utilsInstance.callAPI('upsell', usParams, 'POST', (e) => {
+            const json = utilsInstance.getJson(e);
             if (json.success) {
-              storeSessionToServer(UniversalStorage.getCheckoutDetails(), () => {
-                wrapLocationChange(nextPage);
+              utilsInstance.storeSessionToServer(UniversalStorage.getCheckoutDetails(), () => {
+                utilsInstance.wrapLocationChange(nextPage);
               });
             } else if (json.message) {
               let messageOut = '';
               if (typeof json.message === 'string') {
                 messageOut = json.message;
                 if (messageOut === 'This upsale was already taken.') {
-                  storeSessionToServer(UniversalStorage.getCheckoutDetails(), () => {
-                    wrapLocationChange(nextPage);
+                  utilsInstance.storeSessionToServer(UniversalStorage.getCheckoutDetails(), () => {
+                    utilsInstance.wrapLocationChange(nextPage);
                   });
                   return;
                 }
@@ -65,13 +64,13 @@ storeSessionToServer, initSessionIfNoCookies */
                 const messages = Object.keys(json.message).map(key => `${DOMPurify.sanitize(key)}:${DOMPurify.sanitize(json.message[key])}&lt;br&gt;`);
                 messageOut = messages.join('');
               }
-              bootstrapModal(DOMPurify.sanitize(messageOut), 'Problem with your Addon');
+              utilsInstance.bootstrapModal(DOMPurify.sanitize(messageOut), 'Problem with your Addon');
             }
             $loadingBar.hide();
           });
         }
       } else {
-        bootstrapModal('There was an error finding your order, please refresh the page and try again.', 'Error');
+        utilsInstance.bootstrapModal('There was an error finding your order, please refresh the page and try again.', 'Error');
         $loadingBar.hide();
       }
     }
@@ -81,8 +80,8 @@ storeSessionToServer, initSessionIfNoCookies */
       if (sellID === 'battery') {
         nextPage = `us_headlampoffer.html?orderId=${DOMPurify.sanitize(MediaStorage.orderId)}`;
       }
-      storeSessionToServer(UniversalStorage.getCheckoutDetails(), () => {
-        wrapLocationChange(nextPage);
+      utilsInstance.storeSessionToServer(UniversalStorage.getCheckoutDetails(), () => {
+        utilsInstance.wrapLocationChange(nextPage);
       });
     }
     $('#upsellNo').click(() => {
@@ -92,9 +91,9 @@ storeSessionToServer, initSessionIfNoCookies */
       doUpsellYes(upsellID, DOMPurify.sanitize($(this).data('productid')));
     });
   }
-  initSessionIfNoCookies(() => {
+  utilsInstance.initSessionIfNoCookies(() => {
     if (!UniversalStorage.cookiesEnabled) {
-      callAPI('session', null, 'GET', (response) => {
+      utilsInstance.callAPI('session', null, 'GET', (response) => {
         if (response.success) {
           UniversalStorage.saveCheckoutDetails(response.data);
         }
