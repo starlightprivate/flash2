@@ -40,10 +40,6 @@
   };
 
   const init = () => {
-    $('.popupButton').click((e) => {
-      const data = $(e.currentTarget).data();
-      utilsInstance.showModal(data.modalid);
-    });
     validate(utilsInstance);
     if (utilsInstance.customWrapperForIsMobileDevice()) {
       $('#checkout-wrapper').addClass('mobile-mode');
