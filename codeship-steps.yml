@@ -1,4 +1,5 @@
-- type  steps:
+- type: serial
+  steps:
   #- type: serial
   #  steps:
   #  - name: run test
