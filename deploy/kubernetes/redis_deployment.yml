@@ -1,0 +1,35 @@
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-disk-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - image: gcr.io/flash2-staging/redis:latest
+        name: redis
+        ports:
+        - containerPort: 6379
+          name: redis
+        volumeMounts:
+        - name: redis-disk
+          mountPath: /data
+      volumes:
+      - name: redis-disk
+        persistentVolumeClaim:
+          claimName: redis-disk-claim

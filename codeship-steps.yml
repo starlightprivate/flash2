@@ -1,0 +1,42 @@
+- type: serial
+  steps:
+  - type: parallel
+    steps:
+    - name: Testing Frontend
+      service: app
+      command: ./node_modules/.bin/gulp test
+
+    - name: Testing Backend
+      service: app
+      command: npm test
+  - type: parallel
+    steps:
+    - service: app
+      type: push
+      image_name: gcr.io/flash2-staging/app
+      image_tag: "{{ .CommitID }}"
+      registry: https://gcr.io
+      dockercfg_service: gcr_dockercfg
+      tag: staging
+    #- service: nginx
+    #  type: push
+    #  image_name: gcr.io/flash2-staging/nginx
+    #  image_tag: "{{ .CommitID }}"
+    #  registry: https://gcr.io
+    #  dockercfg_service: gcr_dockercfg
+    #-  service: redis                         
+    #   type: push
+    #   image_name: gcr.io/flash2-staging/redis
+    #   image_tag: latest
+    #   registry: https://gcr.io
+    #   dockercfg_service: gcr_dockercfg
+
+  - type: parallel
+    steps:
+    - service: google_cloud_deployment_app
+      command: /deploy/deploy_app.sh
+      tag: staging
+    #- service: google_cloud_deployment_nginx
+    #  command: /deploy/deploy_nginx.sh
+    #- service: google_cloud_deployment_redis
+    #  command: /deploy/deploy_redis.sh

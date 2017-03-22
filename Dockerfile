@@ -9,9 +9,6 @@ RUN npm install
 # Add source code of `node-api`
 ADD . /src/app
 
-# Verify we added only things reguired
-RUN ls -l /src/app
-
 # Run build scripts for frontend
 RUN npm run-script frontend
 
