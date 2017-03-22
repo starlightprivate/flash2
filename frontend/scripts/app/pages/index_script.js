@@ -29,6 +29,10 @@ function openContactModal() {
 }
 (() => {
   validate(utilsInstance);
+  $('.popupButton').click((e) => {
+    const data = $(e.currentTarget).data();
+    utilsInstance.showModal(data.modalid);
+  });
   utilsInstance.initSessionIfNoCookies(() => {
     $('input[name=phoneNumber]').mask('000-000-0000', { translation: { 0: { pattern: /[0-9*]/ } } });
     const MediaStorage = {};
