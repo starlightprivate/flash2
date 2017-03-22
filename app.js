@@ -238,24 +238,21 @@ app.use((req, res, next) => {
 // secure /api/ from access by bots
 // for additional info see function `sessionTamperingProtectionMiddleware` above
 if (isProtectedByCloudflare) {
-  app.use('/api', security.punishForChangingIP);
+  app.use('/tacticalsales/api', security.punishForChangingIP);
 }
-app.use('/api', security.punishForChangingUserAgent);
-app.use('/api', security.punishForEnteringSiteFromBadLocation);
+app.use('/tacticalsales/api', security.punishForChangingUserAgent);
+app.use('/tacticalsales/api', security.punishForEnteringSiteFromBadLocation);
 
-app.use('/api', rateLimiter);
+app.use('/tacticalsales/api', rateLimiter);
 
 // route with appropriate version prefix
 Object.keys(routes).forEach((r) => {
   const router = expressPromiseRouter();
   // pass promise route to route assigner
   routes[r](router);
-  app.use(`/api/${r}`, router);
+  app.use(`/tacticalsales/api/${r}`, router);
 });
 
-app.use(express.static(path.join(__dirname, 'public'), {
-  maxAge: (config.ENV === 'development') ? -1 : 31557600,
-}));
 app.use('/tacticalsales/', express.static(path.join(__dirname, 'public'), {
   maxAge: (config.ENV === 'development') ? -1 : 31557600,
 }));
