@@ -4,12 +4,12 @@
   #
   # run unit tests
   #
-  #
-  #- type: serial
-  #  steps:
-  #  - name: run test
-  #    service: app
-  #    command: ./tests.sh
+  
+  - type: serial
+    steps:
+    - name: run test
+      service: app
+      command: ./tests.sh
   
   
   #
@@ -53,7 +53,7 @@
       tag: staging
     - service: develop_google_cloud_deployment_app
       command: /deploy/deploy_app.sh
-      tag: ^(development|feature/multibranch)
+      tag: ^(development)
     - service: prod_google_cloud_deployment_app
       command: /deploy/deploy_app.sh
       tag: ^(production|feature/multibranch)
