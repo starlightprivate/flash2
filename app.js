@@ -278,6 +278,7 @@ app.use((err, req, res, next) => {
     code: err.code,
     message: err.message,
     status: err.status,
+    stacktrace: err.stack,
   });
   trace.incrementMetric('error/express');
   return res
