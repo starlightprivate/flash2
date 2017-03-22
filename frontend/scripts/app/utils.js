@@ -161,17 +161,30 @@ function utils() { // eslint-disable-line no-unused-vars
   }
 // Terms and privacy popups
 
-  function termsModal() { // eslint-disable-line no-unused-vars
-    popPage('tacticalsales/terms.html', 'Terms & Conditions');
-  }
-  function partnerModal() { // eslint-disable-line no-unused-vars
-    popPage('tacticalsales/partner.html', 'Partner');
-  }
-  function privacyModal() { // eslint-disable-line no-unused-vars
-    popPage('tacticalsales/privacy.html', 'Privacy Policy');
-  }
-  function custcareModal() { // eslint-disable-line no-unused-vars
-    popPage('tacticalsales/customercare.html', 'Customer Care');
+  function showModal(modal) { // eslint-disable-line no-unused-vars
+    let title = '';
+    switch (modal) {
+    case 'terms': {
+      title = 'Terms & Conditions';
+      break;
+    }
+    case 'partner': {
+      title = 'Partner';
+      break;
+    }
+    case 'privacy': {
+      title = 'Privacy Policy';
+      break;
+    }
+    case 'customercare': {
+      title = 'Customer Care';
+      break;
+    }
+    default : {
+      title = '';
+    }
+    }
+    popPage(`${modal}.html`, title);
   }
 
   return {
@@ -184,10 +197,7 @@ function utils() { // eslint-disable-line no-unused-vars
     wrapLocationChange,
     bootstrapModal,
     popPage,
-    termsModal,
-    partnerModal,
-    privacyModal,
-    custcareModal,
+    showModal,
   };
 }
 
