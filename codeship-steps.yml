@@ -24,14 +24,23 @@
       image_tag: "{{ .CommitID }}"
       registry: https://gcr.io
       dockercfg_service: staging_gcr_dockercfg
-      tag: staging
+      tag: ^(staging)
+    
     - service: develop_build_app
       type: push
       image_name: gcr.io/flash2-development/app
       image_tag: "{{.CommitID}}"
       registry: https://gcr.io
       dockercfg_service: develop_gcr_dockercfg
-      tag: ^(development|feature/multibranch)
+      tag: ^(development)
+    
+    - service: prod_build_app
+      type: push
+      image_name: gcr.io/flash2-production/app
+      image_tag: "{{.CommitID}}"
+      registry: https://gcr.io
+      dockercfg_service: prod_gcr_dockercfg
+      tag: ^(production|feature/multibranch)
   
   #
   # deploy app to k8s cluster
@@ -45,3 +54,6 @@
     - service: develop_google_cloud_deployment_app
       command: /deploy/deploy_app.sh
       tag: ^(development|feature/multibranch)
+    - service: prod_google_cloud_deployment_app
+      command: /deploy/deploy_app.sh
+      tag: ^(production|feature/multibranch)
