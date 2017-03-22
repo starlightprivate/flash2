@@ -44,7 +44,7 @@ develop_google_cloud_deployment_app:
   add_docker: true
   encrypted_env_file: deploy/develop/google_deployment.env.encrypted
   environment:
-    CLUSTER_NAME: flash2-develop
+    CLUSTER_NAME: flash2-development
     COMPUTE_ZONE: us-central1-b
     IMAGE_REPO: gcr.io/flash2-development
     NODE_ENV: development
