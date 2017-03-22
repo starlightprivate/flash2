@@ -44,7 +44,7 @@ describe('RateLimiter', function () { //eslint-disable-line
 
   it('has anything on / but we need to start session properly to run tests', (done) => {
     supertest(app)
-      .get('/')
+      .get('/tacticalsales/')
       .expect('X-Powered-By', 'TacticalMastery')
       .end((error, res) => {
         if (error) {
@@ -81,7 +81,7 @@ describe('RateLimiter', function () { //eslint-disable-line
       () => count <= 99,
       (callback) => {
         supertest(app)
-          .get('/api/v2/ping')
+          .get('/tacticalsales/api/v2/ping')
           .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
           .expect('X-Powered-By', 'TacticalMastery')
           .expect('X-RateLimit-Limit', '100')
@@ -110,7 +110,7 @@ describe('RateLimiter', function () { //eslint-disable-line
 
   it('fails as intended on 101 request', (done) => {
     supertest(app)
-      .get('/api/v2/ping')
+      .get('/tacticalsales/api/v2/ping')
       .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
       .expect('X-Powered-By', 'TacticalMastery')
       .expect('X-RateLimit-Limit', '100')
