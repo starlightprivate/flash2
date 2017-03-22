@@ -1,5 +1,5 @@
 - type: serial
-  #steps:
+  steps:
   #- type: serial
   #  steps:
   #  - name: run test
@@ -22,7 +22,7 @@
       tag: staging
     - service: develop_build_app
       type: push
-      image_name: gcr.io/flash2-develop/app
+      image_name: gcr.io/flash2-development/app
       image_tag: "{{.Branch}}.{{.CommitID}}"
       registry: https://gcr.io
       dockercfg_service: develop_gcr_dockercfg
