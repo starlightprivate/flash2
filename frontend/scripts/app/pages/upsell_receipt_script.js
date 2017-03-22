@@ -1,7 +1,7 @@
 /* global $, DOMPurify, jQuery, utils, UniversalStorage */
 (() => {
   const utilsInstance = utils();
-  function init() {
+  const init = () => {
     let pageType = null;
     if (window.location.pathname.indexOf('receipt') >= 0) {
       pageType = 'receipt';
@@ -80,7 +80,7 @@
         }
       }
     });
-  }
+  };
   utilsInstance.initSessionIfNoCookies(() => {
     if (!UniversalStorage.cookiesEnabled) {
       utilsInstance.callAPI('session', null, 'GET', (response) => {
