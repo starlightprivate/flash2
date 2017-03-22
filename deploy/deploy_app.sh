@@ -20,8 +20,6 @@ apt-get install gettext-base -y
 # update kubernetes Deployment file
 envsubst < deploy/kubernetes/app_deployment.yml.template > deploy/kubernetes/app_deployment.yml
 
-cat deploy/kubernetes/app_deployment.yml
-
 # deploy
 deployment_flag=$(GOOGLE_APPLICATION_CREDENTIALS=/keyconfig.json kubectl get deployment -l app=${APPLICATION_NAME})
 

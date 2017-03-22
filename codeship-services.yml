@@ -78,7 +78,7 @@ prod_google_cloud_deployment_app:
     COMPUTE_ZONE: us-central1-b
     IMAGE_REPO: gcr.io/flash2-production
     NODE_ENV: production
-    REPLICAS: 3
+    REPLICAS: 5
   volumes:
     - ./deploy/:/deploy
 
