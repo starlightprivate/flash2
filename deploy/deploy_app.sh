@@ -1,27 +1,21 @@
 #!/bin/bash
 set -e
 
-export CLUSTER_NAME="flash2-staging"
+export IMAGE_TAG="${CI_BRANCH}.${CI_COMMIT_ID}"
+export IMAGE_NAME="app"
 export APPLICATION_NAME="app"
-export IMAGE_NAME="gcr.io/flash2-staging"
 
 # authenticate to google cloud
 codeship_google authenticate
 
 # set compute zone
-gcloud config set compute/zone us-central1-b
+gcloud config set compute/zone ${COMPUTE_ZONE}
 
 # set kubernetes cluster
 gcloud container clusters get-credentials "${CLUSTER_NAME}"
 
 # install envsubst
 apt-get install gettext-base -y
-
-# export env
-export NODE_ENV=development
-export REDIS_URL=redis://redis:6379
-export APP_REPLICAS=5
-export REDIS_AUTH=tlergerbyhormecielkwarsiblevateximethanimpsonaturyotholholonitervusebardebedaphorgebulgibroperymbeam
 
 # update kubernetes Deployment file
 envsubst < deploy/kubernetes/app_deployment.yml.template > deploy/kubernetes/app_deployment.yml

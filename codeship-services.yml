@@ -1,5 +1,8 @@
+#
+# build docker image and push to registry
+#
 
-app:
+staging_build_app:
   build: 
     image: flash2-staging/app
     dockerfile_path: Dockerfile
@@ -10,41 +13,53 @@ app:
 redis:
   image: redis
 
-#nginx:
-#  build:
-#    image: flash2-staging/nginx
-#    dockerfile_path: nginx/Dockerfile
-#  encrypted_env_file: deploy/staging/environment.env.encrypted
-#  cached: true
-#
-#redis:
-#  build:
-#    image: flash2-staging/redis
-#    dockerfile_path: redis/Dockerfile
-#  encrypted_env_file: deploy/staging/environment.env.encrypted
+develop_build_app:
+  build: 
+    image: flash2-staging/app
+    dockerfile_path: Dockerfile
+  encrypted_env_file: deploy/staging/environment.env.encrypted
+  cached: true
+  links:
+    - redis
 
-google_cloud_deployment_app:
+# redis service
+
+redis:
+  image: redis
+
+#
+# deploy app to k8s cluster
+#
+
+staging_google_cloud_deployment_app:
   image: zachflower/google-cloud-deployment
   add_docker: true
   encrypted_env_file: deploy/staging/google_deployment.env.encrypted
   volumes:
     - ./deploy/:/deploy
 
-#google_cloud_deployment_nginx:
-#  image: zachflower/google-cloud-deployment
-#  add_docker: true
-#  encrypted_env_file: deploy/staging/google_deployment.env.encrypted
-#  volumes:
-#    - ./deploy/:/deploy
-#
-#google_cloud_deployment_redis:
-#  image: zachflower/google-cloud-deployment
-#  add_docker: true
-#  encrypted_env_file: deploy/staging/google_deployment.env.encrypted
-#  volumes:
-#    - ./deploy/:/deploy
+develop_google_cloud_deployment_app:
+  image: zachflower/google-cloud-deployment
+  add_docker: true
+  encrypted_env_file: deploy/develop/google_deployment.env.encrypted
+  environment:
+    CLUSTER_NAME: flash2-develop
+    COMPUTE_ZONE: us-central1-b
+    IMAGE_REPO: gcr.io/flash2-development
+    NODE_ENV: development
+    REPLICAS: 3
+  volumes:
+    - ./deploy/:/deploy
 
-gcr_dockercfg:
+#
+# dockercfg configuration
+#
+
+staging_gcr_dockercfg:
   image: codeship/gcr-dockercfg-generator
   add_docker: true
   encrypted_env_file: deploy/staging/google_deployment.env.encrypted
+develop_gcr_dockercfg:
+  image: codeship/gcr-dockercfg-generator
+  add_docker: true
+  encrypted_env_file: deploy/develop/google_deployment.env.encrypted

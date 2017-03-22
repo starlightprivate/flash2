@@ -1,17 +1,17 @@
 apiVersion:  extensions/v1beta1
 kind: Deployment
 metadata:
-  name: app
+  name: ${APPLICATION_NAME}
 spec:
-  replicas: ${APP_REPLICAS}
+  replicas: ${REPLICAS}
   template:
     metadata:
       labels:
-        app: app
+        app: ${APPLICATION_NAME}
     spec:
       containers:
       - name: app
-        image: ${IMAGE_NAME}/app:${CI_COMMIT_ID}
+        image: ${IMAGE_REPO}/${IMAGE_NAME}:${IMAGE_TAG}
         ports:
         - containerPort: 8000
         env:
