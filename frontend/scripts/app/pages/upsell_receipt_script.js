@@ -16,11 +16,11 @@
     // FIXME: Is this the right logic to redirect?
     if (typeof myOrderID === 'undefined') {
       // window.location = GlobalConfig.BasePagePath + "index.html";
-      window.location = 'index.html';
+      window.location = 'tacticalsales/index.html';
     }
     if (myOrderID === null) {
       // window.location = GlobalConfig.BasePagePath + "checkout.html";
-      window.location = 'checkout.html';
+      window.location = 'tacticalsales/checkout.html';
       return;
     }
     /* if (UniversalStorage.getStorageItem(myOrderID)) {
