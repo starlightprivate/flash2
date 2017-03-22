@@ -1,5 +1,4 @@
-- type: serial
-  steps:
+- type  steps:
   #- type: serial
   #  steps:
   #  - name: run test
@@ -37,3 +36,6 @@
     - service: staging_google_cloud_deployment_app
       command: /deploy/deploy_app.sh
       tag: staging
+    - service: develop_google_cloud_deployment_app
+      command: /deploy/deploy_app.sh
+      tag: ^(development|feature/multibranch)

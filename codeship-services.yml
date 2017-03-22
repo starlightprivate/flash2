@@ -19,6 +19,7 @@ develop_build_app:
     dockerfile_path: Dockerfile
   encrypted_env_file: deploy/staging/environment.env.encrypted
   cached: true
+  default_cache_branch: "feature/multibranch"
   links:
     - redis
 
