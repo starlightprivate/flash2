@@ -1,7 +1,7 @@
 /* global $, DOMPurify, jQuery, utils, validate, UniversalStorage */
 (() => {
   const utilsInstance = utils();
-  function loadStateFromZip() { // eslint-disable-line no-unused-vars
+  const loadStateFromZip = function () { // eslint-disable-line no-unused-vars
     const fZip = $('#zipcode');
     const fZipVal = fZip.val();
     const params = [];
@@ -37,9 +37,9 @@
         frm.formValidation('revalidateField', 'state');
       });
     }
-  }
+  };
 
-  function init() {
+  const init = function () {
     validate(utilsInstance);
     if (utilsInstance.customWrapperForIsMobileDevice()) {
       $('#checkout-wrapper').addClass('mobile-mode');
@@ -364,8 +364,7 @@
             notEmpty: { message: 'The Year is required.' },
             callback: {
               message: 'Please set year more or equal current.',
-              callback(value, validator, $field) {
-                const form = $field.parents('form'); // eslint-disable-line no-unused-vars
+              callback(value) {
                 const currentDate = new Date();
                 const yearCondition = 100 +
                                      parseInt(value, 10) >= parseInt(currentDate.getYear(), 10);
@@ -498,7 +497,7 @@
 
     $('form').on('change', saveToStorage);
     window.onbeforeunload = saveToStorage;
-  }
+  };
   utilsInstance.initSessionIfNoCookies(() => {
     if (!UniversalStorage.cookiesEnabled) {
       utilsInstance.callAPI('session', null, 'GET', (response) => {
