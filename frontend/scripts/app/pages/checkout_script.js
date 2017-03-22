@@ -54,7 +54,7 @@
     .join('');
 
     $('#zipcode').keyup(() => {
-      utilsInstance.loadStateFromZip();
+      loadStateFromZip();
     });
 
     function submitOrderForm() {
