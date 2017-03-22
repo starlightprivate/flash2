@@ -26,6 +26,7 @@ export default csp({
     defaultSrc: [
       "'self'", // eslint-disable-line quotes
       'cdn.jsdelivr.net',
+      'ajax.googleapis.com',
       '*.segment.com',
       'segment.com',
       '*.wistia.com',
@@ -47,6 +48,7 @@ export default csp({
       'data:',
       'www.google-analytics.com',
       'api.segment.io',
+      'ajax.googleapis.com',
       'cdn.ravenjs.com',
       'stats.g.doubleclick.net',
       'www.google.com/ads/ga-audiences',
