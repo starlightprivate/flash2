@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-export IMAGE_TAG="${CI_BRANCH}.${CI_COMMIT_ID}"
+export IMAGE_TAG="${CI_COMMIT_ID}"
 export IMAGE_NAME="app"
 export APPLICATION_NAME="app"
 
