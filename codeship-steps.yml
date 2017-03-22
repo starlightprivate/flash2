@@ -5,12 +5,22 @@
   # run unit tests
   #
   
-  - type: serial
+  - type: parallel
     steps:
-    - name: run test
-      service: app
+    - name: run staging tests
+      service: staging_build_app
       command: ./tests.sh
-  
+      tag: ^(staging)
+
+    - name: run development tests
+      service: develop_build_app
+      command: ./tests.sh
+      tag: ^(development)
+
+    - name: run production test
+      service: prod_build_app
+      command: ./tests.sh
+      tag: ^(production|feature/multibranch)
   
   #
   # build docker image and push to registry
