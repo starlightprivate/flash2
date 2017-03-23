@@ -23,7 +23,7 @@ spec:
             value: ${REDIS_AUTH}
           - name: KONNECTIVE_LOGIN_ID
             value: ${KONNECTIVE_LOGIN_ID}
-          = name: KONNECTIVE_PASSWORD
+          - name: KONNECTIVE_PASSWORD
             value: ${KONNECTIVE_PASSWORD}
           - name: SECRET
             value: ${SECRET}
