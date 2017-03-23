@@ -1,7 +1,7 @@
 # flash2
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/starlightgroup/flash2.svg?token=100123660862b7ddbf2e03e015ad4d70de35f224abee21eb8fd75e6ac86de148)](https://greenkeeper.io/)
-Merge of frontend and backend code into single container that is ok for developers to deploy on their local PC
+Docker friendly javascript application with backend and frontend
+
 
 Badges
 =================
@@ -13,6 +13,8 @@ Badges
 [![Code Climate](https://codeclimate.com/repos/58be6b3139404c025a0024b8/badges/1865a39a9ceafd4895ba/gpa.svg)](https://codeclimate.com/repos/58be6b3139404c025a0024b8/feed)
 [![Test Coverage](https://codeclimate.com/repos/58be6b3139404c025a0024b8/badges/1865a39a9ceafd4895ba/coverage.svg)](https://codeclimate.com/repos/58be6b3139404c025a0024b8/coverage)
 [![Issue Count](https://codeclimate.com/repos/58be6b3139404c025a0024b8/badges/1865a39a9ceafd4895ba/issue_count.svg)](https://codeclimate.com/repos/58be6b3139404c025a0024b8/feed)
+[![Greenkeeper badge](https://badges.greenkeeper.io/starlightgroup/flash2.svg?token=100123660862b7ddbf2e03e015ad4d70de35f224abee21eb8fd75e6ac86de148)](https://greenkeeper.io/)
+
 
 To feed our sin of pride,
 

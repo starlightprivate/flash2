@@ -1,50 +1,100 @@
+#
+# build docker image and push to registry
+#
 
-app:
-  build: 
+staging_build_app:
+  build:
     image: flash2-staging/app
     dockerfile_path: Dockerfile
   encrypted_env_file: deploy/staging/environment.env.encrypted
   cached: true
+  default_cache_branch: "staging"
   links:
     - redis
 redis:
   image: redis
 
-#nginx:
-#  build:
-#    image: flash2-staging/nginx
-#    dockerfile_path: nginx/Dockerfile
-#  encrypted_env_file: deploy/staging/environment.env.encrypted
-#  cached: true
-#
-#redis:
-#  build:
-#    image: flash2-staging/redis
-#    dockerfile_path: redis/Dockerfile
-#  encrypted_env_file: deploy/staging/environment.env.encrypted
+develop_build_app:
+  build:
+    image: flash2-staging/app
+    dockerfile_path: Dockerfile
+  encrypted_env_file: deploy/staging/environment.env.encrypted
+  cached: true
+  default_cache_branch: "development"
+  links:
+    - redis
 
-google_cloud_deployment_app:
+prod_build_app:
+  build:
+    image: flash2-production/app
+    dockerfile_path: Dockerfile
+  encrypted_env_file: deploy/prod/environment.env.encrypted
+  cached: true
+  default_cache_branch: "feature/multibranch"
+  links:
+    - redis
+
+# redis service
+
+redis:
+  image: redis
+
+#
+# deploy app to k8s cluster
+#
+
+staging_google_cloud_deployment_app:
   image: zachflower/google-cloud-deployment
   add_docker: true
   encrypted_env_file: deploy/staging/google_deployment.env.encrypted
+  environment:
+    CLUSTER_NAME: flash2-staging
+    COMPUTE_ZONE: us-central1-b
+    IMAGE_REPO: gcr.io/flash2-staging
+    NODE_ENV: staging
+    REPLICAS: 3
   volumes:
     - ./deploy/:/deploy
 
-#google_cloud_deployment_nginx:
-#  image: zachflower/google-cloud-deployment
-#  add_docker: true
-#  encrypted_env_file: deploy/staging/google_deployment.env.encrypted
-#  volumes:
-#    - ./deploy/:/deploy
-#
-#google_cloud_deployment_redis:
-#  image: zachflower/google-cloud-deployment
-#  add_docker: true
-#  encrypted_env_file: deploy/staging/google_deployment.env.encrypted
-#  volumes:
-#    - ./deploy/:/deploy
+develop_google_cloud_deployment_app:
+  image: zachflower/google-cloud-deployment
+  add_docker: true
+  encrypted_env_file: deploy/develop/google_deployment.env.encrypted
+  environment:
+    CLUSTER_NAME: flash2-development
+    COMPUTE_ZONE: us-central1-b
+    IMAGE_REPO: gcr.io/flash2-development
+    NODE_ENV: development
+    REPLICAS: 3
+  volumes:
+    - ./deploy/:/deploy
 
-gcr_dockercfg:
+prod_google_cloud_deployment_app:
+  image: zachflower/google-cloud-deployment
+  add_docker: true
+  encrypted_env_file: deploy/prod/google_deployment.env.encrypted
+  environment:
+    CLUSTER_NAME: flash2-production
+    COMPUTE_ZONE: us-central1-b
+    IMAGE_REPO: gcr.io/flash2-production
+    NODE_ENV: production
+    REPLICAS: 5
+  volumes:
+    - ./deploy/:/deploy
+
+#
+# dockercfg configuration
+#
+
+staging_gcr_dockercfg:
   image: codeship/gcr-dockercfg-generator
   add_docker: true
   encrypted_env_file: deploy/staging/google_deployment.env.encrypted
+develop_gcr_dockercfg:
+  image: codeship/gcr-dockercfg-generator
+  add_docker: true
+  encrypted_env_file: deploy/develop/google_deployment.env.encrypted
+prod_gcr_dockercfg:
+  image: codeship/gcr-dockercfg-generator
+  add_docker: true
+  encrypted_env_file: deploy/prod/google_deployment.env.encrypted
