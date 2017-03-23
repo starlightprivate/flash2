@@ -162,7 +162,7 @@
   }
 
   .payment {
-    background: $color-light8 url('../images/th.png') repeat top center;
+    background: $color-light8 url('/tacticalsales/assets/images/th.png') repeat top center;
     border: 1px solid $color-light-gray;
     border-radius: 18px;
     box-shadow: 0 2px 2px 0 $color-black-dot05, 0 1px 4px 0 $color-black-dot08, 1px 3px 1px -1px $color-black-dot5;
@@ -219,23 +219,23 @@
 
       &.cc-visa {
         background-color: $color-blue3;
-        background-image: url('../images/cc-visa.svg');
+        background-image: url('/tacticalsales/assets/images/cc-visa.svg');
         background-size: 95%;
       }
 
       &.cc-mc {
         background-color: $color-black;
-        background-image: url('../images/cc-mastercard.jpg');
+        background-image: url('/tacticalsales/assets/images/cc-mastercard.jpg');
         background-size: 90%;
       }
 
       &.cc-american {
-        background-image: url('../images/cc-amex.svg');
+        background-image: url('/tacticalsales/assets/images/cc-amex.svg');
         background-size: 120%;
       }
 
       &.cc-discover {
-        background-image: url('../images/cc-discover.jpg');
+        background-image: url('/tacticalsales/assets/images/cc-discover.jpg');
         background-size: 100%;
       }
     }
@@ -365,7 +365,7 @@
     }
 
     .btn-img-part {
-      background-image: url('../images/icon-truck.png');
+      background-image: url('/tacticalsales/assets/images/icon-truck.png');
       background-position: center;
       background-repeat: no-repeat;
       display: table-cell;
