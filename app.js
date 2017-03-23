@@ -82,7 +82,7 @@ app.use(expressWinston.logger({
 app.use(helmet());
 
 // https://helmetjs.github.io/docs/referrer-policy/
-app.use(helmet.referrerPolicy({ policy: 'origin' }));
+app.use(helmet.referrerPolicy({ policy: 'strict-origin' }));
 
 // https://helmetjs.github.io/docs/frameguard/
 app.use(helmet.frameguard({ action: 'deny' }));
