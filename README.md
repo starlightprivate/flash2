@@ -38,7 +38,8 @@ With nodejs (>=7.5.0) and redis on local machine:
 1. npm install
 2. npm run-script frontend
 3. npm start
-4. Open `http://localhost:8000`
+4. Open [http://localhost:8000/]
+5. Open [http://localhost:8000/tacticalsales/]
 
 
 With `docker` and `docker-compose` installed
@@ -54,7 +55,8 @@ With `docker` and `docker-compose` installed
 ```
 
 2. docker-compose up --build
-3. Open `http://flash2.local`
+3. Open [http://flash2.local]
+4. Open [http://flash2.local/tacticalsales/]
 
 How to build frontend code
 ==================
@@ -75,23 +77,6 @@ How to contribute to this repo
 ==================
 
 See [CONTRIBUTING.md](https://github.com/starlightgroup/flash2/blob/master/CONTRIBUTING.md)
-
-How to use redis server, if you cannot install it locally
-==================
-
-In case, you cannot install redis server, you can use this one:
-
-```bash
-
-    $ REDIS_URL=redis://redistogo:759a4a957ceda6ad36d8c42f41dec81c@koi.redistogo.com:10968/
-    $ npm start
-
-```
-
-Note that it is Free Tier Redis server on [RedisToGo](https://elements.heroku.com/addons/redistogo).
-It has 5 connections limit. It has 5 MB memory limit. But it works ok, if you cannot install redis for your
-local development.
-
 
 How to run unit tests using docker-compose
 ===================
