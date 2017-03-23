@@ -3,9 +3,7 @@
 #
 
 staging_build_app:
-
-app:
-  build: 
+  build:
     image: flash2-staging/app
     dockerfile_path: Dockerfile
   encrypted_env_file: deploy/staging/environment.env.encrypted
@@ -17,7 +15,7 @@ redis:
   image: redis
 
 develop_build_app:
-  build: 
+  build:
     image: flash2-staging/app
     dockerfile_path: Dockerfile
   encrypted_env_file: deploy/staging/environment.env.encrypted
@@ -27,7 +25,7 @@ develop_build_app:
     - redis
 
 prod_build_app:
-  build: 
+  build:
     image: flash2-production/app
     dockerfile_path: Dockerfile
   encrypted_env_file: deploy/prod/environment.env.encrypted
