@@ -69,9 +69,14 @@ app.use(expressWinston.logger({
 // all other sources will get error 500 NOT OK (cryptic, i know).
 // But this error only fired for non cloudflare access.
 // https://starlightgroup.atlassian.net/projects/SG/issues/SG-35
-if (isProtectedByCloudflare) {
-  app.use(security.verifyThatSiteIsAccessedFromCloudflare); // ####
-}
+
+// Since 23 mart the cloudflare IP checks are performed on Google CLoud Load Balancer
+// And all `flash2` applications has grey IP, not accessible directly from
+// internet, only from load balancer
+
+// if (isProtectedByCloudflare) {
+//   app.use(security.verifyThatSiteIsAccessedFromCloudflare); // ####
+// }
 
 // hemlet headers - do not remove
 app.use(helmet());
