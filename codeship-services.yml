@@ -3,6 +3,8 @@
 #
 
 staging_build_app:
+
+app:
   build: 
     image: flash2-staging/app
     dockerfile_path: Dockerfile

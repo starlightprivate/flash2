@@ -1,5 +1,6 @@
-/* global $, DOMPurify, jQuery, callAPI, UniversalStorage, customWrapperForIsMobileDevice */
-function validate() {
+/* global $, DOMPurify, jQuery, UniversalStorage */
+function validate(utils) { // eslint-disable-line no-unused-vars
+  const utilsInstance = utils;
   const cardNumberConfigurations = {
     amex: {
       mask: {
@@ -24,7 +25,7 @@ function validate() {
       $('input.creditcard').attr('type', 'text');
     }
   }
-  if (!customWrapperForIsMobileDevice()) {
+  if (!utilsInstance.customWrapperForIsMobileDevice()) {
     $('input[type=number]').attr('type', 'text');
   }
   let numbstr = '';
@@ -110,7 +111,7 @@ function validate() {
         $('.payment-icon .cc-american-express').addClass('faded');
       }
     }
-    if ($(this).safeVal() === '') {
+    if ($(this).val() === '') {
       $('.payment-icon .cc-icon').removeClass('inactive active faded');
       $('#last').addClass('cc-discover').removeClass('cc-diners-club cc-enroute cc-jcb cc-maestro');
     }
@@ -132,7 +133,7 @@ function validate() {
   }
 
   function clickEvent() {
-    $('.email').safeVal($(this).html());
+    $('.email').val($(this).html());
     $('.email + small').hide().html('Great! We will send you a confirmation e-mail with tracking # after purchasing.');
     if ($('form').length > 0) {
       $('form').formValidation('revalidateField', 'email');
@@ -146,4 +147,3 @@ function validate() {
     $('body').on('click', '.email + small a', clickEvent);
   }
 }
-validate();
