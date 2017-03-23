@@ -16,10 +16,7 @@
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/g/normalize@5.0.0,bootstrap@4.0.0-alpha.5(css/bootstrap.min.css)">
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Open+Sans:400,600,700,700i,800|Oswald:200,300,400,500,600,700|Roboto:700">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/tacticalsales/assets/css/style.css">
     <script type="text/javascript">
       !function () {
         var analytics = window.analytics = window.analytics || [];
@@ -72,6 +69,7 @@
             analytics.load("7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd");
             analytics.page();
           }
+          
         }();
     </script>
   </head>
@@ -275,13 +273,16 @@
           </p>
           <ul class="list-inline">
             <li>
-              <a href="javascript:void(0);" id="privacy" onclick="privacyModal()">Privacy Policy</a>
+              <a href="javascript:void(0);" id="privacy" class="popupButton" data-modalid="privacy">Privacy Policy</a>
             </li>
             <li>
-              <a href="javascript:void(0);" id="terms" onclick="termsModal()">Terms &amp; Conditions</a>
+              <a href="javascript:void(0);" id="terms" class="popupButton" data-modalid="terms">Terms & Conditions</a>
             </li>
             <li>
-              <a href="javascript:void(0);" id="custcare" onclick="custcareModal()">Customer Care</a>
+              <a href="javascript:void(0);" id="partner" class="popupButton" data-modalid="partner">Partners</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" id="custcare" class="popupButton" data-modalid="customercare">Customer Care</a>
             </li>
           </ul>
         </div>

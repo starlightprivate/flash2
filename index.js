@@ -11,11 +11,19 @@ const Sentry = require('winston-sentry');
 
 require('winston-loggly-bulk');
 
+winston.cli();
 if (config.ENV === 'development') {
-  winston.cli();
   winston.level = 'silly';
 } else {
   winston.remove(winston.transports.Console);
+  winston.add(winston.transports.Console, {
+    name: 'production-console',
+    level: 'info',
+    prettyPrint: true,
+    colorize: true,
+    silent: false,
+    timestamp: false,
+  });
 }
 
 winston.add(Sentry, {
@@ -42,6 +50,7 @@ http
       throw error;
     }
     winston.verbose('HTTP Server Started at %s:%s', config.HOST, config.PORT, {
+      buildId: config.buildId,
       type: 'server:start',
       nodejs: process.version,
       arch: process.arch,

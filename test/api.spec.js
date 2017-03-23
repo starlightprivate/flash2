@@ -47,6 +47,74 @@ describe('proxy', function () { // eslint-disable-line func-names
   });
 });
 
+describe('security headers send by nodejs application', () => {
+  it('have X-Frame-Options set to "DENY"', (done) => {
+    supertest(app)
+      .get('/tacticalsales/')
+      .expect('X-Powered-By', 'TacticalMastery')
+      .expect('X-Frame-Options', 'DENY')
+      .end(done);
+  });
+  it('have Referrer-policy set to "same-origin"', (done) => {
+    supertest(app)
+      .get('/tacticalsales/')
+      .expect('X-Powered-By', 'TacticalMastery')
+      .expect('referrer-policy', 'same-origin')
+      .end(done);
+  });
+
+  it('have X-Content-Type-Options set to "nosniff"', (done) => {
+    supertest(app)
+      .get('/tacticalsales/')
+      .expect('X-Powered-By', 'TacticalMastery')
+      .expect('X-Content-Type-Options', 'nosniff')
+      .end(done);
+  });
+
+  it('have  X-XSS-Protection set to "1; mode=block"', (done) => {
+    supertest(app)
+      .get('/tacticalsales/')
+      .expect('X-Powered-By', 'TacticalMastery')
+      .expect('X-XSS-Protection', '1; mode=block')
+      .end(done);
+  });
+
+  it.skip('have Strict-Transport-Security set to "max-age=31536000; includeSubdomains;"', (done) => {
+// i skip this test, because the header only appears on HTTPS protocol,
+// and unit tests are ran against http site
+    supertest(app)
+      .get('/tacticalsales/')
+      .expect('X-Powered-By', 'TacticalMastery')
+      .expect('Strict-Transport-Security', 'max-age=31536000; includeSubdomains;')
+      .end(done);
+  });
+
+  it('has Public-Key-Pins header', (done) => {
+    /*
+     Public-Key-Pins
+     pin-sha256="EZpO1a5wa3q9eyxOxvTaSVciRXlm57R6fYJ2gsIbrJg=";
+     pin-sha256="x9SZw6TwIqfmvrLZ/kz1o0Ossjmn728BnBKpUFqGNVM=";
+     pin-sha256="58qRu/uxh4gFezqAcERupSkRYBlBAvfcw7mEjGPLnNU=";
+     pin-sha256="lCppFqbkrlJ3EcVFAkeip0+44VaoJUymbnOaEUk7tEU="; max-age=2592000
+     */
+
+    supertest(app)
+      .get('/tacticalsales/')
+      .expect('X-Powered-By', 'TacticalMastery')
+      .expect('Public-Key-Pins', /.+/) // i'm sorry for cutting corners
+      .end(done);
+  });
+
+  it('has content security policy set up', (done) => {
+    supertest(app)
+      .get('/tacticalsales/')
+      .expect('X-Powered-By', 'TacticalMastery')
+      .expect('Content-Security-Policy-Report-Only', /.+/) // i'm sorry for cutting corners
+      // .expect('Content-Security-Policy', /.+/) // i'm sorry for cutting corners todo - fix it
+      .end(done);
+  });
+});
+
 describe('web application', function () { // eslint-disable-line func-names
 // eslint-disable-next-line
   this.timeout(10000); //not everybody have good internet connection, including codeship
@@ -61,13 +129,13 @@ describe('web application', function () { // eslint-disable-line func-names
 
   it('has anything on / but we need to start session properly to run tests', (done) => {
     supertest(app)
-      .get('/')
+      .get('/tacticalsales/')
       .expect('X-Powered-By', 'TacticalMastery')
       .end((error, res) => {
         if (error) {
           return done(error);
         }
-        // console.log('/api/v2/ping cookies ',res.headers['set-cookie']);
+        // console.log('/tacticalsales/api/v2/ping cookies ',res.headers['set-cookie']);
         const sId = extractCookie(res, sessionIdCookieRegex);
         if (sId === false) {
           return done(new Error('PHPSESSID not set!'));
@@ -84,7 +152,7 @@ describe('web application', function () { // eslint-disable-line func-names
 
   it('has 200 and pong on /api/v2/ping', (done) => {
     supertest(app)
-      .get('/api/v2/ping')
+      .get('/tacticalsales/api/v2/ping')
       .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
       .expect('X-Powered-By', 'TacticalMastery')
       .expect(200, { msg: 'PONG' })
@@ -92,7 +160,7 @@ describe('web application', function () { // eslint-disable-line func-names
         if (error) {
           return done(error);
         }
-        // console.log('/api/v2/ping cookies ',res.headers['set-cookie']);
+        // console.log('/tacticalsales/api/v2/ping cookies ',res.headers['set-cookie']);
         const sId = extractCookie(res, sessionIdCookieRegex);
         if (sId !== false) {
           return done(new Error('PHPSESSID is reset! Bad session behaviour'));
@@ -107,7 +175,7 @@ describe('web application', function () { // eslint-disable-line func-names
   });
   it('has 403 for /api/v2/pong with wrong entry point', (done) => {
     supertest(app)
-      .get('/api/v2/ping')
+      .get('/tacticalsales/api/v2/ping')
       .expect('X-Powered-By', 'TacticalMastery')
       .expect('X-PUNISHEDBY', 'BAD LOCATION')
       .expect(403, 'Invalid API Key')
@@ -115,7 +183,7 @@ describe('web application', function () { // eslint-disable-line func-names
         if (error) {
           return done(error);
         }
-        // console.log('/api/v2/ping cookies ',res.headers['set-cookie']);
+        // console.log('/tacticalsales/api/v2/ping cookies ',res.headers['set-cookie']);
         const sId = extractCookie(res, sessionIdCookieRegex);
         if (sId === false) {
           return done(new Error('PHPSESSID not set!'));
@@ -133,10 +201,36 @@ describe('web application', function () { // eslint-disable-line func-names
 
   describe('testing sessions', () => {
 // https://starlightgroup.atlassian.net/browse/SG-5
+    let sessionIdSes;
+    let csrfTokenSes;
+
+    it('has anything on / but we need to start session properly to run tests', (done) => {
+      supertest(app)
+        .get('/')
+        .expect('X-Powered-By', 'TacticalMastery')
+        .end((error, res) => {
+          if (error) {
+            return done(error);
+          }
+          // console.log('/tacticalsales/api/v2/ping cookies ',res.headers['set-cookie']);
+          const sId = extractCookie(res, sessionIdCookieRegex);
+          if (sId === false) {
+            return done(new Error('PHPSESSID not set!'));
+          }
+          const csrf = extractCookie(res, csrfTokenCookieRegex);
+          if (csrf === false) {
+            return done(new Error('XSRF-TOKEN not set!'));
+          }
+          sessionIdSes = sId;
+          csrfTokenSes = csrf;
+          return done();
+        });
+    });
+
     it('sets proper data for /api/v2/testSession WITH session token provided', (done) => {
       supertest(app)
-        .get('/api/v2/testSession')
-        .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
+        .get('/tacticalsales/api/v2/testSession')
+        .set('Cookie', [util.format('PHPSESSID=%s', sessionIdSes)])
         .expect('X-Powered-By', 'TacticalMastery')
         .expect(200)
         .end((error, res) => {
@@ -151,77 +245,147 @@ describe('web application', function () { // eslint-disable-line func-names
           if (csrf === false) {
             return done(new Error('XSRF-TOKEN not set!'));
           }
-          csrfToken = csrf;
+          csrfTokenSes = csrf;
 
           const sId = extractCookie(res, sessionIdCookieRegex);
           if (sId === false) {
             return done();
           }
+          sessionIdSes = sId;
           return done(new Error('PHPSESSID is reset! Bad session behaviour'));
         });
     });
 
     it('sets proper data for /api/v2/testSession WITHOUT session token provided', (done) => {
       supertest(app)
-        .get('/api/v2/testSession')
+        .get('/tacticalsales/api/v2/testSession')
         .expect('X-Powered-By', 'TacticalMastery')
         .expect('X-PUNISHEDBY', 'BAD LOCATION')
         .expect(403, 'Invalid API Key', done);
     });
+
+
+    it('allows to save custom session data by POST /api/v2/session/ with session token provided', (done) => {
+      supertest(app)
+        .post('/tacticalsales/api/v2/session')
+        .set('Cookie', [util.format('PHPSESSID=%s', sessionIdSes)])
+        .send({
+          someOtherValue: 'something',
+          _csrf: csrfTokenSes,
+        })
+        .expect(201, 'Created')
+        .end((error, res) => {
+          if (error) {
+            return done(error);
+          }
+
+          const csrf = extractCookie(res, csrfTokenCookieRegex);
+          if (csrf === false) {
+            return done(new Error('XSRF-TOKEN not set!'));
+          }
+          csrfTokenSes = csrf;
+          return done();
+        });
+    });
+
+    it('allows to save custom session data by POST /api/v2/session/someValue with session token provided', (done) => {
+      supertest(app)
+        .post('/tacticalsales/api/v2/session/someValue')
+        .set('Cookie', [util.format('PHPSESSID=%s', sessionIdSes)])
+        .send({
+          value: 'something',
+          _csrf: csrfTokenSes,
+        })
+        .expect(201, 'Created', done);
+    });
+
+    it('allows to retrieve custom session data by GET /api/v2/session with session token provided', (done) => {
+      supertest(app)
+        .get('/tacticalsales/api/v2/session')
+        .set('Cookie', [util.format('PHPSESSID=%s', sessionIdSes)])
+        .expect(200, (error, response) => {
+          if (error) {
+            return done(error);
+          }
+          response.body.success.should.be.true; // eslint-disable-line no-unused-expressions
+          response.body.data.should.exist; // eslint-disable-line no-unused-expressions
+          response.body.data.someValue.should.be.equal('something'); // eslint-disable-line no-unused-expressions
+          response.body.data.someOtherValue.should.be.equal('something'); // eslint-disable-line no-unused-expressions
+          return done();
+        });
+    });
+    it('allows to retrieve custom session data by GET /api/v2/session/someValue with session token provided', (done) => {
+      supertest(app)
+        .get('/tacticalsales/api/v2/session/someValue')
+        .set('Cookie', [util.format('PHPSESSID=%s', sessionIdSes)])
+        .expect(200, (error, response) => {
+          if (error) {
+            return done(error);
+          }
+          console.log(response.body);
+          response.body.success.should.be.true; // eslint-disable-line no-unused-expressions
+          response.body.data.should.exist; // eslint-disable-line no-unused-expressions
+          response.body.data.should.be.equal('something'); // eslint-disable-line no-unused-expressions
+          return done();
+        });
+    });
   });
 
-  it('has 200 and NY on /api/v2/state/00544', (done) => {
-    supertest(app)
-      .get('/api/v2/state/00544')
-      .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
-      .expect(200)
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        res.body.should.exist;// eslint-disable-line no-unused-expressions
-        res.body.data.should.exist;// eslint-disable-line no-unused-expressions
-        res.body.data.state.should.exist;// eslint-disable-line no-unused-expressions
-        res.body.data.state.should.be.equal('NY');
-        return done();
-      });
+  describe('/tacticalsales/api/v2/state', () => {
+    it('has 200 and NY on GET /api/v2/state/00544', (done) => {
+      supertest(app)
+        .get('/tacticalsales/api/v2/state/00544')
+        .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
+        .expect(200)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          res.body.should.exist;// eslint-disable-line no-unused-expressions
+          res.body.data.should.exist;// eslint-disable-line no-unused-expressions
+          res.body.data.state.should.exist;// eslint-disable-line no-unused-expressions
+          res.body.data.state.should.be.equal('NY');
+          return done();
+        });
+    });
+
+    it('has 200 and Marion city on GET /api/v2/state/62959', (done) => {
+      supertest(app)
+        .get('/tacticalsales/api/v2/state/62959')
+        .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
+        .expect(200)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          res.body.should.exist; // eslint-disable-line no-unused-expressions
+          res.body.data.should.exist; // eslint-disable-line no-unused-expressions
+          res.body.data.city.should.exist; // eslint-disable-line no-unused-expressions
+          res.body.data.city.should.be.equal('Marion');
+          return done();
+        });
+    });
+
+    it('has 200 and Beverly Hills on GET /api/v2/state/90210', (done) => {
+      supertest(app)
+        .get('/tacticalsales/api/v2/state/90210')
+        .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
+        .expect(200)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          res.body.should.exist; // eslint-disable-line no-unused-expressions
+          res.body.data.should.exist; // eslint-disable-line no-unused-expressions
+          res.body.data.city.should.exist; // eslint-disable-line no-unused-expressions
+          res.body.data.city.should.be.equal('Beverly Hills');
+          return done();
+        });
+    });
   });
 
-  it('has 200 and Marion city on /api/v2/state/62959', (done) => {
-    supertest(app)
-      .get('/api/v2/state/62959')
-      .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
-      .expect(200)
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        res.body.should.exist; // eslint-disable-line no-unused-expressions
-        res.body.data.should.exist; // eslint-disable-line no-unused-expressions
-        res.body.data.city.should.exist; // eslint-disable-line no-unused-expressions
-        res.body.data.city.should.be.equal('Marion');
-        return done();
-      });
-  });
 
-  it('has 200 and Beverly Hills on /api/v2/state/90210', (done) => {
-    supertest(app)
-      .get('/api/v2/state/90210')
-      .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
-      .expect(200)
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        res.body.should.exist; // eslint-disable-line no-unused-expressions
-        res.body.data.should.exist; // eslint-disable-line no-unused-expressions
-        res.body.data.city.should.exist; // eslint-disable-line no-unused-expressions
-        res.body.data.city.should.be.equal('Beverly Hills');
-        return done();
-      });
-  });
-
-  describe('/api/v2/add-contact', () => {
+  describe('/tacticalsales/api/v2/add-contact', () => {
     let acCsrfToken;
     let acSessionId;
 
@@ -233,7 +397,7 @@ describe('web application', function () { // eslint-disable-line func-names
           if (error) {
             return done(error);
           }
-          // console.log('/api/v2/ping cookies ',res.headers['set-cookie']);
+          // console.log('/tacticalsales/api/v2/ping cookies ',res.headers['set-cookie']);
           const sId = extractCookie(res, sessionIdCookieRegex);
           if (sId === false) {
             return done(new Error('PHPSESSID not set!'));
@@ -252,7 +416,7 @@ describe('web application', function () { // eslint-disable-line func-names
 
     it('has 200 on POST /api/v2/add-contact', (done) => {
       supertest(app)
-        .post('/api/v2/add-contact')
+        .post('/tacticalsales/api/v2/add-contact')
         .set('Cookie', [util.format('PHPSESSID=%s', acSessionId)])
         .send({
           FirstName: 'test_FirstName',
@@ -274,7 +438,7 @@ describe('web application', function () { // eslint-disable-line func-names
     });
     it('has 403 on POST /api/v2/add-contact with missing CSRF token', (done) => {
       supertest(app)
-        .post('/api/v2/add-contact')
+        .post('/tacticalsales/api/v2/add-contact')
         .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
         .send({
           FirstName: 'test_FirstName',
@@ -287,7 +451,7 @@ describe('web application', function () { // eslint-disable-line func-names
     });
     it('has 403 on POST /api/v2/add-contact with bad CSRF token', (done) => {
       supertest(app)
-        .post('/api/v2/add-contact')
+        .post('/tacticalsales/api/v2/add-contact')
         .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
         .send({
           FirstName: 'test_FirstName',
@@ -300,7 +464,7 @@ describe('web application', function () { // eslint-disable-line func-names
     });
     it('has 403 on POST /api/v2/add-contact without session', (done) => {
       supertest(app)
-        .post('/api/v2/add-contact')
+        .post('/tacticalsales/api/v2/add-contact')
         .send({
           FirstName: 'test_FirstName',
           LastName: 'test_LastName',
@@ -311,7 +475,7 @@ describe('web application', function () { // eslint-disable-line func-names
     });
     it('has 403 on POST /api/v2/add-contact with bad entry point', (done) => {
       supertest(app)
-        .post('/api/v2/add-contact')
+        .post('/tacticalsales/api/v2/add-contact')
         .set('Cookie', [util.format('PHPSESSID=%s', taintedSessionId)])
         .expect('X-PUNISHEDBY', 'BAD LOCATION')
         .send({
@@ -325,7 +489,7 @@ describe('web application', function () { // eslint-disable-line func-names
     });
   });
 
-  describe('/api/v2/update-contact', () => {
+  describe('/tacticalsales/api/v2/update-contact', () => {
     let ucSessionId;
     let ucCsrfToken;
 
@@ -337,7 +501,7 @@ describe('web application', function () { // eslint-disable-line func-names
           if (error) {
             return done(error);
           }
-          // console.log('/api/v2/ping cookies ',res.headers['set-cookie']);
+          // console.log('/tacticalsales/api/v2/ping cookies ',res.headers['set-cookie']);
           const sId = extractCookie(res, sessionIdCookieRegex);
           if (sId === false) {
             return done(new Error('PHPSESSID not set!'));
@@ -353,7 +517,7 @@ describe('web application', function () { // eslint-disable-line func-names
     });
     it('has 200 on POST /api/v2/update-contact', (done) => {
       supertest(app)
-        .post('/api/v2/update-contact')
+        .post('/tacticalsales/api/v2/update-contact')
         .set('Cookie', [util.format('PHPSESSID=%s', ucSessionId)])
         .send({
           firstName: 'test_FirstName_updated',
@@ -376,7 +540,7 @@ describe('web application', function () { // eslint-disable-line func-names
     });
     it('has 403 on POST /api/v2/update-contact with missing CSRF token', (done) => {
       supertest(app)
-        .post('/api/v2/update-contact')
+        .post('/tacticalsales/api/v2/update-contact')
         .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
         .send({
           firstName: 'test_FirstName_updated',
@@ -389,7 +553,7 @@ describe('web application', function () { // eslint-disable-line func-names
     });
     it('has 403 on POST /api/v2/update-contact with bad CSRF token', (done) => {
       supertest(app)
-        .post('/api/v2/update-contact')
+        .post('/tacticalsales/api/v2/update-contact')
         .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
         .send({
           firstName: 'test_FirstName_updated',
@@ -402,7 +566,7 @@ describe('web application', function () { // eslint-disable-line func-names
     });
     it('has 403 on POST /api/v2/update-contact without session data', (done) => {
       supertest(app)
-        .post('/api/v2/update-contact')
+        .post('/tacticalsales/api/v2/update-contact')
         .send({
           firstName: 'test_FirstName_updated',
           lastName: 'test_LastName_updated',
@@ -421,10 +585,10 @@ describe('web application', function () { // eslint-disable-line func-names
 // https://starlightgroup.atlassian.net/browse/SG-80
 
 // Only check API call
-  describe('/api/v2/get-lead', () => {
+  describe('/tacticalsales/api/v2/get-lead', () => {
     it('has 200 on GET on /api/v2/get-lead/:id', (done) => {
       supertest(app)
-        .get('/api/v2/get-lead/25B18557B3')
+        .get('/tacticalsales/api/v2/get-lead/25B18557B3')
         .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
         .expect(200, (error, res) => {
           if (error) {
@@ -447,10 +611,10 @@ describe('web application', function () { // eslint-disable-line func-names
     });
   });
 
-  describe('/api/v2/get-trans', () => {
+  describe('/tacticalsales/api/v2/get-trans', () => {
     it('has 200 on GET /api/v2/get-trans/:id', (done) => {
       supertest(app)
-        .get('/api/v2/get-trans/25B18557B3')
+        .get('/tacticalsales/api/v2/get-trans/25B18557B3')
         .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
         .expect(200, (error, res) => {
           if (error) {
@@ -466,10 +630,10 @@ describe('web application', function () { // eslint-disable-line func-names
     });
   });
 
-  describe('/api/v2/create-lead', () => {
+  describe('/tacticalsales/api/v2/create-lead', () => {
     it('has 403 on POST /api/v2/create-lead with missing CSRF token', (done) => {
       supertest(app)
-        .post('/api/v2/create-lead')
+        .post('/tacticalsales/api/v2/create-lead')
         .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
         .send({
           someSaneData: 'to be entered here',
@@ -479,7 +643,7 @@ describe('web application', function () { // eslint-disable-line func-names
     });
     it('has 403 on POST /api/v2/create-lead with bad CSRF token', (done) => {
       supertest(app)
-        .post('/api/v2/create-lead')
+        .post('/tacticalsales/api/v2/create-lead')
         .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
         .send({
           someSaneData: 'to be entered here',
@@ -489,7 +653,7 @@ describe('web application', function () { // eslint-disable-line func-names
     });
     it('has 403 on POST /api/v2/create-lead with wrong entryPoint', (done) => {
       supertest(app)
-        .post('/api/v2/create-lead')
+        .post('/tacticalsales/api/v2/create-lead')
         .set('Cookie', [util.format('PHPSESSID=%s', taintedSessionId)])
         .expect('X-PUNISHEDBY', 'BAD LOCATION')
         .send({
@@ -501,7 +665,7 @@ describe('web application', function () { // eslint-disable-line func-names
 
     it('has 200 on POST /api/v2/create-lead', (done) => {
       supertest(app)
-        .post('/api/v2/create-lead')
+        .post('/tacticalsales/api/v2/create-lead')
         .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
         .send({
           firstName: 'test',
@@ -523,7 +687,7 @@ describe('web application', function () { // eslint-disable-line func-names
     });
   });
 
-  describe('/api/v2/create-order', () => {
+  describe('/tacticalsales/api/v2/create-order', () => {
     let createOrderCSRFToken;
 
     it('has anything on / but we need to start session properly to run tests', (done) => {
@@ -546,7 +710,7 @@ describe('web application', function () { // eslint-disable-line func-names
 
     it('has something usefull on POST /api/v2/create-order', (done) => {
       supertest(app)
-        .post('/api/v2/create-order')
+        .post('/tacticalsales/api/v2/create-order')
         .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
         .send({
           address1: 'Lenin\'s street',
@@ -580,7 +744,7 @@ describe('web application', function () { // eslint-disable-line func-names
     });
     it('has 403 on POST /api/v2/create-order with missing CSRF token', (done) => {
       supertest(app)
-        .post('/api/v2/create-order')
+        .post('/tacticalsales/api/v2/create-order')
         .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
         .send({
           someSaneData: 'to be entered here',
@@ -590,7 +754,7 @@ describe('web application', function () { // eslint-disable-line func-names
     });
     it('has 403 on POST /api/v2/create-order with bad CSRF token', (done) => {
       supertest(app)
-        .post('/api/v2/create-order')
+        .post('/tacticalsales/api/v2/create-order')
         .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
         .send({
           someSaneData: 'to be entered here',
@@ -600,7 +764,7 @@ describe('web application', function () { // eslint-disable-line func-names
     });
     it('has 403 on POST /api/v2/create-order with wrong entryPoint', (done) => {
       supertest(app)
-        .post('/api/v2/create-order')
+        .post('/tacticalsales/api/v2/create-order')
         .set('Cookie', [util.format('PHPSESSID=%s', taintedSessionId)])
         .send({
           someSaneData: 'to be entered here',
@@ -610,7 +774,7 @@ describe('web application', function () { // eslint-disable-line func-names
     });
   });
 
-  describe('/api/v2/upsell', () => {
+  describe('/tacticalsales/api/v2/upsell', () => {
     let upselCSRFToken;
 
     it('has anything on / but we need to start session properly to run tests', (done) => {
@@ -633,7 +797,7 @@ describe('web application', function () { // eslint-disable-line func-names
 
     it('has something usefull on POST /api/v2/upsell', (done) => {
       supertest(app)
-        .post('/api/v2/upsell')
+        .post('/tacticalsales/api/v2/upsell')
         .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
         .send({
           orderId: 'C10D785CD0',
@@ -656,7 +820,7 @@ describe('web application', function () { // eslint-disable-line func-names
 
     it('has 403 on POST /api/v2/create-upsell with missing CSRF token', (done) => {
       supertest(app)
-        .post('/api/v2/create-upsell')
+        .post('/tacticalsales/api/v2/create-upsell')
         .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
         .send({
           someSaneData: 'to be entered here',
@@ -666,7 +830,7 @@ describe('web application', function () { // eslint-disable-line func-names
     });
     it('has 403 on POST /api/v2/create-upsell with bad CSRF token', (done) => {
       supertest(app)
-        .post('/api/v2/create-upsell')
+        .post('/tacticalsales/api/v2/create-upsell')
         .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
         .send({
           someSaneData: 'to be entered here',
@@ -676,7 +840,7 @@ describe('web application', function () { // eslint-disable-line func-names
     });
     it('has 403 on POST /api/v2/create-upsell with wrong entryPoint', (done) => {
       supertest(app)
-        .post('/api/v2/create-upsell')
+        .post('/tacticalsales/api/v2/create-upsell')
         .set('Cookie', [util.format('PHPSESSID=%s', taintedSessionId)])
         .send({
           someSaneData: 'to be entered here',
@@ -700,7 +864,7 @@ describe('web application', function () { // eslint-disable-line func-names
           if (error) {
             return done(error);
           }
-          // console.log('/api/v2/ping cookies ',res.headers['set-cookie']);
+          // console.log('/tacticalsales/api/v2/ping cookies ',res.headers['set-cookie']);
           const sId = extractCookie(res, sessionIdCookieRegex);
           if (sId === false) {
             return done(new Error('PHPSESSID cookie provided set!'));
@@ -715,7 +879,7 @@ describe('web application', function () { // eslint-disable-line func-names
     });
     it('has 200 and pong on /api/v2/ping', (done) => {
       supertest(app)
-        .get('/api/v2/ping')
+        .get('/tacticalsales/api/v2/ping')
         .set('PHPSESSID', headerSessionId)
         .expect('X-Powered-By', 'TacticalMastery')
         .expect(200, { msg: 'PONG' })
@@ -731,7 +895,7 @@ describe('web application', function () { // eslint-disable-line func-names
     });
     it('has 200 on POST /api/v2/add-contact', (done) => {
       supertest(app)
-        .post('/api/v2/add-contact')
+        .post('/tacticalsales/api/v2/add-contact')
         .set('PHPSESSID', headerSessionId)
         .send({
           FirstName: 'test_FirstName',
@@ -772,7 +936,7 @@ describe('testing error reporter', () => {
 
   it('has 500 on GET /api/v2/testError', (done) => {
     supertest(app)
-      .get('/api/v2/testError')
+      .get('/tacticalsales/api/v2/testError')
       .set('PHPSESSID', testErrorSessionId)
       .expect(500)
       .end(done);

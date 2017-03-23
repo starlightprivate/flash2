@@ -9,11 +9,13 @@ RUN npm install
 # Add source code of `node-api`
 ADD . /src/app
 
-# Verify we added only things reguired
-RUN ls -l /src/app
-
 # Run build scripts for frontend
 RUN npm run-script frontend
 
 EXPOSE 8000
+
+# Save git revision id in `public/build.txt`
+RUN git log --format='%h' -n 1 > public/buildId.txt
+RUN git log -n 5 > public/build.txt
+
 CMD ["npm","start"]

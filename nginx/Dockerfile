@@ -1,8 +1,9 @@
-FROM nginx:latest
+FROM nginx:1.11.10
 
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY blockuseragents.rules /etc/nginx/blockuseragents.rules
-COPY dhparam.pem /etc/nginx/
-COPY ./ssl/* /etc/nginx/ssl/
+ADD nginx.conf /etc/nginx/nginx.conf
+ADD blockuseragents.rules /etc/nginx/blockuseragents.rules
+ADD dhparam.pem /etc/nginx/ssl/
+ADD ssl/* /etc/nginx/ssl/
+ADD www/* /usr/share/nginx/html
 
 EXPOSE 443 80

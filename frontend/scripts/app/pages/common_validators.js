@@ -1,5 +1,6 @@
-/* global $, filterXSS, jQuery, callAPI, UniversalStorage, customWrapperForIsMobileDevice */
-function validate() {
+/* global $, DOMPurify, jQuery, UniversalStorage */
+function validate(utils) { // eslint-disable-line no-unused-vars
+  const utilsInstance = utils;
   const cardNumberConfigurations = {
     amex: {
       mask: {
@@ -24,7 +25,7 @@ function validate() {
       $('input.creditcard').attr('type', 'text');
     }
   }
-  if (!customWrapperForIsMobileDevice()) {
+  if (!utilsInstance.customWrapperForIsMobileDevice()) {
     $('input[type=number]').attr('type', 'text');
   }
   let numbstr = '';
@@ -124,7 +125,7 @@ function validate() {
       domains,
       topLevelDomains,
       suggested(element, suggestion) {
-        $('.email + small').html(`Did you mean <a href='javascript:void(0)'>${filterXSS(suggestion.full)}</a>`).show();
+        $('.email + small').html(`Did you mean <a href='javascript:void(0)'>${DOMPurify.sanitize(suggestion.full)}</a>`).show();
       },
       empty() {
       },
@@ -146,4 +147,3 @@ function validate() {
     $('body').on('click', '.email + small a', clickEvent);
   }
 }
-validate();

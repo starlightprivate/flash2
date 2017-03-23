@@ -14,17 +14,21 @@ import trace from './../../risingStack';
 // TODO - verify that nothing is missing
 const validEntryPoints = [
   '/',
+  '/robots.txt',
   '/index.html',
-  '/checkout.html',
-  '/us_headlampoffer.html',
-  '/customercare.html',
-  '/partner.html',
-  '/press.html',
-  '/privacy.html',
-  '/receipt.html',
-  '/terms.html',
-  '/tm3.html',
-  '/us_batteryoffer.html',
+  '/tacticalsales/',
+  '/tacticalsales/robots.txt',
+  '/tacticalsales/index.html',
+  // '/tacticalsales/checkout.html',
+  // '/tacticalsales/us_headlampoffer.html',
+  // '/tacticalsales/customercare.html',
+  // '/tacticalsales/partner.html',
+  // '/tacticalsales/press.html',
+  // '/tacticalsales/privacy.html',
+  // '/tacticalsales/receipt.html',
+  // '/tacticalsales/terms.html',
+  // '/tacticalsales/tm3.html',
+  // '/tacticalsales/us_batteryoffer.html',
 ];
 
 
@@ -119,6 +123,7 @@ function logBotAction(req, punishReason) {
   return winston.info('[SECURITY] bot punished %s - %s', ip, punishReason, {
     env: config.ENV,
     ip: getIp(req),
+    buildId: config.buildId,
     method: req.method,
     entryPoint: req.session ? req.session.entryPoint : null,
     path: req.originalUrl,
@@ -187,6 +192,7 @@ function punishForChangingUserAgent(req, res, next) {
 
 
 export default {
+  validEntryPoints,
   verifyThatSiteIsAccessedFromCloudflare,
   getIp,
   punishForEnteringSiteFromBadLocation,

@@ -1,0 +1,69 @@
+- type: serial
+  steps:
+
+  #
+  # run unit tests
+  #
+  
+  - type: parallel
+    steps:
+    - name: run staging tests
+      service: staging_build_app
+      command: ./tests.sh
+      tag: ^(staging)
+
+    - name: run development tests
+      service: develop_build_app
+      command: ./tests.sh
+      tag: ^(development)
+
+    - name: run production test
+      service: prod_build_app
+      command: ./tests.sh
+      tag: ^(production)
+  
+  #
+  # build docker image and push to registry
+  #
+  
+  - type: parallel
+    steps:
+    - service: staging_build_app
+      type: push
+      image_name: gcr.io/flash2-staging/app
+      image_tag: "{{ .CommitID }}"
+      registry: https://gcr.io
+      dockercfg_service: staging_gcr_dockercfg
+      tag: ^(staging)
+    
+    - service: develop_build_app
+      type: push
+      image_name: gcr.io/flash2-development/app
+      image_tag: "{{.CommitID}}"
+      registry: https://gcr.io
+      dockercfg_service: develop_gcr_dockercfg
+      tag: ^(development)
+    
+    - service: prod_build_app
+      type: push
+      image_name: gcr.io/flash2-production/app
+      image_tag: "{{.CommitID}}"
+      registry: https://gcr.io
+      dockercfg_service: prod_gcr_dockercfg
+      tag: ^(production)
+  
+  #
+  # deploy app to k8s cluster
+  #
+  
+  - type: parallel
+    steps:
+    - service: staging_google_cloud_deployment_app
+      command: /deploy/deploy_app.sh
+      tag: staging
+    - service: develop_google_cloud_deployment_app
+      command: /deploy/deploy_app.sh
+      tag: ^(development)
+    - service: prod_google_cloud_deployment_app
+      command: /deploy/deploy_app.sh
+      tag: ^(production)

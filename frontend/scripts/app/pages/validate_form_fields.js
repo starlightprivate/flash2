@@ -1,21 +1,22 @@
-/* global $, filterXSS, jQuery, callAPI, UniversalStorage */
-/* global loadStateFromZip, customWrapperForIsMobileDevice */
+/* global $, DOMPurify, jQuery, utils, UniversalStorage */
+
 (() => {
+  const utilsInstance = utils();
   let tmpZipCode = '';
   /* eslint-disable no-unused-vars */
   function validateFields(frm, fields) {
   /* eslint-enable no-unused-vars */
     if (frm.length > 0) {
       $.each(fields, (index, key) => {
-        const tempKey = filterXSS(key);
+        const tempKey = DOMPurify.sanitize(key);
         const $input = $(`input[name=${tempKey}]`);
         if ($input.length > 0 && $input.val() !== '') {
-          let phoneNumber = $('input[name=phoneNumber]').safeVal();
+          let phoneNumber = $('input[name=phoneNumber]').val();
           switch (tempKey) {
           case 'postalCode':
             if ($input.val() !== tmpZipCode) {
               tmpZipCode = $input.val();
-              loadStateFromZip();
+              utilsInstance.loadStateFromZip();
             }
             break;
           case 'phoneNumber':

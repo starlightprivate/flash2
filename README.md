@@ -1,10 +1,22 @@
 # flash2
-Merge of frontend and backend code into single container that is ok for developers to deploy on their local PC
+
+Docker friendly javascript application with backend and frontend
 
 
+Badges
+=================
 
 [ ![Codeship Status for starlightgroup/flash2](https://app.codeship.com/projects/5ec6e150-e305-0134-1b72-664f30205a5b/status?branch=master)](https://app.codeship.com/projects/205942)
+[![bitHound Overall Score](https://www.bithound.io/projects/badges/9e423400-03cc-11e7-8b82-1d4d2e7ee639/score.svg)](https://www.bithound.io/github/starlightgroup/flash2)
+[![bitHound Dev Dependencies](https://www.bithound.io/projects/badges/9e423400-03cc-11e7-8b82-1d4d2e7ee639/devDependencies.svg)](https://www.bithound.io/github/starlightgroup/flash2/master/dependencies/npm)
+[![bitHound Code](https://www.bithound.io/projects/badges/9e423400-03cc-11e7-8b82-1d4d2e7ee639/code.svg)](https://www.bithound.io/github/starlightgroup/flash2)
+[![Code Climate](https://codeclimate.com/repos/58be6b3139404c025a0024b8/badges/1865a39a9ceafd4895ba/gpa.svg)](https://codeclimate.com/repos/58be6b3139404c025a0024b8/feed)
+[![Test Coverage](https://codeclimate.com/repos/58be6b3139404c025a0024b8/badges/1865a39a9ceafd4895ba/coverage.svg)](https://codeclimate.com/repos/58be6b3139404c025a0024b8/coverage)
+[![Issue Count](https://codeclimate.com/repos/58be6b3139404c025a0024b8/badges/1865a39a9ceafd4895ba/issue_count.svg)](https://codeclimate.com/repos/58be6b3139404c025a0024b8/feed)
+[![Greenkeeper badge](https://badges.greenkeeper.io/starlightgroup/flash2.svg?token=100123660862b7ddbf2e03e015ad4d70de35f224abee21eb8fd75e6ac86de148)](https://greenkeeper.io/)
 
+
+To feed our sin of pride,
 
 Requirements
 =================
@@ -26,7 +38,8 @@ With nodejs (>=7.5.0) and redis on local machine:
 1. npm install
 2. npm run-script frontend
 3. npm start
-4. Open `http://localhost:8000`
+4. Open [http://localhost:8000/]
+5. Open [http://localhost:8000/tacticalsales/]
 
 
 With `docker` and `docker-compose` installed
@@ -42,7 +55,8 @@ With `docker` and `docker-compose` installed
 ```
 
 2. docker-compose up --build
-3. Open `http://flash2.local`
+3. Open [http://flash2.local]
+4. Open [http://flash2.local/tacticalsales/]
 
 How to build frontend code
 ==================
@@ -64,18 +78,13 @@ How to contribute to this repo
 
 See [CONTRIBUTING.md](https://github.com/starlightgroup/flash2/blob/master/CONTRIBUTING.md)
 
-How to use redis server, if you cannot install it locally
-==================
-
-In case, you cannot install redis server, you can use this one:
+How to run unit tests using docker-compose
+===================
 
 ```bash
 
-    $ REDIS_URL=redis://redistogo:759a4a957ceda6ad36d8c42f41dec81c@koi.redistogo.com:10968/
-    $ npm start
+    # docker-compose -f docker-compose.testing.yaml up --build
 
 ```
 
-Note that it is Free Tier Redis server on [RedisToGo](https://elements.heroku.com/addons/redistogo).
-It has 5 connections limit. It has 5 MB memory limit. But it works ok, if you cannot install redis for your
-local development.
+It have to provide result like this ![test result](https://vvv.msk0.ru/s/gDOOFgX2z.png)
