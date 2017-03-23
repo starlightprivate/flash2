@@ -248,7 +248,7 @@ gulp.task('build', ['clean-all'], function (done) {
   );
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', ['build'], function() {
   gulp.watch('frontend/**/*', ['build']);
 });
 
