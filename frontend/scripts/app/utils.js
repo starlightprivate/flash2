@@ -43,7 +43,7 @@ function utils() { // eslint-disable-line no-unused-vars
       const sessId = getUrlParameter('PHPSESSID');
       jQuery.ajax({
         type: 'GET',
-        url: '/robots.txt',
+        url: '/tacticalsales/robots.txt',
         complete: (request) => {
           if (sessId) {
             UniversalStorage.saveStorageItem('PHPSESSID', sessId);
@@ -65,7 +65,7 @@ function utils() { // eslint-disable-line no-unused-vars
 // call API
   function callAPI(endpoint, data, method, callback, err) {
     let params = data;
-    let ApiUrl = `/api/v2/${endpoint}/`;
+    let ApiUrl = `/tacticalsales/api/v2/${endpoint}/`;
     let headers = {};
     const httpMethod = method || 'POST';
   // if data is an array pass as post,
@@ -161,17 +161,30 @@ function utils() { // eslint-disable-line no-unused-vars
   }
 // Terms and privacy popups
 
-  function termsModal() { // eslint-disable-line no-unused-vars
-    popPage('terms.html', 'Terms & Conditions');
-  }
-  function partnerModal() { // eslint-disable-line no-unused-vars
-    popPage('partner.html', 'Partner');
-  }
-  function privacyModal() { // eslint-disable-line no-unused-vars
-    popPage('privacy.html', 'Privacy Policy');
-  }
-  function custcareModal() { // eslint-disable-line no-unused-vars
-    popPage('customercare.html', 'Customer Care');
+  function showModal(modal) { // eslint-disable-line no-unused-vars
+    let title = '';
+    switch (modal) {
+    case 'terms': {
+      title = 'Terms & Conditions';
+      break;
+    }
+    case 'partner': {
+      title = 'Partner';
+      break;
+    }
+    case 'privacy': {
+      title = 'Privacy Policy';
+      break;
+    }
+    case 'customercare': {
+      title = 'Customer Care';
+      break;
+    }
+    default : {
+      title = '';
+    }
+    }
+    popPage(`${modal}.html`, title);
   }
 
   return {
@@ -184,10 +197,7 @@ function utils() { // eslint-disable-line no-unused-vars
     wrapLocationChange,
     bootstrapModal,
     popPage,
-    termsModal,
-    partnerModal,
-    privacyModal,
-    custcareModal,
+    showModal,
   };
 }
 

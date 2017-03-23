@@ -1,4 +1,4 @@
-/* global $, DOMPurify, jQuery, utils, validate, UniversalStorage */
+/* global $, DOMPurify, jQuery, utils, history, validate, UniversalStorage */
 const utilsInstance = utils();
 function initFieldFv(e, data) {
   const field = DOMPurify.sanitize(data.field);
@@ -29,11 +29,15 @@ function openContactModal() {
 }
 (() => {
   validate(utilsInstance);
+  $('.popupButton').click((e) => {
+    const data = $(e.currentTarget).data();
+    utilsInstance.showModal(data.modalid);
+  });
   utilsInstance.initSessionIfNoCookies(() => {
     $('input[name=phoneNumber]').mask('000-000-0000', { translation: { 0: { pattern: /[0-9*]/ } } });
     const MediaStorage = {};
   // Lead create/update
-    function createLead(data, callback, err) { // eslint-disable-line no-unused-vars
+    const createLead = (data, callback, err) => {
       const crmLead = {
         firstName: data.FirstName,
         lastName: data.LastName,
@@ -59,9 +63,9 @@ function openContactModal() {
           err(textStatus);
         }
       });
-    }
+    };
 
-    function updateLead(data, cb) {
+    const updateLead = (data, cb) => {
       const crmLead = data;
       crmLead.orderId = MediaStorage.orderId;
       crmLead.firstName = MediaStorage.firstName;
@@ -71,9 +75,9 @@ function openContactModal() {
       utilsInstance.callAPI('create-lead', crmLead, 'POST', () => {
         cb();
       }, () => {});
-    }
+    };
   // This switches between contact modal & address modal
-    function submitContactForm() {
+    const submitContactForm = () => {
       const data = {
         Email: $('[name=email]').val(),
         FirstName: $('[name=contactModalName]').val(),
@@ -115,9 +119,9 @@ function openContactModal() {
           });
         }
       });
-    }
+    };
   // submit address form
-    function submitAddressForm() {
+    const submitAddressForm = () => {
       const addressFormFields = [
         'address1',
         'city',
@@ -135,7 +139,7 @@ function openContactModal() {
           utilsInstance.wrapLocationChange('checkout.html');
         });
       });
-    }
+    };
 
     $('#form-contact').on('init.field.fv', initFieldFv).formValidation({
       framework: 'bootstrap4',

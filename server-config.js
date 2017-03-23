@@ -4,7 +4,7 @@ import util from 'util';
 import fs from 'fs';
 import path from 'path';
 
-const buildIdPath = path.join(__dirname, 'public', 'build.txt');
+const buildIdPath = path.join(__dirname, 'public', 'buildId.txt');
 let buildId = 'unknown';
 
 if (fs.existsSync(buildIdPath)) {
@@ -42,7 +42,7 @@ module.exports = {
 
 // to prevent from tampering with sessions
 // related to https://starlightgroup.atlassian.net/browse/SG-5
-  secret: process.env.SECRET || '68e416b2408f34c5a887c321139fb576b89fa4dc',
+  secret: process.env.SECRET || 'deb7cc729f0990c68f8cf6be740256be35ff23a7b1052b7ef9b3cefcf479b60b',
 
   autopilot: {
     key: process.env.AUTOPILOT_KEY || '7d72a72715de40668977c638c01273c8',
