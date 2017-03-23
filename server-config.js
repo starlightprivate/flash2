@@ -58,6 +58,7 @@ module.exports = {
 // NOTE THAT loginId, password have to be loaded from ENVIRONMENT
 // NOT STORED IN SOURCE CODE!!!!
 // --Anatolij
+// can be changed on https://crm.konnektive.com/admin/users/
   },
   redis: {
     REDIS_URL: redisUrl,
