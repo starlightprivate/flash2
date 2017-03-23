@@ -13,15 +13,30 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Tactical Mastery Flashlights - Video page">
     <link rel="icon" href="favicon.ico">
-
-    <link
-      rel="preload"
-      href="https://cdn.jsdelivr.net/g/normalize@5.0.0,bootstrap@4.0.0-alpha.5(css/bootstrap.min.css)"
-      onload="this.rel='stylesheet';"
-      >
-    <link rel="preload" href="/tacticalsales/assets/css/style.css"
-      onload="this.rel='stylesheet';"
-      >
+    <script type="text/javascript">
+      function loadCSS(url) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+          if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+            if (xmlhttp.status == 200) {
+              var style = document.createElement('style');
+              var head = document.head || document.getElementsByTagName('head')[0]
+              style.type = 'text/css';
+              if (style.styleSheet){
+                style.styleSheet.cssText = xmlhttp.responseText;
+              } else {
+                style.appendChild(document.createTextNode(xmlhttp.responseText));
+              }
+              head.appendChild(style);
+            }
+          }
+        };
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+      }
+      loadCSS('/tacticalsales/assets/css/style.css')
+      loadCSS('https://cdn.jsdelivr.net/g/normalize@5.0.0,bootstrap@4.0.0-alpha.5(css/bootstrap.min.css)')
+    </script>
     <script type="text/javascript">
       !function () {
         var analytics = window.analytics = window.analytics || [];
