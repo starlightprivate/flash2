@@ -82,7 +82,7 @@ app.use(expressWinston.logger({
 app.use(helmet());
 
 // https://helmetjs.github.io/docs/referrer-policy/
-app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
+app.use(helmet.referrerPolicy({ policy: 'strict-origin' }));
 
 // https://helmetjs.github.io/docs/frameguard/
 app.use(helmet.frameguard({ action: 'deny' }));
@@ -103,10 +103,16 @@ app.use(helmet.hpkp({
   maxAge: 2592000, // 30 days
   sha256s: [
 // new - generated here - https://report-uri.io/home/pkp_hash
-    'EZpO1a5wa3q9eyxOxvTaSVciRXlm57R6fYJ2gsIbrJg=',
-    'x9SZw6TwIqfmvrLZ/kz1o0Ossjmn728BnBKpUFqGNVM=',
-    '58qRu/uxh4gFezqAcERupSkRYBlBAvfcw7mEjGPLnNU=',
-    'lCppFqbkrlJ3EcVFAkeip0+44VaoJUymbnOaEUk7tEU=',
+//     'EZpO1a5wa3q9eyxOxvTaSVciRXlm57R6fYJ2gsIbrJg=',
+//     'x9SZw6TwIqfmvrLZ/kz1o0Ossjmn728BnBKpUFqGNVM=',
+//     '58qRu/uxh4gFezqAcERupSkRYBlBAvfcw7mEjGPLnNU=',
+//     'lCppFqbkrlJ3EcVFAkeip0+44VaoJUymbnOaEUk7tEU=',
+
+// generated on 23 march 2017 - works ok for https://www.tacticalmastery.com/
+    'URugOC1mFdnhyb05zsPO8jqB4Yz7vsjsuWduMaxbtr0=',
+    'RRM1dGqnDFsCJXBTHky16vi1obOlCgFFn/yOhI/y+ho=',
+    'WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18=',
+
 //old
 //     'AbCdEfSeTyLBvTjEOhGD1627853=',
 //     'ZyXwYuBdQsPIUVxNGRDAKGgxhJVu456='
