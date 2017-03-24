@@ -142,7 +142,7 @@ function validate(utils) { // eslint-disable-line no-unused-vars
 
   // Mailcheck Plugin Code here
   if ($('.email').length > 0) {
-    $('.email').on('blur', blurEvent);
+    $('.email').on('blur vmouseup', blurEvent);
     // If user click on the suggested email, it will replace that email with suggested one.
     $('body').on('click', '.email ~ small a', clickEvent);
   }
