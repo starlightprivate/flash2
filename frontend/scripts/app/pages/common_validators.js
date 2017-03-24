@@ -125,7 +125,7 @@ function validate(utils) { // eslint-disable-line no-unused-vars
       domains,
       topLevelDomains,
       suggested(element, suggestion) {
-        $('.email + small').html(`Did you mean <a href='javascript:void(0)'>${DOMPurify.sanitize(suggestion.full)}</a>`).show();
+        $('.email ~ small').unsafeHtml(`Did you mean <a href='javascript:void(0)'>${DOMPurify.sanitize(suggestion.full)}</a><br/>`).show();
       },
       empty() {
       },
@@ -134,7 +134,7 @@ function validate(utils) { // eslint-disable-line no-unused-vars
 
   function clickEvent() {
     $('.email').val($(this).html());
-    $('.email + small').hide().html('Great! We will send you a confirmation e-mail with tracking # after purchasing.');
+    $('.email ~ small').hide().html('Great! We will send you a confirmation e-mail with tracking # after purchasing.');
     if ($('form').length > 0) {
       $('form').formValidation('revalidateField', 'email');
     }
@@ -144,6 +144,6 @@ function validate(utils) { // eslint-disable-line no-unused-vars
   if ($('.email').length > 0) {
     $('.email').on('blur', blurEvent);
     // If user click on the suggested email, it will replace that email with suggested one.
-    $('body').on('click', '.email + small a', clickEvent);
+    $('body').on('click', '.email ~ small a', clickEvent);
   }
 }
