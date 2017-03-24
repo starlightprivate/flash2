@@ -129,13 +129,16 @@ gulp.task('libcopy', function () {
     config.src + '/scripts/libs/formvalidation/js/formValidation.min.js',
     config.src + '/scripts/libs/formvalidation/js/framework/bootstrap4.min.js',
     config.src + '/scripts/libs/store.everything.min.js',
-    'node_modules/validator/validator.min.js',
-    config.src + '/scripts/app/config.js' ,
-    config.src + '/scripts/app/utils.js' ,
-    config.src + '/scripts/app/storage-wrapper.js' ,
-    config.src + '/scripts/app/safty-overrides.js' ,
+    config.src + 'node_modules/validator/validator.min.js',
+    config.src + '/scripts/app/storage-wrapper.js',
+    config.src + '/scripts/app/utils.js',
+    config.src + '/scripts/app/safty-overrides.js',
   ])
   .pipe(concat('libs.js'))
+  .pipe(babel({
+      babelrc: false,
+			presets: ['es2015']
+		}))
   .pipe(gulp.dest(config.dist + '/assets/js'));
 });
 
@@ -145,6 +148,10 @@ gulp.task('jscopy', function() {
     config.src + '/scripts/app/pages/*.js',
   ])
   .pipe(newer(config.dist + '/assets/js'))
+  .pipe(babel({
+      babelrc: false,
+			presets: ['es2015']
+		}))
   .pipe(gulp.dest(config.dist + '/assets/js'));
 });
 
@@ -248,7 +255,7 @@ gulp.task('build', ['clean-all'], function (done) {
   );
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', ['build'], function() {
   gulp.watch('frontend/**/*', ['build']);
 });
 
