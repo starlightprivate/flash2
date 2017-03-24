@@ -131,7 +131,6 @@ gulp.task('libcopy', function () {
     config.src + '/scripts/libs/store.everything.min.js',
     config.src + 'node_modules/validator/validator.min.js',
     config.src + '/scripts/app/storage-wrapper.js',
-    config.src + '/scripts/app/config.js',
     config.src + '/scripts/app/utils.js',
     config.src + '/scripts/app/safty-overrides.js',
   ])
@@ -256,7 +255,7 @@ gulp.task('build', ['clean-all'], function (done) {
   );
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', ['build'], function() {
   gulp.watch('frontend/**/*', ['build']);
 });
 
