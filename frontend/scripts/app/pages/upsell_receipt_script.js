@@ -38,7 +38,7 @@
 
       const orderId = DOMPurify.sanitize(orderInfo.orderId);
       $('#orderNumber').text(orderId);
-      utilsInstance.callAPI('get-trans', orderId, 'GET', (resp) => {
+      utilsInstance.callAPI(`get-trans/${orderId}`, null, 'GET', (resp) => {
         if (resp.success) {
           if (resp.data) {
             const firstRow = resp.data[0];
@@ -51,7 +51,7 @@
         }
       });
     }
-    utilsInstance.callAPI('get-lead', DOMPurify.sanitize(myOrderID), 'GET', (resp) => {
+    utilsInstance.callAPI(`get-lead/${DOMPurify.sanitize(myOrderID)}`, null, 'GET', (resp) => {
       if (pageType === 'receipt') {
         if (resp.success) {
           populateThanksPage(resp.data);

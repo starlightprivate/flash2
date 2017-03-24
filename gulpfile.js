@@ -130,10 +130,10 @@ gulp.task('libcopy', function () {
     config.src + '/scripts/libs/formvalidation/js/framework/bootstrap4.min.js',
     config.src + '/scripts/libs/store.everything.min.js',
     config.src + 'node_modules/validator/validator.min.js',
-    config.src + '/scripts/app/storage-wrapper.js' ,
-    config.src + '/scripts/app/config.js' ,
-    config.src + '/scripts/app/utils.js' ,
-    config.src + '/scripts/app/safty-overrides.js' ,
+    config.src + '/scripts/app/storage-wrapper.js',
+    config.src + '/scripts/app/config.js',
+    config.src + '/scripts/app/utils.js',
+    config.src + '/scripts/app/safty-overrides.js',
   ])
   .pipe(concat('libs.js'))
   .pipe(babel({
