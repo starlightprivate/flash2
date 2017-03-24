@@ -428,12 +428,12 @@
             $inputCardNumber.attr('maxlength', '19');
             break;
           default:
-            $('.payment-icon .cc-icon').removeClass('inactive active').addClass('faded');
+            // $('.payment-icon .cc-icon').removeClass('inactive active').addClass('faded');
             $inputCardNumber.attr('maxlength', '19');
             break;
           }
         } else if (data.validator !== 'stringLength') {
-          $('.payment-icon .cc-icon').removeClass('inactive active').addClass('faded');
+          // $('.payment-icon .cc-icon').removeClass('inactive active').addClass('faded');
           $inputCardNumber.attr('maxlength', '19');
         }
       }
