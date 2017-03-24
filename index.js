@@ -15,15 +15,7 @@ winston.cli();
 if (config.ENV === 'development') {
   winston.level = 'silly';
 } else {
-  winston.remove(winston.transports.Console);
-  winston.add(winston.transports.Console, {
-    name: 'production-console',
-    level: 'info',
-    prettyPrint: true,
-    colorize: true,
-    silent: false,
-    timestamp: false,
-  });
+  winston.level = 'verbose';
 }
 
 winston.add(Sentry, {
