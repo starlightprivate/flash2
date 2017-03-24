@@ -51,10 +51,10 @@ module.exports = {
   konnective: {
 // used on dev environment
     proxy: 'https://starlightproxy.herokuapp.com/',
-    proxyApiKey: '7d3c81',
+    proxyApiKey: '28a0b53d26c78fc3519c860d58bdd367',
 // used on staging and production environment.
-    loginId: process.env.KONNECTIVE_LOGIN_ID || 'konnective_api_user',
-    password: process.env.KONNECTIVE_PASSWORD || 'kz8A3hHQVN',
+    loginId: process.env.KONNECTIVE_LOGIN_ID || 'this_is_not_konnective_api_user',
+    password: process.env.KONNECTIVE_PASSWORD || 'this_is_not_konnective_api_password',
 // NOTE THAT loginId, password have to be loaded from ENVIRONMENT
 // NOT STORED IN SOURCE CODE!!!!
 // --Anatolij
