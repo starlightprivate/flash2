@@ -266,6 +266,12 @@ app.use('/tacticalsales/', express.static(path.join(__dirname, 'public'), {
 }));
 
 // eslint-disable-next-line no-unused-vars
+app.use('/tacticalsales/', (req, res, next) => {
+  res.redirect('/tacticalsales/');
+});
+
+
+// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   if (err.code === 'EBADCSRFTOKEN') {
     if (config.ENV === 'development') {
