@@ -16,6 +16,17 @@ import config from './../../server-config';
 
 
 const enableFullProtection = config.ENV === 'staging'; // || config.ENV === 'production';
+// for now the CSP works in full power only on staging environment,
+// enforcing CSP rules, not im reportOnly mode
+// while it have to work on both `production` and `staging` one in enforce mode
+// it is temporary measures, because we still recieving new CSP errors.
+// if we enable it in enforcing mode, site can not work for some customers
+
+// on staging and production environments application is working behind nginx.
+// it has HTTPS support enabled
+// and it sends header related to make browser use HTTPS only
+// on development it do not do it.
+const upgradeInsecureRequests = config.ENV === 'staging' || config.ENV === 'production';
 
 // under construction
 export default csp({
@@ -42,7 +53,7 @@ export default csp({
       // to make vistia video work
       "'unsafe-inline'", // eslint-disable-line quotes
       "'unsafe-eval'", // eslint-disable-line quotes
-      'ssl.google-analytics.com',
+      'ssl.google-analytics.com', // https://sentry.io/starlight-group/node-api/issues/241349780/
 
 
 // this all is loaded by Vistia widget
@@ -152,7 +163,7 @@ export default csp({
 
     // on development environment, being run on http://localhost:8000
     // it makes download all scripts via HTTPS,while locally we serve site using HTTP and it fails
-    upgradeInsecureRequests: enableFullProtection,
+    upgradeInsecureRequests,
   },
 
   // This module will detect common mistakes in your directives and throw errors
