@@ -15,7 +15,7 @@ import config from './../../server-config';
 // - Anatolij
 
 
-const isDevelopment = config.ENV === 'development';
+const enableFullProtection = config.ENV === 'staging'; // || config.ENV === 'production';
 
 // under construction
 export default csp({
@@ -152,7 +152,7 @@ export default csp({
 
     // on development environment, being run on http://localhost:8000
     // it makes download all scripts via HTTPS,while locally we serve site using HTTP and it fails
-    upgradeInsecureRequests: !isDevelopment,
+    upgradeInsecureRequests: enableFullProtection,
   },
 
   // This module will detect common mistakes in your directives and throw errors
@@ -162,7 +162,7 @@ export default csp({
   // Set to true if you only want browsers to report errors, not block them.
   // You may also set this to a function(req, res) in order to decide dynamically
   // whether to use reportOnly mode, e.g., to allow for a dynamic kill switch.
-  reportOnly: true, // isDevelopment,
+  reportOnly: !enableFullProtection,
 
   // Set to true if you want to blindly set all headers: Content-Security-Policy,
   // X-WebKit-CSP, and X-Content-Security-Policy.
