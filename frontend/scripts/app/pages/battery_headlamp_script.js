@@ -1,4 +1,4 @@
-/* global $, DOMPurify, jQuery, utils, UniversalStorage, loadAssets */
+/* global $, DOMPurify, jQuery, utils, UniversalStorage, loadAssets, utilsInstance */
 // eslint-disable-file babel/no-invalid-this
 
 const requireAssets = [
@@ -7,7 +7,6 @@ const requireAssets = [
 ];
 
 const batteryHeadlamp = () => {
-  const utilsInstance = utils();
   function init() {
     let upsellID = null;
     if (window.location.pathname.indexOf('us_batteryoffer') >= 0) {

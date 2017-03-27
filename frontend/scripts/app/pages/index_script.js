@@ -1,4 +1,5 @@
 /* global $, DOMPurify, jQuery, utils, history, validate, UniversalStorage, loadAssets */
+/* global utilsInstance */
 
 const requireAssets = [
   'https://cdn.jsdelivr.net/g/jquery@3.1.1,js-cookie@2.2.0,tether@1.3.7,bootstrap@4.0.0-alpha.5,jquery.mask@1.14.0,mailcheck@1.1,mobile-detect.js@1.3.4,modernizr@3.3.1',
@@ -7,7 +8,6 @@ const requireAssets = [
 ];
 
 const index = () => {
-  const utilsInstance = utils();
   function initFieldFv(e, data) {
     const field = DOMPurify.sanitize(data.field);
     const $field = data.element;
@@ -35,6 +35,10 @@ const index = () => {
   function openContactModal() {
     $('#modal-contact').modal('show');
   }
+
+  $('#zipcode').keyup(() => {
+    utilsInstance.loadStateFromZip();
+  });
 
   (() => {
     validate(utilsInstance);

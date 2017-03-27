@@ -1,4 +1,4 @@
-/* global $, DOMPurify, jQuery, UniversalStorage */
+/* global $, DOMPurify, jQuery, UniversalStorage, utilsInstance */
 function validate(utils) { // eslint-disable-line no-unused-vars
   const utilsInstance = utils;
   const cardNumberConfigurations = {
