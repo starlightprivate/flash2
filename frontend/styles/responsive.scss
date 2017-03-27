@@ -18,6 +18,16 @@
       }
     }
   }
+  .pg-index { 
+    .btn {
+    &.btn-red {
+      .btn-title {
+        font-size: 32px;
+      }
+    }
+      
+    }
+  }
 }
 
 @media screen and (min-width: 992px) {
@@ -622,6 +632,8 @@
   }
 }
 
+
+
 @media screen and (max-width: 300px) {
   .pg-index {
     .btn {
@@ -640,6 +652,17 @@
       }
     }
   }
+  .pg-index { 
+    .btn {
+    &.btn-red {
+      .btn-title {
+        font-size: 16px;
+      }
+    }
+      
+    }
+  }    
+
 }
 
 @media screen and (max-width: 400px) {

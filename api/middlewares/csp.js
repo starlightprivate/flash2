@@ -15,7 +15,18 @@ import config from './../../server-config';
 // - Anatolij
 
 
-const isDevelopment = config.ENV === 'development';
+const enableFullProtection = config.ENV === 'staging'; // || config.ENV === 'production';
+// for now the CSP works in full power only on staging environment,
+// enforcing CSP rules, not im reportOnly mode
+// while it have to work on both `production` and `staging` one in enforce mode
+// it is temporary measures, because we still recieving new CSP errors.
+// if we enable it in enforcing mode, site can not work for some customers
+
+// on staging and production environments application is working behind nginx.
+// it has HTTPS support enabled
+// and it sends header related to make browser use HTTPS only
+// on development it do not do it.
+const upgradeInsecureRequests = config.ENV === 'staging' || config.ENV === 'production';
 
 // under construction
 export default csp({
@@ -42,6 +53,8 @@ export default csp({
       // to make vistia video work
       "'unsafe-inline'", // eslint-disable-line quotes
       "'unsafe-eval'", // eslint-disable-line quotes
+      'ssl.google-analytics.com', // https://sentry.io/starlight-group/node-api/issues/241349780/
+
 
 // this all is loaded by Vistia widget
       'data:',
@@ -104,8 +117,13 @@ export default csp({
       'www.google.de',
       'www.google.ca',
       'www.google.com.pk', // https://sentry.io/starlight-group/node-api/issues/237711249/
+      'www.google.ie', // https://sentry.io/starlight-group/node-api/issues/241406270/
+      'www.google.com.vn', // https://sentry.io/starlight-group/node-api/issues/240874666/
       'www.google.co.in', // https://sentry.io/starlight-group/node-api/issues/236475387/
       'www.google.com.tw', // https://sentry.io/starlight-group/node-api/issues/239112816/
+      'www.google.es', // https://sentry.io/starlight-group/node-api/issues/242283604/
+      'amp.cloudflare.com', // https://sentry.io/starlight-group/node-api/issues/242302468/
+      'ssl.google-analytics.com', // https://sentry.io/starlight-group/node-api/issues/241349781/
     ],
     connectSrc: [
       "'self'", // eslint-disable-line quotes
@@ -145,7 +163,7 @@ export default csp({
 
     // on development environment, being run on http://localhost:8000
     // it makes download all scripts via HTTPS,while locally we serve site using HTTP and it fails
-    upgradeInsecureRequests: !isDevelopment,
+    upgradeInsecureRequests,
   },
 
   // This module will detect common mistakes in your directives and throw errors
@@ -155,7 +173,7 @@ export default csp({
   // Set to true if you only want browsers to report errors, not block them.
   // You may also set this to a function(req, res) in order to decide dynamically
   // whether to use reportOnly mode, e.g., to allow for a dynamic kill switch.
-  reportOnly: true, // isDevelopment,
+  reportOnly: !enableFullProtection,
 
   // Set to true if you want to blindly set all headers: Content-Security-Policy,
   // X-WebKit-CSP, and X-Content-Security-Policy.
