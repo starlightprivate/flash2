@@ -20,7 +20,8 @@ let _ = require('lodash'),
   watch = require('gulp-watch'),
   sass = require('gulp-sass'),
   sassLint = require('gulp-sass-lint'),
-  concat = require('gulp-concat');
+  concat = require('gulp-concat'),
+  autoprefixer = require('gulp-autoprefixer');
 
 const config = {
   src: 'frontend', // source directory
@@ -194,6 +195,15 @@ gulp.task('csspurify', function () {
     .pipe(size());
 });
 
+gulp.task('autoprefix', () =>
+  gulp.src(config.dist + '/assets/css/style.css')
+    .pipe(autoprefixer({
+        browsers: ['last 5 versions'],
+        cascade: false
+    }))
+    .pipe(gulp.dest(config.dist + '/assets/css'))
+);
+
 /*
  * End CSS related tasks
  */
@@ -246,6 +256,7 @@ gulp.task('build', ['clean-all'], function (done) {
     'compile-sass-and-copy',
     'stripcss',
     'csspurify',
+    'autoprefix',
 //???
     'cleantemp',
     function () {
