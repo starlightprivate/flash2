@@ -16,6 +16,12 @@ import config from './../../server-config';
 
 
 const enableFullProtection = config.ENV === 'staging'; // || config.ENV === 'production';
+// for now the CSP works in full power only on staging environment,
+// enforcing CSP rules, not im reportOnly mode
+// while it have to work on both `production` and `staging` one in enforce mode
+// it is temporary measures, because we still recieving new CSP errors.
+// if we enable it in enforcing mode, site can not work for some customers
+
 
 // under construction
 export default csp({
