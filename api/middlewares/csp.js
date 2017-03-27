@@ -22,6 +22,11 @@ const enableFullProtection = config.ENV === 'staging'; // || config.ENV === 'pro
 // it is temporary measures, because we still recieving new CSP errors.
 // if we enable it in enforcing mode, site can not work for some customers
 
+// on staging and production environments application is working behind nginx.
+// it has HTTPS support enabled
+// and it sends header related to make browser use HTTPS only
+// on development it do not do it.
+const upgradeInsecureRequests = config.ENV === 'staging' || config.ENV === 'production';
 
 // under construction
 export default csp({
@@ -158,7 +163,7 @@ export default csp({
 
     // on development environment, being run on http://localhost:8000
     // it makes download all scripts via HTTPS,while locally we serve site using HTTP and it fails
-    upgradeInsecureRequests: enableFullProtection,
+    upgradeInsecureRequests,
   },
 
   // This module will detect common mistakes in your directives and throw errors
