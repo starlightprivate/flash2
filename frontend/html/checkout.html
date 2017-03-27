@@ -247,7 +247,8 @@
                             pattern="\d*"
                             autocomplete="postal-code"
                             autocorrect="off"
-                            inputmode="numeric">
+                            inputmode="numeric"
+                            onkeyup="utilsInstance.loadStateFromZip()">
                           <small class="help-block validMessage text-success message-hidden"></small>
                         </div>
                       </div>

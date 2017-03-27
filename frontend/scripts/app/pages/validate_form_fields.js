@@ -1,4 +1,4 @@
-/* global $, DOMPurify, jQuery, utils, UniversalStorage */
+/* global $, DOMPurify, jQuery, utils, UniversalStorage, utilsInstance */
 
 (() => {
   const utilsInstance = utils();

@@ -1,4 +1,4 @@
-/* global $, DOMPurify, jQuery, utils, validate, UniversalStorage, loadAssets */
+/* global $, DOMPurify, jQuery, utils, validate, UniversalStorage, loadAssets, utilsInstance */
 
 const requireAssets = [
   'https://cdn.jsdelivr.net/g/jquery@3.1.1,js-cookie@2.2.0,tether@1.3.7,bootstrap@4.0.0-alpha.5,jquery.mask@1.14.0,mailcheck@1.1,mobile-detect.js@1.3.4',
@@ -7,45 +7,6 @@ const requireAssets = [
 ];
 
 const checkout = () => {
-  const utilsInstance = utils();
-  const loadStateFromZip = () => {
-    const fZip = $('#zipcode');
-    const fZipVal = fZip.val();
-    const params = [];
-    if (fZipVal.length === 5) {
-      fZip.addClass('processed');
-      $('.state, #city').prop('disabled', true);
-      $('.state + small + i, #city + small + i').show();
-      utilsInstance.callAPI(`state/${fZipVal}`, params, 'GET', (resp) => {
-        const jData = resp.data;
-        if (resp.success) {
-          if (jData.city !== undefined && jData.city !== '' && jData.city !== null) {
-            $('#city').val(jData.city);
-          } else {
-            $('#city').val('');
-          }
-
-          if (jData.state !== undefined && jData.state !== '' && jData.state !== null) {
-            $('.state').val(jData.state).trigger('change');
-          } else {
-            $('.state').val('');
-          }
-          $('input[name=address1]').focus();
-        }
-      // remove fa spin icons and do formvalidation
-        $('.state, #city').prop('disabled', false);
-        let frm;
-        if ($('.form-address').length > 0) {
-          frm = $('.form-address');
-        } else {
-          frm = $('#checkoutForm');
-        }
-        frm.formValidation('revalidateField', 'city');
-        frm.formValidation('revalidateField', 'state');
-      });
-    }
-  };
-
   const init = () => {
     $('.popupButton').click((e) => {
       const data = $(e.currentTarget).data();
@@ -63,10 +24,6 @@ const checkout = () => {
 
     const humanizeObject = message => Object.keys(message).map(key => `<span class='error-message'>${DOMPurify.sanitize(`${key} ${message[key]}`)}</span>`)
     .join('');
-
-    $('#zipcode').keyup(() => {
-      loadStateFromZip();
-    });
 
     function submitOrderForm() {
       const $loadingBar = $('div.js-div-loading-bar');
