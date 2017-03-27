@@ -16,6 +16,7 @@ const validEntryPoints = [
   '/',
   '/robots.txt',
   '/index.html',
+  '/tacticalsales',
   '/tacticalsales/',
   '/tacticalsales/robots.txt',
   '/tacticalsales/index.html',
