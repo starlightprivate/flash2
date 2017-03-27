@@ -25,6 +25,10 @@ const checkout = () => {
     const humanizeObject = message => Object.keys(message).map(key => `<span class='error-message'>${DOMPurify.sanitize(`${key} ${message[key]}`)}</span>`)
     .join('');
 
+    $('#zipcode').keyup(() => {
+      utilsInstance.loadStateFromZip();
+    });
+
     function submitOrderForm() {
       const $loadingBar = $('div.js-div-loading-bar');
       $loadingBar.show();

@@ -36,6 +36,10 @@ const index = () => {
     $('#modal-contact').modal('show');
   }
 
+  $('#zipcode').keyup(() => {
+    utilsInstance.loadStateFromZip();
+  });
+
   (() => {
     validate(utilsInstance);
     $('.popupButton').click((e) => {
