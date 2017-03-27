@@ -64,7 +64,7 @@ develop_google_cloud_deployment_app:
     CLUSTER_NAME: flash2-development
     COMPUTE_ZONE: us-central1-b
     IMAGE_REPO: gcr.io/flash2-development
-    NODE_ENV: development
+    NODE_ENV: staging
     REPLICAS: 3
   volumes:
     - ./deploy/:/deploy
