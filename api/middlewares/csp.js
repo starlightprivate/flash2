@@ -42,6 +42,8 @@ export default csp({
       // to make vistia video work
       "'unsafe-inline'", // eslint-disable-line quotes
       "'unsafe-eval'", // eslint-disable-line quotes
+      '\'ssl.google-analytics.com\'',
+
 
 // this all is loaded by Vistia widget
       'data:',
@@ -104,8 +106,13 @@ export default csp({
       'www.google.de',
       'www.google.ca',
       'www.google.com.pk', // https://sentry.io/starlight-group/node-api/issues/237711249/
+      'www.google.ie', // https://sentry.io/starlight-group/node-api/issues/241406270/
+      'www.google.com.vn', // https://sentry.io/starlight-group/node-api/issues/240874666/
       'www.google.co.in', // https://sentry.io/starlight-group/node-api/issues/236475387/
       'www.google.com.tw', // https://sentry.io/starlight-group/node-api/issues/239112816/
+      'www.google.es', // https://sentry.io/starlight-group/node-api/issues/242283604/
+      'amp.cloudflare.com', // https://sentry.io/starlight-group/node-api/issues/242302468/
+      'ssl.google-analytics.com', // https://sentry.io/starlight-group/node-api/issues/241349781/
     ],
     connectSrc: [
       "'self'", // eslint-disable-line quotes
