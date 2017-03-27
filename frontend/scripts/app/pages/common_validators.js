@@ -125,7 +125,7 @@ function validate(utils) { // eslint-disable-line no-unused-vars
       domains,
       topLevelDomains,
       suggested(element, suggestion) {
-        $('.email ~ small').unsafeHtml(`Did you mean <a href='javascript:void(0)'>${DOMPurify.sanitize(suggestion.full)}</a><br/>`).show();
+        $('.email ~ small').first().unsafeHtml(`Did you mean <a href='javascript:void(0)'>${DOMPurify.sanitize(suggestion.full)}</a><br/>`).show();
       },
       empty() {
       },
