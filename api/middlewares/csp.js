@@ -42,7 +42,7 @@ export default csp({
       // to make vistia video work
       "'unsafe-inline'", // eslint-disable-line quotes
       "'unsafe-eval'", // eslint-disable-line quotes
-      'ssl.google-analytics.com',
+      'ssl.google-analytics.com', // https://sentry.io/starlight-group/node-api/issues/241349780/
 
 
 // this all is loaded by Vistia widget
