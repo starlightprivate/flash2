@@ -82,10 +82,13 @@ app.use(expressWinston.logger({
 app.use(helmet());
 
 // https://helmetjs.github.io/docs/referrer-policy/
-app.use(helmet.referrerPolicy({ policy: 'strict-origin' }));
+app.use(helmet.referrerPolicy({ policy: 'origin' }));
 
 // https://helmetjs.github.io/docs/frameguard/
-app.use(helmet.frameguard({ action: 'deny' }));
+app.use(helmet.frameguard({
+  action: 'allow-from',
+  domain: 'https://fast.wistia.net/',
+}));
 
 // This is Content Security Policy for site
 // https://en.wikipedia.org/wiki/Content_Security_Policy
