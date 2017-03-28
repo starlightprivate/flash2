@@ -23,7 +23,7 @@ import trace from './risingStack';
 
 import config from './server-config';
 import redis from './config/redis'; // load redis client
-import csp from './api/middlewares/csp'; // CSP middleware
+// import csp from './api/middlewares/csp'; // CSP middleware
 
 import routes from './config/routes/v2';
 
@@ -82,15 +82,19 @@ app.use(expressWinston.logger({
 app.use(helmet());
 
 // https://helmetjs.github.io/docs/referrer-policy/
-app.use(helmet.referrerPolicy({ policy: 'strict-origin' }));
+app.use(helmet.referrerPolicy({ policy: 'origin' }));
 
 // https://helmetjs.github.io/docs/frameguard/
-app.use(helmet.frameguard({ action: 'deny' }));
+app.use(helmet.frameguard({
+  action: 'allow-from',
+  domain: 'https://fast.wistia.net/',
+}));
 
 // This is Content Security Policy for site
 // https://en.wikipedia.org/wiki/Content_Security_Policy
 // see api/middlewares/csp.js for more details
-app.use(csp);
+
+// app.use(csp);
 
 // https://helmetjs.github.io/docs/hsts/
 app.use(helmet.hsts({
@@ -262,7 +266,8 @@ Object.keys(routes).forEach((r) => {
 });
 
 app.use('/tacticalsales/', express.static(path.join(__dirname, 'public'), {
-  maxAge: (config.ENV === 'development') ? -1 : 31557600,
+  // maxAge: (config.ENV === 'development') ? -1 : 31557600, // https://github.com/starlightgroup/flash2/issues/221
+  // no cache!!!
 }));
 
 // eslint-disable-next-line no-unused-vars

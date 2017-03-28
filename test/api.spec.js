@@ -48,18 +48,19 @@ describe('proxy', function () { // eslint-disable-line func-names
 });
 
 describe('security headers send by nodejs application', () => {
-  it('have X-Frame-Options set to "DENY"', (done) => {
+  it('have X-Frame-Options set to ALLOW-FROM https://fast.wistia.net/', (done) => {
     supertest(app)
       .get('/tacticalsales/')
       .expect('X-Powered-By', 'TacticalMastery')
-      .expect('X-Frame-Options', 'DENY')
+      .expect('X-Frame-Options', 'ALLOW-FROM https://fast.wistia.net/')
       .end(done);
   });
-  it('have Referrer-policy set to "strict-origin"', (done) => {
+
+  it('have Referrer-policy set to "origin"', (done) => {
     supertest(app)
       .get('/tacticalsales/')
       .expect('X-Powered-By', 'TacticalMastery')
-      .expect('referrer-policy', 'strict-origin')
+      .expect('referrer-policy', 'origin')
       .end(done);
   });
 
@@ -105,7 +106,8 @@ describe('security headers send by nodejs application', () => {
       .end(done);
   });
 
-  it('has content security policy set up', (done) => {
+  it.skip('has content security policy set up', (done) => {
+// because Larby said to disable CSP, because it breakes application on old iOS and Android devices
     supertest(app)
       .get('/tacticalsales/')
       .expect('X-Powered-By', 'TacticalMastery')
