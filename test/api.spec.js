@@ -55,6 +55,7 @@ describe('security headers send by nodejs application', () => {
       .expect('X-Frame-Options', 'ALLOW-FROM https://fast.wistia.net/')
       .end(done);
   });
+
   it('have Referrer-policy set to "origin"', (done) => {
     supertest(app)
       .get('/tacticalsales/')
