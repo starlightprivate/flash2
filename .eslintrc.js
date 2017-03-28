@@ -23,7 +23,6 @@ module.exports = {
     'require-await':[
       2
     ],
-    'no-plusplus': ["error", { "allowForLoopAfterthoughts": true }],
     'no-console': [
       1
     ],
