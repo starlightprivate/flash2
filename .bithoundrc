@@ -1,9 +1,4 @@
 {
-	"ignore": [
-		"**/node_modules/**",
-		"**/frontend/scripts/libs/**",
-		"**/gulpfile.js**",
-		"**/eslint-rules/**"
 	],
 	"critics": {
 		"lint": {
@@ -11,10 +6,7 @@
 		}
 	},
 	"dependencies": {
-		"unused-ignores": [
-			"validator",
-			"snyk",
-			"minimatch"
+		
 		]
 	}
 }
