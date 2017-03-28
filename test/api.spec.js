@@ -48,11 +48,11 @@ describe('proxy', function () { // eslint-disable-line func-names
 });
 
 describe('security headers send by nodejs application', () => {
-  it('have X-Frame-Options set to "DENY"', (done) => {
+  it('have X-Frame-Options set to ALLOW-FROM https://fast.wistia.net/', (done) => {
     supertest(app)
       .get('/tacticalsales/')
       .expect('X-Powered-By', 'TacticalMastery')
-      .expect('X-Frame-Options', 'DENY')
+      .expect('X-Frame-Options', 'ALLOW-FROM https://fast.wistia.net/')
       .end(done);
   });
   it('have Referrer-policy set to "origin"', (done) => {
