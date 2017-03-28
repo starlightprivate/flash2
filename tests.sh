@@ -18,3 +18,4 @@ echo "sending coverate report"
 CODECLIMATE_REPO_TOKEN=b208580aee4ed59ef2d5b8112fbc836edf531dc2cb9569028a83556e7f25e176 ./node_modules/.bin/codeclimate-test-reporter < coverage/lcov.info
 
 echo "all test pass!"
+exit 0
