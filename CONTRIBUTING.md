@@ -29,16 +29,16 @@ Anatolij github id - @vodolaz095
 Branch meaning
 ====================
 
-- `master` - code is working, ok to deploy locally for development.
-Locally code runs with environment variable of `NODE_ENV` set to `development` or non existant.
+- `development` - main branch, where everybody can push code.
+Code is deployed on [http://dev.tacticalmastery.com/tacticalsales](http://dev.tacticalmastery.com/tacticalsales)
+With `NODE_ENV` set to staging.
 
-- `staging` - code is working and mainly tested. The code should be merged to this branch only from the 'master' branch.
-This branch is automatically been deployed to our staging server https://stg.tacticalmastery.com/tacticalsales/
+- `staging` - code is working and mainly tested - ok to deploy on staging server.
 The`NODE_ENV` have to be `staging`.
+Code is deployed on [http://stg.tacticalmastery.com/tacticalsales](http://stg.tacticalmastery.com/tacticalsales)
 
-
-- `production` - code for production.  The`NODE_ENV` have to be `production`. The code should be merged to this branch only from the 'staging' branch.
-This branch is automatically been deployed to our production server https://www.tacticalmastery.com/tacticalsales/
+- `master` and `production` - code for production.  The`NODE_ENV` have to be `production`.
+Code is deployed on [http://tacticalmastery.com/tacticalsales](http://tacticalmastery.com/tacticalsales)
 
 
 Contributors
@@ -54,14 +54,10 @@ Is prone to sins of rage and pride. On Sunday he goes to Church and is totally o
 Can be reached by [anatolii@starlightgroup.io], slackchat - [@anatolij](https://starlightads.slack.com/messages/@anatolij/)
 Has bachelor degree at mathematics, self educated programmer.
 
+- Sachin (Github - [asharma-ror](http://github.com/asharma-ror/)) - nodejs and ROR developer. Uses Ubuntu.
 
-- Kenji (Github - [KenKimura88](http://github.com/KenKimura88/)) - security expert, javascript developer. Uses MacOS.
+- Alexis (Github - [sledderGIT](http://github.com/sledderGIT)) - nodejs and javascript developer. Speaks Russian.
 
-Full Stack Developer( knows front end and back end programming and architecture ).
-Back End(Node, Python, bit of ROR, Laravel)
-Front End(Angular, React, Vue)
-Can be reached by ken.kimura1988@outlook.com, slackchat - [@kenji](https://starlightads.slack.com/messages/@kenji/)
+- Vlad (Github - [solarvm](https://github.com/solarvm)) - devops
 
-- Sachin (Github - [asharma-ror](http://github.com/asharma-ror/) - nodejs and ROR developer. Uses Ubuntu.
-
-- Ming (Github - [ming-soon](https://github.com/ming-soon)) - JavaScript Developer. Uses Ubuntu 16.04 LTS. Full-stack developer with knowledge of Node/Express.js, React/Redux, Angular, Python/Django, and PHP/Laravel.
+- Thomas (Github - [ThomasLee2014](http://github.com/ThomasLee2014)) - full stack developer
