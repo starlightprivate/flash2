@@ -266,7 +266,8 @@ Object.keys(routes).forEach((r) => {
 });
 
 app.use('/tacticalsales/', express.static(path.join(__dirname, 'public'), {
-  maxAge: (config.ENV === 'development') ? -1 : 31557600,
+  // maxAge: (config.ENV === 'development') ? -1 : 31557600, // https://github.com/starlightgroup/flash2/issues/221
+  // no cache!!!
 }));
 
 // eslint-disable-next-line no-unused-vars
