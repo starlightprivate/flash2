@@ -105,7 +105,8 @@ describe('security headers send by nodejs application', () => {
       .end(done);
   });
 
-  it('has content security policy set up', (done) => {
+  it.skip('has content security policy set up', (done) => {
+// because Larby said to disable CSP, because it breakes application on old iOS and Android devices
     supertest(app)
       .get('/tacticalsales/')
       .expect('X-Powered-By', 'TacticalMastery')
