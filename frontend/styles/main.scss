@@ -271,8 +271,7 @@ img {
 
   &.mobile-mode {
     .step-2,
-    .step-3,
-    .step-1 {
+    .step-3 {
       display: none;
     }
   }
@@ -323,12 +322,6 @@ img {
 
   .exp-detail {
     position: relative;
-  }
-}
-
-.step-content {
-  .radio-box {
-    display: none;
   }
 }
 

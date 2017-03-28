@@ -23,7 +23,7 @@ import trace from './risingStack';
 
 import config from './server-config';
 import redis from './config/redis'; // load redis client
-import csp from './api/middlewares/csp'; // CSP middleware
+// import csp from './api/middlewares/csp'; // CSP middleware
 
 import routes from './config/routes/v2';
 
@@ -90,7 +90,8 @@ app.use(helmet.frameguard({ action: 'deny' }));
 // This is Content Security Policy for site
 // https://en.wikipedia.org/wiki/Content_Security_Policy
 // see api/middlewares/csp.js for more details
-app.use(csp);
+
+// app.use(csp);
 
 // https://helmetjs.github.io/docs/hsts/
 app.use(helmet.hsts({
