@@ -187,6 +187,44 @@ function utils() { // eslint-disable-line no-unused-vars
     popPage(`${modal}.html`, title);
   }
 
+  function loadStateFromZip() {
+    const fZip = $('#zipcode');
+    const fZipVal = fZip.val();
+    const params = [];
+    if (fZipVal.length === 5) {
+      fZip.addClass('processed');
+      $('.state, #city').prop('disabled', true);
+      $('.state + small + i, #city + small + i').show();
+      callAPI(`state/${fZipVal}`, params, 'GET', (resp) => {
+        const jData = resp.data;
+        if (resp.success) {
+          if (jData.city !== undefined && jData.city !== '' && jData.city !== null) {
+            $('#city').val(jData.city);
+          } else {
+            $('#city').val('');
+          }
+
+          if (jData.state !== undefined && jData.state !== '' && jData.state !== null) {
+            $('.state').val(jData.state).trigger('change');
+          } else {
+            $('.state').val('');
+          }
+          $('input[name=address1]').focus();
+        }
+      // remove fa spin icons and do formvalidation
+        $('.state, #city').prop('disabled', false);
+        let frm;
+        if ($('.form-address').length > 0) {
+          frm = $('.form-address');
+        } else {
+          frm = $('#checkoutForm');
+        }
+        frm.formValidation('revalidateField', 'city');
+        frm.formValidation('revalidateField', 'state');
+      });
+    }
+  }
+
   return {
     customWrapperForIsMobileDevice,
     getJson,
@@ -198,6 +236,8 @@ function utils() { // eslint-disable-line no-unused-vars
     bootstrapModal,
     popPage,
     showModal,
+    loadStateFromZip,
   };
 }
 
+window.utilsInstance = utils();

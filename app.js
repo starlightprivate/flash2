@@ -69,15 +69,20 @@ app.use(expressWinston.logger({
 // all other sources will get error 500 NOT OK (cryptic, i know).
 // But this error only fired for non cloudflare access.
 // https://starlightgroup.atlassian.net/projects/SG/issues/SG-35
-if (isProtectedByCloudflare) {
-  app.use(security.verifyThatSiteIsAccessedFromCloudflare); // ####
-}
+
+// Since 23 mart the cloudflare IP checks are performed on Google CLoud Load Balancer
+// And all `flash2` applications has grey IP, not accessible directly from
+// internet, only from load balancer
+
+// if (isProtectedByCloudflare) {
+//   app.use(security.verifyThatSiteIsAccessedFromCloudflare); // ####
+// }
 
 // hemlet headers - do not remove
 app.use(helmet());
 
 // https://helmetjs.github.io/docs/referrer-policy/
-app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
+app.use(helmet.referrerPolicy({ policy: 'strict-origin' }));
 
 // https://helmetjs.github.io/docs/frameguard/
 app.use(helmet.frameguard({ action: 'deny' }));
@@ -98,10 +103,16 @@ app.use(helmet.hpkp({
   maxAge: 2592000, // 30 days
   sha256s: [
 // new - generated here - https://report-uri.io/home/pkp_hash
-    'EZpO1a5wa3q9eyxOxvTaSVciRXlm57R6fYJ2gsIbrJg=',
-    'x9SZw6TwIqfmvrLZ/kz1o0Ossjmn728BnBKpUFqGNVM=',
-    '58qRu/uxh4gFezqAcERupSkRYBlBAvfcw7mEjGPLnNU=',
-    'lCppFqbkrlJ3EcVFAkeip0+44VaoJUymbnOaEUk7tEU=',
+//     'EZpO1a5wa3q9eyxOxvTaSVciRXlm57R6fYJ2gsIbrJg=',
+//     'x9SZw6TwIqfmvrLZ/kz1o0Ossjmn728BnBKpUFqGNVM=',
+//     '58qRu/uxh4gFezqAcERupSkRYBlBAvfcw7mEjGPLnNU=',
+//     'lCppFqbkrlJ3EcVFAkeip0+44VaoJUymbnOaEUk7tEU=',
+
+// generated on 23 march 2017 - works ok for https://www.tacticalmastery.com/
+    'URugOC1mFdnhyb05zsPO8jqB4Yz7vsjsuWduMaxbtr0=',
+    'RRM1dGqnDFsCJXBTHky16vi1obOlCgFFn/yOhI/y+ho=',
+    'WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18=',
+
 //old
 //     'AbCdEfSeTyLBvTjEOhGD1627853=',
 //     'ZyXwYuBdQsPIUVxNGRDAKGgxhJVu456='
@@ -253,6 +264,12 @@ Object.keys(routes).forEach((r) => {
 app.use('/tacticalsales/', express.static(path.join(__dirname, 'public'), {
   maxAge: (config.ENV === 'development') ? -1 : 31557600,
 }));
+
+// eslint-disable-next-line no-unused-vars
+app.use('/tacticalsales/', (req, res, next) => {
+  res.redirect('/tacticalsales/');
+});
+
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {

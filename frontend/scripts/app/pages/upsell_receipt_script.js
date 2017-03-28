@@ -1,6 +1,11 @@
-/* global $, DOMPurify, jQuery, utils, UniversalStorage */
-(() => {
-  const utilsInstance = utils();
+/* global $, DOMPurify, jQuery, utils, UniversalStorage, loadAssets, utilsInstance */
+
+const requireAssets = [
+  'https://cdn.jsdelivr.net/g/jquery@3.1.1,js-cookie@2.2.0,tether@1.3.7,bootstrap@4.0.0-alpha.5,jquery.mask@1.14.0,mailcheck@1.1,mobile-detect.js@1.3.4',
+  '/tacticalsales/assets/js/libs.js',
+];
+
+const upsellReceipt = () => {
   const init = () => {
     let pageType = null;
     if (window.location.pathname.indexOf('receipt') >= 0) {
@@ -38,7 +43,7 @@
 
       const orderId = DOMPurify.sanitize(orderInfo.orderId);
       $('#orderNumber').text(orderId);
-      utilsInstance.callAPI('get-trans', orderId, 'GET', (resp) => {
+      utilsInstance.callAPI(`get-trans/${orderId}`, null, 'GET', (resp) => {
         if (resp.success) {
           if (resp.data) {
             const firstRow = resp.data[0];
@@ -51,7 +56,7 @@
         }
       });
     }
-    utilsInstance.callAPI('get-lead', DOMPurify.sanitize(myOrderID), 'GET', (resp) => {
+    utilsInstance.callAPI(`get-lead/${DOMPurify.sanitize(myOrderID)}`, null, 'GET', (resp) => {
       if (pageType === 'receipt') {
         if (resp.success) {
           populateThanksPage(resp.data);
@@ -93,4 +98,9 @@
       init();
     }
   });
-})();
+};
+
+loadAssets(requireAssets, {
+  success: () => upsellReceipt(),
+  async: false,
+});

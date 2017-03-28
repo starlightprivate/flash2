@@ -20,7 +20,8 @@ let _ = require('lodash'),
   watch = require('gulp-watch'),
   sass = require('gulp-sass'),
   sassLint = require('gulp-sass-lint'),
-  concat = require('gulp-concat');
+  concat = require('gulp-concat'),
+  autoprefixer = require('gulp-autoprefixer');
 
 const config = {
   src: 'frontend', // source directory
@@ -129,13 +130,16 @@ gulp.task('libcopy', function () {
     config.src + '/scripts/libs/formvalidation/js/formValidation.min.js',
     config.src + '/scripts/libs/formvalidation/js/framework/bootstrap4.min.js',
     config.src + '/scripts/libs/store.everything.min.js',
-    'node_modules/validator/validator.min.js',
-    config.src + '/scripts/app/config.js' ,
-    config.src + '/scripts/app/utils.js' ,
-    config.src + '/scripts/app/storage-wrapper.js' ,
-    config.src + '/scripts/app/safty-overrides.js' ,
+    config.src + 'node_modules/validator/validator.min.js',
+    config.src + '/scripts/app/storage-wrapper.js',
+    config.src + '/scripts/app/utils.js',
+    config.src + '/scripts/app/safty-overrides.js',
   ])
   .pipe(concat('libs.js'))
+  .pipe(babel({
+      babelrc: false,
+			presets: ['es2015']
+		}))
   .pipe(gulp.dest(config.dist + '/assets/js'));
 });
 
@@ -145,6 +149,10 @@ gulp.task('jscopy', function() {
     config.src + '/scripts/app/pages/*.js',
   ])
   .pipe(newer(config.dist + '/assets/js'))
+  .pipe(babel({
+      babelrc: false,
+			presets: ['es2015']
+		}))
   .pipe(gulp.dest(config.dist + '/assets/js'));
 });
 
@@ -186,6 +194,15 @@ gulp.task('csspurify', function () {
     .pipe(gulp.dest(config.dist + '/assets/css'))
     .pipe(size());
 });
+
+gulp.task('autoprefix', () =>
+  gulp.src(config.dist + '/assets/css/style.css')
+    .pipe(autoprefixer({
+        browsers: ['last 5 versions'],
+        cascade: false
+    }))
+    .pipe(gulp.dest(config.dist + '/assets/css'))
+);
 
 /*
  * End CSS related tasks
@@ -239,6 +256,7 @@ gulp.task('build', ['clean-all'], function (done) {
     'compile-sass-and-copy',
     'stripcss',
     'csspurify',
+    'autoprefix',
 //???
     'cleantemp',
     function () {
@@ -248,7 +266,7 @@ gulp.task('build', ['clean-all'], function (done) {
   );
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', ['build'], function() {
   gulp.watch('frontend/**/*', ['build']);
 });
 

@@ -51,13 +51,14 @@ module.exports = {
   konnective: {
 // used on dev environment
     proxy: 'https://starlightproxy.herokuapp.com/',
-    proxyApiKey: '7d3c81',
+    proxyApiKey: '28a0b53d26c78fc3519c860d58bdd367',
 // used on staging and production environment.
     loginId: process.env.KONNECTIVE_LOGIN_ID || 'konnective_api_user',
-    password: process.env.KONNECTIVE_PASSWORD || 'kz8A3hHQVN',
+    password: process.env.KONNECTIVE_PASSWORD || 'e0853de70514661cd9d2da853bf690b9', //generated on 24 march by Anatolij - not known by Kenji - have to be revoked
 // NOTE THAT loginId, password have to be loaded from ENVIRONMENT
 // NOT STORED IN SOURCE CODE!!!!
 // --Anatolij
+// can be changed on https://crm.konnektive.com/admin/users/
   },
   redis: {
     REDIS_URL: redisUrl,
@@ -71,8 +72,8 @@ module.exports = {
 // https://sentry.io/starlight-group/node-api/settings/keys/
   sentryDSN: process.env.SENTRY_DSN || 'https://68ae2c197a6440efac407117aec0326f:f64d954adde3493ab03f86d94815e814@sentry.io/133524',
 
-  loggly: {
-    token: process.env.LOGGLY_TOKEN || 'a52a98a7-c97f-40d5-bb5b-b544716b04c3',
+  loggly: { // https://starlightgroup.loggly.com/tokens
+    token: process.env.LOGGLY_TOKEN || '5eef4adb-a47a-4c51-af84-a9b6b41bab11',
     subdomain: process.env.LOGGLY_SUBDOMAIN || 'starlightgroup',
   },
   segmentWriteKey: process.env.SEGMENT_WRITE_KEY || '7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd', // https://segment.com/docs/sources/server/node/

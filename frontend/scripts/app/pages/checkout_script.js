@@ -1,44 +1,12 @@
-/* global $, DOMPurify, jQuery, utils, validate, UniversalStorage */
-(() => {
-  const utilsInstance = utils();
-  const loadStateFromZip = () => {
-    const fZip = $('#zipcode');
-    const fZipVal = fZip.val();
-    const params = [];
-    if (fZipVal.length === 5) {
-      fZip.addClass('processed');
-      $('.state, #city').prop('disabled', true);
-      $('.state + small + i, #city + small + i').show();
-      utilsInstance.callAPI(`state/${fZipVal}`, params, 'GET', (resp) => {
-        const jData = resp.data;
-        if (resp.success) {
-          if (jData.city !== undefined && jData.city !== '' && jData.city !== null) {
-            $('#city').val(jData.city);
-          } else {
-            $('#city').val('');
-          }
+/* global $, DOMPurify, jQuery, utils, validate, UniversalStorage, loadAssets, utilsInstance */
 
-          if (jData.state !== undefined && jData.state !== '' && jData.state !== null) {
-            $('.state').val(jData.state).trigger('change');
-          } else {
-            $('.state').val('');
-          }
-          $('input[name=address1]').focus();
-        }
-      // remove fa spin icons and do formvalidation
-        $('.state, #city').prop('disabled', false);
-        let frm;
-        if ($('.form-address').length > 0) {
-          frm = $('.form-address');
-        } else {
-          frm = $('#checkoutForm');
-        }
-        frm.formValidation('revalidateField', 'city');
-        frm.formValidation('revalidateField', 'state');
-      });
-    }
-  };
+const requireAssets = [
+  'https://cdn.jsdelivr.net/g/jquery@3.1.1,js-cookie@2.2.0,tether@1.3.7,bootstrap@4.0.0-alpha.5,jquery.mask@1.14.0,mailcheck@1.1,mobile-detect.js@1.3.4',
+  '/tacticalsales/assets/js/libs.js',
+  '/tacticalsales/assets/js/common_validators.js',
+];
 
+const checkout = () => {
   const init = () => {
     $('.popupButton').click((e) => {
       const data = $(e.currentTarget).data();
@@ -58,7 +26,7 @@
     .join('');
 
     $('#zipcode').keyup(() => {
-      loadStateFromZip();
+      utilsInstance.loadStateFromZip();
     });
 
     function submitOrderForm() {
@@ -428,12 +396,12 @@
             $inputCardNumber.attr('maxlength', '19');
             break;
           default:
-            $('.payment-icon .cc-icon').removeClass('inactive active').addClass('faded');
+            // $('.payment-icon .cc-icon').removeClass('inactive active').addClass('faded');
             $inputCardNumber.attr('maxlength', '19');
             break;
           }
         } else if (data.validator !== 'stringLength') {
-          $('.payment-icon .cc-icon').removeClass('inactive active').addClass('faded');
+          // $('.payment-icon .cc-icon').removeClass('inactive active').addClass('faded');
           $inputCardNumber.attr('maxlength', '19');
         }
       }
@@ -514,4 +482,9 @@
       init();
     }
   });
-})();
+};
+
+loadAssets(requireAssets, {
+  success: () => checkout(),
+  async: false,
+});

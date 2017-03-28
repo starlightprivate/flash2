@@ -1,7 +1,12 @@
-/* global $, DOMPurify, jQuery, utils, UniversalStorage */
+/* global $, DOMPurify, jQuery, utils, UniversalStorage, loadAssets, utilsInstance */
 // eslint-disable-file babel/no-invalid-this
-(() => {
-  const utilsInstance = utils();
+
+const requireAssets = [
+  'https://cdn.jsdelivr.net/g/jquery@3.1.1,js-cookie@2.2.0,tether@1.3.7,bootstrap@4.0.0-alpha.5,jquery.mask@1.14.0,mailcheck@1.1,mobile-detect.js@1.3.4',
+  '/tacticalsales/assets/js/libs.js',
+];
+
+const batteryHeadlamp = () => {
   function init() {
     let upsellID = null;
     if (window.location.pathname.indexOf('us_batteryoffer') >= 0) {
@@ -103,4 +108,9 @@
       init();
     }
   });
-})();
+};
+
+loadAssets(requireAssets, {
+  success: () => batteryHeadlamp(),
+  async: false,
+});
