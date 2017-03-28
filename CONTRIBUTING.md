@@ -29,16 +29,16 @@ Anatolij github id - @vodolaz095
 Branch meaning
 ====================
 
-- `master` - code is working, ok to deploy locally for development or on dev server.
+- `master` - code is working, ok to deploy locally for development.
 Locally code runs with environment variable of `NODE_ENV` set to `development` or non existant.
-On dev server the `NODE_ENV` have to be `staging`.
 
-- `staging` - code is working and mainly tested - ok to deploy on staging server.
+- `staging` - code is working and mainly tested. The code should be merged to this branch only from the 'master' branch.
+This branch is automatically been deployed to our staging server https://stg.tacticalmastery.com/tacticalsales/
 The`NODE_ENV` have to be `staging`.
 
 
-- `production` - code for production.  The`NODE_ENV` have to be `production`.
-
+- `production` - code for production.  The`NODE_ENV` have to be `production`. The code should be merged to this branch only from the 'staging' branch.
+This branch is automatically been deployed to our production server https://www.tacticalmastery.com/tacticalsales/
 
 
 Contributors
