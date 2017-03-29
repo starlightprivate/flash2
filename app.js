@@ -74,9 +74,9 @@ app.use(expressWinston.logger({
 // And all `flash2` applications has grey IP, not accessible directly from
 // internet, only from load balancer
 
-// if (isProtectedByCloudflare) {
-//   app.use(security.verifyThatSiteIsAccessedFromCloudflare); // ####
-// }
+if (isProtectedByCloudflare) {
+  app.use(security.verifyThatSiteIsAccessedFromCloudflare); // ####
+}
 
 // hemlet headers - do not remove
 app.use(helmet());
