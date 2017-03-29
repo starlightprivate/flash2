@@ -20,7 +20,7 @@
     "prepublish": "npm run snyk-protect",
     "lint": "gulp test",
     "build": "npm run lint && gulp build",
-    "lint:backend": "./node_modules/.bin/eslint api/ config/ app.js index.js server-config.js  trace.config.js test/"
+    "lint:backend": "./node_modules/.bin/eslint api/ config/ app.js index.js server-config.js  trace.config.js test/",
     "install":"./node_modules/.bin/gulp build"
   },
   "repository": {
