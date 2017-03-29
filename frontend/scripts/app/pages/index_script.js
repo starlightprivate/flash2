@@ -178,11 +178,17 @@ const index = () => {
             validators: {
               notEmpty: { message: 'The email address is required.' },
               stringLength: {
-                min: 1,
-                max: 100,
+                min: 6,
+                max: 50,
                 message: 'The email address must be more than 6 and less than 30 characters long.',
               },
-              emailAddress: { message: 'The email address is not valid.' },
+              emailAddress: {
+                message: 'The value is not a valid email address',
+              },
+              regexp: {
+                regexp: /.+[a-zA-Z]{2,}$/,
+                message: 'The email address must have a valid domain name.',
+              },
             },
           },
           phoneNumber: {
