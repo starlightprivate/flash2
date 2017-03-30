@@ -1,6 +1,6 @@
 /* global process */
 require('babel-register');
-require('@risingstack/trace');
+// require('@risingstack/trace');
 
 const winston = require('winston');
 const http = require('http');

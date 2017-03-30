@@ -20,7 +20,8 @@
     "prepublish": "npm run snyk-protect",
     "lint": "gulp test",
     "build": "npm run lint && gulp build",
-    "lint:backend": "./node_modules/.bin/eslint api/ config/ app.js index.js server-config.js  trace.config.js test/"
+    "lint:backend": "./node_modules/.bin/eslint api/ config/ app.js index.js server-config.js  trace.config.js test/",
+    "install": "./node_modules/.bin/gulp build"
   },
   "repository": {
     "type": "git",
@@ -29,12 +30,12 @@
   "main": "index.js",
   "snyk": true,
   "dependencies": {
-    "@risingstack/trace": "^3.4.0",
     "analytics-node": "^2.4.0",
     "autopilot-api": "^2.0.0",
     "babel-register": "^6.23.0",
     "body-parser": "^1.17.1",
     "connect-redis": "^3.2.0",
+    "cookie-parser": "^1.4.3",
     "csurf": "^1.9.0",
     "eslint-plugin-async-await": "0.0.0",
     "express": "^4.15.2",
