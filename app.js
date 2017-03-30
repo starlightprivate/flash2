@@ -157,7 +157,8 @@ if (isProtectedByCloudflare) {
   app.enable('trust proxy'); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
 }
 app.use(expressSession({
-  key: 'PHPSESSID',
+  // key: 'PHPSESSID',
+  key: 'lalala',
   // LOL, let they waste some time hacking in assumption
   // this as PHP application, at least it will be detected by Cloudfare :-)
   store: new RedisSessionStore({
