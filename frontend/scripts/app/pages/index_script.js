@@ -283,7 +283,7 @@ const index = () => {
     };
 
     toggleModalIfHashUrl();
-    $(window).bind('hashchange', () => toggleModalIfHashUrl());
+    // $(window).bind('hashchange', () => toggleModalIfHashUrl());
   });
 };
 
