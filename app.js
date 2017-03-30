@@ -290,6 +290,13 @@ app.use('/tacticalsales/', express.static(path.join(__dirname, 'public'), {
   // no cache!!!
 }));
 
+
+// catch all redirects
+// http://tacticalmastery.com/{anythingNotIntended} and
+// http://tacticalmastery.com/tacticalmastery/{anythingNotIntended}
+// are redirecting to
+// http://tacticalmastery.com/tacticalmastery/
+
 // eslint-disable-next-line no-unused-vars
 app.use((req, res, next) => {
   res.redirect('/tacticalsales/');

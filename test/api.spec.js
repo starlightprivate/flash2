@@ -175,7 +175,7 @@ describe('web application', function () { // eslint-disable-line func-names
         return done();
       });
   });
-  it('has 403 for /api/v2/pong with wrong entry point', (done) => {
+  it('has 403 for /api/v2/ping with wrong entry point', (done) => {
     supertest(app)
       .get('/tacticalsales/api/v2/ping')
       .expect('X-Powered-By', 'TacticalMastery')

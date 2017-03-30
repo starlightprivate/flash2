@@ -10,28 +10,6 @@ import config from './../../server-config';
 
 // import trace from './../../risingStack';
 
-// This is first pages of site, that real users usually visits
-// TODO - verify that nothing is missing
-const validEntryPoints = [
-  '/',
-  '/robots.txt',
-  '/index.html',
-  '/tacticalsales/',
-  '/tacticalsales/robots.txt',
-  '/tacticalsales/index.html',
-  // '/tacticalsales/checkout.html',
-  // '/tacticalsales/us_headlampoffer.html',
-  // '/tacticalsales/customercare.html',
-  // '/tacticalsales/partner.html',
-  // '/tacticalsales/press.html',
-  // '/tacticalsales/privacy.html',
-  // '/tacticalsales/receipt.html',
-  // '/tacticalsales/terms.html',
-  // '/tacticalsales/tm3.html',
-  // '/tacticalsales/us_batteryoffer.html',
-];
-
-
 // https://www.cloudflare.com/ips/
 const cloudFlareIp4Range = [
   '103.21.244.0/22',
@@ -141,10 +119,15 @@ function logBotAction(req, punishReason) {
 // https://starlightgroup.atlassian.net/browse/SG-5
 // https://starlightgroup.atlassian.net/browse/SG-8
 // https://starlightgroup.atlassian.net/browse/SG-9
+// how it works?
+// if for first page of site user visited is under /tacticalsales/api/v2/*,
+// it means that user calls api directly, without visiting other pages
+// most probably it is because user is a bot, that calls directly api endpoints
+
 
 function punishForEnteringSiteFromBadLocation(req, res, next) {
   if (req.session) {
-    if (validEntryPoints.indexOf(req.session.entryPoint) === -1) {
+    if (req.session.entryPoint.indexOf('/tacticalsales/api/v2/') === 0) {
       if (config.ENV !== 'production') {
         res.set('X-PUNISHEDBY', 'BAD LOCATION');
       }
@@ -192,7 +175,6 @@ function punishForChangingUserAgent(req, res, next) {
 
 
 export default {
-  validEntryPoints,
   verifyThatSiteIsAccessedFromCloudflare,
   getIp,
   punishForEnteringSiteFromBadLocation,
