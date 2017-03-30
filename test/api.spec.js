@@ -48,19 +48,19 @@ describe('proxy', function () { // eslint-disable-line func-names
 });
 
 describe('security headers send by nodejs application', () => {
-  it('have X-Frame-Options set to ALLOW-FROM https://fast.wistia.net/', (done) => {
+  it('have X-Frame-Options set to SAMEORIGIN', (done) => {
     supertest(app)
       .get('/tacticalsales/')
       .expect('X-Powered-By', 'TacticalMastery')
-      .expect('X-Frame-Options', 'ALLOW-FROM https://fast.wistia.net/')
+      .expect('X-Frame-Options', 'SAMEORIGIN')
       .end(done);
   });
 
-  it('have Referrer-policy set to "origin"', (done) => {
+  it('have Referrer-policy set to "no-refferer"', (done) => {
     supertest(app)
       .get('/tacticalsales/')
       .expect('X-Powered-By', 'TacticalMastery')
-      .expect('referrer-policy', 'origin')
+      .expect('referrer-policy', 'no-referrer')
       .end(done);
   });
 
@@ -175,7 +175,7 @@ describe('web application', function () { // eslint-disable-line func-names
         return done();
       });
   });
-  it('has 403 for /api/v2/pong with wrong entry point', (done) => {
+  it('has 403 for /api/v2/ping with wrong entry point', (done) => {
     supertest(app)
       .get('/tacticalsales/api/v2/ping')
       .expect('X-Powered-By', 'TacticalMastery')

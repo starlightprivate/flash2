@@ -6,7 +6,7 @@ import phone from 'phone';
 import Autopilot from 'autopilot-api';
 import Analytics from 'analytics-node';
 
-import trace from './../../risingStack';
+// import trace from './../../risingStack';
 import config from '../../server-config';
 import logger from './../logger';
 import security from './../middlewares/security';
@@ -128,7 +128,7 @@ function addContact(req, res) {
           },
         });
 
-        trace.incrementMetric('addContact');
+        // trace.incrementMetric('addContact');
         return res.success();
       });
   } catch (error) {
@@ -161,7 +161,7 @@ function updateContact(req, res) {
       .post(options)
       .then((data) => {
         logger('info', 'updateContact', req, data); // TODO - think of data required for logs
-        trace.incrementMetric('updateContact');
+        // trace.incrementMetric('updateContact');
 
         // https://segment.com/docs/sources/server/node/#identify
         segmentAnalytics.identify({
@@ -203,7 +203,7 @@ function addLeadoutpost(req, res) {
     .post(options)
     .then((data) => {
       logger('info', 'addLeadoutpost', req, data); // TODO - think of data required for logs
-      trace.incrementMetric('addLeadoutpost');
+      // trace.incrementMetric('addLeadoutpost');
       return res.send(data);
     });
 }

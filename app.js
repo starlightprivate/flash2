@@ -14,6 +14,7 @@ import expressWinston from 'express-winston';
 // proper session implementation
 // https://starlightgroup.atlassian.net/browse/SG-5
 import expressSession from 'express-session'; // initialize sessions
+import cookieParser from 'cookie-parser';
 import connectRedis from 'connect-redis';// store session data in redis database
 import csurf from 'csurf'; // add CSRF protection https://www.npmjs.com/package/csurf
 import helmet from 'helmet';
@@ -74,21 +75,33 @@ app.use(expressWinston.logger({
 // And all `flash2` applications has grey IP, not accessible directly from
 // internet, only from load balancer
 
-// if (isProtectedByCloudflare) {
-//   app.use(security.verifyThatSiteIsAccessedFromCloudflare); // ####
-// }
+if (isProtectedByCloudflare) {
+  // app.enable('trust proxy'); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
+  // app.set('trust proxy', 1); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
+  app.use(security.verifyThatSiteIsAccessedFromCloudflare); // ####
+
+  app.use((req, res, next) => { // reditect from http to https
+    const hostname = req.hostname || 'tacticalmastery.com';
+    if (req.headers['x-forwarded-proto'] !== 'https') {
+      res.redirect(`https://${hostname}${req.url}`);
+    } else {
+      next();
+    }
+  });
+}
+
 
 // hemlet headers - do not remove
 app.use(helmet());
 
 // https://helmetjs.github.io/docs/referrer-policy/
-app.use(helmet.referrerPolicy({ policy: 'origin' }));
+app.use(helmet.referrerPolicy({ policy: 'no-referrer' }));
 
 // https://helmetjs.github.io/docs/frameguard/
-app.use(helmet.frameguard({
-  action: 'allow-from',
-  domain: 'https://fast.wistia.net/',
-}));
+app.use(helmet.frameguard({ action: 'sameorigin' }));
+
+app.use(helmet.noCache());
+
 
 // This is Content Security Policy for site
 // https://en.wikipedia.org/wiki/Content_Security_Policy
@@ -154,9 +167,10 @@ const RedisSessionStore = connectRedis(expressSession);
 if (isProtectedByCloudflare) {
   app.enable('trust proxy'); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
 }
-
+app.use(cookieParser(config.secret));
 app.use(expressSession({
   key: 'PHPSESSID',
+  // key: 'lalala',
   // LOL, let they waste some time hacking in assumption
   // this as PHP application, at least it will be detected by Cloudfare :-)
   store: new RedisSessionStore({
@@ -250,8 +264,9 @@ app.use((req, res, next) => {
 // secure /api/ from access by bots
 // for additional info see function `sessionTamperingProtectionMiddleware` above
 if (isProtectedByCloudflare) {
-  app.use('/tacticalsales/api', security.punishForChangingIP);
+  // app.use('/tacticalsales/api', security.punishForChangingIP);
 }
+
 app.use('/tacticalsales/api', security.punishForChangingUserAgent);
 app.use('/tacticalsales/api', security.punishForEnteringSiteFromBadLocation);
 
@@ -266,11 +281,19 @@ Object.keys(routes).forEach((r) => {
 });
 
 app.use('/tacticalsales/', express.static(path.join(__dirname, 'public'), {
-  maxAge: (config.ENV === 'development') ? -1 : 31557600,
+  // maxAge: (config.ENV === 'development') ? -1 : 31557600, // https://github.com/starlightgroup/flash2/issues/221
+  // no cache!!!
 }));
 
+
+// catch all redirects
+// http://tacticalmastery.com/{anythingNotIntended} and
+// http://tacticalmastery.com/tacticalmastery/{anythingNotIntended}
+// are redirecting to
+// http://tacticalmastery.com/tacticalmastery/
+
 // eslint-disable-next-line no-unused-vars
-app.use('/tacticalsales/', (req, res, next) => {
+app.use((req, res, next) => {
   res.redirect('/tacticalsales/');
 });
 
