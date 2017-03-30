@@ -22,6 +22,9 @@ function extractCookie(res, rgx) {
   const cookies = res.headers['set-cookie'];
   let val;
   let matched = false;
+  if (!cookies) {
+    return false;
+  }
   cookies.map((c) => {
     if (!matched) {
       const results = rgx.exec(c);
