@@ -91,8 +91,8 @@ if (isProtectedByCloudflare) {
 }
 
 // lets encrypt challenge - blame Sachin
-app.get('/.well-known/acme-challenge/acme-challenge/MeXsPDebEQU1Tgn_V9iiOHqk_DHMPA2Et2zEwQyET7o', (req, res) => {
-  res.send('MeXsPDebEQU1Tgn_V9iiOHqk_DHMPA2Et2zEwQyET7o.6lafGIstSVHGsz_Ibk3Dbu2wVz9Z4UTLebVC09Xk1CM');
+app.get('/.well-known/acme-challenge/acme-challenge/-lLtNbylv0-zaRWCYetAZGFJhh5uRq2jsHxCJdQJZRs', (req, res) => {
+  res.send('-lLtNbylv0-zaRWCYetAZGFJhh5uRq2jsHxCJdQJZRs.6lafGIstSVHGsz_Ibk3Dbu2wVz9Z4UTLebVC09Xk1CM');
 });
 
 
