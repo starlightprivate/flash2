@@ -75,6 +75,7 @@ app.use(expressWinston.logger({
 // internet, only from load balancer
 
 if (isProtectedByCloudflare) {
+  app.set('trust proxy', 1); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
   app.use(security.verifyThatSiteIsAccessedFromCloudflare); // ####
 }
 
@@ -151,9 +152,6 @@ app.use(expressContentLength.validateMax({
 // setup redis powered sessions
 // https://github.com/vodolaz095/hunt/blob/master/lib/http/expressApp.js#L236-L244
 const RedisSessionStore = connectRedis(expressSession);
-if (isProtectedByCloudflare) {
-  app.set('trust proxy', 1); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
-}
 
 app.use(expressSession({
   key: 'PHPSESSID',
