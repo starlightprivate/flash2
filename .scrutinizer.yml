@@ -2,11 +2,6 @@ checks:
   javascript: true
 filter:
   excluded_paths:
-    - node_modules/*
-    - eslint-rules/*
-    - frontend/scripts/libs/*
-    - gulpfile.js
-    - safe-regex-shell.js
 build:
   tests:
     override:
