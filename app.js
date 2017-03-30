@@ -75,7 +75,7 @@ app.use(expressWinston.logger({
 // internet, only from load balancer
 
 if (isProtectedByCloudflare) {
-  app.set('trust proxy', 1); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
+  app.set('trust proxy', 2); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
   app.use(security.verifyThatSiteIsAccessedFromCloudflare); // ####
 }
 
