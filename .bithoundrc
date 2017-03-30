@@ -48,5 +48,10 @@
     "**/tests/**",
     "**/spec/**",
     "**/specs/**"
-  ]
+  ],
+  "dependencies": {
+  	"unused-ignores": [
+  		"snyk"
+  	]
+  }
 }
