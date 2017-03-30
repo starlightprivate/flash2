@@ -41,7 +41,7 @@ const cloudFlareIp6Range = [
 // this middleware have to be the first!!!
 // https://starlightgroup.atlassian.net/projects/SG/issues/SG-35
 function verifyThatSiteIsAccessedFromCloudflare(req, res, next) {
-  let rIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  let rIp = req.ip;
   rIp = xss(rIp);
 // https://github.com/keverw/range_check#check-if-ip-is-within-range
   let isOk = false;
@@ -90,6 +90,9 @@ function getIp(req) {
 // http://stackoverflow.com/a/10849772/1885921
   if (req.headers['x-forwarded-for']) {
     return xss(req.headers['x-forwarded-for']);
+  }
+  if (req.ip) {
+    return req.ip;
   }
   return req.connection.remoteAddress;
 }
