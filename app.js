@@ -137,7 +137,8 @@ app.use(helmet.hpkp({
 }));
 
 
-// app.use(helmet.noCache());
+// https://helmetjs.github.io/docs/nocache/
+app.use(helmet.noCache());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
