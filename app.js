@@ -249,7 +249,7 @@ app.use((req, res, next) => {
 // secure /api/ from access by bots
 // for additional info see function `sessionTamperingProtectionMiddleware` above
 if (isProtectedByCloudflare) {
-  app.use('/tacticalsales/api', security.punishForChangingIP);
+  // app.use('/tacticalsales/api', security.punishForChangingIP);
 }
 app.use('/tacticalsales/api', security.punishForChangingUserAgent);
 app.use('/tacticalsales/api', security.punishForEnteringSiteFromBadLocation);
