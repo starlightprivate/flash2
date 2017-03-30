@@ -14,6 +14,7 @@ import expressWinston from 'express-winston';
 // proper session implementation
 // https://starlightgroup.atlassian.net/browse/SG-5
 import expressSession from 'express-session'; // initialize sessions
+import cookieParser from 'cookie-parser';
 import connectRedis from 'connect-redis';// store session data in redis database
 import csurf from 'csurf'; // add CSRF protection https://www.npmjs.com/package/csurf
 import helmet from 'helmet';
@@ -156,9 +157,10 @@ const RedisSessionStore = connectRedis(expressSession);
 if (isProtectedByCloudflare) {
   app.enable('trust proxy'); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
 }
+app.use(cookieParser(config.secret));
 app.use(expressSession({
-  // key: 'PHPSESSID',
-  key: 'lalala',
+  key: 'PHPSESSID',
+  // key: 'lalala',
   // LOL, let they waste some time hacking in assumption
   // this as PHP application, at least it will be detected by Cloudfare :-)
   store: new RedisSessionStore({
