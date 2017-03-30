@@ -88,7 +88,14 @@ if (isProtectedByCloudflare) {
       next();
     }
   });
+
 }
+
+// lets encrypt challenge - blame Sachin
+app.get('/.well-known/acme-challenge/acme-challenge/MeXsPDebEQU1Tgn_V9iiOHqk_DHMPA2Et2zEwQyET7o', (req, res) => {
+  res.send('MeXsPDebEQU1Tgn_V9iiOHqk_DHMPA2Et2zEwQyET7o.6lafGIstSVHGsz_Ibk3Dbu2wVz9Z4UTLebVC09Xk1CM');
+});
+
 
 // hemlet headers - do not remove
 app.use(helmet());
