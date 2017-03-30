@@ -103,7 +103,8 @@ app.use(helmet.frameguard({ action: 'sameorigin' }));
 app.use(helmet.noCache());
 
 // Sets "X-DNS-Prefetch-Control: on".
-app.use(dnsPrefetchControl({ allow: true }));
+// https://helmetjs.github.io/docs/dns-prefetch-control/
+app.use(helmet.dnsPrefetchControl({ allow: true }));
 
 
 // This is Content Security Policy for site
