@@ -297,9 +297,9 @@ app.use('/tacticalsales/', (req, res, next) => {
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   if (err.code === 'EBADCSRFTOKEN') {
-    // if (config.ENV === 'development') {
-    res.set('X-PUNISHED_BY', 'CSRF');
-    // }
+    if (config.ENV === 'development') {
+      res.set('X-PUNISHED_BY', 'CSRF');
+    }
     return res.status(403).send('Invalid API Key');
   }
   winston.error('expressjs error : %s', err.message, {
