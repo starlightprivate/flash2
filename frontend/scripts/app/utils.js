@@ -26,16 +26,15 @@ function utils() { // eslint-disable-line no-unused-vars
     const sPageURL = decodeURIComponent(window.location.search.substring(1));
     const sURLVariables = sPageURL.split('&');
     let sParameterName;
-    let i;
 
-    for (i = 0; i < sURLVariables.length; i += 1) { // http://eslint.org/docs/rules/no-plusplus
-      sParameterName = sURLVariables[i].split('=');
+    sURLVariables.forEach((urlItem) => {
+      sParameterName = urlItem.split('=');
 
       if (sParameterName[0] === sParam) {
         return sParameterName[1] === undefined ? true : sParameterName[1];
       }
-    }
-    return null;
+      return null;
+    });
   }
 
   function initSessionIfNoCookies(cb) { // eslint-disable-line no-unused-vars
