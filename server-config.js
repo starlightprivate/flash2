@@ -1,15 +1,15 @@
 /* global process */
 
 import util from 'util';
-import fs from 'fs';
-import path from 'path';
+// import fs from 'fs';
+// import path from 'path';
 
-const buildIdPath = path.join(__dirname, 'public', 'buildId.txt');
-let buildId = 'unknown';
-
-if (fs.existsSync(buildIdPath)) {
-  buildId = fs.readFileSync(buildIdPath);
-}
+// const buildIdPath = path.join(__dirname, 'public', 'buildId.txt');
+// let buildId = 'unknown';
+//
+// if (fs.existsSync(buildIdPath)) {
+//   buildId = fs.readFileSync(buildIdPath);
+// }
 
 let redisUrl = 'redis://localhost:6379/';
 
@@ -77,5 +77,5 @@ module.exports = {
     subdomain: process.env.LOGGLY_SUBDOMAIN || 'starlightgroup',
   },
   segmentWriteKey: process.env.SEGMENT_WRITE_KEY || '7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd', // https://segment.com/docs/sources/server/node/
-  buildId: util.format('https://github.com/starlightgroup/flash2/commit/%s', buildId),
+  buildId: 'heroku', //util.format('https://github.com/starlightgroup/flash2/commit/%s', buildId),
 };
