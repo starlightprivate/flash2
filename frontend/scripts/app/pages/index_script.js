@@ -288,60 +288,6 @@ const index = () => {
 };
 
 (function init() {
-  window.analytics = window.analytics || [];
-  const analytics = window.analytics;
-  if (!analytics.initialize) {
-    if (analytics.invoked) {
-      console.error('Segment snippet included twice.'); // eslint-disable-line no-console
-    } else {
-      analytics.invoked = !0;
-      analytics.methods = [
-        'trackSubmit',
-        'trackClick',
-        'trackLink',
-        'trackForm',
-        'pageview',
-        'identify',
-        'reset',
-        'group',
-        'track',
-        'ready',
-        'alias',
-        'debug',
-        'page',
-        'once',
-        'off',
-        'on',
-      ];
-      analytics.factory = function (t) { // eslint-disable-line func-names
-        return function () { // eslint-disable-line func-names
-          const e = Array.prototype.slice.call(arguments); // eslint-disable-line prefer-rest-params
-          e.unshift(t);
-          analytics.push(e);
-          return analytics;
-        };
-      };
-      analytics.methods.forEach((method) => {
-        const e = method;
-        analytics[e] = analytics.factory(e);
-      });
-
-      analytics.load = (t) => {
-        const e = document.createElement('script');
-        e.type = 'text/javascript';
-        e.async = !0;
-        const path = `cdn.segment.com/analytics.js/v1/${t}/analytics.min.js`;
-        e.src = document.location.protocol === 'https:'
-        ? `https://${path}`
-        : `http://${path}`;
-        const n = document.getElementsByTagName('script')[0];
-        n.parentNode.insertBefore(e, n);
-      };
-      analytics.SNIPPET_VERSION = '4.0.0';
-      analytics.load('7FMBWsjMCbyWvbx4UuGCovr1SYyokQYd');
-      analytics.page();
-    }
-  }
   loadAssets(requireAssets, {
     success: () => index(),
     async: false,
