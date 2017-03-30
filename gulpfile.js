@@ -21,7 +21,6 @@ let _ = require('lodash'),
   sass = require('gulp-sass'),
   sassLint = require('gulp-sass-lint'),
   concat = require('gulp-concat'),
-  shell = require('gulp-shell'),
   autoprefixer = require('gulp-autoprefixer');
 
 const config = {
@@ -238,17 +237,10 @@ gulp.task('cleantemp', function (cb) {
 //   });
 // });
 
-gulp.task('engraveVersion', shell.task([
-  'git log --format=\'%h\' -n 1 > public/buildId.txt',
-  'git log -n 5 > public/build.txt',
-]));
-
 
 // Build Task !
 gulp.task('build', ['clean-all'], function (done) {
   runSequence(
-
-    'engraveVersion',
 
 //process js
     'libcopy',
