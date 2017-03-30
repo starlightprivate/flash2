@@ -43,6 +43,11 @@ const cloudFlareIp6Range = [
 function verifyThatSiteIsAccessedFromCloudflare(req, res, next) {
   let rIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   rIp = xss(rIp);
+  const ipsExtracted = rIp.split(',');
+  if (ipsExtracted.length === 2) {
+    rIp = ipsExtracted[1].trim();
+  }
+
 // https://github.com/keverw/range_check#check-if-ip-is-within-range
   let isOk = false;
 // it helped me

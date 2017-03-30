@@ -78,7 +78,7 @@ app.use(expressWinston.logger({
 if (isProtectedByCloudflare) {
   // app.enable('trust proxy'); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
   // app.set('trust proxy', 1); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
-  // app.use(security.verifyThatSiteIsAccessedFromCloudflare); // ####
+  app.use(security.verifyThatSiteIsAccessedFromCloudflare); // ####
 
   app.use((req, res, next) => { // reditect from http to https
     const hostname = req.hostname || 'tacticalmastery.com';
@@ -89,11 +89,6 @@ if (isProtectedByCloudflare) {
     }
   });
 }
-
-// lets encrypt challenge - blame Sachin
-app.get('/.well-known/acme-challenge/MubOuz7KCg_ZiIUDZa6jmj2GArTI_D4_7RKGmus57K4', (req, res) => {
-  res.send('MubOuz7KCg_ZiIUDZa6jmj2GArTI_D4_7RKGmus57K4.6lafGIstSVHGsz_Ibk3Dbu2wVz9Z4UTLebVC09Xk1CM');
-});
 
 
 // hemlet headers - do not remove
