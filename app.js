@@ -152,7 +152,7 @@ app.use(expressContentLength.validateMax({
 // https://github.com/vodolaz095/hunt/blob/master/lib/http/expressApp.js#L236-L244
 const RedisSessionStore = connectRedis(expressSession);
 if (isProtectedByCloudflare) {
-  app.enable('trust proxy'); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
+  app.set('trust proxy', 2); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
 }
 
 app.use(expressSession({
