@@ -75,8 +75,8 @@ app.use(expressWinston.logger({
 // internet, only from load balancer
 
 if (isProtectedByCloudflare) {
-  app.set('trust proxy', 3); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
-  app.use(security.verifyThatSiteIsAccessedFromCloudflare); // ####
+  // app.set('trust proxy', 3); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
+  // app.use(security.verifyThatSiteIsAccessedFromCloudflare); // ####
 }
 
 // hemlet headers - do not remove
