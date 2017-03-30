@@ -80,7 +80,7 @@ if (isProtectedByCloudflare) {
 //   // app.set('trust proxy', 3); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
 //   // app.use(security.verifyThatSiteIsAccessedFromCloudflare); // ####
 
-  app.use((req, res, next) => { //reditect to https
+  app.use((req, res, next) => { // reditect to https
     const hostname = req.headers.host || 'tacticalmastery.com';
     if (req.headers['x-forwarded-proto'] !== 'https') {
       res.redirect(`https://${hostname}${req.url}`);
@@ -94,7 +94,7 @@ if (isProtectedByCloudflare) {
 app.use(helmet());
 
 // https://helmetjs.github.io/docs/referrer-policy/
-app.use(helmet.referrerPolicy({ policy: 'origin' }));
+app.use(helmet.referrerPolicy({ policy: 'no-referrer' }));
 
 // https://helmetjs.github.io/docs/frameguard/
 app.use(helmet.frameguard({
@@ -292,7 +292,7 @@ app.use('/tacticalsales/', (req, res, next) => {
 app.use((err, req, res, next) => {
   if (err.code === 'EBADCSRFTOKEN') {
     // if (config.ENV === 'development') {
-      res.set('X-PUNISHED_BY', 'CSRF');
+    res.set('X-PUNISHED_BY', 'CSRF');
     // }
     return res.status(403).send('Invalid API Key');
   }
