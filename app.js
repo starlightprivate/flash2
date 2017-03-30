@@ -103,10 +103,10 @@ app.use(helmet());
 app.use(helmet.referrerPolicy({ policy: 'no-referrer' }));
 
 // https://helmetjs.github.io/docs/frameguard/
-app.use(helmet.frameguard({
-  action: 'allow-from',
-  domain: 'https://fast.wistia.net/',
-}));
+app.use(helmet.frameguard({ action: 'sameorigin' }));
+
+app.use(helmet.noCache());
+
 
 // This is Content Security Policy for site
 // https://en.wikipedia.org/wiki/Content_Security_Policy
@@ -285,7 +285,8 @@ Object.keys(routes).forEach((r) => {
 });
 
 app.use('/tacticalsales/', express.static(path.join(__dirname, 'public'), {
-  maxAge: (config.ENV === 'development') ? -1 : 31557600,
+  // maxAge: (config.ENV === 'development') ? -1 : 31557600, // https://github.com/starlightgroup/flash2/issues/221
+  // no cache!!!
 }));
 
 // eslint-disable-next-line no-unused-vars
