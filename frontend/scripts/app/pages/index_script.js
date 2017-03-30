@@ -321,11 +321,12 @@ const index = () => {
           return analytics;
         };
       };
-      for (let t = 0; t < analytics.methods.length; t++) {
-        const e = analytics.methods[t];
+      analytics.methods.forEach((method) => {
+        const e = method;
         analytics[e] = analytics.factory(e);
-      }
-      analytics.load = function (t) {
+      });
+
+      analytics.load = (t) => {
         const e = document.createElement('script');
         e.type = 'text/javascript';
         e.async = !0;
