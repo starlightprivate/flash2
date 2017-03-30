@@ -19,6 +19,7 @@ const validEntryPoints = [
   '/tacticalsales/',
   '/tacticalsales/robots.txt',
   '/tacticalsales/index.html',
+  '/tacticalsales/tm3.html',
   // '/tacticalsales/checkout.html',
   // '/tacticalsales/us_headlampoffer.html',
   // '/tacticalsales/customercare.html',

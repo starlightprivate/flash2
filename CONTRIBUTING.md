@@ -33,8 +33,7 @@ Branch meaning
 Code is deployed on [http://dev.tacticalmastery.com/tacticalsales](http://dev.tacticalmastery.com/tacticalsales)
 With `NODE_ENV` set to staging.
 
-- `staging` - code is working and mainly tested. The code should be merged to this branch only from the 'master' branch.
-This branch is automatically been deployed to our staging server https://stg.tacticalmastery.com/tacticalsales/
+- `staging` - code is working and mainly tested - ok to deploy on staging server.
 The`NODE_ENV` have to be `staging`.
 Code is deployed on [http://stg.tacticalmastery.com/tacticalsales](http://stg.tacticalmastery.com/tacticalsales)
 
