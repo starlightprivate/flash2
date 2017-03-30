@@ -643,6 +643,28 @@ describe('web application', function () { // eslint-disable-line func-names
   });
 
   describe('/tacticalsales/api/v2/create-lead', () => {
+    let createLeadCSRFToken;
+
+    it('has anything on / but we need to start session properly to run tests', (done) => {
+      supertest(app)
+        .get('/')
+        .set('Cookie', [util.format('PHPSESSID=%s', sessionId)])
+        .expect('X-Powered-By', 'TacticalMastery')
+        .end((error, res) => {
+          if (error) {
+            return done(error);
+          }
+          const csrf = res.headers['xsrf-token'];
+          if (csrf === false) {
+            return done(new Error('XSRF-TOKEN not set!'));
+          }
+          createLeadCSRFToken = csrf;
+          return done();
+        });
+    });
+
+
+
     it('has 403 on POST /api/v2/create-lead with missing CSRF token', (done) => {
       supertest(app)
         .post('/tacticalsales/api/v2/create-lead')
@@ -683,7 +705,7 @@ describe('web application', function () { // eslint-disable-line func-names
           firstName: 'test',
           phoneNumber: '111-111-1111',
           emailAddress: 'test@test.com',
-          _csrf: csrfToken,
+          _csrf: createLeadCSRFToken,
         })
         .expect(200, (error, res) => {
           if (error) {
