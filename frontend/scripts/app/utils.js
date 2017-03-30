@@ -63,6 +63,8 @@ function utils() { // eslint-disable-line no-unused-vars
 
 // call API
   function callAPI(endpoint, data, method, callback, err) {
+    const $loadingBar = $('div.js-div-loading-bar');
+    $loadingBar.show();
     let params = data;
     let ApiUrl = `/tacticalsales/api/v2/${endpoint}/`;
     let headers = {};
@@ -106,10 +108,12 @@ function utils() { // eslint-disable-line no-unused-vars
       beforeSend(xhr) { xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded'); },
     }).done((msg/* , textStatus , request */) => {
       if (typeof callback === 'function') {
+        $loadingBar.hide();
         callback(msg);
       }
     }).fail((jqXHR, textStatus/* , request */) => {
       if (typeof err === 'function') {
+        $loadingBar.hide();
         err(textStatus);
       }
     });
