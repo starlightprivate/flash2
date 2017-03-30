@@ -271,6 +271,7 @@ app.use((req, res, next) => {
 if (isProtectedByCloudflare) {
   // app.use('/tacticalsales/api', security.punishForChangingIP);
 }
+
 app.use('/tacticalsales/api', security.punishForChangingUserAgent);
 app.use('/tacticalsales/api', security.punishForEnteringSiteFromBadLocation);
 
@@ -290,7 +291,7 @@ app.use('/tacticalsales/', express.static(path.join(__dirname, 'public'), {
 }));
 
 // eslint-disable-next-line no-unused-vars
-app.use('/tacticalsales/', (req, res, next) => {
+app.use((req, res, next) => {
   res.redirect('/tacticalsales/');
 });
 
