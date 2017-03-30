@@ -2,7 +2,7 @@
 
 import request from 'request-promise';
 import xss from 'xss';
-import phone from 'phone';
+// import phone from 'phone';
 import Autopilot from 'autopilot-api';
 import Analytics from 'analytics-node';
 
@@ -28,44 +28,46 @@ const autopilot = new Autopilot(config.autopilot.key);
 const segmentAnalytics = new Analytics(config.segmentWriteKey);
 
 
-async function migrate(req, res) {
-  let contacts = await autopilot.lists.roster(config.autopilot.clientlist, 'person_0E8607F2-E308-438F-BF16-FB627DB4A4C9');
-  while (contacts.data.contacts.length >= 100) {
-    let contact = {};
-    for (contact of contacts.data.contacts) { // eslint-disable-line
-      if (contact.Phone && phone(contact.Phone, 'US')[0]) {
-        const leadoutpost = {
-          firstName: contact.FirstName,
-          lastName: contact.LastName,
-          email: contact.Email,
-          phone: contact.Phone,
-        };
-        leadoutpost.apiKey = config.leadoutpost.apiKey;
-        leadoutpost.campaignId = config.leadoutpost.campaignId;
-        const options = {
-          uri: 'https://www.leadoutpost.com/api/v1/lead',
-          qs: leadoutpost,
-          headers: {
-            'User-Agent': 'Request-Promise',
-          },
-          json: true, // Automatically parses the JSON string in the response
-        };
-        await request.post(options); // eslint-disable-line no-await-in-loop
-        console.log(
-          contact.contact_id,
-          contact.Email,
-          contact.Phone,
-          contact.FirstName,
-          contact.LastName);
-      }
-    }
-// eslint-disable-next-line no-await-in-loop
-    contacts = await autopilot.lists.roster(config.autopilot.clientlist, contact.contact_id);
-
-    console.log('last----------------', contact.contact_id);
-  }
-  res.success({ length: contacts.data.contacts.length });
-}
+// async function migrate(req, res) {
+//   let contacts = await autopilot.lists.roster(
+//      config.autopilot.clientlist, 'person_0E8607F2-E308-438F-BF16-FB627DB4A4C9'
+//    );
+//   while (contacts.data.contacts.length >= 100) {
+//     let contact = {};
+//     for (contact of contacts.data.contacts) { // eslint-disable-line
+//       if (contact.Phone && phone(contact.Phone, 'US')[0]) {
+//         const leadoutpost = {
+//           firstName: contact.FirstName,
+//           lastName: contact.LastName,
+//           email: contact.Email,
+//           phone: contact.Phone,
+//         };
+//         leadoutpost.apiKey = config.leadoutpost.apiKey;
+//         leadoutpost.campaignId = config.leadoutpost.campaignId;
+//         const options = {
+//           uri: 'https://www.leadoutpost.com/api/v1/lead',
+//           qs: leadoutpost,
+//           headers: {
+//             'User-Agent': 'Request-Promise',
+//           },
+//           json: true, // Automatically parses the JSON string in the response
+//         };
+//         await request.post(options); // eslint-disable-line no-await-in-loop
+//         console.log(
+//           contact.contact_id,
+//           contact.Email,
+//           contact.Phone,
+//           contact.FirstName,
+//           contact.LastName);
+//       }
+//     }
+// // eslint-disable-next-line no-await-in-loop
+//     contacts = await autopilot.lists.roster(config.autopilot.clientlist, contact.contact_id);
+//
+//     console.log('last----------------', contact.contact_id);
+//   }
+//   res.success({ length: contacts.data.contacts.length });
+// }
 
 /*
  * add contact to autopilot
@@ -186,31 +188,31 @@ function updateContact(req, res) {
   }
 }
 
-function addLeadoutpost(req, res) {
-  // TODO - this function is never used - it is commented in config/routes/v2.js
-  req.body.apiKey = config.leadoutpost.apiKey; // eslint-disable-line no-param-reassign
-  req.body.campaignId = config.leadoutpost.campaignId; // eslint-disable-line no-param-reassign
-  const options = {
-    uri: 'https://www.leadoutpost.com/api/v1/lead',
-    qs: req.body,
-    headers: {
-      'User-Agent': 'Request-Promise',
-    },
-    json: true, // Automatically parses the JSON string in the response
-  };
-
-  return request
-    .post(options)
-    .then((data) => {
-      logger('info', 'addLeadoutpost', req, data); // TODO - think of data required for logs
-      // trace.incrementMetric('addLeadoutpost');
-      return res.send(data);
-    });
-}
+// function addLeadoutpost(req, res) {
+//   // TODO - this function is never used - it is commented in config/routes/v2.js
+//   req.body.apiKey = config.leadoutpost.apiKey; // eslint-disable-line no-param-reassign
+//   req.body.campaignId = config.leadoutpost.campaignId; // eslint-disable-line no-param-reassign
+//   const options = {
+//     uri: 'https://www.leadoutpost.com/api/v1/lead',
+//     qs: req.body,
+//     headers: {
+//       'User-Agent': 'Request-Promise',
+//     },
+//     json: true, // Automatically parses the JSON string in the response
+//   };
+//
+//   return request
+//     .post(options)
+//     .then((data) => {
+//       logger('info', 'addLeadoutpost', req, data); // TODO - think of data required for logs
+//       // trace.incrementMetric('addLeadoutpost');
+//       return res.send(data);
+//     });
+// }
 
 export default {
-  migrate,
+  // migrate,
   addContact,
   updateContact,
-  addLeadoutpost,
+  // addLeadoutpost,
 };
