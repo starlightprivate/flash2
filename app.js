@@ -85,10 +85,7 @@ app.use(helmet());
 app.use(helmet.referrerPolicy({ policy: 'origin' }));
 
 // https://helmetjs.github.io/docs/frameguard/
-app.use(helmet.frameguard({
-  action: 'allow-from',
-  domain: 'https://fast.wistia.net/',
-}));
+app.use(helmet.frameguard({ action: 'sameorigin' }));
 
 // This is Content Security Policy for site
 // https://en.wikipedia.org/wiki/Content_Security_Policy
