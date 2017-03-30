@@ -75,11 +75,20 @@ app.use(expressWinston.logger({
 // And all `flash2` applications has grey IP, not accessible directly from
 // internet, only from load balancer
 
-// if (isProtectedByCloudflare) {
+if (isProtectedByCloudflare) {
 //   // app.enable('trust proxy'); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
 //   // app.set('trust proxy', 3); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
 //   // app.use(security.verifyThatSiteIsAccessedFromCloudflare); // ####
-// }
+
+  app.use((req, res, next) => { //reditect to https
+    const hostname = req.headers.host || 'tacticalmastery.com';
+    if (req.headers['x-forwarded-proto'] !== 'https') {
+      res.redirect(`https://${hostname}${req.url}`);
+    } else {
+      next();
+    }
+  });
+}
 
 // hemlet headers - do not remove
 app.use(helmet());
