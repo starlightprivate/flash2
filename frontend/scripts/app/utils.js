@@ -27,7 +27,7 @@ function utils() { // eslint-disable-line no-unused-vars
     const sURLVariables = sPageURL.split('&');
     let sParameterName;
 
-    sURLVariables.forEach((urlItem) => { // http://eslint.org/docs/rules/no-plusplus
+    sURLVariables.forEach((urlItem) => {
       sParameterName = urlItem.split('=');
 
       if (sParameterName[0] === sParam) {
