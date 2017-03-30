@@ -88,7 +88,6 @@ if (isProtectedByCloudflare) {
       next();
     }
   });
-
 }
 
 // lets encrypt challenge - blame Sachin

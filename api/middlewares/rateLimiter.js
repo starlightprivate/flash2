@@ -1,6 +1,6 @@
 // Middleware for rate limiting
 import RateLimiter from 'strict-rate-limiter';
-import util from 'util';
+// import util from 'util';
 // import trace from './../../risingStack';
 
 import security from './security';

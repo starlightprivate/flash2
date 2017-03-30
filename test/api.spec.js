@@ -56,11 +56,11 @@ describe('security headers send by nodejs application', () => {
       .end(done);
   });
 
-  it('have Referrer-policy set to "origin"', (done) => {
+  it('have Referrer-policy set to "no-refferer"', (done) => {
     supertest(app)
       .get('/tacticalsales/')
       .expect('X-Powered-By', 'TacticalMastery')
-      .expect('referrer-policy', 'origin')
+      .expect('referrer-policy', 'no-referrer')
       .end(done);
   });
 

@@ -146,7 +146,7 @@ function punishForEnteringSiteFromBadLocation(req, res, next) {
   if (req.session) {
     if (validEntryPoints.indexOf(req.session.entryPoint) === -1) {
       // if (config.ENV !== 'production') {
-        res.set('X-PUNISHEDBY', 'BAD LOCATION');
+      res.set('X-PUNISHEDBY', 'BAD LOCATION');
       // }
       logBotAction(req, 'BAD_LOCATION');
       req.session.isBot = true;  // eslint-disable-line no-param-reassign
@@ -163,7 +163,7 @@ function punishForChangingIP(req, res, next) {
     const rIp = getIp(req);
     if (req.session.ip !== rIp) {
       // if (config.ENV !== 'production') {
-        res.set('X-PUNISHEDBY', 'BAD_IP');
+      res.set('X-PUNISHEDBY', 'BAD_IP');
       // }
       logBotAction(req, 'BAD_IP');
       req.session.isBot = true; // eslint-disable-line no-param-reassign
@@ -179,7 +179,7 @@ function punishForChangingUserAgent(req, res, next) {
     const ua = req.get('User-Agent');
     if (req.session.userAgent !== ua) {
       // if (config.ENV !== 'production') {
-        res.set('X-PUNISHEDBY', 'BAD_UA');
+      res.set('X-PUNISHEDBY', 'BAD_UA');
       // }
       logBotAction(req, 'BAD_UA');
       req.session.isBot = true; // eslint-disable-line no-param-reassign
