@@ -78,7 +78,7 @@ app.use(expressWinston.logger({
 if (isProtectedByCloudflare) {
 //   // app.enable('trust proxy'); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
 
-  app.set('trust proxy', 2); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
+  app.set('trust proxy', 1); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
   app.use(security.verifyThatSiteIsAccessedFromCloudflare); // ####
 
   app.use((req, res, next) => { // reditect from http to https
