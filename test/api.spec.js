@@ -11,7 +11,7 @@ import redis from './../config/redis';
 import config from './../server-config';
 
 const sessionIdCookieRegex = /^PHPSESSID=([^;]+); Path=\/; HttpOnly/;
-const csrfTokenCookieRegex = /^XSRF-TOKEN=([^;]+); Path=\//;
+// const csrfTokenCookieRegex = /^XSRF-TOKEN=([^;]+); Path=\//;
 
 function extractCookie(res, rgx) {
   const cookies = res.headers['set-cookie'];
@@ -142,7 +142,7 @@ describe('web application', function () { // eslint-disable-line func-names
         if (sId === false) {
           return done(new Error('PHPSESSID not set!'));
         }
-        const csrf = extractCookie(res, csrfTokenCookieRegex);
+        const csrf = res.headers['XSRF-TOKEN'];
         if (csrf === false) {
           return done(new Error('XSRF-TOKEN not set!'));
         }
@@ -167,7 +167,7 @@ describe('web application', function () { // eslint-disable-line func-names
         if (sId !== false) {
           return done(new Error('PHPSESSID is reset! Bad session behaviour'));
         }
-        const csrf = extractCookie(res, csrfTokenCookieRegex);
+        const csrf = res.headers['XSRF-TOKEN'];
         if (csrf === false) {
           return done(new Error('XSRF-TOKEN not set!'));
         }
@@ -190,7 +190,7 @@ describe('web application', function () { // eslint-disable-line func-names
         if (sId === false) {
           return done(new Error('PHPSESSID not set!'));
         }
-        const csrf = extractCookie(res, csrfTokenCookieRegex);
+        const csrf = res.headers['XSRF-TOKEN'];
         if (csrf === false) {
           return done(new Error('XSRF-TOKEN not set!'));
         }
@@ -219,7 +219,7 @@ describe('web application', function () { // eslint-disable-line func-names
           if (sId === false) {
             return done(new Error('PHPSESSID not set!'));
           }
-          const csrf = extractCookie(res, csrfTokenCookieRegex);
+          const csrf = res.headers['XSRF-TOKEN'];
           if (csrf === false) {
             return done(new Error('XSRF-TOKEN not set!'));
           }
@@ -243,7 +243,7 @@ describe('web application', function () { // eslint-disable-line func-names
           res.body.entryPoint.should.be.equal('/');
           res.body.userAgent.should.match(/^node-superagent/);
           res.body.isBot.should.be.false; // eslint-disable-line no-unused-expressions
-          const csrf = extractCookie(res, csrfTokenCookieRegex);
+          const csrf = res.headers['XSRF-TOKEN'];
           if (csrf === false) {
             return done(new Error('XSRF-TOKEN not set!'));
           }
@@ -281,7 +281,7 @@ describe('web application', function () { // eslint-disable-line func-names
             return done(error);
           }
 
-          const csrf = extractCookie(res, csrfTokenCookieRegex);
+          const csrf = res.headers['XSRF-TOKEN'];
           if (csrf === false) {
             return done(new Error('XSRF-TOKEN not set!'));
           }
@@ -404,7 +404,7 @@ describe('web application', function () { // eslint-disable-line func-names
           if (sId === false) {
             return done(new Error('PHPSESSID not set!'));
           }
-          const csrf = extractCookie(res, csrfTokenCookieRegex);
+          const csrf = res.headers['XSRF-TOKEN'];
           if (csrf === false) {
             return done(new Error('XSRF-TOKEN not set!'));
           }
@@ -431,7 +431,7 @@ describe('web application', function () { // eslint-disable-line func-names
           if (error) {
             return done(error);
           }
-          const csrf = extractCookie(res, csrfTokenCookieRegex);
+          const csrf = res.headers['XSRF-TOKEN'];
           if (csrf === false) {
             return done(new Error('XSRF-TOKEN not set!'));
           }
@@ -508,7 +508,7 @@ describe('web application', function () { // eslint-disable-line func-names
           if (sId === false) {
             return done(new Error('PHPSESSID not set!'));
           }
-          const csrf = extractCookie(res, csrfTokenCookieRegex);
+          const csrf = res.headers['XSRF-TOKEN'];
           if (csrf === false) {
             return done(new Error('XSRF-TOKEN not set!'));
           }
@@ -532,7 +532,7 @@ describe('web application', function () { // eslint-disable-line func-names
           if (error) {
             return done(error);
           }
-          const csrf = extractCookie(res, csrfTokenCookieRegex);
+          const csrf = res.headers['XSRF-TOKEN'];
           if (csrf === false) {
             return done(new Error('XSRF-TOKEN not set!'));
           }
@@ -701,7 +701,7 @@ describe('web application', function () { // eslint-disable-line func-names
           if (error) {
             return done(error);
           }
-          const csrf = extractCookie(res, csrfTokenCookieRegex);
+          const csrf = res.headers['XSRF-TOKEN'];
           if (csrf === false) {
             return done(new Error('XSRF-TOKEN not set!'));
           }
@@ -788,7 +788,7 @@ describe('web application', function () { // eslint-disable-line func-names
           if (error) {
             return done(error);
           }
-          const csrf = extractCookie(res, csrfTokenCookieRegex);
+          const csrf = res.headers['XSRF-TOKEN'];
           if (csrf === false) {
             return done(new Error('XSRF-TOKEN not set!'));
           }
@@ -871,7 +871,7 @@ describe('web application', function () { // eslint-disable-line func-names
           if (sId === false) {
             return done(new Error('PHPSESSID cookie provided set!'));
           }
-          const csrf = extractCookie(res, csrfTokenCookieRegex);
+          const csrf = res.headers['XSRF-TOKEN'];
           if (csrf === false) {
             return done(new Error('XSRF-TOKEN not set!'));
           }
