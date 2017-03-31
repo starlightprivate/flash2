@@ -21,7 +21,8 @@ let _ = require('lodash'),
   sass = require('gulp-sass'),
   sassLint = require('gulp-sass-lint'),
   concat = require('gulp-concat'),
-  autoprefixer = require('gulp-autoprefixer');
+  autoprefixer = require('gulp-autoprefixer'),
+  image = require('gulp-image');
 
 const config = {
   src: 'frontend', // source directory
@@ -103,9 +104,10 @@ gulp.task('fonts', function () {
 });
 
 // Images
-gulp.task('images', function () {
+gulp.task('optimize-copy-images', function () {
   return gulp.src([config.src + '/images/**/*'])
     .pipe(gulp.dest(config.dist + '/assets/images'))
+    .pipe(image())
     .pipe(size());
 });
 
@@ -249,7 +251,7 @@ gulp.task('build', ['clean-all'], function (done) {
 
 //process other assets
     'fonts',
-    'images',
+    'optimize-copy-images',
     'html',
 
 // css
