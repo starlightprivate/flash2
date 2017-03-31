@@ -8,29 +8,7 @@ import winston from 'winston';
 import rangeCheck from 'range_check';
 import config from './../../server-config';
 
-import trace from './../../risingStack';
-
-// This is first pages of site, that real users usually visits
-// TODO - verify that nothing is missing
-const validEntryPoints = [
-  '/',
-  '/robots.txt',
-  '/index.html',
-  '/tacticalsales/',
-  '/tacticalsales/robots.txt',
-  '/tacticalsales/index.html',
-  // '/tacticalsales/checkout.html',
-  // '/tacticalsales/us_headlampoffer.html',
-  // '/tacticalsales/customercare.html',
-  // '/tacticalsales/partner.html',
-  // '/tacticalsales/press.html',
-  // '/tacticalsales/privacy.html',
-  // '/tacticalsales/receipt.html',
-  // '/tacticalsales/terms.html',
-  // '/tacticalsales/tm3.html',
-  // '/tacticalsales/us_batteryoffer.html',
-];
-
+// import trace from './../../risingStack';
 
 // https://www.cloudflare.com/ips/
 const cloudFlareIp4Range = [
@@ -65,6 +43,11 @@ const cloudFlareIp6Range = [
 function verifyThatSiteIsAccessedFromCloudflare(req, res, next) {
   let rIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   rIp = xss(rIp);
+  const ipsExtracted = rIp.split(',');
+  if (ipsExtracted.length === 2) {
+    rIp = ipsExtracted[1].trim();
+  }
+
 // https://github.com/keverw/range_check#check-if-ip-is-within-range
   let isOk = false;
 // it helped me
@@ -98,7 +81,7 @@ function verifyThatSiteIsAccessedFromCloudflare(req, res, next) {
     type: 'security:nonCloudflareAccess',
     userAgent: req.headers['User-Agent'],
   });
-  trace.incrementMetric('security/NonCloudflareAccess');
+  // trace.incrementMetric('security/NonCloudflareAccess');
   return res
     .status(500)
     .end('NOT OK');
@@ -119,7 +102,7 @@ function getIp(req) {
 
 function logBotAction(req, punishReason) {
   const ip = getIp(req);
-  trace.incrementMetric(util.format('security/BotPunished/%s', punishReason));
+  // trace.incrementMetric(util.format('security/BotPunished/%s', punishReason));
   return winston.info('[SECURITY] bot punished %s - %s', ip, punishReason, {
     env: config.ENV,
     ip: getIp(req),
@@ -141,10 +124,15 @@ function logBotAction(req, punishReason) {
 // https://starlightgroup.atlassian.net/browse/SG-5
 // https://starlightgroup.atlassian.net/browse/SG-8
 // https://starlightgroup.atlassian.net/browse/SG-9
+// how it works?
+// if for first page of site user visited is under /tacticalsales/api/v2/*,
+// it means that user calls api directly, without visiting other pages
+// most probably it is because user is a bot, that calls directly api endpoints
+
 
 function punishForEnteringSiteFromBadLocation(req, res, next) {
   if (req.session) {
-    if (validEntryPoints.indexOf(req.session.entryPoint) === -1) {
+    if (req.session.entryPoint.indexOf('/tacticalsales/api/v2/') === 0) {
       if (config.ENV !== 'production') {
         res.set('X-PUNISHEDBY', 'BAD LOCATION');
       }
@@ -192,7 +180,6 @@ function punishForChangingUserAgent(req, res, next) {
 
 
 export default {
-  validEntryPoints,
   verifyThatSiteIsAccessedFromCloudflare,
   getIp,
   punishForEnteringSiteFromBadLocation,

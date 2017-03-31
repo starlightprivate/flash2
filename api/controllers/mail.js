@@ -1,12 +1,12 @@
 /* eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
 
-import Autopilot from 'autopilot-api';
-import phone from 'phone';
+// import Autopilot from 'autopilot-api';
+// import phone from 'phone';
 import util from 'util';
 import xss from 'xss';
 import zipcodes from 'zipcodes';
 
-import config from '../../server-config';
+// import config from '../../server-config';
 
 // DO NOT REMOVE THIS COMMENT!!!
 //  I know that code is quite ugly in this file.
@@ -20,7 +20,7 @@ import config from '../../server-config';
 //
 //  - Anatolij
 
-const autopilot = new Autopilot(config.autopilot.key);
+// const autopilot = new Autopilot(config.autopilot.key);
 
 function getStateInfo(req, res) {
   const stateNumber = xss(req.params.stateNumber);
@@ -31,13 +31,13 @@ function getStateInfo(req, res) {
   return res.error('state not found', 200);
 }
 
-async function triggerJourney(req, res) {
-  const { contactid } = req.query;
-  const hookid = xss(req.query.hookid) || '0001';
-  const response = await autopilot.journeys.add(hookid, xss(contactid));
-  console.log(response);
-  res.success();
-}
+// async function triggerJourney(req, res) {
+//   const { contactid } = req.query;
+//   const hookid = xss(req.query.hookid) || '0001';
+//   const response = await autopilot.journeys.add(hookid, xss(contactid));
+//   console.log(response);
+//   res.success();
+// }
 
 
 // function mapToStateDetails(data) {
@@ -87,15 +87,15 @@ export function mapToLeadoutpostJson(data) {
   };
 }
 
-function verifyPhoneNumber(req, res) {
-  const number = req.params.phone;
-  console.log(phone(number, 'US')[0]);
-  if (!phone(number, 'US')[0]) {
-    return res.error('Invalid phone number');
-  }
-
-  return res.success({ formatted: phone(number, 'US')[0] });
-}
+// function verifyPhoneNumber(req, res) {
+//   const number = req.params.phone;
+//   console.log(phone(number, 'US')[0]);
+//   if (!phone(number, 'US')[0]) {
+//     return res.error('Invalid phone number');
+//   }
+//
+//   return res.success({ formatted: phone(number, 'US')[0] });
+// }
 
 function ping(req, res) {
   return res.json({ msg: 'PONG' });
@@ -103,7 +103,7 @@ function ping(req, res) {
 
 export default {
   getStateInfo,
-  triggerJourney,
-  verifyPhoneNumber,
+  // triggerJourney,
+  // verifyPhoneNumber,
   ping,
 };

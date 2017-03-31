@@ -14,16 +14,17 @@ import expressWinston from 'express-winston';
 // proper session implementation
 // https://starlightgroup.atlassian.net/browse/SG-5
 import expressSession from 'express-session'; // initialize sessions
+import cookieParser from 'cookie-parser';
 import connectRedis from 'connect-redis';// store session data in redis database
 import csurf from 'csurf'; // add CSRF protection https://www.npmjs.com/package/csurf
-import helmet from 'helmet';
+import helmet from 'helmet'; // very important middleware with security headers for browsers
 import hpp from 'hpp';
 
-import trace from './risingStack';
+// import trace from './risingStack';
 
 import config from './server-config';
 import redis from './config/redis'; // load redis client
-// import csp from './api/middlewares/csp'; // CSP middleware
+// import csp from './api/middlewares/csp'; // CSP middleware, time bomb
 
 import routes from './config/routes/v2';
 
@@ -74,9 +75,21 @@ app.use(expressWinston.logger({
 // And all `flash2` applications has grey IP, not accessible directly from
 // internet, only from load balancer
 
-// if (isProtectedByCloudflare) {
-//   app.use(security.verifyThatSiteIsAccessedFromCloudflare); // ####
-// }
+if (isProtectedByCloudflare) {
+  // app.enable('trust proxy'); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
+  // app.set('trust proxy', 1); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
+  app.use(security.verifyThatSiteIsAccessedFromCloudflare); // ####
+
+  app.use((req, res, next) => { // redirect from http to https
+    const hostname = req.hostname || 'tacticalmastery.com';
+    if (req.headers['x-forwarded-proto'] !== 'https') {
+      res.redirect(`https://${hostname}${req.url}`);
+    } else {
+      next();
+    }
+  });
+}
+
 
 // hemlet headers - do not remove
 app.use(helmet());
@@ -88,6 +101,10 @@ app.use(helmet.referrerPolicy({ policy: 'no-referrer' }));
 app.use(helmet.frameguard({ action: 'sameorigin' }));
 
 app.use(helmet.noCache());
+
+// Sets "X-DNS-Prefetch-Control: on".
+// https://helmetjs.github.io/docs/dns-prefetch-control/
+app.use(helmet.dnsPrefetchControl({ allow: true }));
 
 
 // This is Content Security Policy for site
@@ -124,7 +141,8 @@ app.use(helmet.hpkp({
 }));
 
 
-// app.use(helmet.noCache());
+// https://helmetjs.github.io/docs/nocache/
+app.use(helmet.noCache());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -151,12 +169,20 @@ app.use(expressContentLength.validateMax({
 // setup redis powered sessions
 // https://github.com/vodolaz095/hunt/blob/master/lib/http/expressApp.js#L236-L244
 const RedisSessionStore = connectRedis(expressSession);
+
+// TODO - it is not required, better remove it, and test on heroku --Anatolij
 if (isProtectedByCloudflare) {
   app.enable('trust proxy'); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
 }
 
+// TODO - probably, cookieParser is not required
+// https://github.com/expressjs/session#sessionoptions
+//  --Anatolij - one less npmjs module = few less potential bugs!!!
+app.use(cookieParser(config.secret));
+
 app.use(expressSession({
   key: 'PHPSESSID',
+  // key: 'lalala',
   // LOL, let they waste some time hacking in assumption
   // this as PHP application, at least it will be detected by Cloudfare :-)
   store: new RedisSessionStore({
@@ -237,7 +263,7 @@ app.use((req, res, next) => {
   if (req.session) {
     const token = req.csrfToken();
     res.locals.csrf = token; // eslint-disable-line no-param-reassign
-    res.cookie('XSRF-TOKEN', token, { secure: isProtectedByCloudflare });
+    // res.cookie('XSRF-TOKEN', token, { secure: isProtectedByCloudflare, httpOnly: true });
     res.set('XSRF-TOKEN', token);
   }
   // }
@@ -250,8 +276,10 @@ app.use((req, res, next) => {
 // secure /api/ from access by bots
 // for additional info see function `sessionTamperingProtectionMiddleware` above
 if (isProtectedByCloudflare) {
-  app.use('/tacticalsales/api', security.punishForChangingIP);
+  // TODO - enable and test on cloudflare!!! - Anatolij
+  // app.use('/tacticalsales/api', security.punishForChangingIP);
 }
+
 app.use('/tacticalsales/api', security.punishForChangingUserAgent);
 app.use('/tacticalsales/api', security.punishForEnteringSiteFromBadLocation);
 
@@ -270,8 +298,15 @@ app.use('/tacticalsales/', express.static(path.join(__dirname, 'public'), {
   // no cache!!!
 }));
 
+
+// catch all redirects
+// http://tacticalmastery.com/{anythingNotIntended} and
+// http://tacticalmastery.com/tacticalmastery/{anythingNotIntended}
+// are redirecting to
+// http://tacticalmastery.com/tacticalmastery/
+
 // eslint-disable-next-line no-unused-vars
-app.use('/tacticalsales/', (req, res, next) => {
+app.use((req, res, next) => {
   res.redirect('/tacticalsales/');
 });
 
@@ -302,7 +337,7 @@ app.use((err, req, res, next) => {
     status: err.status,
     stacktrace: err.stack,
   });
-  trace.incrementMetric('error/express');
+  // trace.incrementMetric('error/express');
   return res
     .status(500)
     .send('server error');
