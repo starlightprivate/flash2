@@ -102,6 +102,10 @@ app.use(helmet.frameguard({ action: 'sameorigin' }));
 
 app.use(helmet.noCache());
 
+// Sets "X-DNS-Prefetch-Control: on".
+// https://helmetjs.github.io/docs/dns-prefetch-control/
+app.use(helmet.dnsPrefetchControl({ allow: true }));
+
 
 // This is Content Security Policy for site
 // https://en.wikipedia.org/wiki/Content_Security_Policy
@@ -259,7 +263,7 @@ app.use((req, res, next) => {
   if (req.session) {
     const token = req.csrfToken();
     res.locals.csrf = token; // eslint-disable-line no-param-reassign
-    res.cookie('XSRF-TOKEN', token, { secure: isProtectedByCloudflare });
+    // res.cookie('XSRF-TOKEN', token, { secure: isProtectedByCloudflare, httpOnly: true });
     res.set('XSRF-TOKEN', token);
   }
   // }
