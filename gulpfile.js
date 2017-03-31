@@ -22,7 +22,7 @@ let _ = require('lodash'),
   sassLint = require('gulp-sass-lint'),
   concat = require('gulp-concat'),
   autoprefixer = require('gulp-autoprefixer'),
-  image = require('gulp-image');
+  imagemin = require('gulp-imagemin');
 
 const config = {
   src: 'frontend', // source directory
@@ -107,7 +107,7 @@ gulp.task('fonts', function () {
 gulp.task('optimize-copy-images', function () {
   return gulp.src([config.src + '/images/**/*'])
     .pipe(gulp.dest(config.dist + '/assets/images'))
-    .pipe(image())
+    .pipe(imagemin())
     .pipe(size());
 });
 
