@@ -210,8 +210,7 @@ const index = () => {
             },
           },
         },
-      },
-    })
+      })
     .on('status.field.fv', statusFieldFv)
     .on('err.validator.fv', errorValidatorFv)
     .on('success.validator.fv', () => {})
@@ -223,9 +222,9 @@ const index = () => {
     .on('success.field.fv', successFieldFv)
     .on('err.field.fv', errFieldFv);
 
-    $('#form-contact').submit((e) => {
-      e.preventDefault();
-    });
+      $('#form-contact').submit((e) => {
+        e.preventDefault();
+      });
 
         // Address Form Validator
       $('.form-address').on('init.field.fv', initFieldFv).formValidation({
