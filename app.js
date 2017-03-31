@@ -170,9 +170,6 @@ app.use(expressContentLength.validateMax({
 // https://github.com/vodolaz095/hunt/blob/master/lib/http/expressApp.js#L236-L244
 const RedisSessionStore = connectRedis(expressSession);
 
-// https://github.com/expressjs/session#sessionoptions
-//  --Anatolij - one less npmjs module = few less potential bugs!!!
-// app.use(cookieParser(config.secret));
 
 app.use(expressSession({
   key: 'PHPSESSID',
