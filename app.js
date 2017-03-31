@@ -14,7 +14,6 @@ import expressWinston from 'express-winston';
 // proper session implementation
 // https://starlightgroup.atlassian.net/browse/SG-5
 import expressSession from 'express-session'; // initialize sessions
-// import cookieParser from 'cookie-parser';
 import connectRedis from 'connect-redis';// store session data in redis database
 import csurf from 'csurf'; // add CSRF protection https://www.npmjs.com/package/csurf
 import helmet from 'helmet'; // very important middleware with security headers for browsers
