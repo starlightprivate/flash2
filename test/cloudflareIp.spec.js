@@ -11,7 +11,7 @@ import security from './../api/middlewares/security';
 
 function RequestMock(originatingIp) {
   this.headers = {
-    'x-forwarded-for': originatingIp,
+    'x-forwarded-for': util.format('193.41.76.172, %s', originatingIp),
   };
   this.connection = {
     remoteAddress: originatingIp,
@@ -19,6 +19,15 @@ function RequestMock(originatingIp) {
   return this;
 }
 
+function RequestMock1(originatingIp) {
+  this.headers = {
+    'x-forwarded-for': originatingIp,
+  };
+  this.connection = {
+    remoteAddress: originatingIp,
+  };
+  return this;
+}
 
 function ResponseMock(done) {
   // return res
@@ -60,7 +69,7 @@ describe('security', () => {
       assert.equal(typeof security.verifyThatSiteIsAccessedFromCloudflare, 'function');
     });
 
-    it('do not works with IPv4 from not cloudflare', (done) => {
+    it('do not works with IPv4 from not cloudflare (2 IPs in x-forwarded-for)', (done) => {
       const req = new RequestMock(invalidIp);
       const res = new ResponseMock((error, code, message) => {
         if (error) {
@@ -79,6 +88,24 @@ describe('security', () => {
       });
     });
 
+    it('do not works with IPv4 from not cloudflare (1 IP in x-forwarded-for)', (done) => {
+      const req = new RequestMock1(invalidIp);
+      const res = new ResponseMock((error, code, message) => {
+        if (error) {
+          return done(error);
+        }
+        assert.equal(code, 500);
+        assert.equal(message, 'NOT OK');
+        return done();
+      });
+
+      security.verifyThatSiteIsAccessedFromCloudflare(req, res, (error) => {
+        if (error) {
+          return done(error);
+        }
+        return null;
+      });
+    });
 
     it('do works with IPv4 from cloudflare 1', (done) => {
       const req = new RequestMock('103.22.200.23');
