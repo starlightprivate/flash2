@@ -292,10 +292,9 @@ const index = () => {
       openContactModal();
     });
 
-    $(document).on('click', '.btn-green', () => {
+   $(document).on('click', '.btn-green', () => {
       initializeFormsValidation();
     });
-    toggleModalIfHashUrl();
     // $(window).bind('hashchange', () => toggleModalIfHashUrl());
   });
 };
@@ -306,4 +305,3 @@ const index = () => {
     async: false,
   });
 }());
-

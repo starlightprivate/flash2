@@ -198,7 +198,7 @@ gulp.task('autoprefix', () =>
   gulp.src(config.dist + '/assets/css/style.css')
     .pipe(autoprefixer({
         browsers: ['last 5 versions'],
-        cascade: false
+        cascade: false,
     }))
     .pipe(gulp.dest(config.dist + '/assets/css'))
 );
@@ -236,6 +236,7 @@ gulp.task('cleantemp', function (cb) {
 //     });
 //   });
 // });
+
 
 // Build Task !
 gulp.task('build', ['clean-all'], function (done) {
