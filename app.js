@@ -260,7 +260,7 @@ app.use((req, res, next) => {
   if (req.session) {
     const token = req.csrfToken();
     res.locals.csrf = token; // eslint-disable-line no-param-reassign
-    // res.cookie('XSRF-TOKEN', token, { secure: isProtectedByCloudflare, httpOnly: true });
+    res.cookie('XSRF-TOKEN', token, { secure: isProtectedByCloudflare, httpOnly: true });
     res.set('XSRF-TOKEN', token);
   }
   // }
@@ -314,6 +314,25 @@ app.use((err, req, res, next) => {
     if (config.ENV === 'development') {
       res.set('X-PUNISHED_BY', 'CSRF');
     }
+    winston.error('CSRF error : %s', err.message, {
+      buildId: config.buildId,
+      type: 'http:csrf',
+      env: config.ENV,
+      ip: security.getIp(req),
+      method: req.method,
+      entryPoint: req.session ? req.session.entryPoint : null,
+      path: req.originalUrl,
+      query: req.query,
+      body: req.body,
+      isBot: req.session ? req.session.isBot : null,
+      sessionId: req.session ? req.sessionID : null,
+      userAgent: req.get('User-Agent'),
+      code: err.code,
+      message: err.message,
+      status: err.status,
+      stacktrace: err.stack,
+    });
+
     return res.status(403).send('Invalid API Key');
   }
   winston.error('expressjs error : %s', err.message, {
