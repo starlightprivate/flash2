@@ -5,7 +5,7 @@ module.exports = {
   // 'extends': 'eslint:recommended',
   'extends': 'airbnb-base',
   'parser': 'babel-eslint',
-  'plugins': ['async-await','babel','import'],
+  'plugins': ['async-await','babel','import','no-unsafe-regex'],
   'env': {
     'browser': true,
     'commonjs': true,

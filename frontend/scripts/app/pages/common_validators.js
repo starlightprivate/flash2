@@ -116,25 +116,32 @@ function validate(utils) { // eslint-disable-line no-unused-vars
       $('#last').addClass('cc-discover').removeClass('cc-diners-club cc-enroute cc-jcb cc-maestro');
     }
   }
-  $('.creditcard').keyup(keyupEvent);
+  $(document).on('keyup', '.creditcard', keyupEvent);
 
   function blurEvent() {
     const domains = ['hotmail.com', 'gmail.com', 'aol.com'];
     const topLevelDomains = ['com', 'net', 'org'];
-    $(this).mailcheck({
-      domains,
-      topLevelDomains,
-      suggested(element, suggestion) {
-        $('.email ~ small').first().unsafeHtml(`Did you mean <a href='javascript:void(0)'>${DOMPurify.sanitize(suggestion.full)}</a><br/>`).show();
-      },
-      empty() {
-      },
-    });
+    const $targetElement = $('.email ~ small:first');
+
+    if (!$targetElement.has('br').length) {
+      $(this).mailcheck({
+        domains,
+        topLevelDomains,
+        suggested(element, suggestion) {
+          const newRow = `${DOMPurify.sanitize($targetElement.html())}<br/>Did you mean <a href='javascript:void(0)'>${DOMPurify.sanitize(suggestion.full)}</a><br/>`;
+          $targetElement.first().unsafeHtml(newRow).show();
+        },
+        empty() {
+        },
+      });
+    }
   }
 
   function clickEvent() {
+    const $targetElement = $('.email ~ small').first();
+
     $('.email').val($(this).html());
-    $('.email ~ small').hide().html('Great! We will send you a confirmation e-mail with tracking # after purchasing.');
+    $targetElement.html($targetElement.html().split('<br>', 1)[0]);
     if ($('form').length > 0) {
       $('form').formValidation('revalidateField', 'email');
     }

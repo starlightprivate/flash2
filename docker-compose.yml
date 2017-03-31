@@ -11,23 +11,10 @@ app-server:
 redis:
   build: ./redis
 
-mysql:
-  image: mariadb
-  environment:
-    - MYSQL_ROOT_PASSWORD=devops
-
-wordpress:
-  image: wordpress
-  links:
-    - mysql
-  environment:
-    - WORDPRESS_DB_PASSWORD=devops
-
 nginx:
   build: ./nginx
   links:
     - app-server:app-server
-    - wordpress:wordpress
   ports:
     - "80:80"
     - "443:443"
