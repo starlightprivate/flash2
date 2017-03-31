@@ -3,7 +3,7 @@ import util from 'util';
 import request from 'request-promise';
 import Analytics from 'analytics-node';
 
-import trace from './../../risingStack';
+// import trace from './../../risingStack';
 import config from '../../server-config';
 import logger from './../logger';
 
@@ -109,7 +109,7 @@ async function addKonnektiveOrder(req, res) {
   const response = await request(options);
   // console.log(response);
   // TODO - think of data required for logs
-  trace.incrementMetric('konnectiveNewOrder');
+  // trace.incrementMetric('konnectiveNewOrder');
   logger('info', 'konnectiveNewOrder', req, {
     country: 'US',
     state: body.state,
@@ -274,7 +274,7 @@ async function createKonnektiveLead(req, res) {
   if (response.result === 'ERROR') {
     return res.error(response.message);
   }
-  trace.incrementMetric('createKonnektiveLead');
+  // trace.incrementMetric('createKonnektiveLead');
   logger('info', 'createKonnektiveLead', req, {
     firstName: body.firstName,
     lastName: body.lastName,
@@ -313,7 +313,7 @@ function upsell(req, res) {
   };
   return request(options)
     .then((response) => {
-      trace.incrementMetric('upsell');
+      // trace.incrementMetric('upsell');
       logger('info', 'upsell', req, {
         orderId: body.orderId,
         productId: body.productId,

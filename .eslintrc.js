@@ -16,16 +16,16 @@ module.exports = {
     'sourceType': 'module'
   },
   'rules': {
-    'no-undef': 1,
-    'babel/new-cap': 1,
-    'no-await-in-loop': 1,
+    'no-undef': 2,
+    'babel/new-cap': 2,
+    'no-await-in-loop': 2,
     'import/extensions': ["off", "never"],
     'require-await':[
       2
     ],
-    'no-plusplus': ["error", { "allowForLoopAfterthoughts": true }],
+    'no-plusplus': ["error", { "allowForLoopAfterthoughts": false }],
     'no-console': [
-      1
+      2
     ],
     'indent': [
       'error',
