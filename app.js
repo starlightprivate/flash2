@@ -100,6 +100,7 @@ app.use(helmet.referrerPolicy({ policy: 'no-referrer' }));
 // https://helmetjs.github.io/docs/frameguard/
 app.use(helmet.frameguard({ action: 'sameorigin' }));
 
+// https://helmetjs.github.io/docs/nocache/
 app.use(helmet.noCache());
 
 // Sets "X-DNS-Prefetch-Control: on".
@@ -141,8 +142,6 @@ app.use(helmet.hpkp({
 }));
 
 
-// https://helmetjs.github.io/docs/nocache/
-app.use(helmet.noCache());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
