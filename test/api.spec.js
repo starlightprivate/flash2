@@ -16,7 +16,7 @@ const sessionIdCookieRegex = /^PHPSESSID=([^;]+); Path=\/; HttpOnly/;
 
 winston.logException = (err, info) => {
   console.error(err, info);
-}
+};
 
 function extractCookie(res, rgx) {
   const cookies = res.headers['set-cookie'];
@@ -132,7 +132,6 @@ describe('web application', function () { // eslint-disable-line func-names
 
 // being used in all requests
   let sessionId;
-  let csrfToken;
 // being used in requests emulating typical bot behaviour
   let taintedSessionId;
   let taintedCsrfToken;
@@ -157,7 +156,7 @@ describe('web application', function () { // eslint-disable-line func-names
           return done(new Error('XSRF-TOKEN not set!'));
         }
         sessionId = sId;
-        csrfToken = csrf;
+        // csrfToken = csrf;
         return done();
       });
   });
@@ -181,7 +180,7 @@ describe('web application', function () { // eslint-disable-line func-names
         if (csrf === false) {
           return done(new Error('XSRF-TOKEN not set!'));
         }
-        csrfToken = csrf;
+        // csrfToken = csrf;
         return done();
       });
   });
@@ -662,8 +661,6 @@ describe('web application', function () { // eslint-disable-line func-names
           return done();
         });
     });
-
-
 
     it('has 403 on POST /api/v2/create-lead with missing CSRF token', (done) => {
       supertest(app)
