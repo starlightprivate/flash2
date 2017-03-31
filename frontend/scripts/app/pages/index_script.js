@@ -32,6 +32,22 @@ const index = () => {
     const $field = data.element;
     $field.siblings(`.valid-message[data-field='${field}']`).hide();
   }
+  function errorValidatorFv(e, data) {
+    data.element
+      .data('fv.messages')
+      .find(`.form-control-feedback[data-fv-for="${data.field}"]`)
+      .hide()
+      .filter(`[data-fv-validator="${data.validator}"]`)
+      .show();
+  }
+  function statusFieldFv(e, data) {
+    if (data.field === 'email') {
+      const $targetElement = $('.email ~ small:first');
+      if ($targetElement.has('br').length) {
+        $targetElement.html($targetElement.html().split('<br>', 1)[0]);
+      }
+    }
+  }
   function openContactModal() {
     $('#modal-contact').modal('show');
   }
@@ -132,6 +148,7 @@ const index = () => {
         }
       });
     };
+
   // submit address form
     const submitAddressForm = () => {
       const addressFormFields = [
@@ -176,12 +193,13 @@ const index = () => {
           validMessage: 'Great! We will send you a confirmation e-mail with tracking # after purchasing.',
           validators: {
             notEmpty: { message: 'The email address is required.' },
-            stringLength: {
-              min: 1,
-              max: 100,
-              message: 'The email address must be more than 6 and less than 30 characters long.',
+            regexp: {
+              regexp: /[.]+[a-zA-Z]{2,}$/,
+              message: 'The email address must have a valid domain name.',
             },
-            emailAddress: { message: 'The email address is not valid.' },
+            emailAddress: {
+              message: 'The value is not a valid email address',
+            },
           },
         },
         phoneNumber: {
@@ -196,15 +214,17 @@ const index = () => {
         },
       },
     })
-  .on('err.field.fv', () => {})
-  .on('success.validator.fv', () => {})
-  .on('err.form.fv', () => {})
-  .on('success.form.fv', (e) => {
-    submitContactForm();
-    e.preventDefault();
-  })
-  .on('success.field.fv', successFieldFv)
-  .on('err.field.fv', errFieldFv);
+    .on('status.field.fv', statusFieldFv)
+    .on('err.validator.fv', errorValidatorFv)
+    .on('success.validator.fv', () => {})
+    .on('err.form.fv', () => {})
+    .on('success.form.fv', (e) => {
+      submitContactForm();
+      e.preventDefault();
+    })
+    .on('success.field.fv', successFieldFv)
+    .on('err.field.fv', errFieldFv);
+
     $('#form-contact').submit((e) => {
       e.preventDefault();
     });
