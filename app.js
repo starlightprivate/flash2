@@ -304,7 +304,7 @@ app.use((err, req, res, next) => {
     if (config.ENV === 'development') {
       res.set('X-PUNISHED_BY', 'CSRF');
     }
-    winston.error('CSRF error : %s', err.message, {
+    winston.info('CSRF error : %s', err.message, {
       buildId: config.buildId,
       type: 'http:csrf',
       env: config.ENV,
