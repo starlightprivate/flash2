@@ -170,11 +170,6 @@ app.use(expressContentLength.validateMax({
 // https://github.com/vodolaz095/hunt/blob/master/lib/http/expressApp.js#L236-L244
 const RedisSessionStore = connectRedis(expressSession);
 
-// TODO - it is not required, better remove it, and test on heroku --Anatolij
-if (isProtectedByCloudflare) {
-  app.enable('trust proxy'); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
-}
-
 // TODO - probably, cookieParser is not required
 // https://github.com/expressjs/session#sessionoptions
 //  --Anatolij - one less npmjs module = few less potential bugs!!!
