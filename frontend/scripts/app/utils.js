@@ -26,16 +26,15 @@ function utils() { // eslint-disable-line no-unused-vars
     const sPageURL = decodeURIComponent(window.location.search.substring(1));
     const sURLVariables = sPageURL.split('&');
     let sParameterName;
-    let i;
 
-    for (i = 0; i < sURLVariables.length; i++) {
-      sParameterName = sURLVariables[i].split('=');
+    sURLVariables.forEach((urlItem) => {
+      sParameterName = urlItem.split('=');
 
       if (sParameterName[0] === sParam) {
         return sParameterName[1] === undefined ? true : sParameterName[1];
       }
-    }
-    return null;
+      return null;
+    });
   }
 
   function initSessionIfNoCookies(cb) { // eslint-disable-line no-unused-vars
@@ -64,6 +63,8 @@ function utils() { // eslint-disable-line no-unused-vars
 
 // call API
   function callAPI(endpoint, data, method, callback, err) {
+    const $loadingBar = $('div.js-div-loading-bar');
+    $loadingBar.show();
     let params = data;
     let ApiUrl = `/tacticalsales/api/v2/${endpoint}/`;
     let headers = {};
@@ -107,10 +108,12 @@ function utils() { // eslint-disable-line no-unused-vars
       beforeSend(xhr) { xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded'); },
     }).done((msg/* , textStatus , request */) => {
       if (typeof callback === 'function') {
+        $loadingBar.hide();
         callback(msg);
       }
     }).fail((jqXHR, textStatus/* , request */) => {
       if (typeof err === 'function') {
+        $loadingBar.hide();
         err(textStatus);
       }
     });

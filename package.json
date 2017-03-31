@@ -20,7 +20,8 @@
     "prepublish": "npm run snyk-protect",
     "lint": "gulp test",
     "build": "npm run lint && gulp build",
-    "lint:backend": "./node_modules/.bin/eslint api/ config/ app.js index.js server-config.js  trace.config.js test/"
+    "lint:backend": "./node_modules/.bin/eslint api/ config/ app.js index.js server-config.js  trace.config.js test/",
+    "install": "./node_modules/.bin/gulp build"
   },
   "repository": {
     "type": "git",
@@ -29,7 +30,6 @@
   "main": "index.js",
   "snyk": true,
   "dependencies": {
-    "@risingstack/trace": "^3.4.0",
     "analytics-node": "^2.4.0",
     "autopilot-api": "^2.0.0",
     "babel-register": "^6.23.0",
@@ -37,6 +37,7 @@
     "connect-redis": "^3.2.0",
     "csurf": "^1.9.0",
     "eslint-plugin-async-await": "0.0.0",
+    "eslint-plugin-no-unsafe-regex": "^1.0.0",
     "express": "^4.15.2",
     "express-content-length-validator": "^1.0.0",
     "express-promise-router": "^1.1.1",
@@ -46,13 +47,10 @@
     "helmet-csp": "^2.1.0",
     "hpp": "^0.2.1",
     "ioredis": "^2.4.0",
-    "minimatch": "^3.0.2",
-    "phone": "^1.0.8",
     "range_check": "^1.4.0",
     "request-promise": "^4.1.1",
     "snyk": "^1.25.2",
     "strict-rate-limiter": "^0.2.0",
-    "validator": "^7.0.0",
     "winston": "^2.3.0",
     "winston-loggly-bulk": "^1.4.1",
     "winston-sentry": "^0.1.5",
@@ -90,6 +88,7 @@
     "gulp-eslint": "^3.0.1",
     "gulp-html-lint": "0.0.1",
     "gulp-htmlhint": "^0.3.1",
+    "gulp-imagemin": "^3.2.0",
     "gulp-jshint": "^2.0.1",
     "gulp-newer": "^1.2.0",
     "gulp-plumber": "^1.1.0",

@@ -4,7 +4,7 @@ import xss from 'xss';
 import config from './../server-config';
 import security from './middlewares/security';
 
-import trace from './../risingStack';
+// import trace from './../risingStack';
 
 // It is default logger being used for all api endpoints
 
@@ -24,6 +24,6 @@ export default function (level, name, req, metadata) {
   data.userAgent = xss(req.get('User-Agent'));
   data.env = config.ENV;
   data.type = util.format('api:%s', name);
-  trace.incrementMetric('logEventsFired');
+  // trace.incrementMetric('logEventsFired');
   return winston[level](name, data);
 }

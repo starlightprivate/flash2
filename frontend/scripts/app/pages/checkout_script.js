@@ -1,7 +1,7 @@
 /* global $, DOMPurify, jQuery, utils, validate, UniversalStorage, loadAssets, utilsInstance */
 
 const requireAssets = [
-  'https://cdn.jsdelivr.net/g/jquery@3.1.1,js-cookie@2.2.0,tether@1.3.7,bootstrap@4.0.0-alpha.5,jquery.mask@1.14.0,mailcheck@1.1,mobile-detect.js@1.3.4',
+  'https://cdn.jsdelivr.net/g/jquery@3.1.1,js-cookie@2.2.0,tether@1.3.7,bootstrap@4.0.0-alpha.5,jquery.mask@1.14.10,mailcheck@1.1,mobile-detect.js@1.3.4',
   '/tacticalsales/assets/js/libs.js',
   '/tacticalsales/assets/js/common_validators.js',
 ];
@@ -201,11 +201,17 @@ const checkout = () => {
           validators: {
             notEmpty: { message: 'The email address is required.' },
             stringLength: {
-              min: 1,
-              max: 100,
+              min: 6,
+              max: 50,
               message: 'The email address must be more than 6 and less than 30 characters long.',
             },
-            emailAddress: { message: 'The email address is not valid.' },
+            emailAddress: {
+              message: 'The value is not a valid email address',
+            },
+            regexp: {
+              regexp: /.+[a-zA-Z]{2,}$/,
+              message: 'The email address must have a valid domain name.',
+            },
           },
         },
         phoneNumber: {

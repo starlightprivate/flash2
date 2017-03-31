@@ -21,7 +21,8 @@ let _ = require('lodash'),
   sass = require('gulp-sass'),
   sassLint = require('gulp-sass-lint'),
   concat = require('gulp-concat'),
-  autoprefixer = require('gulp-autoprefixer');
+  autoprefixer = require('gulp-autoprefixer'),
+  imagemin = require('gulp-imagemin');
 
 const config = {
   src: 'frontend', // source directory
@@ -103,9 +104,10 @@ gulp.task('fonts', function () {
 });
 
 // Images
-gulp.task('images', function () {
+gulp.task('optimize-copy-images', function () {
   return gulp.src([config.src + '/images/**/*'])
     .pipe(gulp.dest(config.dist + '/assets/images'))
+    .pipe(imagemin())
     .pipe(size());
 });
 
@@ -198,7 +200,7 @@ gulp.task('autoprefix', () =>
   gulp.src(config.dist + '/assets/css/style.css')
     .pipe(autoprefixer({
         browsers: ['last 5 versions'],
-        cascade: false
+        cascade: false,
     }))
     .pipe(gulp.dest(config.dist + '/assets/css'))
 );
@@ -237,6 +239,7 @@ gulp.task('cleantemp', function (cb) {
 //   });
 // });
 
+
 // Build Task !
 gulp.task('build', ['clean-all'], function (done) {
   runSequence(
@@ -248,7 +251,7 @@ gulp.task('build', ['clean-all'], function (done) {
 
 //process other assets
     'fonts',
-    'images',
+    'optimize-copy-images',
     'html',
 
 // css

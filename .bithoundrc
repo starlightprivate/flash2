@@ -1,20 +1,19 @@
 {
-	"ignore": [
-		"**/node_modules/**",
-		"**/frontend/scripts/libs/**",
-		"**/gulpfile.js**",
-		"**/eslint-rules/**"
-	],
-	"critics": {
-		"lint": {
-			"engine": "eslint"
-		}
-	},
-	"dependencies": {
-		"unused-ignores": [
-			"validator",
-			"snyk",
-			"minimatch"
-		]
-	}
+  "ignore": [
+    "**/node_modules/**",
+    "**/frontend/scripts/libs/**",
+  	"**/gulpfile.js**",
+  	"**/eslint-rules/**"
+  ],
+  "test": [
+    "**/test/**",
+    "**/tests/**",
+    "**/spec/**",
+    "**/specs/**"
+  ],
+  "dependencies": {
+  	"unused-ignores": [
+  		"snyk"
+  	]
+  }
 }
