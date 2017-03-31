@@ -144,10 +144,6 @@ const index = () => {
       });
     });
   };
-  const removeHashUrl = () => {
-    const original = window.location.href.substr(0, window.location.href.indexOf('#'));
-    history.replaceState({}, document.title, original);
-  };
 
   function initializeFormsValidation() {
     if (!isValidatorInitialized) {
@@ -266,13 +262,6 @@ const index = () => {
     }
   }
 
-  const toggleModalIfHashUrl = () => {
-    if (window.location.hash === '#modal-contact') {
-      initializeFormsValidation();
-      $('#modal-contact').modal('toggle');
-      removeHashUrl();
-    }
-  };
   $(document).on('keyup', '#zipcode', () => {
     utilsInstance.loadStateFromZip();
   });
@@ -292,7 +281,7 @@ const index = () => {
       openContactModal();
     });
 
-   $(document).on('click', '.btn-green', () => {
+    $(document).on('click', '.btn-green', () => {
       initializeFormsValidation();
     });
     // $(window).bind('hashchange', () => toggleModalIfHashUrl());
