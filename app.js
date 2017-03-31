@@ -14,7 +14,6 @@ import expressWinston from 'express-winston';
 // proper session implementation
 // https://starlightgroup.atlassian.net/browse/SG-5
 import expressSession from 'express-session'; // initialize sessions
-import cookieParser from 'cookie-parser';
 import connectRedis from 'connect-redis';// store session data in redis database
 import csurf from 'csurf'; // add CSRF protection https://www.npmjs.com/package/csurf
 import helmet from 'helmet'; // very important middleware with security headers for browsers
@@ -167,15 +166,6 @@ app.use(expressContentLength.validateMax({
 // https://github.com/vodolaz095/hunt/blob/master/lib/http/expressApp.js#L236-L244
 const RedisSessionStore = connectRedis(expressSession);
 
-// TODO - it is not required, better remove it, and test on heroku --Anatolij
-if (isProtectedByCloudflare) {
-  app.enable('trust proxy'); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
-}
-
-// TODO - probably, cookieParser is not required
-// https://github.com/expressjs/session#sessionoptions
-//  --Anatolij - one less npmjs module = few less potential bugs!!!
-app.use(cookieParser(config.secret));
 
 app.use(expressSession({
   key: 'PHPSESSID',
@@ -260,7 +250,7 @@ app.use((req, res, next) => {
   if (req.session) {
     const token = req.csrfToken();
     res.locals.csrf = token; // eslint-disable-line no-param-reassign
-    res.cookie('XSRF-TOKEN', token, { secure: isProtectedByCloudflare, httpOnly: true });
+    res.cookie('XSRF-TOKEN', token, { secure: isProtectedByCloudflare });
     res.set('XSRF-TOKEN', token);
   }
   // }
