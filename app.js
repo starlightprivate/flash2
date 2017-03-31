@@ -175,7 +175,6 @@ if (isProtectedByCloudflare) {
   app.enable('trust proxy'); // http://expressjs.com/en/4x/api.html#trust.proxy.options.table
 }
 
-// TODO - probably, cookieParser is not required
 // https://github.com/expressjs/session#sessionoptions
 //  --Anatolij - one less npmjs module = few less potential bugs!!!
 // app.use(cookieParser(config.secret));
