@@ -116,7 +116,7 @@ function validate(utils) { // eslint-disable-line no-unused-vars
       $('#last').addClass('cc-discover').removeClass('cc-diners-club cc-enroute cc-jcb cc-maestro');
     }
   }
-  $('.creditcard').keyup(keyupEvent);
+  $(document).on('keyup', '.creditcard', keyupEvent);
 
   function blurEvent() {
     const domains = ['hotmail.com', 'gmail.com', 'aol.com'];
