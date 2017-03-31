@@ -262,7 +262,7 @@ app.use((req, res, next) => {
   if (req.session) {
     const token = req.csrfToken();
     res.locals.csrf = token; // eslint-disable-line no-param-reassign
-    res.cookie('XSRF-TOKEN', token, { secure: isProtectedByCloudflare, httpOnly: true });
+    res.cookie('XSRF-TOKEN', token, { secure: isProtectedByCloudflare });
     res.set('XSRF-TOKEN', token);
   }
   // }
