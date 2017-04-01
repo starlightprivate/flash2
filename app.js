@@ -14,6 +14,7 @@ import expressWinston from 'express-winston';
 // proper session implementation
 // https://starlightgroup.atlassian.net/browse/SG-5
 import expressSession from 'express-session'; // initialize sessions
+// import cookieParser from 'cookie-parser';
 import connectRedis from 'connect-redis';// store session data in redis database
 import csurf from 'csurf'; // add CSRF protection https://www.npmjs.com/package/csurf
 import helmet from 'helmet'; // very important middleware with security headers for browsers
@@ -140,6 +141,7 @@ app.use(helmet.hpkp({
   ],
 }));
 
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -166,6 +168,15 @@ app.use(expressContentLength.validateMax({
 // https://github.com/vodolaz095/hunt/blob/master/lib/http/expressApp.js#L236-L244
 const RedisSessionStore = connectRedis(expressSession);
 
+// probably, cookieParser is not required
+// https://github.com/expressjs/session#sessionoptions
+//  --Anatolij - one less npmjs module = few less potential bugs!!!
+
+// no, cookie parser is required - https://sentry.io/starlight-group/node-api/issues/245313329/
+// because without it session is not cleared and redis database is cluttered???
+// UPD - it is not required, there was issues with cloudflare-heroku ssl certs
+
+// app.use(cookieParser(config.secret));
 
 app.use(expressSession({
   key: 'PHPSESSID',
@@ -182,7 +193,9 @@ app.use(expressSession({
   resave: true,
   saveUninitialized: true,
   cookie: { // http://stackoverflow.com/a/14570856/1885921
-    secure: isProtectedByCloudflare, //https://github.com/expressjs/session#cookiesecure
+    // secure: isProtectedByCloudflare, //https://github.com/expressjs/session#cookiesecure
+    // TODO - @sachin, fix cloudflare pls!
+    // it have to proxy requests to heroku site using HTTPS, not HTTP!!!!
   },
 }));
 // end of SG-5
