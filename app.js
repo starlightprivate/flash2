@@ -194,7 +194,7 @@ app.use(expressSession({
   resave: true,
   saveUninitialized: true,
   cookie: { // http://stackoverflow.com/a/14570856/1885921
-    secure: isProtectedByCloudflare, //https://github.com/expressjs/session#cookiesecure
+    // secure: isProtectedByCloudflare, //https://github.com/expressjs/session#cookiesecure
   },
 }));
 // end of SG-5
