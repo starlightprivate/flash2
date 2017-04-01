@@ -1,5 +1,5 @@
 import csp from 'helmet-csp';
-import config from './../../server-config';
+// import config from './../../server-config';
 
 // This is Content Security Policy for site
 // https://en.wikipedia.org/wiki/Content_Security_Policy
@@ -15,7 +15,7 @@ import config from './../../server-config';
 // - Anatolij
 
 
-//const enableFullProtection = config.ENV === 'staging' || config.ENV === 'production';
+// const enableFullProtection = config.ENV === 'staging' || config.ENV === 'production';
 // for now the CSP works in full power only on staging environment,
 // enforcing CSP rules, not im reportOnly mode
 // while it have to work on both `production` and `staging` one in enforce mode
@@ -26,7 +26,7 @@ import config from './../../server-config';
 // it has HTTPS support enabled
 // and it sends header related to make browser use HTTPS only
 // on development it do not do it.
-//const upgradeInsecureRequests = config.ENV === 'staging' || config.ENV === 'production';
+// const upgradeInsecureRequests = config.ENV === 'staging' || config.ENV === 'production';
 
 // under construction
 export default csp({
