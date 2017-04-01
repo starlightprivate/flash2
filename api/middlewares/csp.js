@@ -15,7 +15,7 @@ import config from './../../server-config';
 // - Anatolij
 
 
-const enableFullProtection = config.ENV === 'staging'; // || config.ENV === 'production';
+const enableFullProtection = config.ENV === 'staging' || config.ENV === 'production';
 // for now the CSP works in full power only on staging environment,
 // enforcing CSP rules, not im reportOnly mode
 // while it have to work on both `production` and `staging` one in enforce mode
@@ -44,6 +44,7 @@ export default csp({
       '*.akamaihd.net',
       'api.segment.io',
       'sentry.io/api/',
+'*.youtube.com',
       'data:',
       'blob:',
     ],
@@ -54,6 +55,11 @@ export default csp({
       "'unsafe-inline'", // eslint-disable-line quotes
       "'unsafe-eval'", // eslint-disable-line quotes
       'ssl.google-analytics.com', // https://sentry.io/starlight-group/node-api/issues/241349780/
+'*.fullstory.com',
+'api.konnektive.com',
+'*.konnektive.com',
+'www.leadoutpost.com',
+'*.leadoutpost.com',
 
 
 // this all is loaded by Vistia widget
@@ -125,6 +131,9 @@ export default csp({
       'amp.cloudflare.com', // https://sentry.io/starlight-group/node-api/issues/242302468/
       'ssl.google-analytics.com', // https://sentry.io/starlight-group/node-api/issues/241349781/
     ],
+frameSrc: [
+'*.youtube.com',
+],
     connectSrc: [
       "'self'", // eslint-disable-line quotes
       'cdn.jsdelivr.net',
@@ -135,10 +144,15 @@ export default csp({
       '*.akamaihd.net',
       'api.segment.io',
       'sentry.io/api/',
+'api.konnektive.com',
+'*.konnektive.com',
+'www.leadoutpost.com',
+'*.leadoutpost.com',
+'*.fullstory.com',
       'data:',
       'blob:',
     ],
-    sandbox: ['allow-forms', 'allow-scripts'],
+//    sandbox: ['allow-forms', 'allow-scripts'],
     reportUri: 'https://sentry.io/api/133524/csp-report/?sentry_key=68ae2c197a6440efac407117aec0326f',
 
     // reportUri: '/a434819b5a5f4bfeeaa5d47c8af8ac87',
@@ -163,7 +177,7 @@ export default csp({
 
     // on development environment, being run on http://localhost:8000
     // it makes download all scripts via HTTPS,while locally we serve site using HTTP and it fails
-    upgradeInsecureRequests,
+//    upgradeInsecureRequests,
   },
 
   // This module will detect common mistakes in your directives and throw errors
@@ -173,8 +187,8 @@ export default csp({
   // Set to true if you only want browsers to report errors, not block them.
   // You may also set this to a function(req, res) in order to decide dynamically
   // whether to use reportOnly mode, e.g., to allow for a dynamic kill switch.
-  reportOnly: !enableFullProtection,
-
+//  reportOnly: !enableFullProtection,
+  reportOnly: false,
   // Set to true if you want to blindly set all headers: Content-Security-Policy,
   // X-WebKit-CSP, and X-Content-Security-Policy.
   setAllHeaders: false,
