@@ -142,9 +142,6 @@ app.use(helmet.hpkp({
 }));
 
 
-// https://helmetjs.github.io/docs/nocache/
-app.use(helmet.noCache());
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
