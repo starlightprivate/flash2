@@ -23,7 +23,7 @@ import hpp from 'hpp';
 
 import config from './server-config';
 import redis from './config/redis'; // load redis client
-// import csp from './api/middlewares/csp'; // CSP middleware, time bomb
+import csp from './api/middlewares/csp'; // CSP middleware, time bomb
 
 import routes from './config/routes/v2';
 
