@@ -111,7 +111,7 @@ app.use(helmet.dnsPrefetchControl({ allow: true }));
 // https://en.wikipedia.org/wiki/Content_Security_Policy
 // see api/middlewares/csp.js for more details
 
-// app.use(csp);
+app.use(csp);
 
 // https://helmetjs.github.io/docs/hsts/
 app.use(helmet.hsts({
