@@ -142,9 +142,6 @@ app.use(helmet.hpkp({
 }));
 
 
-// https://helmetjs.github.io/docs/nocache/
-app.use(helmet.noCache());
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -196,9 +193,7 @@ app.use(expressSession({
   resave: true,
   saveUninitialized: true,
   cookie: { // http://stackoverflow.com/a/14570856/1885921
-    // secure: isProtectedByCloudflare, //https://github.com/expressjs/session#cookiesecure
-    // TODO - @sachin, fix cloudflare pls!
-    // it have to proxy requests to heroku site using HTTPS, not HTTP!!!!
+    secure: isProtectedByCloudflare, //https://github.com/expressjs/session#cookiesecure
   },
 }));
 // end of SG-5
