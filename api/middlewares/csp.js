@@ -15,7 +15,7 @@ import config from './../../server-config';
 // - Anatolij
 
 
-const enableFullProtection = config.ENV === 'staging' || config.ENV === 'production';
+//const enableFullProtection = config.ENV === 'staging' || config.ENV === 'production';
 // for now the CSP works in full power only on staging environment,
 // enforcing CSP rules, not im reportOnly mode
 // while it have to work on both `production` and `staging` one in enforce mode
@@ -26,7 +26,7 @@ const enableFullProtection = config.ENV === 'staging' || config.ENV === 'product
 // it has HTTPS support enabled
 // and it sends header related to make browser use HTTPS only
 // on development it do not do it.
-const upgradeInsecureRequests = config.ENV === 'staging' || config.ENV === 'production';
+//const upgradeInsecureRequests = config.ENV === 'staging' || config.ENV === 'production';
 
 // under construction
 export default csp({
@@ -44,7 +44,7 @@ export default csp({
       '*.akamaihd.net',
       'api.segment.io',
       'sentry.io/api/',
-'*.youtube.com',
+      '*.youtube.com',
       'data:',
       'blob:',
     ],
@@ -55,11 +55,11 @@ export default csp({
       "'unsafe-inline'", // eslint-disable-line quotes
       "'unsafe-eval'", // eslint-disable-line quotes
       'ssl.google-analytics.com', // https://sentry.io/starlight-group/node-api/issues/241349780/
-'*.fullstory.com',
-'api.konnektive.com',
-'*.konnektive.com',
-'www.leadoutpost.com',
-'*.leadoutpost.com',
+      '*.fullstory.com',
+      'api.konnektive.com',
+      '*.konnektive.com',
+      'www.leadoutpost.com',
+      '*.leadoutpost.com',
 
 
 // this all is loaded by Vistia widget
@@ -131,9 +131,9 @@ export default csp({
       'amp.cloudflare.com', // https://sentry.io/starlight-group/node-api/issues/242302468/
       'ssl.google-analytics.com', // https://sentry.io/starlight-group/node-api/issues/241349781/
     ],
-frameSrc: [
-'*.youtube.com',
-],
+    frameSrc: [
+      '*.youtube.com',
+    ],
     connectSrc: [
       "'self'", // eslint-disable-line quotes
       'cdn.jsdelivr.net',
@@ -144,11 +144,11 @@ frameSrc: [
       '*.akamaihd.net',
       'api.segment.io',
       'sentry.io/api/',
-'api.konnektive.com',
-'*.konnektive.com',
-'www.leadoutpost.com',
-'*.leadoutpost.com',
-'*.fullstory.com',
+      'api.konnektive.com',
+      '*.konnektive.com',
+      'www.leadoutpost.com',
+      '*.leadoutpost.com',
+      '*.fullstory.com',
       'data:',
       'blob:',
     ],
