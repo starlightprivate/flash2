@@ -1,20 +1,15 @@
-var safe = require('safe-regex');
-module.exports = function(context) {
+import safe from 'safe-regex'; // eslint-disable-line
 
-    "use strict";
-
-    return {
-        "Literal": function(node) {
-            var token = context.getTokens(node)[0],
-                nodeType = token.type,
-                nodeValue = token.value;
-
-            if (nodeType === "RegularExpression") {
-                if (!safe(nodeValue)) {
-                    context.report(node, "Possible Unsafe Regular Expression");
-                }
-            }
-        }
-    };
-
+module.exports = (context) => {
+  const Literal = (node) => {
+    const token = context.getTokens(node)[0];
+    const nodeType = token.type;
+    const nodeValue = token.value;
+    if (nodeType === 'RegularExpression') {
+      if (!safe(nodeValue)) {
+        context.report(node, 'Possible Unsafe Regular Expression');
+      }
+    }
+  };
+  return { Literal };
 };

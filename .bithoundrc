@@ -2,8 +2,9 @@
   "ignore": [
     "**/node_modules/**",
     "**/frontend/scripts/libs/**",
-  	"**/gulpfile.js**",
-  	"**/eslint-rules/**"
+    "frontend/scripts/libs/formvalidation/js/language/en_US.js",
+    "frontend/scripts/libs/jpurify.js",
+    "frontend/scripts/libs/formvalidation/js/framework/bootstrap4.js"
   ],
   "test": [
     "**/test/**",
