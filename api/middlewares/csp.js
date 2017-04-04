@@ -56,10 +56,6 @@ export default csp({
       "'unsafe-eval'", // eslint-disable-line quotes
       'ssl.google-analytics.com', // https://sentry.io/starlight-group/node-api/issues/241349780/
       '*.fullstory.com',
-      'api.konnektive.com',
-      '*.konnektive.com',
-      'www.leadoutpost.com',
-      '*.leadoutpost.com',
 
 
 // this all is loaded by Vistia widget
@@ -144,10 +140,6 @@ export default csp({
       '*.akamaihd.net',
       'api.segment.io',
       'sentry.io/api/',
-      'api.konnektive.com',
-      '*.konnektive.com',
-      'www.leadoutpost.com',
-      '*.leadoutpost.com',
       '*.fullstory.com',
       'data:',
       'blob:',
